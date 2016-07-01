@@ -10,16 +10,25 @@ namespace MedicalStoreModule.App_Code.DAO
 {
     public class ConnectionManager
     {
-        private MySqlConnection connection;
+        public MySqlConnection connection;
 
         #region DAO
         public ConnectionManager()
         {
             string MyConn = ConfigurationManager.ConnectionStrings["ConnectionString"].ConnectionString;
+            string devConn = "Database=hungasty_medicrum_dev;Data Source=localhost;User Id=root;Password=root";
             connection = new MySqlConnection(MyConn);
+            if (!this.OpenConnection())
+            {
+                this.connection = new MySqlConnection(devConn);
+            }
+            else
+            {
+                this.CloseConnection();
+            }
         }
 
-        private bool OpenConnection()
+        public bool OpenConnection()
         {
             try
             {
@@ -33,7 +42,7 @@ namespace MedicalStoreModule.App_Code.DAO
             }
         }
 
-        private bool CloseConnection()
+        public bool CloseConnection()
         {
             try
             {

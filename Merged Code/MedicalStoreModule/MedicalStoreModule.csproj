@@ -19,6 +19,7 @@
     <IISExpressAnonymousAuthentication />
     <IISExpressWindowsAuthentication />
     <IISExpressUseClassicPipelineMode />
+    <UseGlobalApplicationHostFile />
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
     <DebugSymbols>true</DebugSymbols>
@@ -252,8 +253,10 @@
     <Content Include="assets\js\custom\wizard_steps.min.js" />
     <Content Include="assets\js\kendoui_custom.js" />
     <Content Include="assets\js\kendoui_custom.min.js" />
+    <Content Include="assets\js\lib\add_customer.js" />
     <Content Include="assets\js\lib\add_product_model.js" />
     <Content Include="assets\js\lib\add_store.js" />
+    <Content Include="assets\js\lib\customer_table.js" />
     <Content Include="assets\js\lib\form_wizard.js" />
     <Content Include="assets\js\lib\get_product_model.js" />
     <Content Include="assets\js\lib\get_supplier.js" />
@@ -5319,6 +5322,7 @@
     <Compile Include="AddUser.aspx.designer.cs">
       <DependentUpon>AddUser.aspx</DependentUpon>
     </Compile>
+    <Compile Include="App_Code\DAO\DAOCustomer.cs" />
     <Compile Include="App_Code\Model\BillingItems.cs" />
     <Compile Include="App_Code\Model\Customer.cs" />
     <Compile Include="App_Code\Model\Inovice.cs" />

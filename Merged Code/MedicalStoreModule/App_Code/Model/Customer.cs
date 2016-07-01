@@ -16,7 +16,7 @@ namespace MedicalStoreModule.App_Code.Model
         public string state { get; set; }
         public string country { get; set; }
         public string pincode { get; set; }
-        public string phone { get; set; }
+        public string phoneNumber { get; set; }
         public string mobile { get; set; }
         public string email { get; set; }
         public Nullable<System.DateTime> dateOfBirth { get; set; }
