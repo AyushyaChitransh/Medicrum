@@ -34,12 +34,12 @@
                                             <i class="material-icons md-36">people</i>
                                             <span class="uk-text-muted uk-display-block">Supplier</span>
                                         </a>
-                                        <a href="ViewInventory.aspx">
+                                        <a href="ViewProduct.aspx">
                                             <i class="material-icons md-36">&#xE8CB;</i>
                                             <span class="uk-text-muted uk-display-block">Inventory</span>
                                         </a>
                                         <a href="ViewCustomer.aspx">
-                                            <i class="material-icons md-36">people</i>
+                                            <i class="material-icons md-36">person</i>
                                             <span class="uk-text-muted uk-display-block">Customer</span>
                                         </a>
                                         <a href="Inovice.aspx">
@@ -212,11 +212,15 @@
                         <span class="menu_title">Dashboard</span>
                     </a>
                 </li>
-                <li title="Add Store" id="Add User">
-                    <a href="AddStore.aspx">
+                <li title="User" id="User">
+                    <a href="#">
                         <span class="menu_icon"><i class="material-icons">face</i></span>
-                        <span class="menu_title">Add User</span>
+                        <span class="menu_title">User</span>
                     </a>
+                    <ul>
+                        <li id="Add User"><a href="AddUser.aspx">Add User</a></li>
+                        <li id="View User"><a href="ViewUser.aspx">View User</a></li>
+                    </ul>
                 </li>
                 <li title="Product Model" id="Product Model">
                     <a href="#">
@@ -247,17 +251,21 @@
                         <li id="Add Product"><a href="AddProduct.aspx">Add Product</a></li>
                         <li id="View Product"><a href="ViewProduct.aspx">View Product</a></li>
                         <li id="Emergency Stocks"><a href="EmergencyStocks.aspx">Emergency Stocks</a></li>                        
-                        <li id="Empty Stock"><a href="EmptyStocks.aspx">Empty Stock</a></li>
+                        <li id="Empty Stocks"><a href="EmptyStocks.aspx">Empty Stocks</a></li>
                     </ul>
                 </li>
                 <li title="Customer" id="Customer">
-                    <a href="Dashboard.aspx">
-                        <span class="menu_icon"><i class="material-icons">people</i></span>
+                    <a href="#">
+                        <span class="menu_icon"><i class="material-icons">person</i></span>
                         <span class="menu_title">Customer</span>
                     </a>
+                    <ul>
+                        <li id="Add Customer"><a href="AddCustomer.aspx">Add Customer</a></li>
+                        <li id="View Customer"><a href="ViewCustomer.aspx">View Customer</a></li>
+                    </ul>
                 </li>
                 <li title="Inovice" id="Inovice">
-                    <a href="Dashboard.aspx">
+                    <a href="#">
                         <span class="menu_icon"><i class="material-icons">&#xE53E;</i></span>
                         <span class="menu_title">Inovice</span>
                     </a>

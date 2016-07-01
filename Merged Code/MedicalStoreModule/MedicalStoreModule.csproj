@@ -61,9 +61,12 @@
     <Reference Include="System.EnterpriseServices" />
   </ItemGroup>
   <ItemGroup>
+    <Content Include="AddCustomer.aspx" />
+    <Content Include="AddProduct.aspx" />
     <Content Include="AddProductModel.aspx" />
     <Content Include="AddStore.aspx" />
     <Content Include="AddSupplier.aspx" />
+    <Content Include="AddUser.aspx" />
     <Content Include="assets\css\codemirror_themes.min.css" />
     <Content Include="assets\css\error_page.css" />
     <Content Include="assets\css\error_page.min.css" />
@@ -5260,14 +5263,33 @@
     <Content Include="Controls\HeaderAndSideBar.ascx" />
     <Content Include="Controls\StyleSwitcher.ascx" />
     <Content Include="Dashboard.aspx" />
+    <Content Include="EmergencyStocks.aspx" />
+    <Content Include="EmptyStocks.aspx" />
     <Content Include="Error.aspx" />
+    <Content Include="ViewCustomer.aspx" />
     <Content Include="ViewDetailedProductModel.aspx" />
     <Content Include="ViewDetailedSupplier.aspx" />
+    <Content Include="ViewProduct.aspx" />
     <Content Include="ViewProductModel.aspx" />
     <Content Include="ViewSupplier.aspx" />
+    <Content Include="ViewUser.aspx" />
     <Content Include="Web.config" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="AddCustomer.aspx.cs">
+      <DependentUpon>AddCustomer.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="AddCustomer.aspx.designer.cs">
+      <DependentUpon>AddCustomer.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="AddProduct.aspx.cs">
+      <DependentUpon>AddProduct.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="AddProduct.aspx.designer.cs">
+      <DependentUpon>AddProduct.aspx</DependentUpon>
+    </Compile>
     <Compile Include="AddProductModel.aspx.cs">
       <DependentUpon>AddProductModel.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
@@ -5289,6 +5311,18 @@
     <Compile Include="AddSupplier.aspx.designer.cs">
       <DependentUpon>AddSupplier.aspx</DependentUpon>
     </Compile>
+    <Compile Include="AddUser.aspx.cs">
+      <DependentUpon>AddUser.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="AddUser.aspx.designer.cs">
+      <DependentUpon>AddUser.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="App_Code\Model\BillingItems.cs" />
+    <Compile Include="App_Code\Model\Customer.cs" />
+    <Compile Include="App_Code\Model\Inovice.cs" />
+    <Compile Include="App_Code\Model\InoviceTax.cs" />
+    <Compile Include="App_Code\Model\StockProduct.cs" />
     <Compile Include="App_Code\Model\Store.cs" />
     <Compile Include="App_Code\Model\Supplier.cs" />
     <Compile Include="App_Code\Model\User.cs" />
@@ -5315,6 +5349,20 @@
     <Compile Include="Dashboard.aspx.designer.cs">
       <DependentUpon>Dashboard.aspx</DependentUpon>
     </Compile>
+    <Compile Include="EmergencyStocks.aspx.cs">
+      <DependentUpon>EmergencyStocks.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="EmergencyStocks.aspx.designer.cs">
+      <DependentUpon>EmergencyStocks.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="EmptyStocks.aspx.cs">
+      <DependentUpon>EmptyStocks.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="EmptyStocks.aspx.designer.cs">
+      <DependentUpon>EmptyStocks.aspx</DependentUpon>
+    </Compile>
     <Compile Include="Error.aspx.cs">
       <DependentUpon>Error.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
@@ -5323,6 +5371,13 @@
       <DependentUpon>Error.aspx</DependentUpon>
     </Compile>
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="ViewCustomer.aspx.cs">
+      <DependentUpon>ViewCustomer.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="ViewCustomer.aspx.designer.cs">
+      <DependentUpon>ViewCustomer.aspx</DependentUpon>
+    </Compile>
     <Compile Include="ViewDetailedProductModel.aspx.cs">
       <DependentUpon>ViewDetailedProductModel.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
@@ -5337,6 +5392,13 @@
     <Compile Include="ViewDetailedSupplier.aspx.designer.cs">
       <DependentUpon>ViewDetailedSupplier.aspx</DependentUpon>
     </Compile>
+    <Compile Include="ViewProduct.aspx.cs">
+      <DependentUpon>ViewProduct.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="ViewProduct.aspx.designer.cs">
+      <DependentUpon>ViewProduct.aspx</DependentUpon>
+    </Compile>
     <Compile Include="ViewProductModel.aspx.cs">
       <DependentUpon>ViewProductModel.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
@@ -5350,6 +5412,13 @@
     </Compile>
     <Compile Include="ViewSupplier.aspx.designer.cs">
       <DependentUpon>ViewSupplier.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="ViewUser.aspx.cs">
+      <DependentUpon>ViewUser.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="ViewUser.aspx.designer.cs">
+      <DependentUpon>ViewUser.aspx</DependentUpon>
     </Compile>
   </ItemGroup>
   <ItemGroup>
