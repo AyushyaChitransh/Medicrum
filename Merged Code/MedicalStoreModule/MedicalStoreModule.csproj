@@ -5266,6 +5266,7 @@
     <Content Include="EmergencyStocks.aspx" />
     <Content Include="EmptyStocks.aspx" />
     <Content Include="Error.aspx" />
+    <Content Include="tt.aspx" />
     <Content Include="ViewCustomer.aspx" />
     <Content Include="ViewDetailedProductModel.aspx" />
     <Content Include="ViewDetailedSupplier.aspx" />
@@ -5371,6 +5372,13 @@
       <DependentUpon>Error.aspx</DependentUpon>
     </Compile>
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="tt.aspx.cs">
+      <DependentUpon>tt.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="tt.aspx.designer.cs">
+      <DependentUpon>tt.aspx</DependentUpon>
+    </Compile>
     <Compile Include="ViewCustomer.aspx.cs">
       <DependentUpon>ViewCustomer.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
