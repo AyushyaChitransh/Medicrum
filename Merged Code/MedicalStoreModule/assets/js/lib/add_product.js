@@ -1,15 +1,19 @@
 ﻿function validate() {
-    var productName = document.getElementById('wizard_product_name').value;
-    var tradeName = document.getElementById('wizard_trade_name').value;
-    var company = document.getElementById('wizard_company').value;
-    var category = document.getElementById('wizard_category').value;
-    var type = document.getElementById('wizard_type').value;
-    if (!productName || !tradeName || !company || !category || !type) {
+    var productModelId = document.getElementById('wizard_product_model_id').value;
+    var supplierId = document.getElementById('wizard_supplier_id').value;
+    var batchNumber = document.getElementById('wizard_batch_number').value;
+    var packageQuantity = document.getElementById('wizard_package_quantity').value;
+    var quantity = document.getElementById('wizard_quantity').value;
+    var price = document.getElementById('wizard_price').value;
+    var manufactureDate = document.getElementById('wizard_manufacture_date').value;
+    var expiryDate = document.getElementById('wizard_expiry_date').value;
+    if (!productModelId || !supplierId || !batchNumber || !packageQuantity || !quantity || !price || !manufactureDate || !expiryDate) {
         return false;
     }
     else {
         return true;
     }
+        
 }
 function addDetails() {
     $('#wizard_advanced_form')
@@ -37,7 +41,7 @@ function addDetails() {
         var form_serialized = JSON.stringify($('#wizard_advanced_form').serializeObject(), null, 2);
         $.ajax({
             type: 'POST',
-            url: 'AddProductModel.aspx/InsertProductModel',
+            url: 'AddProduct.aspx/InsertProduct',
             contentType: 'application/json; charset=utf-8',
             data: "{ 'data': " + form_serialized + " }",
             dataType: "json",
@@ -45,7 +49,7 @@ function addDetails() {
                 if (response.d == true) {
                     Notification('s');
                     setTimeout(function () {
-                        window.location = "AddProductModel.aspx";
+                        window.location = "AddProduct.aspx";
                     }, 1000);
                 }
                 else

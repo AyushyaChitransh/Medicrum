@@ -27,7 +27,7 @@ namespace MedicalStoreModule
         {
             JavaScriptSerializer serializer = new JavaScriptSerializer();
             ConnectionManager conn = new ConnectionManager();
-            return serializer.Serialize(conn.GetProduct(productModelId)).ToString();
+            return serializer.Serialize(conn.GetProductModel(productModelId)).ToString();
         }
     }
 }
