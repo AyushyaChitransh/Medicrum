@@ -252,11 +252,14 @@
     <Content Include="assets\js\custom\wizard_steps.min.js" />
     <Content Include="assets\js\kendoui_custom.js" />
     <Content Include="assets\js\kendoui_custom.min.js" />
+    <Content Include="assets\js\lib\add_customer.js" />
     <Content Include="assets\js\lib\add_product.js" />
     <Content Include="assets\js\lib\add_product_model.js" />
     <Content Include="assets\js\lib\add_store.js" />
     <Content Include="assets\js\lib\add_supplier.js" />
+    <Content Include="assets\js\lib\customer_table.js" />
     <Content Include="assets\js\lib\form_wizard.js" />
+    <Content Include="assets\js\lib\get_customer.js" />
     <Content Include="assets\js\lib\get_product_model.js" />
     <Content Include="assets\js\lib\get_supplier.js" />
     <Content Include="assets\js\lib\load_add_product_data.js" />
@@ -5321,6 +5324,13 @@
     <Compile Include="AddUser.aspx.designer.cs">
       <DependentUpon>AddUser.aspx</DependentUpon>
     </Compile>
+    <Compile Include="App_Code\DAO\DAOCustomer.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="App_Code\DAO\DAOProductModel.cs" />
+    <Compile Include="App_Code\DAO\DAOStockProduct.cs" />
+    <Compile Include="App_Code\DAO\DAOSupplier.cs" />
+    <Compile Include="App_Code\DAO\DAOStore.cs" />
     <Compile Include="App_Code\Model\BillingItems.cs" />
     <Compile Include="App_Code\Model\Customer.cs" />
     <Compile Include="App_Code\Model\Inovice.cs" />

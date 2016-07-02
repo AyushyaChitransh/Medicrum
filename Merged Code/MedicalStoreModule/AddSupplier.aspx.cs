@@ -27,8 +27,8 @@ namespace MedicalStoreModule
             data.lastUpdatedTimestamp = DateTime.Now;
             data.status = 1;
             data.deleteStatus = 0;
-            ConnectionManager connectionManager = new ConnectionManager();
-            return connectionManager.InsertSupplier(data);
+            DAOSupplier accessSupplierdb = new DAOSupplier();
+            return accessSupplierdb.InsertSupplier(data);
         }
     }
 }

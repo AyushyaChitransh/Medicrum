@@ -26,8 +26,8 @@ namespace MedicalStoreModule
         public static string GetProduct()
         {
             JavaScriptSerializer serializer = new JavaScriptSerializer();
-            ConnectionManager conn = new ConnectionManager();
-            return serializer.Serialize(conn.GetProductModel(productModelId)).ToString();
+            DAOProductModel accessProductModeldb = new DAOProductModel();
+            return serializer.Serialize(accessProductModeldb.GetProductModel(productModelId)).ToString();
         }
     }
 }

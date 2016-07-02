@@ -25,24 +25,24 @@ namespace MedicalStoreModule
             data.status = 1;
             data.inStock = 1;
             data.deleteStatus = 0;
-            ConnectionManager connectionManager = new ConnectionManager();
-            return connectionManager.InsertProduct(data);
+            DAOStockProduct accessStockProductdb = new DAOStockProduct();
+            return accessStockProductdb.InsertProduct(data);
         }
 
         [WebMethod]
         public static List<KeyValuePair<int, string>> GetProductModelForProduct()
         {
             int storeId = 1;
-            ConnectionManager connectionManager = new ConnectionManager();
-            return connectionManager.GetProductModelForProduct(storeId);
+            DAOStockProduct accessStockProductdb = new DAOStockProduct();
+            return accessStockProductdb.GetProductModelForProduct(storeId);
         }
 
         [WebMethod]
         public static List<KeyValuePair<int, string>> GetSupplierForProduct()
         {
             int storeId = 1;
-            ConnectionManager connectionManager = new ConnectionManager();
-            return connectionManager.GetSupplierForProduct(storeId);
+            DAOStockProduct accessStockProductdb = new DAOStockProduct();
+            return accessStockProductdb.GetSupplierForProduct(storeId);
         }
     }
 }

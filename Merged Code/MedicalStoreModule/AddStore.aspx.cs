@@ -20,8 +20,8 @@ namespace MedicalStoreModule
         [WebMethod]
         public static bool CheckStoreId(int StoreId)
         {
-            ConnectionManager conn = new ConnectionManager();
-            return conn.CheckStoreId(StoreId);
+            DAOStore accessStoredb = new DAOStore();
+            return accessStoredb.CheckStoreId(StoreId);
         }
 
         [WebMethod]
@@ -32,8 +32,8 @@ namespace MedicalStoreModule
             data.storePlan = 0;
             data.storeMode = "trial mode";
             data.validUpto = DateTime.Now.AddDays(14);
-            ConnectionManager conn = new ConnectionManager();
-            return conn.InsertStore(data);
+            DAOStore accessStoredb = new DAOStore();
+            return accessStoredb.InsertStore(data);
         }
     }
 }

@@ -319,11 +319,11 @@
                                 <div class="uk-grid">
                                     <div class="uk-width-medium-1-4 parsley-row">
                                         <label for="wizard_mobile_number">Mobile Number</label>
-                                        <input type="text" name="mobileNumber" id="wizard_mobile_number" pattern="[0-9]{7,20}" title="Mobile Number" class="md-input" />
+                                        <input type="text" name="mobile" id="wizard_mobile_number" pattern="[0-9]{7,20}" title="Mobile Number" class="md-input" />
                                     </div>
                                     <div class="uk-width-medium-1-4 parsley-row">
                                         <label for="wizard_mobile">Phone</label>
-                                        <input type="text" name="phone" id="wizard_phone" data-parsley-trigger="change" class="md-input" />
+                                        <input type="text" name="phoneNumber" id="wizard_phone" data-parsley-trigger="change" class="md-input" />
                                     </div>
                                     <div class="uk-width-medium-2-4 parsley-row">
                                         <label for="wizard_email">Email<span class="req"></span></label>
