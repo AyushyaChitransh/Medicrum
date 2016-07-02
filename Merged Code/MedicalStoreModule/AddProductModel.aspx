@@ -31,11 +31,9 @@
                 <div class="md-card-content">
                     <form class="uk-form-stacked" id="wizard_advanced_form">
                         <div id="wizard_advanced" data-uk-observe="data-uk-observe">
-                            <!-- first section -->
-                            <h3>Product Information</h3>
                             <section>
-                                <h2 class="heading_a">Basic Information About Your Product
-                                    <span class="sub-heading">Most of the fields are required.</span>
+                                <h2 class="heading_a">Product Model Information 
+                                    <span class="sub-heading">Enter Details below</span>
                                 </h2>
                                 <hr class="md-hr" />
                                 <div class="uk-grid">
@@ -45,15 +43,13 @@
                                     </div>
                                 </div>
                                 <div class="uk-grid">
-                                    <div class="uk-width-medium-1-1 parsley-row">
-                                        <label for="wizard_trade_name">Trade Name<span class="req">*</span></label>
-                                        <input type="text" name="tradeName" id="wizard_trade_name" required="required" class="md-input" />
-                                    </div>
-                                </div>
-                                <div class="uk-grid">
-                                    <div class="uk-width-medium-1-1 parsley-row">
+                                    <div class="uk-width-medium-1-2 parsley-row">
                                         <label for="wizard_company">Company<span class="req">*</span></label>
                                         <input type="text" name="company" id="wizard_company" required="required" class="md-input" />
+                                    </div>
+                                    <div class="uk-width-medium-1-2 parsley-row">
+                                        <label for="wizard_trade_name">Trade Name<span class="req">*</span></label>
+                                        <input type="text" name="tradeName" id="wizard_trade_name" required="required" class="md-input" />
                                     </div>
                                 </div>
                                 <div class="uk-grid" data-uk-grid-margin="data-uk-grid-margin">
@@ -74,14 +70,6 @@
                                         <input type="text" name="schedule" id="wizard_schedule" class="input-count md-input" maxlength="10" />
                                     </div>
                                 </div>
-                            </section>
-                            <!-- second section -->
-                            <h3>Additional information</h3>
-                            <section>
-                                <h2 class="heading_a">Additional Information About Your Product
-                                    <span class="sub-heading">Fill additional details here</span>
-                                </h2>
-                                <hr class="md-hr" />
                                 <div class="uk-grid" data-uk-grid-margin="data-uk-grid-margin">
                                     <div class="uk-width-medium-1-1 parsley-row">
                                         <label for="wizard_composition">Composition</label>
@@ -130,6 +118,13 @@
                                         <textarea name="otherInformation" id="wizard_other_information" data-uk-tooltip="{pos:'bottom'}" title="other details" cols="30" rows="4" class="input-count md-input" maxlength="2000"></textarea>
                                     </div>
                                 </div>
+                                <br />
+                                <br />
+                                <div class="uk-grid" data-uk-grid-margin="data-uk-grid-margin">
+                                    <div class="uk-width-medium-1">
+                                        <button class="md-btn md-btn-primary md-btn-block" onclick="addDetails()">Finish</button>
+                                    </div>
+                                </div>
                             </section>
                         </div>
                     </form>
@@ -176,17 +171,10 @@
         altair_forms.parsley_extra_validators();
     </script>
     <script src="bower_components/parsleyjs/dist/parsley.min.js"></script>
-    <!-- jquery steps -->
-    <script src="assets/js/custom/wizard_steps.min.js"></script>
 
     <!-- Page function scripts -->
     <script src="assets/js/lib/notification.js"></script>
     <script src="assets/js/lib/add_product_model.js"></script>
-    <!--  forms wizard functions -->
-    <script src="assets/js/lib/form_wizard.js"></script>
-
-    <!--  forms advanced functions -->
-    <script src="assets/js/pages/forms_advanced.min.js"></script>
 
     <script>
         $(function () {

@@ -22,7 +22,7 @@ namespace MedicalStoreModule
         {
             ConnectionManager conn = new ConnectionManager();
             int storeId = 1;
-            return conn.ProductList(productName, storeId, jtStartIndex, jtPageSize, jtSorting);
+            return conn.ProductModelList(productName, storeId, jtStartIndex, jtPageSize, jtSorting);
         }
 
         [WebMethod]
@@ -31,14 +31,14 @@ namespace MedicalStoreModule
             record.lastUpdatedBy = "ravi.jain";
             record.lastUpdatedTimestamp = DateTime.Now;
             ConnectionManager conn = new ConnectionManager();
-            return conn.UpdateProduct(record);
+            return conn.UpdateProductModel(record);
         }
 
         [WebMethod]
         public static object DeleteProduct(int productModelId)
         {
             ConnectionManager conn = new ConnectionManager();
-            return conn.DeleteProduct(productModelId);
+            return conn.DeleteProductModel(productModelId);
         }
 
         [WebMethod]

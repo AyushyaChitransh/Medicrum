@@ -22,6 +22,7 @@ namespace MedicalStoreModule.App_Code.Model
         public Nullable<decimal> volume { get; set; }
         public int quantity { get; set; }
         public Nullable<decimal> tax { get; set; }
+        public Nullable<int> status { get; set; }
         public int inStock { get; set; }
         public int deleteStatus { get; set; }
     }

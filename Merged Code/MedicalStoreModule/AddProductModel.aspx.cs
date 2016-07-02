@@ -18,7 +18,7 @@ namespace MedicalStoreModule
         }
 
         [WebMethod]
-        public static bool InsertProduct(ProductModel data)
+        public static bool InsertProductModel(ProductModel data)
         {
             data.storeId = 1;
             data.addedBy = "ravi.jain";
@@ -28,7 +28,7 @@ namespace MedicalStoreModule
             data.status = 1;
             data.deleteStatus = 0;
             ConnectionManager connectionManager = new ConnectionManager();
-            return connectionManager.InsertProduct(data);
+            return connectionManager.InsertProductModel(data);
         }
     }
 }

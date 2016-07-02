@@ -53,7 +53,7 @@
     </div>
 
     <div class="md-fab-wrapper">
-        <a class="md-fab md-fab-accent" href="AddProduct.aspx">
+        <a class="md-fab md-fab-accent" href="AddProductModel.aspx">
             <i class="material-icons">&#xE145;</i>
         </a>
     </div>

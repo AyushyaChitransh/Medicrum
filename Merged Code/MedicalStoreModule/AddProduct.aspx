@@ -31,103 +31,78 @@
                 <div class="md-card-content">
                     <form class="uk-form-stacked" id="wizard_advanced_form">
                         <div id="wizard_advanced" data-uk-observe="data-uk-observe">
-                            <!-- first section -->
-                            <h3>Product Information</h3>
                             <section>
-                                <h2 class="heading_a">Basic Information About Your Product
-                                    <span class="sub-heading">Most of the fields are required.</span>
-                                </h2>
-                                <hr class="md-hr" />
-                                <div class="uk-grid">
-                                    <div class="uk-width-medium-1-1 parsley-row">
-                                        <label for="wizard_product_name">Product Name<span class="req">*</span></label>
-                                        <input type="text" name="productName" id="wizard_product_name" required="required" class="md-input" />
-                                    </div>
-                                </div>
-                                <div class="uk-grid">
-                                    <div class="uk-width-medium-1-1 parsley-row">
-                                        <label for="wizard_trade_name">Trade Name<span class="req">*</span></label>
-                                        <input type="text" name="tradeName" id="wizard_trade_name" required="required" class="md-input" />
-                                    </div>
-                                </div>
-                                <div class="uk-grid">
-                                    <div class="uk-width-medium-1-1 parsley-row">
-                                        <label for="wizard_company">Company<span class="req">*</span></label>
-                                        <input type="text" name="company" id="wizard_company" required="required" class="md-input" />
-                                    </div>
-                                </div>
-                                <div class="uk-grid" data-uk-grid-margin="data-uk-grid-margin">
-                                    <div class="uk-width-medium-1-4 parsley-row">
-                                        <label for="wizard_category">Category<span class="req">*</span></label>
-                                        <input type="text" name="category" id="wizard_category" required="required" class="md-input" />
-                                    </div>
-                                    <div class="uk-width-medium-1-4 parsley-row">
-                                        <label for="wizard_sub_category">Sub Category</label>
-                                        <input type="text" name="subCategory" id="wizard_sub_category" class="md-input" />
-                                    </div>
-                                    <div class="uk-width-medium-1-4 parsley-row">
-                                        <label for="wizard_type">Type<span class="req">*</span></label>
-                                        <input type="text" name="type" id="wizard_type" required="required" class="md-input" />
-                                    </div>
-                                    <div class="uk-width-medium-1-4 parsley-row">
-                                        <label for="wizard_schedule">Schedule</label>
-                                        <input type="text" name="schedule" id="wizard_schedule" class="input-count md-input" maxlength="10" />
-                                    </div>
-                                </div>
-                            </section>
-                            <!-- second section -->
-                            <h3>Additional information</h3>
-                            <section>
-                                <h2 class="heading_a">Additional Information About Your Product
-                                    <span class="sub-heading">Fill additional details here</span>
+                                <h2 class="heading_a">Product Stock Information
+                                    <span class="sub-heading">Enter details below</span>
                                 </h2>
                                 <hr class="md-hr" />
                                 <div class="uk-grid" data-uk-grid-margin="data-uk-grid-margin">
-                                    <div class="uk-width-medium-1-1 parsley-row">
-                                        <label for="wizard_composition">Composition</label>
-                                        <textarea name="composition" id="wizard_composition" data-uk-tooltip="{pos:'bottom'}" title="composition of product" cols="30" rows="4" class="input-count md-input" maxlength="2000"></textarea>
+                                    <div class="uk-width-medium-1-2 parsley-row">
+                                        <span>Product Model<span class="req">*</span></span>
+                                        <select id="wizard_product_model_id" name="productModelId" class="md-input" required="required">
+                                        </select>
+                                    </div>
+                                    <div class="uk-width-medium-1-2 parsley-row">
+                                        <span>Supplier<span class="req">*</span></span>
+                                        <select id="wizard_supplier_id" name="supplierId" class="md-input" required="required">
+                                        </select>
                                     </div>
                                 </div>
                                 <div class="uk-grid" data-uk-grid-margin="data-uk-grid-margin">
-                                    <div class="uk-width-medium-1-1 parsley-row">
-                                        <label for="wizard_description">Description</label>
-                                        <textarea name="description" id="wizard_description" data-uk-tooltip="{pos:'bottom'}" title="description of product" cols="30" rows="4" class="input-count md-input" maxlength="2000"></textarea>
+                                    <div class="uk-width-medium-1-5 parsley-row">
+                                        <label for="wizard_barcode">Barcode</label>
+                                        <input type="number" name="barcode" id="wizard_barcode" class="md-input" />
+                                    </div>
+                                    <div class="uk-width-medium-1-5 parsley-row">
+                                        <label for="wizard_batch_number">Batch Number<span class="req">*</span></label>
+                                        <input type="text" name="batchNumber" id="wizard_batch_number" required="required" class="md-input" />
+                                    </div>
+                                    <div class="uk-width-medium-1-5 parsley-row">
+                                        <label for="wizard_package_quantity">Package Quantity<span class="req">*</span></label>
+                                        <input type="number" name="packageQuantity" id="wizard_package_quantity" required="required" class="md-input" />
+                                    </div>
+                                    <div class="uk-width-medium-1-5 parsley-row">
+                                        <label for="wizard_quantity">Quantity<span class="req">*</span></label>
+                                        <input type="number" name="quantity" id="wizard_quantity" required="required" class="md-input" />
+                                    </div>
+                                    <div class="uk-width-medium-1-5 parsley-row">
+                                        <label for="wizard_price">Price<span class="req">*</span></label>
+                                        <input type="number" step="any" name="price" id="wizard_price" required="required" class="md-input" />
                                     </div>
                                 </div>
                                 <div class="uk-grid" data-uk-grid-margin="data-uk-grid-margin">
-                                    <div class="uk-width-medium-1-1 parsley-row">
-                                        <label for="wizard_purpose">Purpose</label>
-                                        <textarea name="purpose" id="wizard_purpose" data-uk-tooltip="{pos:'bottom'}" title="purpose of product" cols="30" rows="4" class="input-count md-input" maxlength="2000"></textarea>
+                                    <div class="uk-width-medium-1-2 parsley-row">
+                                        <label for="wizard_manufacture_date">Manufacture Date<span class="req">*</span></label>
+                                        <input type="text" name="manufactureDate" id="wizard_manufacture_date" required="required" class="md-input" data-parsley-date="data-parsley-date" data-parsley-date-message="This value should be a valid date" data-uk-datepicker="{format:'MM.DD.YYYY'}" />
+                                    </div>
+                                    <div class="uk-width-medium-1-2 parsley-row">
+                                        <label for="wizard_expiry_date">Expiry Date<span class="req">*</span></label>
+                                        <input type="text" name="expiryDate" id="wizard_expiry_date" required="required" class="md-input" data-parsley-date="data-parsley-date" data-parsley-date-message="This value should be a valid date" data-uk-datepicker="{format:'MM.DD.YYYY'}" />
                                     </div>
                                 </div>
                                 <div class="uk-grid" data-uk-grid-margin="data-uk-grid-margin">
-                                    <div class="uk-width-medium-1-1 parsley-row">
-                                        <label for="wizard_dosage_instruction">Dosage Instruction</label>
-                                        <textarea name="dosageInstruction" id="wizard_dosage_instruction" data-uk-tooltip="{pos:'bottom'}" title="dosage instruction" cols="30" rows="4" class="input-count md-input" maxlength="2000"></textarea>
+                                    <div class="uk-width-medium-1-4 parsley-row">
+                                        <label for="wizard_manufacture_licence_number">Manufacture Licence Number</label>
+                                        <input type="text" name="manufactureLicenceNumber" id="wizard_manufacture_licence_number" class="md-input" />
+                                    </div>
+                                    <div class="uk-width-medium-1-4 parsley-row">
+                                        <label for="wizard_weight">Weight</label>
+                                        <input type="number" step="any" name="weight" id="wizard_weight" class="md-input" />
+                                    </div>
+                                    <div class="uk-width-medium-1-4 parsley-row">
+                                        <label for="wizard_volume">Volume</label>
+                                        <input type="number" step="any" name="volume" id="wizard_volume" class="md-input" />
+                                    </div>
+                                    <div class="uk-width-medium-1-4 parsley-row">
+                                        <label for="wizard_tax">Tax</label>
+                                        <input type="number" step="any" name="tax" id="wizard_tax" class="md-input" />
                                     </div>
                                 </div>
+                                <br />
+                                <br />
                                 <div class="uk-grid" data-uk-grid-margin="data-uk-grid-margin">
-                                    <div class="uk-width-medium-1-1 parsley-row">
-                                        <label for="wizard_storage_instruction">Storage Instruction</label>
-                                        <textarea name="storageInstruction" id="wizard_storage_instruction" data-uk-tooltip="{pos:'bottom'}" title="storage instruction" cols="30" rows="4" class="input-count md-input" maxlength="2000"></textarea>
-                                    </div>
-                                </div>
-                                <div class="uk-grid" data-uk-grid-margin="data-uk-grid-margin">
-                                    <div class="uk-width-medium-1-1 parsley-row">
-                                        <label for="wizard_indications">Indications</label>
-                                        <textarea name="indications" id="wizard_indications" data-uk-tooltip="{pos:'bottom'}" title="indication for product" cols="30" rows="4" class="input-count md-input" maxlength="2000"></textarea>
-                                    </div>
-                                </div>
-                                <div class="uk-grid" data-uk-grid-margin="data-uk-grid-margin">
-                                    <div class="uk-width-medium-1-1 parsley-row">
-                                        <label for="wizard_warning">Warning</label>
-                                        <textarea name="warning" id="wizard_warning" data-uk-tooltip="{pos:'bottom'}" title="warning for product" cols="30" rows="4" class="input-count md-input" maxlength="2000"></textarea>
-                                    </div>
-                                </div>
-                                <div class="uk-grid" data-uk-grid-margin="data-uk-grid-margin">
-                                    <div class="uk-width-medium-1-1 parsley-row">
-                                        <label for="wizard_other_information">Other Information</label>
-                                        <textarea name="otherInformation" id="wizard_other_information" data-uk-tooltip="{pos:'bottom'}" title="other details" cols="30" rows="4" class="input-count md-input" maxlength="2000"></textarea>
+                                    <div class="uk-width-medium-1">
+                                        <button class="md-btn md-btn-primary md-btn-block" onclick="addDetails()">Finish</button>
                                     </div>
                                 </div>
                             </section>
@@ -158,13 +133,14 @@
             s.parentNode.insertBefore(wf, s);
         })();
     </script>
+
     <!-- common functions -->
     <script src="assets/js/common.min.js"></script>
     <!-- uikit functions -->
     <script src="assets/js/uikit_custom.min.js"></script>
     <!-- altair common functions/helpers -->
     <script src="assets/js/altair_admin_common.min.js"></script>
-    
+
     <uc1:StyleSwitcher runat="server" ID="StyleSwitcher1" />
 
     <!-- page specific plugins -->
@@ -176,17 +152,11 @@
         altair_forms.parsley_extra_validators();
     </script>
     <script src="bower_components/parsleyjs/dist/parsley.min.js"></script>
-    <!-- jquery steps -->
-    <script src="assets/js/custom/wizard_steps.min.js"></script>
 
     <!-- Page function scripts -->
+    <script src="assets/js/lib/load_add_product_data.js"></script>
     <script src="assets/js/lib/notification.js"></script>
-    <script src="assets/js/lib/add_product_model.js"></script>
-    <!--  forms wizard functions -->
-    <script src="assets/js/lib/form_wizard.js"></script>
-
-    <!--  forms advanced functions -->
-    <script src="assets/js/pages/forms_advanced.min.js"></script>
+    <script src="assets/js/lib/add_product.js"></script>
 
     <script>
         $(function () {

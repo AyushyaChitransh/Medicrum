@@ -81,29 +81,23 @@
                 <div class="md-card-content">
                     <h3 class="heading_a">Contact Description</h3>
                     <div class="uk-grid" data-uk-grid-margin="data-uk-grid-margin">
-                        <div class="uk-width-1-2  uk-form-row">
-                            <div class="uk-width-medium-1-1">
-                                <span>Email</span>
+                        <div class="uk-width-medium-1-2 parsley-row">
+                            <span>Email</span>
                                 <input type="text" id="email" class="md-input" disabled="disabled" />
-                            </div>
                         </div>
-                        <div class="uk-width-1-2  uk-form-row">
-                            <div class="uk-width-medium-1-1 parsley-row">
-                                <span>Phone Number</span>
+                        <div class="uk-width-medium-1-2 parsley-row">
+                            <span>Phone Number</span>
                                 <input type="text" id="phone_number" class="md-input" disabled="disabled" />
-                            </div>
                         </div>
-                        <div class="uk-width-1-2  uk-form-row">
-                            <div class="uk-width-medium-1-1 parsley-row">
-                                <span>Mobile</span>
+                    </div>
+                    <div class="uk-grid" data-uk-grid-margin="data-uk-grid-margin">
+                        <div class="uk-width-medium-1-2 parsley-row">
+                            <span>Mobile</span>
                                 <input type="text" id="mobile" class="md-input" disabled="disabled" />
-                            </div>
                         </div>
-                        <div class="uk-width-1-2  uk-form-row">
-                            <div class="uk-width-medium-1-1 parsley-row">
-                                <span>Website</span>
+                        <div class="uk-width-medium-1-2 parsley-row">
+                            <span>Website</span>
                                 <input type="text" id="website" class="md-input" disabled="disabled" />
-                            </div>
                         </div>
                     </div>
                 </div>

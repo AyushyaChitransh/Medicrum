@@ -12,5 +12,5 @@
     });
     setTimeout(function () {
         window.open("ViewDetailedSupplier.aspx", '_blank');
-    }, 50);
+    }, 500);
 }

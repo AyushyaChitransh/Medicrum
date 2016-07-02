@@ -12,5 +12,5 @@
     });
     setTimeout(function () {
         window.open("ViewDetailedProductModel.aspx", '_blank');
-    }, 50);
+    }, 500);
 }

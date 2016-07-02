@@ -31,20 +31,27 @@
                 <div class="md-card-content">
                     <form class="uk-form-stacked" id="wizard_advanced_form">
                         <div id="wizard_advanced" data-uk-observe="data-uk-observe">
-                            <!-- first section -->
-                            <h3>Basic Information</h3>
                             <section>
-                                <h2 class="heading_a">Basic Information About Supplier<span class="sub-heading">Required Field</span></h2>
+                                <h2 class="heading_a">Supplier Information
+                                    <span class="sub-heading">Enter details below.</span>
+                                </h2>
+                                <hr class="md-hr" />
                                 <div class="uk-grid">
                                     <div class="uk-width-medium-1-1 parsley-row">
                                         <label for="wizard_supplier_store_name">Store Name<span class="req uk-button-dropdown">*</span></label>
                                         <input type="text" name="supplierStoreName" id="wizard_supplier_store_name" class="md-input" required="required" />
                                     </div>
                                 </div>
-                            </section>
-                            <!-- second section -->
-                            <h3>Location Details</h3>
-                            <section>
+                                <div class="uk-grid">
+                                    <div class="uk-width-medium-1-2 parsley-row">
+                                        <label for="wizard_contact_person_name">Contact Person Name<span class="req"></span></label>
+                                        <input type="text" name="contactPersonName" id="wizard_contact_person_name" class="md-input" />
+                                    </div>
+                                    <div class="uk-width-medium-1-2 parsley-row">
+                                        <label for="wizard_licence_number">Licence Number</label>
+                                        <input type="text" name="licenceNumber" id="wizard_licence_number" class="md-input" />
+                                    </div>
+                                </div>
                                 <div class="uk-grid">
                                     <div class="uk-width-medium-1-1 parsley-row">
                                         <label for="wizard_address">Address</label>
@@ -52,20 +59,16 @@
                                     </div>
                                 </div>
                                 <div class="uk-grid">
-                                    <div class="uk-width-medium-1-1 parsley-row">
+                                    <div class="uk-width-medium-1-4 parsley-row">
                                         <label for="wizard_district">District</label>
                                         <input type="text" name="district" id="wizard_district" class="md-input" />
                                     </div>
-                                </div>
-                                <div class="uk-grid">
-                                    <div class="uk-width-medium-1-1 parsley-row">
+                                    <div class="uk-width-medium-1-4 parsley-row">
                                         <label for="wizard_state">State</label>
                                         <input type="text" name="state" id="wizard_state" class="md-input" />
                                     </div>
-                                </div>
-                                <div class="uk-grid">
-                                    <div class="uk-width-medium-3-4 parsley-row">
-                                        <select id="wizard_country" name="country">
+                                    <div class="uk-width-medium-1-4 parsley-row">
+                                        <select id="wizard_country" name="country" class="md-input">
                                             <option value="Unselected">Select Country</option>
                                             <option value="Afghanistan">Afghanistan</option>
                                             <option value="Albania">Albania</option>
@@ -313,40 +316,31 @@
                                         <input type="text" name="pincode" id="wizard_pincode" class="md-input" />
                                     </div>
                                 </div>
-                            </section>
-                            <!-- third section -->
-                            <h3>Other information</h3>
-                            <section>
                                 <div class="uk-grid">
-                                    <div class="uk-width-medium-1-2 parsley-row">
-                                        <label for="wizard_contact_person_name">Contact Person Name<span class="req"></span></label>
-                                        <input type="text" name="contactPersonName" id="wizard_contact_person_name" class="md-input" />
+                                    <div class="uk-width-medium-1-4 parsley-row">
+                                        <label for="wizard_mobile_number">Mobile Number</label>
+                                        <input type="text" name="mobileNumber" id="wizard_mobile_number" pattern="[0-9]{7,20}" title="Mobile Number" class="md-input" />
                                     </div>
-                                    <div class="uk-width-medium-1-2 parsley-row">
+                                    <div class="uk-width-medium-1-4 parsley-row">
+                                        <label for="wizard_mobile">Phone</label>
+                                        <input type="text" name="phone" id="wizard_phone" data-parsley-trigger="change" class="md-input" />
+                                    </div>
+                                    <div class="uk-width-medium-2-4 parsley-row">
                                         <label for="wizard_email">Email<span class="req"></span></label>
                                         <input type="email" name="email" id="wizard_email" data-parsley-trigger="change" class="md-input" />
                                     </div>
                                 </div>
                                 <div class="uk-grid">
                                     <div class="uk-width-medium-1-1 parsley-row">
-                                        <label for="wizard_mobile_number">Mobile Number</label>
-                                        <input type="text" name="mobileNumber" id="wizard_mobile_number" pattern="[0-9]{7,20}" title="Mobile Number" class="md-input" />
-                                    </div>
-                                </div>
-                                <div class="uk-grid">
-                                    <div class="uk-width-medium-1-1 parsley-row">
-                                        <label for="wizard_mobile">Phone</label>
-                                        <input type="text" name="phone" id="wizard_phone" data-parsley-trigger="change" class="md-input" />
-                                    </div>
-                                </div>
-                                <div class="uk-grid">
-                                    <div class="uk-width-medium-1-2 parsley-row">
                                         <label for="wizard_website">Website</label>
                                         <input type="url" name="website" id="wizard_website" class="md-input" />
                                     </div>
-                                    <div class="uk-width-medium-1-2 parsley-row">
-                                        <label for="wizard_licence_number">Licence Number</label>
-                                        <input type="text" name="licenceNumber" id="wizard_licence_number" class="md-input" />
+                                </div>
+                                <br />
+                                <br />
+                                <div class="uk-grid" data-uk-grid-margin="data-uk-grid-margin">
+                                    <div class="uk-width-medium-1">
+                                        <button class="md-btn md-btn-primary md-btn-block" onclick="addDetails()">Finish</button>
                                     </div>
                                 </div>
                             </section>
@@ -395,56 +389,10 @@
         altair_forms.parsley_extra_validators();
     </script>
     <script src="bower_components/parsleyjs/dist/parsley.min.js"></script>
-    <!-- jquery steps -->
-    <script src="assets/js/custom/wizard_steps.min.js"></script>
 
-    <script>
-        function Notification(value) {
-            if (value == 's')
-                UIkit.notify({
-                    message: 'Successful',
-                    status: 'success',
-                    timeout: 2000,
-                    group: null,
-                    pos: 'top-center'
-                });
-            else
-                UIkit.notify({
-                    message: 'Unsuccessful',
-                    status: 'danger',
-                    timeout: 3000,
-                    group: null,
-                    pos: 'top-center'
-                });
-        }
-        function addDetails(form_serialized) {
-            $.ajax({
-                type: 'POST',
-                url: '<%=ResolveUrl("addSupplier.aspx/InsertSupplier") %>',
-                contentType: 'application/json; charset=utf-8',
-                data: "{ 'data': " + form_serialized + " }",
-                dataType: "json",
-                success: function (response) {
-                    if (response.d == true) {
-                        Notification('s');
-                        setTimeout(function () {
-                            window.location = "AddSupplier.aspx";
-                        }, 2000);
-                    }
-                    else
-                        Notification('u');
-                },
-                error: function (error) {
-                    Notification('u');
-                }
-            });
-        }
-    </script>
-
-    <!--  forms wizard functions -->
-    <script src="assets/js/pages/forms_wizard.js"></script>
-    <!--  forms advanced functions -->
-    <script src="assets/js/pages/forms_advanced.min.js"></script>
+    <!-- Page function scripts -->
+    <script src="assets/js/lib/notification.js"></script>
+    <script src="assets/js/lib/add_supplier.js"></script>
 
     <script>
         $(function () {
