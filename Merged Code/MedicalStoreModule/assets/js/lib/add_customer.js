@@ -9,7 +9,7 @@
             if (response.d == true) {
                 Notification('s');
                 setTimeout(function () {
-                    window.location = "AddCustommer.aspx";
+                    window.location = "AddCustomer.aspx";
                 }, 1000);
             }
             else

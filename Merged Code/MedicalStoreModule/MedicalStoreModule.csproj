@@ -258,6 +258,7 @@
     <Content Include="assets\js\lib\add_store.js" />
     <Content Include="assets\js\lib\customer_table.js" />
     <Content Include="assets\js\lib\form_wizard.js" />
+    <Content Include="assets\js\lib\get_customer.js" />
     <Content Include="assets\js\lib\get_product_model.js" />
     <Content Include="assets\js\lib\get_supplier.js" />
     <Content Include="assets\js\lib\notification.js" />

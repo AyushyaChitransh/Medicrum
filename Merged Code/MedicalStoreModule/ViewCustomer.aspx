@@ -87,6 +87,7 @@
     <script src="assets/js/uikit_custom.min.js"></script>
     <!-- altair common functions/helpers -->
     <script src="assets/js/altair_admin_common.min.js"></script>
+    <uc1:StyleSwitcher runat="server" ID="StyleSwitcher" />
 
     <!-- page specific plugins -->
     <!-- JQuery-UI -->
@@ -114,6 +115,5 @@
             }
         });
     </script>
-    <uc1:StyleSwitcher runat="server" ID="StyleSwitcher" />
 </body>
 </html>
