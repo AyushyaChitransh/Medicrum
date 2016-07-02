@@ -21,8 +21,8 @@ namespace MedicalStoreModule
         public static object SupplierList(string contactPersonName, int jtStartIndex, int jtPageSize, string jtSorting)
         {
             int storeId = 1;
-            ConnectionManager conn = new ConnectionManager();
-            return conn.SupplierList(contactPersonName, storeId, jtStartIndex, jtPageSize, jtSorting);
+            DAOSupplier accessSupplierdb = new DAOSupplier();
+            return accessSupplierdb.SupplierList(contactPersonName, storeId, jtStartIndex, jtPageSize, jtSorting);
         }
 
         [WebMethod]
@@ -30,15 +30,15 @@ namespace MedicalStoreModule
         {
             record.lastUpdatedBy = "ravi.jain";
             record.lastUpdatedTimestamp = DateTime.Now;
-            ConnectionManager conn = new ConnectionManager();
-            return conn.UpdateSupplier(record);
+            DAOSupplier accessSupplierdb = new DAOSupplier();
+            return accessSupplierdb.UpdateSupplier(record);
         }
 
         [WebMethod]
         public static object DeleteSupplier(int supplierId)
         {
-            ConnectionManager conn = new ConnectionManager();
-            return conn.DeleteSupplier(supplierId);
+            DAOSupplier accessSupplierdb = new DAOSupplier();
+            return accessSupplierdb.DeleteSupplier(supplierId);
         }
 
         [WebMethod]

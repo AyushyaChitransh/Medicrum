@@ -27,8 +27,8 @@ namespace MedicalStoreModule
         public static string GetSupplier()
         {
             JavaScriptSerializer serializer = new JavaScriptSerializer();
-            ConnectionManager conn = new ConnectionManager();
-            return serializer.Serialize(conn.GetSupplier(supplierId)).ToString();
+            DAOSupplier accessSupplierdb = new DAOSupplier();
+            return serializer.Serialize(accessSupplierdb.GetSupplier(supplierId)).ToString();
         }
     }
 }

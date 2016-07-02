@@ -25,7 +25,9 @@
     <link rel="stylesheet" href="assets/css/main.min.css" media="all" />
 </head>
 <body class=" sidebar_main_open sidebar_main_swipe">
+
     <uc1:HeaderAndSideBar runat="server" ID="HeaderAndSideBar" />
+
     <div id="page_content">
         <div id="page_content_inner">
             <h2 class="heading_b uk-margin-bottom">Add Customer</h2>
@@ -33,10 +35,9 @@
                 <div class="md-card-content">
                     <form class="uk-form-stacked" id="wizard_advanced_form">
                         <div id="wizard_advanced" data-uk-observe="data-uk-observe">
-                            <h3>Customer Information</h3>
                             <section>
-                                <h2 class="heading_a">Contact Information
-                                    <span class="sub-heading">Starred fields are required.</span>
+                                <h2 class="heading_a">Customer Information
+                                    <span class="sub-heading">Enter details below</span>
                                 </h2>
                                 <hr class="md-hr" />
                                 <div class="uk-grid">
@@ -52,21 +53,19 @@
                                     </div>
                                 </div>
                                 <div class="uk-grid">
-                                    <div class="uk-width-medium-1-3 parsley-row">
+                                    <div class="uk-width-medium-2-4 parsley-row">
                                         <label for="wizard_email">Email</label>
                                         <input type="email" name="email" id="wizard_email" data-parsley-trigger="change" class="md-input" />
                                     </div>
-                                    <div class="uk-width-medium-1-3 parsley-row">
+                                    <div class="uk-width-medium-1-4 parsley-row">
                                         <label for="wizard_mobile_number">Mobile Number</label>
-                                        <input type="text" name="mobileNumber" id="wizard_mobile_number" pattern="[0-9]{7,20}" title="Mobile Number" class="md-input" />
+                                        <input type="text" name="mobile" id="wizard_mobile_number" pattern="[0-9]{7,20}" title="Mobile Number" class="md-input" />
                                     </div>
-                                    <div class="uk-width-medium-1-3 parsley-row">
+                                    <div class="uk-width-medium-1-4 parsley-row">
                                         <label for="wizard_phone_number">Phone</label>
-                                        <input type="text" name="phone" id="wizard_phone" data-parsley-trigger="change" class="md-input" />
+                                        <input type="text" name="phoneNumber" id="wizard_phone" data-parsley-trigger="change" class="md-input" />
                                     </div>
                                 </div>
-                                <h2 class="heading_a">Location Information for Customer
-                                </h2>
                                 <div class="uk-grid">
                                     <div class="uk-width-medium-1-1 parsley-row">
                                         <label for="wizard_address">Address</label>
@@ -74,21 +73,17 @@
                                     </div>
                                 </div>
                                 <div class="uk-grid">
-                                    <div class="uk-width-medium-1-1 parsley-row">
+                                    <div class="uk-width-medium-1-4 parsley-row">
                                         <label for="wizard_district">District</label>
                                         <input type="text" name="district" id="wizard_district" class="md-input" />
                                     </div>
-                                </div>
-                                <div class="uk-grid">
-                                    <div class="uk-width-medium-1-1 parsley-row">
+                                    <div class="uk-width-medium-1-4 parsley-row">
                                         <label for="wizard_state">State</label>
                                         <input type="text" name="state" id="wizard_state" class="md-input" />
                                     </div>
-                                </div>
-                                <div class="uk-grid">
-                                    <div class="uk-width-medium-3-4 parsley-row">
+                                    <div class="uk-width-medium-1-4 parsley-row">
                                         <label for="wizard_country">Country</label>
-                                        <select id="wizard_country" name="country">
+                                        <select id="wizard_country" name="country" class="md-input">
                                             <option value="Unselected">Select Country</option>
                                             <option value="Afghanistan">Afghanistan</option>
                                             <option value="Albania">Albania</option>
@@ -336,8 +331,6 @@
                                         <input type="text" name="pincode" id="wizard_pincode" class="md-input" />
                                     </div>
                                 </div>
-                                <h2 class="heading_a">Personal Information
-                                </h2>
                                 <div class="uk-grid">
                                     <div class="uk-width-medium-1-4 parsley-row">
                                         <label for="wizard_date_of_birth">Date of birth</label>
@@ -345,15 +338,22 @@
                                     </div>
                                     <div class="uk-width-medium-1-4 parsley-row">
                                         <label for="wizard_height">Height</label>
-                                        <input type="text" name="height" id="wizard_height" class="md-input" />
+                                        <input type="number" name="height" id="wizard_height" class="md-input" />
                                     </div>
                                     <div class="uk-width-medium-1-4 parsley-row">
                                         <label for="wizard_weight">Weight</label>
-                                        <input type="text" name="weight" id="wizard_weight" class="md-input" />
+                                        <input type="number" step="any" name="weight" id="wizard_weight" class="md-input" />
                                     </div>
                                     <div class="uk-width-medium-1-4 parsley-row">
                                         <label for="wizard_blood_group">Blood Group</label>
                                         <input type="text" name="bloodGroup" id="wizard_blood_group" class="md-input" />
+                                    </div>
+                                </div>
+                                <br />
+                                <br />
+                                <div class="uk-grid" data-uk-grid-margin="data-uk-grid-margin">
+                                    <div class="uk-width-medium-1">
+                                        <button class="md-btn md-btn-primary md-btn-block" onclick="addDetails()">Finish</button>
                                     </div>
                                 </div>
                             </section>
@@ -390,6 +390,7 @@
     <script src="assets/js/uikit_custom.min.js"></script>
     <!-- altair common functions/helpers -->
     <script src="assets/js/altair_admin_common.min.js"></script>
+
     <uc1:StyleSwitcher runat="server" ID="StyleSwitcher" />
 
     <!-- page specific plugins -->
@@ -401,16 +402,11 @@
         altair_forms.parsley_extra_validators();
     </script>
     <script src="bower_components/parsleyjs/dist/parsley.min.js"></script>
-    <!-- jquery steps -->
-    <script src="assets/js/custom/wizard_steps.min.js"></script>
 
     <!-- Page function scripts -->
     <script src="assets/js/lib/notification.js"></script>
     <script src="assets/js/lib/add_customer.js"></script>
-    <!--  forms wizard functions -->
-    <script src="assets/js/lib/form_wizard.js"></script>
-    <!--  forms advanced functions -->
-    <script src="assets/js/pages/forms_advanced.min.js"></script>
+
     <script>
         $(function () {
             // enable hires images

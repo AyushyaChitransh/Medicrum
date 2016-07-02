@@ -1,5 +1,5 @@
 ﻿using MedicalStoreModule.App_Code.Model;
-using ProdectModelModule.App_Code.DAO;
+using MedicalStoreModule.App_Code.DAO;
 using System;
 using System.Collections.Generic;
 using System.Linq;
