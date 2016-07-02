@@ -101,7 +101,6 @@ altair_crud_table = {
                 },
                 storeId: {
                     title: 'Store Id',
-                    width: '25%',
                     edit: false,
                     list: false
                 },
@@ -161,10 +160,11 @@ altair_crud_table = {
                     list: false
                 },
                 dateOfBirth: {
-                    title: 'Date of Birth',
-                    type: 'datetime',
-                    edit: 'true',
-                    list: 'false'
+                    title: 'Birth Date',
+                    type: 'date',
+                    displayFormat: 'dd/mm/yy',
+                    edit: true,
+                    list: false
                 },
                 height: {
                     title: 'Height',
@@ -202,7 +202,7 @@ altair_crud_table = {
                     }
                 }
             }
-        }).jtable('load', { contactPersonName: '' });
+        }).jtable('load', { customerName: '' });
 
         // change buttons visual style in ui-dialog
         $('.ui-dialog-buttonset')

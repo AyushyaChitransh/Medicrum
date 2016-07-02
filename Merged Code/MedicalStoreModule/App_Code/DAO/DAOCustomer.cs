@@ -176,7 +176,7 @@ namespace ProdectModelModule.App_Code.DAO
                 if (cm.OpenConnection() == true)
                 {
                     string qry = @"UPDATE customer SET
-                                               (customer_name=@customer_name,
+                                                customer_name=@customer_name,
                                                 company_name=@company_name,
                                                 address=@address,
                                                 district=@district,
@@ -192,7 +192,7 @@ namespace ProdectModelModule.App_Code.DAO
                                                 blood_group=@blood_group,
                                                 last_updated_by=@last_updated_by,
                                                 last_updated_timestamp=@last_updated_timestamp,
-                                                status=@status)
+                                                status=@status
                                         WHERE
                                                customer_id=@customer_id";
                     MySqlCommand cmd = new MySqlCommand(qry, cm.connection);
