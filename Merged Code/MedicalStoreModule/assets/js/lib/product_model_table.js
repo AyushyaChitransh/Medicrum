@@ -1,5 +1,5 @@
 ﻿function response() {
-    $("#product_list").jtable('load', {
+    $("#product_model_list").jtable('load', {
         productName: $('#search_product').val()
     });
 }
@@ -12,7 +12,7 @@ $(function () {
 altair_crud_table = {
     init: function () {
 
-        $('#product_list').jtable({
+        $('#product_model_list').jtable({
             paging: true,
             pageSize: 10,
             sorting: true,
@@ -89,9 +89,9 @@ altair_crud_table = {
                 altair_md.inputs();
             },
             actions: {
-                listAction: '/ViewProductModel.aspx/ProductList',
-                updateAction: '/ViewProductModel.aspx/UpdateProduct',
-                deleteAction: '/ViewProductModel.aspx/DeleteProduct'
+                listAction: '/ViewProductModel.aspx/ProductModelList',
+                updateAction: '/ViewProductModel.aspx/UpdateProductModel',
+                deleteAction: '/ViewProductModel.aspx/DeleteProductModel'
             },
             fields: {
                 productModelId: {

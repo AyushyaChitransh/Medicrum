@@ -34,6 +34,7 @@ function addDetails() {
                 });
     var result = validate();
     if (result) {
+        event.preventDefault();
         var form_serialized = JSON.stringify($('#wizard_advanced_form').serializeObject(), null, 2);
         $.ajax({
             type: 'POST',
