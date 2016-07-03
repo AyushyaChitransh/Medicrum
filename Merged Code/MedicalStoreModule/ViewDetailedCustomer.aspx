@@ -26,16 +26,12 @@
 
     <div id="page_content">
         <div id="page_content_inner">
-            <h2 class="heading_b uk-margin-bottom">View Customer</h2>
+            <h2 class="heading_b uk-margin-bottom">Customer Information</h2>
             <div class="md-card uk-margin-large-bottom">
                 <div class="md-card-content">
-                    <h2 class="heading_a">Customer Information
-                                    <span class="sub-heading">Enter details below</span>
-                    </h2>
-                    <hr class="md-hr" />
                     <div class="uk-grid">
                         <div class="uk-width-medium-1-1 parsley-row">
-                            <span>Customer Name<span class="req">*</span></span>
+                            <span>Customer Name</span>
                             <input id="customer_name" class="md-input" disabled="disabled" type="text" />
                         </div>
                     </div>
@@ -101,14 +97,6 @@
                             <input id="blood_group" class="md-input" disabled="disabled" type="text" />
                         </div>
                     </div>
-                    <br />
-                    <br />
-                    <div class="uk-grid" data-uk-grid-margin="data-uk-grid-margin">
-                        <div class="uk-width-medium-1">
-                            <a href="#" class="md-btn md-btn-primary md-btn-block" onclick="history.go(-1);return false;">Go back to previous page</a>
-                        </div>
-                    </div>
-
                 </div>
             </div>
         </div>
@@ -145,8 +133,8 @@
     <uc1:StyleSwitcher runat="server" ID="StyleSwitcher" />
 
     <!-- Page function scripts -->
-    <script src="assets/js/lib/loading_data.js"></script>
     <script src="assets/js/lib/get_customer.js"></script>
+
     <script>
         $(function () {
             // enable hires images

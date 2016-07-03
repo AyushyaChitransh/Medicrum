@@ -93,6 +93,7 @@ namespace MedicalStoreModule.App_Code.DAO
                 return false;
             }
         }
+
         public object SupplierList(string supplierStoreName, int storeId, int jtStartIndex, int jtPageSize, string jtSorting)
         {
             try
@@ -156,6 +157,7 @@ namespace MedicalStoreModule.App_Code.DAO
                 return new { Result = "ERROR", Message = ex.Message };
             }
         }
+
         public Supplier GetSupplier(int supplierId)
         {
             Supplier selectedSupplier = new Supplier();
@@ -202,6 +204,7 @@ namespace MedicalStoreModule.App_Code.DAO
                 return selectedSupplier;
             }
         }
+
         public object UpdateSupplier(Supplier supplier)
         {
             string qry = @"UPDATE supplier SET 
@@ -251,6 +254,7 @@ namespace MedicalStoreModule.App_Code.DAO
                 return new { Result = "Error", Message = e.Message };
             }
         }
+
         public object DeleteSupplier(int supplierId)
         {
             try
