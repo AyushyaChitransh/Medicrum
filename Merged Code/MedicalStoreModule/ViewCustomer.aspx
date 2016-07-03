@@ -1,8 +1,5 @@
 ﻿<%@ Page Language="C#" AutoEventWireup="true" CodeBehind="ViewCustomer.aspx.cs" Inherits="MedicalStoreModule.ViewCustomer" %>
 
-<%@ Register Src="~/Controls/HeaderAndSideBar.ascx" TagPrefix="uc1" TagName="HeaderAndSideBar" %>
-<%@ Register Src="~/Controls/StyleSwitcher.ascx" TagPrefix="uc1" TagName="StyleSwitcher" %>
-
 <!DOCTYPE html>
 
 <html xmlns="http://www.w3.org/1999/xhtml">
