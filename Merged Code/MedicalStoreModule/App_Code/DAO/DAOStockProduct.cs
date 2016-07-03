@@ -79,21 +79,21 @@ namespace MedicalStoreModule.App_Code.DAO
             }
         }
 
-        //these are just the body of view module of stock product after updating remove this comment
-        public object ProductList(string productName, int storeId, int jtStartIndex, int jtPageSize, string jtSorting)
+        public object ProductList(string productModelId, int storeId, int jtStartIndex, int jtPageSize, string jtSorting)
         {
             try
             {
                 int productCount = 0;
-                List<StockProduct> listProductModels = new List<StockProduct>();
+                List<StockProduct> listProduct = new List<StockProduct>();
                 string[] sortOrder = jtSorting.Split(' ');
                 if (cm.OpenConnection() == true)
                 {
                     MySqlCommand cmd = new MySqlCommand();
-                    cmd.CommandText = @"SELECT * FROM product_model 
-                                        WHERE delete_status=@delete_status AND store_id=@store_id AND product_name LIKE @searchText 
-                                        ORDER BY product_name " + sortOrder[1] + " LIMIT @jtStartIndex,@jtPageSize";
-                    cmd.Parameters.AddWithValue("@searchText", productName + '%');
+                    cmd.CommandText = @"SELECT * FROM stock_product s 
+                                        LEFT JOIN product_model p ON s.product_model_id = p.product_model_id
+                                        WHERE s.delete_status=@delete_status AND s.store_id=@store_id AND p.product_name LIKE @searchText 
+                                        ORDER BY p.product_name " + sortOrder[1] + " LIMIT @jtStartIndex,@jtPageSize";
+                    cmd.Parameters.AddWithValue("@searchText", productModelId + '%');
                     cmd.Parameters.AddWithValue("@store_id", storeId);
                     cmd.Parameters.AddWithValue("@delete_status", 0);
                     cmd.Parameters.AddWithValue("@jtStartIndex", jtStartIndex);
@@ -102,38 +102,84 @@ namespace MedicalStoreModule.App_Code.DAO
                     MySqlDataReader dataReader = cmd.ExecuteReader();
                     while (dataReader.Read())
                     {
-                        //StockProduct productModel = new StockProduct();
-                        //productModel.productModelId = int.Parse(dataReader["product_model_id"].ToString());
-                        //productModel.productName = dataReader["product_name"].ToString();
-                        //productModel.tradeName = dataReader["trade_name"].ToString();
-                        //productModel.company = dataReader["company"].ToString();
-                        //productModel.composition = dataReader["composition"].ToString();
-                        //productModel.purpose = dataReader["purpose"].ToString();
-                        //productModel.category = dataReader["category"].ToString();
-                        //productModel.subCategory = dataReader["sub_category"].ToString();
-                        //productModel.type = dataReader["type"].ToString();
-                        //productModel.dosageInstruction = dataReader["dosage_instruction"].ToString();
-                        //productModel.storageInstruction = dataReader["storage_instruction"].ToString();
-                        //productModel.schedule = dataReader["schedule"].ToString();
-                        //productModel.description = dataReader["description"].ToString();
-                        //productModel.otherInformation = dataReader["other_information"].ToString();
-                        //productModel.indications = dataReader["indications"].ToString();
-                        //productModel.warning = dataReader["warning"].ToString();
-                        //listProductModels.Add(productModel);
+                        StockProduct product = new StockProduct();
+                        product.productId = int.Parse(dataReader["product_id"].ToString());
+                        product.productModelId = int.Parse(dataReader["product_model_id"].ToString());
+                        product.supplierId = int.Parse(dataReader["supplier_id"].ToString());
+                        int barcode = new int();
+                        if (int.TryParse(dataReader["barcode"].ToString(), out barcode))
+                        {
+                            product.barcode = barcode;
+                        }
+                        product.batchNumber = dataReader["batch_number"].ToString();
+                        DateTime manufactureDate = new DateTime();
+                        if (DateTime.TryParse(dataReader["manufacture_date"].ToString(), out manufactureDate))
+                        {
+                            product.manufactureDate = manufactureDate;
+                        }
+                        DateTime expiryDate = new DateTime();
+                        if (DateTime.TryParse(dataReader["expiry_date"].ToString(), out expiryDate))
+                        {
+                            product.expiryDate = expiryDate;
+                        }
+                        int packageQuantity = new int();
+                        if (int.TryParse(dataReader["package_quantity"].ToString(), out packageQuantity))
+                        {
+                            product.packageQuantity = packageQuantity;
+                        }
+                        decimal price = new decimal();
+                        if (decimal.TryParse(dataReader["price"].ToString(), out price))
+                        {
+                            product.price = price;
+                        }
+                        product.manufactureLicenceNumber = dataReader["manufacture_licence_number"].ToString();
+                        decimal weight = new decimal();
+                        if (decimal.TryParse(dataReader["weight"].ToString(), out weight))
+                        {
+                            product.weight = weight;
+                        }
+                        decimal volume = new decimal();
+                        if (decimal.TryParse(dataReader["volume"].ToString(), out volume))
+                        {
+                            product.volume = volume;
+                        }
+                        int quantity = new int();
+                        if (int.TryParse(dataReader["quantity"].ToString(), out quantity))
+                        {
+                            product.quantity = quantity;
+                        }
+                        decimal tax = new decimal();
+                        if (decimal.TryParse(dataReader["tax"].ToString(), out tax))
+                        {
+                            product.tax = tax;
+                        }
+                        int status = new int();
+                        if (int.TryParse(dataReader["status"].ToString(), out status))
+                        {
+                            product.status = status;
+                        }
+                        int inStock = new int();
+                        if (int.TryParse(dataReader["in_stock"].ToString(), out inStock))
+                        {
+                            product.inStock = inStock;
+                        }
+                        listProduct.Add(product);
                     }
                     cm.CloseConnection();
                 }
                 if (cm.OpenConnection() == true)
                 {
-                    //MySqlCommand cmd = new MySqlCommand();
-                    //cmd.CommandText = "SELECT COUNT(*) FROM product_model WHERE delete_status=@delete_status AND product_name like @searchText";
-                    //cmd.Parameters.AddWithValue("@searchText", productName + "%");
-                    //cmd.Parameters.AddWithValue("@delete_status", 0);
-                    //cmd.Connection = cm.connection;
-                    //productCount = int.Parse(cmd.ExecuteScalar().ToString());
-                    //cm.CloseConnection();
+                    MySqlCommand cmd = new MySqlCommand();
+                    cmd.CommandText = @"SELECT COUNT(*) FROM stock_product s
+                                        LEFT JOIN product_model p ON s.product_model_id = p.product_model_id
+                                        WHERE s.delete_status=@delete_status AND p.product_name like @searchText";
+                    cmd.Parameters.AddWithValue("@searchText", productModelId + "%");
+                    cmd.Parameters.AddWithValue("@delete_status", 0);
+                    cmd.Connection = cm.connection;
+                    productCount = int.Parse(cmd.ExecuteScalar().ToString());
+                    cm.CloseConnection();
                 }
-                return new { Result = "OK", Records = listProductModels, TotalRecordCount = productCount };
+                return new { Result = "OK", Records = listProduct, TotalRecordCount = productCount };
             }
             catch (Exception ex)
             {
@@ -148,34 +194,30 @@ namespace MedicalStoreModule.App_Code.DAO
             {
                 if (cm.OpenConnection() == true)
                 {
-                    //                    MySqlCommand cmd = new MySqlCommand();
-                    //                    cmd.CommandText = @"UPDATE product_model SET product_name=@product_name, trade_name=@trade_name, company=@company, 
-                    //                                        composition=@composition, purpose=@purpose, category=@category, sub_category=@sub_category, 
-                    //                                        type=@type, dosage_instruction=@dosage_instruction, storage_instruction=@storage_instruction, 
-                    //                                        schedule=@schedule, description=@description, other_information=@other_information, 
-                    //                                        indications=@indications, warning=@warning, last_updated_by=@last_updated_by, 
-                    //                                        last_updated_timestamp=@last_updated_timestamp WHERE product_model_id=@product_model_id";
-                    //                    cmd.Parameters.AddWithValue("@product_model_id", productModel.productModelId);
-                    //                    cmd.Parameters.AddWithValue("@product_name", productModel.productName);
-                    //                    cmd.Parameters.AddWithValue("@trade_name", productModel.tradeName);
-                    //                    cmd.Parameters.AddWithValue("@company", productModel.company);
-                    //                    cmd.Parameters.AddWithValue("@composition", productModel.composition);
-                    //                    cmd.Parameters.AddWithValue("@purpose", productModel.purpose);
-                    //                    cmd.Parameters.AddWithValue("@category", productModel.category);
-                    //                    cmd.Parameters.AddWithValue("@sub_category", productModel.subCategory);
-                    //                    cmd.Parameters.AddWithValue("@type", productModel.type);
-                    //                    cmd.Parameters.AddWithValue("@dosage_instruction", productModel.dosageInstruction);
-                    //                    cmd.Parameters.AddWithValue("@storage_instruction", productModel.storageInstruction);
-                    //                    cmd.Parameters.AddWithValue("@schedule", productModel.schedule);
-                    //                    cmd.Parameters.AddWithValue("@description", productModel.description);
-                    //                    cmd.Parameters.AddWithValue("@other_information", productModel.otherInformation);
-                    //                    cmd.Parameters.AddWithValue("@indications", productModel.indications);
-                    //                    cmd.Parameters.AddWithValue("@warning", productModel.warning);
-                    //                    cmd.Parameters.AddWithValue("@last_updated_by", productModel.lastUpdatedBy);
-                    //                    cmd.Parameters.AddWithValue("@last_updated_timestamp", productModel.lastUpdatedTimestamp);
-                    //                    cmd.Connection = connection;
-                    //                    cmd.ExecuteNonQuery();
-                    //                    this.CloseConnection();
+                    MySqlCommand cmd = new MySqlCommand();
+                    cmd.CommandText = @"UPDATE stock_product SET product_model_id=@product_model_id, supplier_id=@supplier_id, barcode=@barcode, 
+                                        batch_number=@batch_number, manufacture_date=@manufacture_date, expiry_date=@expiry_date, 
+                                        package_quantity=@package_quantity, price=@price, manufacture_licence_number=@manufacture_licence_number, 
+                                        weight=@weight, volume=@volume, quantity=@quantity, tax=@tax
+                                        WHERE product_id=@product_id";
+                    cmd.Parameters.AddWithValue("@product_id", stockProduct.productId);
+                    cmd.Parameters.AddWithValue("@product_model_id", stockProduct.productModelId);
+                    cmd.Parameters.AddWithValue("@supplier_id", stockProduct.supplierId);
+                    cmd.Parameters.AddWithValue("@barcode", stockProduct.barcode);
+                    cmd.Parameters.AddWithValue("@batch_number", stockProduct.batchNumber);
+                    cmd.Parameters.AddWithValue("@manufacture_date", stockProduct.manufactureDate);
+                    cmd.Parameters.AddWithValue("@expiry_date", stockProduct.expiryDate);
+                    cmd.Parameters.AddWithValue("@package_quantity", stockProduct.packageQuantity);
+                    cmd.Parameters.AddWithValue("@price", stockProduct.price);
+                    cmd.Parameters.AddWithValue("@manufacture_licence_number", stockProduct.manufactureLicenceNumber);
+                    cmd.Parameters.AddWithValue("@weight", stockProduct.weight);
+                    cmd.Parameters.AddWithValue("@volume", stockProduct.volume);
+                    cmd.Parameters.AddWithValue("@quantity", stockProduct.quantity);
+                    cmd.Parameters.AddWithValue("@tax", stockProduct.tax);
+                    cmd.Connection = cm.connection;
+                    cmd.CommandTimeout = 0;
+                    cmd.ExecuteNonQuery();
+                    cm.CloseConnection();
                 }
                 return new { Result = "OK" };
             }
@@ -322,6 +364,67 @@ namespace MedicalStoreModule.App_Code.DAO
                 cm.CloseConnection();
                 string message = ex.Message;
                 return kvpList;
+            }
+        }
+
+        public object GetProductModelOptions(int storeId)
+        {
+            //var productModelOption = new[]{};
+            List<object> productModelOption = new List<object>();
+            try
+            {
+                if (cm.OpenConnection() == true)
+                {
+                    MySqlCommand cmd = new MySqlCommand();
+                    cmd.CommandText = @"SELECT * FROM product_model 
+                                    WHERE delete_status=@delete_status AND store_id=@store_id";
+                    cmd.Parameters.AddWithValue("@store_id", storeId);
+                    cmd.Parameters.AddWithValue("@delete_status", 0);
+                    cmd.Connection = cm.connection;
+                    MySqlDataReader dataReader = cmd.ExecuteReader();
+                    int i = 0;
+                    while (dataReader.Read())
+                    {
+                        productModelOption.Add(new { DisplayText = dataReader["product_name"].ToString(), Value = int.Parse(dataReader["product_model_id"].ToString()) });
+                    }
+                    cm.CloseConnection();
+                }
+                return new { Result = "OK", Options = productModelOption };
+            }
+            catch (Exception ex)
+            {
+                cm.CloseConnection();
+                return new { Result = "ERROR", Message = ex.Message };
+            }
+        }
+
+        public object GetSupplierOptions(int storeId)
+        {
+            //var supplierOptions = new object();
+            List<object> supplierOptions = new List<object>();
+            try
+            {
+                if (cm.OpenConnection() == true)
+                {
+                    MySqlCommand cmd = new MySqlCommand();
+                    cmd.CommandText = @"SELECT * FROM supplier 
+                                        WHERE delete_status=@delete_status AND store_id=@store_id";
+                    cmd.Parameters.AddWithValue("@store_id", storeId);
+                    cmd.Parameters.AddWithValue("@delete_status", 0);
+                    cmd.Connection = cm.connection;
+                    MySqlDataReader dataReader = cmd.ExecuteReader();
+                    while (dataReader.Read())
+                    {
+                        supplierOptions.Add(new { DisplayText = dataReader["supplier_store_name"].ToString(), Value = int.Parse(dataReader["supplier_id"].ToString()) });
+                    }
+                    cm.CloseConnection();
+                }
+                return new { Result = "OK", Options = supplierOptions };
+            }
+            catch (Exception ex)
+            {
+                cm.CloseConnection();
+                return new { Result = "ERROR", Message = ex.Message };
             }
         }
     }

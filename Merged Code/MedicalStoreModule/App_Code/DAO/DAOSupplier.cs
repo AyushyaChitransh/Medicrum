@@ -93,7 +93,7 @@ namespace MedicalStoreModule.App_Code.DAO
                 return false;
             }
         }
-        public object SupplierList(string contactPersonName, int storeId, int jtStartIndex, int jtPageSize, string jtSorting)
+        public object SupplierList(string supplierStoreName, int storeId, int jtStartIndex, int jtPageSize, string jtSorting)
         {
             try
             {
@@ -104,9 +104,9 @@ namespace MedicalStoreModule.App_Code.DAO
                 {
                     MySqlCommand cmd = new MySqlCommand();
                     cmd.CommandText = @"SELECT * FROM supplier 
-                                        WHERE delete_status=@delete_status AND store_id=@store_id AND contact_person_name LIKE @searchText 
-                                        ORDER BY contact_person_name " + sortOrder[1] + " LIMIT @jtStartIndex,@jtPageSize";
-                    cmd.Parameters.AddWithValue("@searchText", contactPersonName + '%');
+                                        WHERE delete_status=@delete_status AND store_id=@store_id AND supplier_store_name LIKE @searchText 
+                                        ORDER BY supplier_store_name " + sortOrder[1] + " LIMIT @jtStartIndex,@jtPageSize";
+                    cmd.Parameters.AddWithValue("@searchText", supplierStoreName + '%');
                     cmd.Parameters.AddWithValue("@store_id", storeId);
                     cmd.Parameters.AddWithValue("@delete_status", 0);
                     cmd.Parameters.AddWithValue("@jtStartIndex", jtStartIndex);
@@ -142,7 +142,7 @@ namespace MedicalStoreModule.App_Code.DAO
                 {
                     MySqlCommand cmd = new MySqlCommand();
                     cmd.CommandText = "SELECT COUNT(*) FROM supplier WHERE delete_status=@delete_status AND contact_person_name like @searchText";
-                    cmd.Parameters.AddWithValue("@searchText", contactPersonName + "%");
+                    cmd.Parameters.AddWithValue("@searchText", supplierStoreName + "%");
                     cmd.Parameters.AddWithValue("@delete_status", 0);
                     cmd.Connection = cm.connection;
                     supplierCount = int.Parse(cmd.ExecuteScalar().ToString());

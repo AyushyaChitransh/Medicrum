@@ -1,6 +1,6 @@
 ﻿function response() {
-    $("#product_model_list").jtable('load', {
-        productName: $('#search_product_model').val()
+    $("#product_list").jtable('load', {
+        productModelId: $('#search_product').val()
     });
 }
 
@@ -12,13 +12,13 @@ $(function () {
 altair_crud_table = {
     init: function () {
 
-        $('#product_model_list').jtable({
+        $('#product_list').jtable({
             paging: true,
             pageSize: 10,
             sorting: true,
-            defaultSorting: 'productName ASC',
+            defaultSorting: 'productModelId ASC',
             deleteConfirmation: function (data) {
-                data.deleteConfirmMessage = 'Are you sure to delete records of ' + data.record.productName + '?';
+                data.deleteConfirmMessage = 'Are you sure to delete records of ' + data.record.productModelId + '?';
             },
             formCreated: function (event, data) {
                 // replace click event on some clickable elements
@@ -89,84 +89,85 @@ altair_crud_table = {
                 altair_md.inputs();
             },
             actions: {
-                listAction: '/ViewProductModel.aspx/ProductModelList',
-                updateAction: '/ViewProductModel.aspx/UpdateProductModel',
-                deleteAction: '/ViewProductModel.aspx/DeleteProductModel'
+                listAction: '/ViewProduct.aspx/ProductList',
+                updateAction: '/ViewProduct.aspx/UpdateProduct',
+                deleteAction: '/ViewProduct.aspx/DeleteProduct'
             },
             fields: {
-                productModelId: {
+                productId: {
                     key: true,
                     create: false,
                     edit: false,
                     list: false
                 },
-                productName: {
+                productModelId: {
                     title: 'Product Name',
-                    width: '50%'
+                    width: '20%',
+                    options: '/ViewProduct.aspx/GetProductModelOptions'
                 },
-                tradeName: {
-                    title: 'Trade Name',
+                supplierId: {
+                    title: 'Supplier Name',
+                    width: '20%',
+                    options: '/ViewProduct.aspx/GetSupplierOptions'
+                },
+                barcode: {
+                    title: 'Barcode',
                     list: false
                 },
-                company: {
-                    title: 'Company',
+                batchNumber: {
+                    title: 'Batch Number',
                     list: false
                 },
-                category: {
-                    title: 'Category',
+                manufactureDate: {
+                    title: 'Manufacture Date',
+                    type: 'date',
+                    displayFormat: 'dd-mm-yy',
                     list: false
                 },
-                subCategory: {
-                    title: 'Sub Category',
+                expiryDate: {
+                    title: 'Expiry Date',
+                    type: 'date',
+                    displayFormat: 'dd-mm-yy',
+                    width: '20%'
+                },
+                packageQuantity: {
+                    title: 'Package Quantity',
                     list: false
                 },
-                type: {
-                    title: 'Type',
+                price: {
+                    title: 'Price',
                     list: false
                 },
-                schedule: {
-                    title: 'Schedule',
+                manufactureLicenceNumber: {
+                    title: 'Manufacture Licence Number',
                     list: false
                 },
-                composition: {
-                    title: 'Composition',
-                    list: false,
-                    type: 'textarea'
+                weight: {
+                    title: 'Weight',
+                    list: false
                 },
-                description: {
-                    title: 'Description',
-                    list: false,
-                    type: 'textarea'
+                volume: {
+                    title: 'Volume',
+                    list: false
                 },
-                purpose: {
-                    title: 'Purpose',
-                    list: false,
-                    type: 'textarea'
+                quantity: {
+                    title: 'Quantity',
+                    list: false
                 },
-                dosageInstruction: {
-                    title: 'Dosage Instruction',
-                    list: false,
-                    type: 'textarea'
+                tax: {
+                    title: 'Tax',
+                    list: false
                 },
-                storageInstruction: {
-                    title: 'Storage Instruction',
-                    list: false,
-                    type: 'textarea'
+                status: {
+                    title: 'Status',
+                    edit: false,
+                    list: false
                 },
-                indications: {
-                    title: 'Indications',
-                    list: false,
-                    type: 'textarea'
-                },
-                warning: {
-                    title: 'Warning',
-                    list: false,
-                    type: 'textarea'
-                },
-                otherInformation: {
-                    title: 'Other Information',
-                    list: false,
-                    type: 'textarea'
+                inStock: {
+                    title: 'In Stock',
+                    width: '1%',
+                    edit: false,
+                    options: { '1': '<span class="uk-badge uk-badge-success">In stock</span>', '0': '<span class="uk-badge uk-badge-danger">Out of stock</span>' }
                 },
                 viewButton: {
                     width: '1%',
@@ -174,11 +175,11 @@ altair_crud_table = {
                     edit: false,
                     sorting: false,
                     display: function (data) {
-                        return '<a href="#" onclick="ViewDetailedProductModel(' + data.record.productModelId + ')"><i class="material-icons md-24">&#xE8F4;</i></a>';
+                        return '<a href="#" onclick="ViewDetailedProduct(' + data.record.productId + ')"><i class="material-icons md-24">&#xE8F4;</i></a>';
                     }
                 }
             }
-        }).jtable('load', { productName: '' });
+        }).jtable('load', { productModelId: '' });
 
         // change buttons visual style in ui-dialog
         $('.ui-dialog-buttonset')

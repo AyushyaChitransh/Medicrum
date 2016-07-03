@@ -1,9 +1,9 @@
-﻿function ViewDetailedProductModel(productModelId) {
+﻿function ViewDetailedProduct(productId) {
     $.ajax({
         type: 'POST',
-        url: 'ViewProductModel.aspx/SetProductModelSession',
+        url: 'ViewProduct.aspx/SetProductSession',
         contentType: 'application/json; charset=utf-8',
-        data: "{ 'productModelId': " + productModelId + " }",
+        data: "{ 'productId': " + productId + " }",
         success: function () {
         },
         error: function (error) {
@@ -11,6 +11,6 @@
         }
     });
     setTimeout(function () {
-        window.open("ViewDetailedProductModel.aspx", '_blank');
+        window.open("ViewDetailedProduct.aspx", '_blank');
     }, 500);
 }

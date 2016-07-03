@@ -18,7 +18,7 @@ altair_crud_table = {
             sorting: true,
             defaultSorting: 'customerName ASC',
             deleteConfirmation: function (data) {
-                data.deleteConfirmMessage = 'Are you sure to delete all records of ' + data.record.customerName + '?';
+                data.deleteConfirmMessage = 'Are you sure to delete records of ' + data.record.customerName + '?';
             },
             formCreated: function (event, data) {
                 // replace click event on some clickable elements

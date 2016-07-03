@@ -265,7 +265,9 @@
     <Content Include="assets\js\lib\load_add_product_data.js" />
     <Content Include="assets\js\lib\notification.js" />
     <Content Include="assets\js\lib\product_model_table.js" />
+    <Content Include="assets\js\lib\product_table.js" />
     <Content Include="assets\js\lib\supplier_table.js" />
+    <Content Include="assets\js\lib\view_product.js" />
     <Content Include="assets\js\lib\view_product_model.js" />
     <Content Include="assets\js\lib\view_supplier.js" />
     <Content Include="assets\js\pages\components_nestable.js" />
@@ -5273,6 +5275,7 @@
     <Content Include="EmptyStocks.aspx" />
     <Content Include="Error.aspx" />
     <Content Include="ViewCustomer.aspx" />
+    <Content Include="ViewDetailedProduct.aspx" />
     <Content Include="ViewDetailedProductModel.aspx" />
     <Content Include="ViewDetailedSupplier.aspx" />
     <Content Include="ViewProduct.aspx" />
@@ -5390,6 +5393,13 @@
     </Compile>
     <Compile Include="ViewCustomer.aspx.designer.cs">
       <DependentUpon>ViewCustomer.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="ViewDetailedProduct.aspx.cs">
+      <DependentUpon>ViewDetailedProduct.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="ViewDetailedProduct.aspx.designer.cs">
+      <DependentUpon>ViewDetailedProduct.aspx</DependentUpon>
     </Compile>
     <Compile Include="ViewDetailedProductModel.aspx.cs">
       <DependentUpon>ViewDetailedProductModel.aspx</DependentUpon>

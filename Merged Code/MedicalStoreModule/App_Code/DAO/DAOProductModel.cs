@@ -109,7 +109,7 @@ namespace MedicalStoreModule.App_Code.DAO
         {
             try
             {
-                int productCount = 0;
+                int productModelCount = 0;
                 List<ProductModel> listProductModels = new List<ProductModel>();
                 string[] sortOrder = jtSorting.Split(' ');
                 if (cm.OpenConnection() == true)
@@ -155,10 +155,10 @@ namespace MedicalStoreModule.App_Code.DAO
                     cmd.Parameters.AddWithValue("@searchText", productName + "%");
                     cmd.Parameters.AddWithValue("@delete_status", 0);
                     cmd.Connection = cm.connection;
-                    productCount = int.Parse(cmd.ExecuteScalar().ToString());
+                    productModelCount = int.Parse(cmd.ExecuteScalar().ToString());
                     cm.CloseConnection();
                 }
-                return new { Result = "OK", Records = listProductModels, TotalRecordCount = productCount };
+                return new { Result = "OK", Records = listProductModels, TotalRecordCount = productModelCount };
             }
             catch (Exception ex)
             {

@@ -20,9 +20,8 @@ namespace MedicalStoreModule
         [WebMethod]
         public static object ProductModelList(string productName, int jtStartIndex, int jtPageSize, string jtSorting)
         {
-            ConnectionManager conn = new ConnectionManager();
-            DAOProductModel accessProductModeldb = new DAOProductModel();
             int storeId = 1;
+            DAOProductModel accessProductModeldb = new DAOProductModel();
             return accessProductModeldb.ProductModelList(productName, storeId, jtStartIndex, jtPageSize, jtSorting);
         }
 
@@ -43,7 +42,7 @@ namespace MedicalStoreModule
         }
 
         [WebMethod]
-        public static void SetProductSession(int productModelId)
+        public static void SetProductModelSession(int productModelId)
         {
             HttpContext.Current.Session["productModelId"] = productModelId;
         }

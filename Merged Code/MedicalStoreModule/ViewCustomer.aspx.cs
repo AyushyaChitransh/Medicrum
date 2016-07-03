@@ -17,6 +17,7 @@ namespace MedicalStoreModule
         {
 
         }
+
         [WebMethod]
         public static object CustomerList(string customerName, int jtStartIndex, int jtPageSize, string jtSorting)
         {

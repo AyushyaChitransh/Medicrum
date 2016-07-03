@@ -36,7 +36,7 @@
                         <br />
                         <div class="uk-width-medium-2-6">
                             <label for="search_product">Search Product</label>
-                            <input type="text" class="md-input" id="search_product" name="search_product" onkeyup="response()" />
+                            <input type="text" class="md-input" id="search_product_model" name="search_product" onkeyup="response()" />
                         </div>
                         <br />
                     </div>

@@ -1,6 +1,6 @@
 ﻿function response() {
     $("#supplier_list").jtable('load', {
-        contactPersonName: $('#search_supplier').val()
+        supplierStoreName: $('#search_supplier').val()
     });
 }
 
@@ -16,9 +16,9 @@ altair_crud_table = {
             paging: true,
             pageSize: 10,
             sorting: true,
-            defaultSorting: 'contactPersonName ASC',
+            defaultSorting: 'supplierStoreName ASC',
             deleteConfirmation: function (data) {
-                data.deleteConfirmMessage = 'Are you sure to delete supplier ' + data.record.contactPersonName + '?';
+                data.deleteConfirmMessage = 'Are you sure to delete records of ' + data.record.supplierStoreName + '?';
             },
             formCreated: function (event, data) {
                 // replace click event on some clickable elements
@@ -96,9 +96,8 @@ altair_crud_table = {
             fields: {
                 contactPersonName: {
                     title: 'Supplier Name',
-                    width: '25%',
                     edit: true,
-                    list: true
+                    list: false
                 },
                 supplierId: {
                     key: true,
@@ -112,9 +111,10 @@ altair_crud_table = {
                     list: false
                 },
                 supplierStoreName: {
-                    title: 'Supplier Store',
+                    title: 'Supplier Store Name',
+                    width: '25%',
                     edit: true,
-                    list: false
+                    list: true
                 },
                 address: {
                     title:'Address',
@@ -190,7 +190,7 @@ altair_crud_table = {
                     }
                 }
             }
-        }).jtable('load', { contactPersonName: '' });
+        }).jtable('load', { supplierStoreName: '' });
 
         // change buttons visual style in ui-dialog
         $('.ui-dialog-buttonset')

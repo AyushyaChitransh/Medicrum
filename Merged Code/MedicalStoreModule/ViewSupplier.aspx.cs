@@ -18,11 +18,11 @@ namespace MedicalStoreModule
         }
 
         [WebMethod]
-        public static object SupplierList(string contactPersonName, int jtStartIndex, int jtPageSize, string jtSorting)
+        public static object SupplierList(string supplierStoreName, int jtStartIndex, int jtPageSize, string jtSorting)
         {
             int storeId = 1;
             DAOSupplier accessSupplierdb = new DAOSupplier();
-            return accessSupplierdb.SupplierList(contactPersonName, storeId, jtStartIndex, jtPageSize, jtSorting);
+            return accessSupplierdb.SupplierList(supplierStoreName, storeId, jtStartIndex, jtPageSize, jtSorting);
         }
 
         [WebMethod]
