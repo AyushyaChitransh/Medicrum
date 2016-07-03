@@ -269,30 +269,30 @@ namespace MedicalStoreModule.App_Code.DAO
                 {
                     MySqlCommand cmd = new MySqlCommand();
                     cmd.CommandText = @"SELECT customer_id,
-                                           store_id,
+                                c.store_id as store_id,
                                            customer_name,
-                                           company_name,
-                                           address,
-                                           district,
-                                           state,
-                                           country,
-                                           pincode,
-                                           phone_number,
-                                           mobile,
-                                           email,
+                                c.company_name as company_name,
+                                c.address as address,
+                                c.district as district,
+                                c.state as state,
+                                c.country as country,
+                                c.pincode as pincode,
+                                c.phone_number as phone_number,
+                                c.mobile as mobile,
+                                c.email as email,
                                            date_of_birth,
                                            height,
                                            weight,
                                            blood_group,
                                 u1.name as added_by,  
-                                           added_timestamp,
-                                u2.name as last_updated_by  
-                                           last_updated_timestamp,
-                                           status,
-                                           delete_status
+                                c.added_timestamp as added_timestamp,
+                                u2.name as last_updated_by,
+                                c.last_updated_timestamp as last_updated_timestamp,
+                                c.status as status,
+                                c.delete_status as delete_status
                                     FROM customer c
-                                           JOIN user u1 ON p.added_by = u1.user_name  
-                                           JOIN user u2 ON p.last_updated_by = u2.user_name
+                                           JOIN user u1 ON c.added_by = u1.user_name  
+                                           JOIN user u2 ON c.last_updated_by = u2.user_name
                                     WHERE customer_id=@customer_id";
                     cmd.Parameters.AddWithValue("@customer_id", customerId);
                     cmd.Connection = cm.connection;

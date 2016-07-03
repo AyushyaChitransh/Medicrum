@@ -19,6 +19,7 @@
     <IISExpressAnonymousAuthentication />
     <IISExpressWindowsAuthentication />
     <IISExpressUseClassicPipelineMode />
+    <UseGlobalApplicationHostFile />
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
     <DebugSymbols>true</DebugSymbols>
@@ -267,7 +268,11 @@
     <Content Include="assets\js\lib\product_model_table.js" />
     <Content Include="assets\js\lib\product_table.js" />
     <Content Include="assets\js\lib\supplier_table.js" />
+<<<<<<< HEAD
     <Content Include="assets\js\lib\view_product.js" />
+=======
+    <Content Include="assets\js\lib\view_customer.js" />
+>>>>>>> ef92a7ac23c2a34d93a4ccc5cd2a1f084288dca2
     <Content Include="assets\js\lib\view_product_model.js" />
     <Content Include="assets\js\lib\view_supplier.js" />
     <Content Include="assets\js\pages\components_nestable.js" />
@@ -5275,7 +5280,11 @@
     <Content Include="EmptyStocks.aspx" />
     <Content Include="Error.aspx" />
     <Content Include="ViewCustomer.aspx" />
+<<<<<<< HEAD
     <Content Include="ViewDetailedProduct.aspx" />
+=======
+    <Content Include="ViewDetailedCustomer.aspx" />
+>>>>>>> ef92a7ac23c2a34d93a4ccc5cd2a1f084288dca2
     <Content Include="ViewDetailedProductModel.aspx" />
     <Content Include="ViewDetailedSupplier.aspx" />
     <Content Include="ViewProduct.aspx" />
@@ -5394,12 +5403,21 @@
     <Compile Include="ViewCustomer.aspx.designer.cs">
       <DependentUpon>ViewCustomer.aspx</DependentUpon>
     </Compile>
+<<<<<<< HEAD
     <Compile Include="ViewDetailedProduct.aspx.cs">
       <DependentUpon>ViewDetailedProduct.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
     </Compile>
     <Compile Include="ViewDetailedProduct.aspx.designer.cs">
       <DependentUpon>ViewDetailedProduct.aspx</DependentUpon>
+=======
+    <Compile Include="ViewDetailedCustomer.aspx.cs">
+      <DependentUpon>ViewDetailedCustomer.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="ViewDetailedCustomer.aspx.designer.cs">
+      <DependentUpon>ViewDetailedCustomer.aspx</DependentUpon>
+>>>>>>> ef92a7ac23c2a34d93a4ccc5cd2a1f084288dca2
     </Compile>
     <Compile Include="ViewDetailedProductModel.aspx.cs">
       <DependentUpon>ViewDetailedProductModel.aspx</DependentUpon>
