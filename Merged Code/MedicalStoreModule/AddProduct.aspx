@@ -152,6 +152,8 @@
         altair_forms.parsley_extra_validators();
     </script>
     <script src="bower_components/parsleyjs/dist/parsley.min.js"></script>
+    <!-- jquery steps -->
+    <script src="assets/js/custom/wizard_steps.min.js"></script>
 
     <!-- Page function scripts -->
     <script src="assets/js/lib/load_add_product_data.js"></script>
