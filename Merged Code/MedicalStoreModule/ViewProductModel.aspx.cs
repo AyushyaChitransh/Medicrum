@@ -18,7 +18,7 @@ namespace MedicalStoreModule
         }
 
         [WebMethod]
-        public static object ProductList(string productName, int jtStartIndex, int jtPageSize, string jtSorting)
+        public static object ProductModelList(string productName, int jtStartIndex, int jtPageSize, string jtSorting)
         {
             ConnectionManager conn = new ConnectionManager();
             DAOProductModel accessProductModeldb = new DAOProductModel();
@@ -27,7 +27,7 @@ namespace MedicalStoreModule
         }
 
         [WebMethod]
-        public static object UpdateProduct(ProductModel record)
+        public static object UpdateProductModel(ProductModel record)
         {
             record.lastUpdatedBy = "ravi.jain";
             record.lastUpdatedTimestamp = DateTime.Now;
@@ -36,7 +36,7 @@ namespace MedicalStoreModule
         }
 
         [WebMethod]
-        public static object DeleteProduct(int productModelId)
+        public static object DeleteProductModel(int productModelId)
         {
             DAOProductModel accessProductModeldb = new DAOProductModel();
             return accessProductModeldb.DeleteProductModel(productModelId);

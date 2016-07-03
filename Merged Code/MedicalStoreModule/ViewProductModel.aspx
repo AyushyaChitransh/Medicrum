@@ -45,7 +45,7 @@
             <br />
             <div class="md-card">
                 <div class="md-card-content">
-                    <div id="product_list"></div>
+                    <div id="product_model_list"></div>
                 </div>
             </div>
 
