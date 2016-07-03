@@ -156,9 +156,9 @@
     <script src="assets/js/custom/wizard_steps.min.js"></script>
 
     <!-- Page function scripts -->
-    <script src="assets/js/lib/load_add_product_data.js"></script>
+    <script src="assets/js/lib/stock_product/load_add_product_data.js"></script>
     <script src="assets/js/lib/notification.js"></script>
-    <script src="assets/js/lib/add_product.js"></script>
+    <script src="assets/js/lib/stock_product/add_product.js"></script>
 
     <script>
         $(function () {

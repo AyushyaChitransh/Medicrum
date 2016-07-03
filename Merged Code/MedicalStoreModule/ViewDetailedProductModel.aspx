@@ -204,7 +204,7 @@
     <uc1:StyleSwitcher runat="server" ID="StyleSwitcher" />
 
     <!-- Page function scripts -->
-    <script src="assets/js/lib/get_product_model.js"></script>
+    <script src="assets/js/lib/product_model/get_product_model.js"></script>
 
     <script>
         $(function () {

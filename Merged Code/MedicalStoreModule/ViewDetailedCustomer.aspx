@@ -133,7 +133,7 @@
     <uc1:StyleSwitcher runat="server" ID="StyleSwitcher" />
 
     <!-- Page function scripts -->
-    <script src="assets/js/lib/get_customer.js"></script>
+    <script src="assets/js/lib/customer/get_customer.js"></script>
 
     <script>
         $(function () {

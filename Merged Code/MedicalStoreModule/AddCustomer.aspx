@@ -401,7 +401,7 @@
 
     <!-- Page function scripts -->
     <script src="assets/js/lib/notification.js"></script>
-    <script src="assets/js/lib/add_customer.js"></script>
+    <script src="assets/js/lib/customer/add_customer.js"></script>
 
     <script>
         $(function () {

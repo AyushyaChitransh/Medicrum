@@ -252,25 +252,25 @@
     <Content Include="assets\js\custom\wizard_steps.min.js" />
     <Content Include="assets\js\kendoui_custom.js" />
     <Content Include="assets\js\kendoui_custom.min.js" />
-    <Content Include="assets\js\lib\add_customer.js" />
-    <Content Include="assets\js\lib\add_product.js" />
-    <Content Include="assets\js\lib\add_product_model.js" />
-    <Content Include="assets\js\lib\add_store.js" />
-    <Content Include="assets\js\lib\add_supplier.js" />
-    <Content Include="assets\js\lib\customer_table.js" />
+    <Content Include="assets\js\lib\customer\add_customer.js" />
+    <Content Include="assets\js\lib\stock_product\add_product.js" />
+    <Content Include="assets\js\lib\product_model\add_product_model.js" />
+    <Content Include="assets\js\lib\store\add_store.js" />
+    <Content Include="assets\js\lib\supplier\add_supplier.js" />
+    <Content Include="assets\js\lib\customer\customer_table.js" />
     <Content Include="assets\js\lib\form_wizard.js" />
-    <Content Include="assets\js\lib\get_customer.js" />
-    <Content Include="assets\js\lib\get_product_model.js" />
-    <Content Include="assets\js\lib\get_supplier.js" />
-    <Content Include="assets\js\lib\load_add_product_data.js" />
+    <Content Include="assets\js\lib\customer\get_customer.js" />
+    <Content Include="assets\js\lib\product_model\get_product_model.js" />
+    <Content Include="assets\js\lib\supplier\get_supplier.js" />
+    <Content Include="assets\js\lib\stock_product\load_add_product_data.js" />
     <Content Include="assets\js\lib\notification.js" />
-    <Content Include="assets\js\lib\product_model_table.js" />
-    <Content Include="assets\js\lib\product_table.js" />
-    <Content Include="assets\js\lib\supplier_table.js" />
-    <Content Include="assets\js\lib\view_customer.js" />
-    <Content Include="assets\js\lib\view_product.js" />
-    <Content Include="assets\js\lib\view_product_model.js" />
-    <Content Include="assets\js\lib\view_supplier.js" />
+    <Content Include="assets\js\lib\product_model\product_model_table.js" />
+    <Content Include="assets\js\lib\stock_product\product_table.js" />
+    <Content Include="assets\js\lib\supplier\supplier_table.js" />
+    <Content Include="assets\js\lib\customer\view_customer.js" />
+    <Content Include="assets\js\lib\stock_product\view_product.js" />
+    <Content Include="assets\js\lib\product_model\view_product_model.js" />
+    <Content Include="assets\js\lib\supplier\view_supplier.js" />
     <Content Include="assets\js\pages\components_nestable.js" />
     <Content Include="assets\js\pages\components_nestable.min.js" />
     <Content Include="assets\js\pages\components_notifications.js" />
@@ -5280,6 +5280,7 @@
     <Content Include="ViewDetailedProduct.aspx" />
     <Content Include="ViewDetailedProductModel.aspx" />
     <Content Include="ViewDetailedSupplier.aspx" />
+    <Content Include="ViewDetailedUser.aspx" />
     <Content Include="ViewProduct.aspx" />
     <Content Include="ViewProductModel.aspx" />
     <Content Include="ViewSupplier.aspx" />
@@ -5423,6 +5424,13 @@
     </Compile>
     <Compile Include="ViewDetailedSupplier.aspx.designer.cs">
       <DependentUpon>ViewDetailedSupplier.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="ViewDetailedUser.aspx.cs">
+      <DependentUpon>ViewDetailedUser.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="ViewDetailedUser.aspx.designer.cs">
+      <DependentUpon>ViewDetailedUser.aspx</DependentUpon>
     </Compile>
     <Compile Include="ViewProduct.aspx.cs">
       <DependentUpon>ViewProduct.aspx</DependentUpon>

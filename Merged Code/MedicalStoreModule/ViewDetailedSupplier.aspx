@@ -136,8 +136,8 @@
     <uc1:StyleSwitcher runat="server" ID="StyleSwitcher" />
 
     <!-- Page function scripts -->
-    <script src="assets/js/lib/loading_data.js"></script>
-    <script src="assets/js/lib/get_supplier.js"></script>
+    <script src="assets/js/lib/supplier/get_supplier.js"></script>
+
     <script>
         $(function () {
             // enable hires images

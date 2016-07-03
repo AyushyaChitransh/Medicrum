@@ -31,7 +31,7 @@
             if (mm < 10) {
                 mm = '0' + mm;
             }
-            date = dd + '/' + mm + '/' + yyyy;
+            date = mm + '/' + dd + '/' + yyyy;
             document.getElementById("date_of_birth").value = date;
             document.getElementById("height").value = arr.height;
             document.getElementById("weight").value = arr.weight;

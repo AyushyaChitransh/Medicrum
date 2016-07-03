@@ -423,33 +423,8 @@
 
     <!-- Page function scripts -->
     <script src="assets/js/lib/notification.js"></script>
-    <script src="assets/js/lib/add_store.js"></script>
-    <script>
-        function CheckStoreId() {
-            var storeId = document.getElementById("wizard_store_id").value;
-            $.ajax({
-                type: 'POST',
-                url: 'AddStore.aspx/CheckStoreId',
-                contentType: 'application/json; charset=utf-8',
-                data: "{ 'StoreId': '" + storeId + "' }",
-                success: function (response) {
-                    if (response.d == false) {
-                        document.getElementById("wizard_store_id").setAttribute("class", "md-input md-input-danger");
-                        document.getElementById("storeIdCheck").style.display = 'block';
-                        return false;
-                    }
-                    else {
-                        document.getElementById("wizard_store_id").setAttribute("class", "md-input md-input-success");
-                        document.getElementById("storeIdCheck").style.display = 'none';
-                        return true;
-                    }
-                },
-                error: function (error) {
-                    alert("Failed!");
-                }
-            });
-        }
-    </script>
+    <script src="assets/js/lib/store/add_store.js"></script>
+
     <!--  forms wizard functions -->
     <script src="assets/js/lib/form_wizard.js"></script>
 

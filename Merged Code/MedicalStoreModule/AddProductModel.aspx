@@ -174,7 +174,7 @@
 
     <!-- Page function scripts -->
     <script src="assets/js/lib/notification.js"></script>
-    <script src="assets/js/lib/add_product_model.js"></script>
+    <script src="assets/js/lib/product_model/add_product_model.js"></script>
 
     <script>
         $(function () {

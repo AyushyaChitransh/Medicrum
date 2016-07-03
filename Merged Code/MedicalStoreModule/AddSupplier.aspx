@@ -392,7 +392,7 @@
 
     <!-- Page function scripts -->
     <script src="assets/js/lib/notification.js"></script>
-    <script src="assets/js/lib/add_supplier.js"></script>
+    <script src="assets/js/lib/supplier/add_supplier.js"></script>
 
     <script>
         $(function () {
