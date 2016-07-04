@@ -151,8 +151,9 @@ namespace MedicalStoreModule.App_Code.DAO
                 if (cm.OpenConnection() == true)
                 {
                     MySqlCommand cmd = new MySqlCommand();
-                    cmd.CommandText = "SELECT COUNT(*) FROM product_model WHERE delete_status=@delete_status AND product_name like @searchText";
+                    cmd.CommandText = "SELECT COUNT(*) FROM product_model WHERE delete_status=@delete_status AND store_id=@store_id AND product_name like @searchText";
                     cmd.Parameters.AddWithValue("@searchText", productName + "%");
+                    cmd.Parameters.AddWithValue("@store_id", storeId);
                     cmd.Parameters.AddWithValue("@delete_status", 0);
                     cmd.Connection = cm.connection;
                     productModelCount = int.Parse(cmd.ExecuteScalar().ToString());

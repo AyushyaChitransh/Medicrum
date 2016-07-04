@@ -152,11 +152,5 @@ namespace MedicalStoreModule
             DAOStockProduct accessProductdb = new DAOStockProduct();
             return accessProductdb.DeleteProduct(productId);
         }
-
-        [WebMethod]
-        public static void SetProductSession(int productId)
-        {
-            HttpContext.Current.Session["productId"] = productId;
-        }
     }
 }

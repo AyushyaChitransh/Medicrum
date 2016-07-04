@@ -172,8 +172,9 @@ namespace MedicalStoreModule.App_Code.DAO
                     MySqlCommand cmd = new MySqlCommand();
                     cmd.CommandText = @"SELECT COUNT(*) FROM stock_product s
                                         LEFT JOIN product_model p ON s.product_model_id = p.product_model_id
-                                        WHERE s.delete_status=@delete_status AND p.product_name like @searchText";
+                                        WHERE s.delete_status=@delete_status AND s.store_id=@store_id AND p.product_name like @searchText";
                     cmd.Parameters.AddWithValue("@searchText", productModelId + "%");
+                    cmd.Parameters.AddWithValue("@store_id", storeId);
                     cmd.Parameters.AddWithValue("@delete_status", 0);
                     cmd.Connection = cm.connection;
                     productCount = int.Parse(cmd.ExecuteScalar().ToString());
@@ -531,10 +532,11 @@ namespace MedicalStoreModule.App_Code.DAO
                     MySqlCommand cmd = new MySqlCommand();
                     cmd.CommandText = @"SELECT * FROM stock_product s 
                                         LEFT JOIN product_model p ON s.product_model_id = p.product_model_id
-                                        WHERE s.delete_status=@delete_status AND s.store_id=@store_id AND p.product_name LIKE @searchText 
+                                        WHERE s.delete_status=@delete_status AND s.store_id=@store_id AND s.quantity<@quantity AND p.product_name LIKE @searchText 
                                         ORDER BY p.product_name " + sortOrder[1] + " LIMIT @jtStartIndex,@jtPageSize";
                     cmd.Parameters.AddWithValue("@searchText", productModelId + '%');
                     cmd.Parameters.AddWithValue("@store_id", storeId);
+                    cmd.Parameters.AddWithValue("@quantity", 50);
                     cmd.Parameters.AddWithValue("@delete_status", 0);
                     cmd.Parameters.AddWithValue("@jtStartIndex", jtStartIndex);
                     cmd.Parameters.AddWithValue("@jtPageSize", jtPageSize);
@@ -612,8 +614,10 @@ namespace MedicalStoreModule.App_Code.DAO
                     MySqlCommand cmd = new MySqlCommand();
                     cmd.CommandText = @"SELECT COUNT(*) FROM stock_product s
                                         LEFT JOIN product_model p ON s.product_model_id = p.product_model_id
-                                        WHERE s.delete_status=@delete_status AND p.product_name like @searchText";
+                                        WHERE s.delete_status=@delete_status AND s.store_id=@store_id AND s.quantity<@quantity  AND p.product_name like @searchText";
                     cmd.Parameters.AddWithValue("@searchText", productModelId + "%");
+                    cmd.Parameters.AddWithValue("@store_id", storeId);
+                    cmd.Parameters.AddWithValue("@quantity", 50);
                     cmd.Parameters.AddWithValue("@delete_status", 0);
                     cmd.Connection = cm.connection;
                     productCount = int.Parse(cmd.ExecuteScalar().ToString());
@@ -640,10 +644,11 @@ namespace MedicalStoreModule.App_Code.DAO
                     MySqlCommand cmd = new MySqlCommand();
                     cmd.CommandText = @"SELECT * FROM stock_product s 
                                         LEFT JOIN product_model p ON s.product_model_id = p.product_model_id
-                                        WHERE s.delete_status=@delete_status AND s.store_id=@store_id AND p.product_name LIKE @searchText 
+                                        WHERE s.delete_status=@delete_status AND s.store_id=@store_id AND s.in_stock=@in_stock AND p.product_name LIKE @searchText 
                                         ORDER BY p.product_name " + sortOrder[1] + " LIMIT @jtStartIndex,@jtPageSize";
                     cmd.Parameters.AddWithValue("@searchText", productModelId + '%');
                     cmd.Parameters.AddWithValue("@store_id", storeId);
+                    cmd.Parameters.AddWithValue("@in_stock", 0);
                     cmd.Parameters.AddWithValue("@delete_status", 0);
                     cmd.Parameters.AddWithValue("@jtStartIndex", jtStartIndex);
                     cmd.Parameters.AddWithValue("@jtPageSize", jtPageSize);
@@ -721,8 +726,10 @@ namespace MedicalStoreModule.App_Code.DAO
                     MySqlCommand cmd = new MySqlCommand();
                     cmd.CommandText = @"SELECT COUNT(*) FROM stock_product s
                                         LEFT JOIN product_model p ON s.product_model_id = p.product_model_id
-                                        WHERE s.delete_status=@delete_status AND p.product_name like @searchText";
+                                        WHERE s.delete_status=@delete_status AND s.store_id=@store_id AND s.in_stock=@in_stock AND p.product_name like @searchText";
                     cmd.Parameters.AddWithValue("@searchText", productModelId + "%");
+                    cmd.Parameters.AddWithValue("@store_id", storeId);
+                    cmd.Parameters.AddWithValue("@in_stock", 0);
                     cmd.Parameters.AddWithValue("@delete_status", 0);
                     cmd.Connection = cm.connection;
                     productCount = int.Parse(cmd.ExecuteScalar().ToString());

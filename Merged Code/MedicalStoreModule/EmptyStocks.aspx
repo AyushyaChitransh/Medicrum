@@ -103,7 +103,7 @@
 
     <!-- Page function scripts -->
     <script src="assets/js/lib/stock_product/view_product.js"></script>
-    <script src="assets/js/lib/stock_product/product_table.js"></script>
+    <script src="assets/js/lib/stock_product/empty_stock_table.js"></script>
 
     <script>
         $(function () {

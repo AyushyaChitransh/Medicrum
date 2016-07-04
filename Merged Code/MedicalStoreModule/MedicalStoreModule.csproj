@@ -256,6 +256,8 @@
     <Content Include="assets\js\lib\json_decrypt_date.js" />
     <Content Include="assets\js\lib\stock_product\add_product.js" />
     <Content Include="assets\js\lib\product_model\add_product_model.js" />
+    <Content Include="assets\js\lib\stock_product\emergency_stock_table.js" />
+    <Content Include="assets\js\lib\stock_product\empty_stock_table.js" />
     <Content Include="assets\js\lib\stock_product\get_product.js" />
     <Content Include="assets\js\lib\store\add_store.js" />
     <Content Include="assets\js\lib\supplier\add_supplier.js" />
