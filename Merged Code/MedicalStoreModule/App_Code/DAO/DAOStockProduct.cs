@@ -475,7 +475,6 @@ namespace MedicalStoreModule.App_Code.DAO
                     cmd.Parameters.AddWithValue("@delete_status", 0);
                     cmd.Connection = cm.connection;
                     MySqlDataReader dataReader = cmd.ExecuteReader();
-                    int i = 0;
                     while (dataReader.Read())
                     {
                         productModelOption.Add(new { DisplayText = dataReader["product_name"].ToString(), Value = int.Parse(dataReader["product_model_id"].ToString()) });
@@ -512,6 +511,224 @@ namespace MedicalStoreModule.App_Code.DAO
                     cm.CloseConnection();
                 }
                 return new { Result = "OK", Options = supplierOptions };
+            }
+            catch (Exception ex)
+            {
+                cm.CloseConnection();
+                return new { Result = "ERROR", Message = ex.Message };
+            }
+        }
+
+        public object ProductEmergencyList(string productModelId, int storeId, int jtStartIndex, int jtPageSize, string jtSorting)
+        {
+            try
+            {
+                int productCount = 0;
+                List<StockProduct> listProduct = new List<StockProduct>();
+                string[] sortOrder = jtSorting.Split(' ');
+                if (cm.OpenConnection() == true)
+                {
+                    MySqlCommand cmd = new MySqlCommand();
+                    cmd.CommandText = @"SELECT * FROM stock_product s 
+                                        LEFT JOIN product_model p ON s.product_model_id = p.product_model_id
+                                        WHERE s.delete_status=@delete_status AND s.store_id=@store_id AND p.product_name LIKE @searchText 
+                                        ORDER BY p.product_name " + sortOrder[1] + " LIMIT @jtStartIndex,@jtPageSize";
+                    cmd.Parameters.AddWithValue("@searchText", productModelId + '%');
+                    cmd.Parameters.AddWithValue("@store_id", storeId);
+                    cmd.Parameters.AddWithValue("@delete_status", 0);
+                    cmd.Parameters.AddWithValue("@jtStartIndex", jtStartIndex);
+                    cmd.Parameters.AddWithValue("@jtPageSize", jtPageSize);
+                    cmd.Connection = cm.connection;
+                    MySqlDataReader dataReader = cmd.ExecuteReader();
+                    while (dataReader.Read())
+                    {
+                        StockProduct product = new StockProduct();
+                        product.productId = int.Parse(dataReader["product_id"].ToString());
+                        product.productModelId = int.Parse(dataReader["product_model_id"].ToString());
+                        product.supplierId = int.Parse(dataReader["supplier_id"].ToString());
+                        int barcode = new int();
+                        if (int.TryParse(dataReader["barcode"].ToString(), out barcode))
+                        {
+                            product.barcode = barcode;
+                        }
+                        product.batchNumber = dataReader["batch_number"].ToString();
+                        DateTime manufactureDate = new DateTime();
+                        if (DateTime.TryParse(dataReader["manufacture_date"].ToString(), out manufactureDate))
+                        {
+                            product.manufactureDate = manufactureDate;
+                        }
+                        DateTime expiryDate = new DateTime();
+                        if (DateTime.TryParse(dataReader["expiry_date"].ToString(), out expiryDate))
+                        {
+                            product.expiryDate = expiryDate;
+                        }
+                        int packageQuantity = new int();
+                        if (int.TryParse(dataReader["package_quantity"].ToString(), out packageQuantity))
+                        {
+                            product.packageQuantity = packageQuantity;
+                        }
+                        decimal price = new decimal();
+                        if (decimal.TryParse(dataReader["price"].ToString(), out price))
+                        {
+                            product.price = price;
+                        }
+                        product.manufactureLicenceNumber = dataReader["manufacture_licence_number"].ToString();
+                        decimal weight = new decimal();
+                        if (decimal.TryParse(dataReader["weight"].ToString(), out weight))
+                        {
+                            product.weight = weight;
+                        }
+                        decimal volume = new decimal();
+                        if (decimal.TryParse(dataReader["volume"].ToString(), out volume))
+                        {
+                            product.volume = volume;
+                        }
+                        int quantity = new int();
+                        if (int.TryParse(dataReader["quantity"].ToString(), out quantity))
+                        {
+                            product.quantity = quantity;
+                        }
+                        decimal tax = new decimal();
+                        if (decimal.TryParse(dataReader["tax"].ToString(), out tax))
+                        {
+                            product.tax = tax;
+                        }
+                        int status = new int();
+                        if (int.TryParse(dataReader["status"].ToString(), out status))
+                        {
+                            product.status = status;
+                        }
+                        int inStock = new int();
+                        if (int.TryParse(dataReader["in_stock"].ToString(), out inStock))
+                        {
+                            product.inStock = inStock;
+                        }
+                        listProduct.Add(product);
+                    }
+                    cm.CloseConnection();
+                }
+                if (cm.OpenConnection() == true)
+                {
+                    MySqlCommand cmd = new MySqlCommand();
+                    cmd.CommandText = @"SELECT COUNT(*) FROM stock_product s
+                                        LEFT JOIN product_model p ON s.product_model_id = p.product_model_id
+                                        WHERE s.delete_status=@delete_status AND p.product_name like @searchText";
+                    cmd.Parameters.AddWithValue("@searchText", productModelId + "%");
+                    cmd.Parameters.AddWithValue("@delete_status", 0);
+                    cmd.Connection = cm.connection;
+                    productCount = int.Parse(cmd.ExecuteScalar().ToString());
+                    cm.CloseConnection();
+                }
+                return new { Result = "OK", Records = listProduct, TotalRecordCount = productCount };
+            }
+            catch (Exception ex)
+            {
+                cm.CloseConnection();
+                return new { Result = "ERROR", Message = ex.Message };
+            }
+        }
+
+        public object ProductEmptyList(string productModelId, int storeId, int jtStartIndex, int jtPageSize, string jtSorting)
+        {
+            try
+            {
+                int productCount = 0;
+                List<StockProduct> listProduct = new List<StockProduct>();
+                string[] sortOrder = jtSorting.Split(' ');
+                if (cm.OpenConnection() == true)
+                {
+                    MySqlCommand cmd = new MySqlCommand();
+                    cmd.CommandText = @"SELECT * FROM stock_product s 
+                                        LEFT JOIN product_model p ON s.product_model_id = p.product_model_id
+                                        WHERE s.delete_status=@delete_status AND s.store_id=@store_id AND p.product_name LIKE @searchText 
+                                        ORDER BY p.product_name " + sortOrder[1] + " LIMIT @jtStartIndex,@jtPageSize";
+                    cmd.Parameters.AddWithValue("@searchText", productModelId + '%');
+                    cmd.Parameters.AddWithValue("@store_id", storeId);
+                    cmd.Parameters.AddWithValue("@delete_status", 0);
+                    cmd.Parameters.AddWithValue("@jtStartIndex", jtStartIndex);
+                    cmd.Parameters.AddWithValue("@jtPageSize", jtPageSize);
+                    cmd.Connection = cm.connection;
+                    MySqlDataReader dataReader = cmd.ExecuteReader();
+                    while (dataReader.Read())
+                    {
+                        StockProduct product = new StockProduct();
+                        product.productId = int.Parse(dataReader["product_id"].ToString());
+                        product.productModelId = int.Parse(dataReader["product_model_id"].ToString());
+                        product.supplierId = int.Parse(dataReader["supplier_id"].ToString());
+                        int barcode = new int();
+                        if (int.TryParse(dataReader["barcode"].ToString(), out barcode))
+                        {
+                            product.barcode = barcode;
+                        }
+                        product.batchNumber = dataReader["batch_number"].ToString();
+                        DateTime manufactureDate = new DateTime();
+                        if (DateTime.TryParse(dataReader["manufacture_date"].ToString(), out manufactureDate))
+                        {
+                            product.manufactureDate = manufactureDate;
+                        }
+                        DateTime expiryDate = new DateTime();
+                        if (DateTime.TryParse(dataReader["expiry_date"].ToString(), out expiryDate))
+                        {
+                            product.expiryDate = expiryDate;
+                        }
+                        int packageQuantity = new int();
+                        if (int.TryParse(dataReader["package_quantity"].ToString(), out packageQuantity))
+                        {
+                            product.packageQuantity = packageQuantity;
+                        }
+                        decimal price = new decimal();
+                        if (decimal.TryParse(dataReader["price"].ToString(), out price))
+                        {
+                            product.price = price;
+                        }
+                        product.manufactureLicenceNumber = dataReader["manufacture_licence_number"].ToString();
+                        decimal weight = new decimal();
+                        if (decimal.TryParse(dataReader["weight"].ToString(), out weight))
+                        {
+                            product.weight = weight;
+                        }
+                        decimal volume = new decimal();
+                        if (decimal.TryParse(dataReader["volume"].ToString(), out volume))
+                        {
+                            product.volume = volume;
+                        }
+                        int quantity = new int();
+                        if (int.TryParse(dataReader["quantity"].ToString(), out quantity))
+                        {
+                            product.quantity = quantity;
+                        }
+                        decimal tax = new decimal();
+                        if (decimal.TryParse(dataReader["tax"].ToString(), out tax))
+                        {
+                            product.tax = tax;
+                        }
+                        int status = new int();
+                        if (int.TryParse(dataReader["status"].ToString(), out status))
+                        {
+                            product.status = status;
+                        }
+                        int inStock = new int();
+                        if (int.TryParse(dataReader["in_stock"].ToString(), out inStock))
+                        {
+                            product.inStock = inStock;
+                        }
+                        listProduct.Add(product);
+                    }
+                    cm.CloseConnection();
+                }
+                if (cm.OpenConnection() == true)
+                {
+                    MySqlCommand cmd = new MySqlCommand();
+                    cmd.CommandText = @"SELECT COUNT(*) FROM stock_product s
+                                        LEFT JOIN product_model p ON s.product_model_id = p.product_model_id
+                                        WHERE s.delete_status=@delete_status AND p.product_name like @searchText";
+                    cmd.Parameters.AddWithValue("@searchText", productModelId + "%");
+                    cmd.Parameters.AddWithValue("@delete_status", 0);
+                    cmd.Connection = cm.connection;
+                    productCount = int.Parse(cmd.ExecuteScalar().ToString());
+                    cm.CloseConnection();
+                }
+                return new { Result = "OK", Records = listProduct, TotalRecordCount = productCount };
             }
             catch (Exception ex)
             {

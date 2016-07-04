@@ -102,8 +102,8 @@
     <script src="bower_components/jtable/lib/extensions/jquery.jtable.aspnetpagemethods.js"></script>
 
     <!-- Page function scripts -->
-    <script src="assets/js/lib/view_product_model.js"></script>
-    <script src="assets/js/lib/product_model_table.js"></script>
+    <script src="assets/js/lib/stock_product/view_product.js"></script>
+    <script src="assets/js/lib/stock_product/product_table.js"></script>
 
     <script>
         $(function () {
