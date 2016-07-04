@@ -25,15 +25,21 @@ namespace MedicalStoreModule
         }
 
         [WebMethod]
-        public static bool InsertStore(Store data)
+        public static bool InsertDetails(Store store, User user)
         {
-            data.registrationDate = DateTime.Now;
-            data.registrationStatus = 1;
-            data.storePlan = 0;
-            data.storeMode = "trial mode";
-            data.validUpto = DateTime.Now.AddDays(14);
+            store.registrationDate = DateTime.Now;
+            store.registrationStatus = 1;
+            store.storePlan = 0;
+            store.storeMode = "trial mode";
+            store.validUpto = DateTime.Now.AddDays(14);
+
+            user.name = store.contactPersonName;
+            user.role = 1;
+            user.status = 1;
+            user.storeStatus = 1;
+            user.deleteStatus = 0;
             DAOStore accessStoredb = new DAOStore();
-            return accessStoredb.InsertStore(data);
+            return accessStoredb.InsertStore(store);
         }
     }
 }
