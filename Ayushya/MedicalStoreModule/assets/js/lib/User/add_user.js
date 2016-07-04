@@ -4,13 +4,11 @@
         if (!userName) {
             return false;
         }
-        else if (!CheckUserName) {
+        if (!CheckUserName) {
             alert("User Name must be unique!");
             return false;
         }
-        else {
             return true;
-        }
     }
     var validEmail = function () {
         if (!CheckEmail()) {
@@ -28,29 +26,9 @@
     }
 }
 function addDetails() {
-    $('#wizard_advanced_form')
-    .parsley()
-                .on('form:validated', function () {
-                    setTimeout(function () {
-                        altair_md.update_input($wizard_advanced_form.find('.md-input'));
-                        // adjust content height
-                        $window.resize();
-                    }, 100)
-                })
-                .on('field:validated', function (parsleyField) {
-
-                    var $this = $(parsleyField.$element);
-                    setTimeout(function () {
-                        altair_md.update_input($this);
-                        // adjust content height
-                        var currentIndex = $('#wizard_advanced').find('.body.current').attr('data-step');
-                        altair_wizard.content_height($('#wizard_advanced'), currentIndex);
-                    }, 100);
-
-                });
+    event.preventDefault();
     var result = validate();
-    if (result) {
-        event.preventDefault();
+    if (ValidityState) {
         var form_serialized = JSON.stringify($('#wizard_advanced_form').serializeObject(), null, 2);
         $.ajax({
             type: 'POST',
@@ -122,3 +100,23 @@ function CheckUserName() {
         }
     });
 }
+$('#wizard_advanced_form')
+    .parsley()
+            .on('form:validated', function () {
+                setTimeout(function () {
+                    altair_md.update_input($wizard_advanced_form.find('.md-input'));
+                    // adjust content height
+                    $window.resize();
+                }, 100)
+            })
+            .on('field:validated', function (parsleyField) {
+
+                var $this = $(parsleyField.$element);
+                setTimeout(function () {
+                    altair_md.update_input($this);
+                    // adjust content height
+                    var currentIndex = $('#wizard_advanced').find('.body.current').attr('data-step');
+                    altair_wizard.content_height($('#wizard_advanced'), currentIndex);
+                }, 100);
+
+            });

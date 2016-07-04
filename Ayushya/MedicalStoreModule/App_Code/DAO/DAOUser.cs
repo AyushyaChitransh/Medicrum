@@ -256,7 +256,7 @@ namespace MedicalStoreModule.App_Code.DAO
                 return new { Result = "ERROR", Message = ex.Message };
             }
         }
-        public User GetUser(int userName)
+        public User GetUser(string userName)
         {
             User user = new User();
             try
@@ -274,7 +274,7 @@ namespace MedicalStoreModule.App_Code.DAO
                                           user.phone_number,
                                           user.address,
                                           user.store_status,
-                                          user.status,
+                                          user.status
                                     FROM user
                                           WHERE user_name=@user_name";
                     cmd.Parameters.AddWithValue("@user_name", userName);

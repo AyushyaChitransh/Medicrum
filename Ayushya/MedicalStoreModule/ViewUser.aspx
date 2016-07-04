@@ -102,7 +102,7 @@
     <script src="bower_components/jtable/lib/extensions/jquery.jtable.aspnetpagemethods.js"></script>
 
     <!-- Page function scripts -->
-    <script src="assets/js/lib/user/view_user.js"></script>
+    <script src="assets/js/lib/User/view_user.js"></script>
     <script src="assets/js/lib/user/user_table.js"></script>
 
     <script>

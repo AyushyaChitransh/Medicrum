@@ -96,14 +96,14 @@ altair_crud_table = {
             fields: {
                 name: {
                     title: 'Name',
-                    width: '25%',
+                    width: '20%',
                     edit: true,
                     list: true
                 },
                 userName: {
                     key: true,
                     title: 'User Name',
-                    width: '25%',
+                    width: '20%',
                     edit: false,
                     list: true
                 },

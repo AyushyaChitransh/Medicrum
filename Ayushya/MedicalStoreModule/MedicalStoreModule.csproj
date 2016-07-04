@@ -274,6 +274,7 @@
     <Content Include="assets\js\lib\stock_product\view_product.js" />
     <Content Include="assets\js\lib\product_model\view_product_model.js" />
     <Content Include="assets\js\lib\supplier\view_supplier.js" />
+    <Content Include="assets\js\lib\User\get_user.js" />
     <Content Include="assets\js\lib\User\user_table.js" />
     <Content Include="assets\js\lib\User\view_user.js" />
     <Content Include="assets\js\pages\components_nestable.js" />
