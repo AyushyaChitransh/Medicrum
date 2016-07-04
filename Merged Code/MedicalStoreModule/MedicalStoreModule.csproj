@@ -253,8 +253,10 @@
     <Content Include="assets\js\kendoui_custom.js" />
     <Content Include="assets\js\kendoui_custom.min.js" />
     <Content Include="assets\js\lib\customer\add_customer.js" />
+    <Content Include="assets\js\lib\json_decrypt_date.js" />
     <Content Include="assets\js\lib\stock_product\add_product.js" />
     <Content Include="assets\js\lib\product_model\add_product_model.js" />
+    <Content Include="assets\js\lib\stock_product\get_product.js" />
     <Content Include="assets\js\lib\store\add_store.js" />
     <Content Include="assets\js\lib\supplier\add_supplier.js" />
     <Content Include="assets\js\lib\customer\customer_table.js" />

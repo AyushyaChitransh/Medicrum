@@ -208,6 +208,7 @@ namespace MedicalStoreModule.App_Code.DAO
         public object UpdateSupplier(Supplier supplier)
         {
             string qry = @"UPDATE supplier SET 
+                                           contact_person_name=@contact_person_name
                                            address=@address, 
                                            country=@country, 
                                            district=@district, 
@@ -224,6 +225,7 @@ namespace MedicalStoreModule.App_Code.DAO
                                 WHERE supplier_id=@supplier_id";
 
             MySqlCommand cmd = new MySqlCommand(qry, cm.connection);
+            cmd.Parameters.AddWithValue("@contact_person_name", supplier.contactPersonName);
             cmd.Parameters.AddWithValue("@address", supplier.address);
             cmd.Parameters.AddWithValue("@country", supplier.country);
             cmd.Parameters.AddWithValue("@district", supplier.district);

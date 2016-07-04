@@ -330,7 +330,7 @@
                                 <div class="uk-grid">
                                     <div class="uk-width-medium-1-4 parsley-row">
                                         <label for="wizard_date_of_birth">Date of birth</label>
-                                        <input type="text" name="dateOfBirth" id="wizard_date_of_birth" class="md-input" data-uk-datepicker="{format:'DD/MM/YYYY'}"/>
+                                        <input type="text" name="dateOfBirth" id="wizard_date_of_birth" class="md-input" data-parsley-date="data-parsley-date" data-parsley-date-message="This value should be a valid date" data-uk-datepicker="{format:'MM.DD.YYYY'}" />
                                     </div>
                                     <div class="uk-width-medium-1-4 parsley-row">
                                         <label for="wizard_height">Height</label>

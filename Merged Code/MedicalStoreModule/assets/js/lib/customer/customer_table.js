@@ -162,7 +162,7 @@ altair_crud_table = {
                 dateOfBirth: {
                     title: 'Birth Date',
                     type: 'date',
-                    displayFormat: 'dd/mm/yy',
+                    displayFormat: 'dd-mm-yy',
                     edit: true,
                     list: false
                 },
