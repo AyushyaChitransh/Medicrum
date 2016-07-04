@@ -5278,6 +5278,7 @@
     <Content Include="EmergencyStocks.aspx" />
     <Content Include="EmptyStocks.aspx" />
     <Content Include="Error.aspx" />
+    <Content Include="Login.aspx" />
     <Content Include="ViewCustomer.aspx" />
     <Content Include="ViewDetailedCustomer.aspx" />
     <Content Include="ViewDetailedProduct.aspx" />
@@ -5336,6 +5337,7 @@
     <Compile Include="App_Code\DAO\DAOCustomer.cs">
       <SubType>Code</SubType>
     </Compile>
+    <Compile Include="App_Code\DAO\DAOLogin.cs" />
     <Compile Include="App_Code\DAO\DAOProductModel.cs" />
     <Compile Include="App_Code\DAO\DAOStockProduct.cs" />
     <Compile Include="App_Code\DAO\DAOSupplier.cs" />
@@ -5392,6 +5394,13 @@
     </Compile>
     <Compile Include="Error.aspx.designer.cs">
       <DependentUpon>Error.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Login.aspx.cs">
+      <DependentUpon>Login.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Login.aspx.designer.cs">
+      <DependentUpon>Login.aspx</DependentUpon>
     </Compile>
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="ViewCustomer.aspx.cs">
