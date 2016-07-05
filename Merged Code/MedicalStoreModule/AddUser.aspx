@@ -45,7 +45,7 @@
                                 <div class="uk-grid">
                                     <div class="uk-width-medium-1-2 parsley-row">
                                         <label for="wizard_user_name">User Name<span class="req">*</span></label>
-                                        <input type="text" name="userName" id="wizard_user_name" required="required" class="md-input" onkeyup="CheckUserName()" />
+                                        <input type="text" name="userName" id="wizard_user_name" data-parsley-trigger="change" required="required" class="md-input" onkeyup="CheckUserName()" />
                                         <span class="md-color-red-600" id="userNameCheck" style="display:none;">User Name already taken.</span>
                                     </div>
                                     <div class="uk-width-medium-1-2 parsley-row">
@@ -81,7 +81,7 @@
                                 <br />
                                 <div class="uk-grid" data-uk-grid-margin="data-uk-grid-margin">
                                     <div class="uk-width-medium-1">
-                                        <a href="#" class="md-btn md-btn-primary md-btn-block" onclick="addDetails();return false;">Finish</a>
+                                        <button id="button" class="md-btn md-btn-primary md-btn-block" onclick="addDetails()">Finish</button>
                                     </div>
                                 </div>
                             </section>

@@ -55,11 +55,11 @@
                                     </div>
                                     <div class="uk-width-medium-1-4 parsley-row">
                                         <label for="wizard_mobile_number">Mobile Number</label>
-                                        <input type="text" name="mobile" id="wizard_mobile_number" pattern="[0-9]{7,20}" title="Mobile Number" class="md-input" />
+                                        <input type="text" name="mobile" id="wizard_mobile_number" pattern="[0-9]{7,20}" data-parsley-trigger="change" title="Mobile Number" class="md-input" />
                                     </div>
                                     <div class="uk-width-medium-1-4 parsley-row">
                                         <label for="wizard_phone_number">Phone</label>
-                                        <input type="text" name="phoneNumber" id="wizard_phone" data-parsley-trigger="change" class="md-input" />
+                                        <input type="text" name="phoneNumber" id="wizard_phone" pattern="[0-9]{7,20}" data-parsley-trigger="change" title="Phone Number" class="md-input" />
                                     </div>
                                 </div>
                                 <div class="uk-grid">
