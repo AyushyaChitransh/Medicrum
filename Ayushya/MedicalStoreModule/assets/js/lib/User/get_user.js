@@ -14,7 +14,6 @@
             document.getElementById("user_name").value = arr.userName;
             document.getElementById("name").value = arr.name;
             document.getElementById("role").value = arr.role;
-            document.getElementById("password").value = arr.password;
             document.getElementById("email").value = arr.email;
             document.getElementById("address").value = arr.address;
             document.getElementById("phone_number").value = arr.phoneNumber;

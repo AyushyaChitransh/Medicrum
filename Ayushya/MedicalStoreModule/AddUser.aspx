@@ -38,30 +38,33 @@
                                 <hr class="md-hr" />
                                 <div class="uk-grid">
                                     <div class="uk-width-medium-1-1 parsley-row">
-                                        <label for="wizard_name">Name</label>
-                                        <input type="text" name="name" id="wizard_name" class="md-input" />
+                                        <label for="wizard_name">Name<span class="req">*</span></label>
+                                        <input type="text" name="name" id="wizard_name" required="required" class="md-input" />
                                     </div>
                                 </div>
                                 <div class="uk-grid">
-                                    <div class="uk-width-medium-1-3 parsley-row">
+                                    <div class="uk-width-medium-1-2 parsley-row">
                                         <label for="wizard_user_name">User Name<span class="req">*</span></label>
-                                        <input type="text" name="userName" id="wizard_user_name" required="required" class="md-input" onkeyup="CheckUserName()" />
+                                        <input type="text" name="userName" id="wizard_user_name" data-parsley-trigger="change" required="required" class="md-input" onkeyup="CheckUserName()" />
                                         <span class="md-color-red-600" id="userNameCheck" style="display:none;">User Name already taken.</span>
                                     </div>
-                                    <div class="uk-width-medium-1-3 parsley-row">
+                                    <div class="uk-width-medium-1-2 parsley-row">
+                                        <label for="wizard_password">Password<span class="req">*</span></label>
+                                        <input type="password" name="password" id="wizard_password" required="required" class="md-input" />
+                                    </div>
+                                </div>
+                                <div class="uk-grid">
+                                    <div class="uk-width-medium-1-2 parsley-row">
                                         <label for="wizard_email">Email</label>
                                         <input type="email" name="email" id="wizard_email" data-parsley-trigger="change" class="md-input" onkeyup="CheckEmail()"/>
                                         <span class="md-color-red-600" id="emailCheck" style="display:none;">Email ID already registered.</span>
                                     </div>
-                                    <div class="uk-width-medium-1-3 parsley-row">
-                                        <label for="wizard_password">Password</label>
-                                        <input type="password" name="password" id="wizard_password" class="md-input" />
-                                    </div>
-                                </div>
-                                <div class="uk-grid">
-                                    <div class="uk-width-medium-1-1 parsley-row">
-                                        <label for="wizard_role">Role</label>
-                                        <input type="number" name="role" id="wizard_role" class="md-input" />
+                                    <div class="uk-width-medium-1-2 parsley-row">
+                                        <label for="wizard_role">Role<span class="req">*</span></label>
+                                        <select id="wizard_role" name="role" required="required" class="md-input label-fixed">
+                                            <option value="">Select Role</option>
+                                            <option value="1">Admin</option>
+                                        </select>
                                     </div>
                                 </div>
                                 <div class="uk-grid">
@@ -71,14 +74,14 @@
                                     </div>
                                     <div class="uk-width-medium-1-2 parsley-row">
                                         <label for="wizard_phone_number">Phone</label>
-                                        <input type="text" name="phoneNumber" id="wizard_phone" data-parsley-trigger="change" class="md-input" />
+                                        <input type="text" name="phoneNumber" id="wizard_phone" pattern="[0-9]{7,20}" title="Phone Number" data-parsley-trigger="change" class="md-input" />
                                     </div>
                                 </div>
                                 <br />
                                 <br />
                                 <div class="uk-grid" data-uk-grid-margin="data-uk-grid-margin">
                                     <div class="uk-width-medium-1">
-                                        <button class="md-btn md-btn-primary md-btn-block" onclick="addDetails()">Finish</button>
+                                        <button id="button" class="md-btn md-btn-primary md-btn-block" onclick="addDetails()">Finish</button>
                                     </div>
                                 </div>
                             </section>
@@ -130,6 +133,7 @@
 
     <!-- Page function scripts -->
     <script src="assets/js/lib/notification.js"></script>
+    <script src="assets/js/lib/User/validate_data.js"></script>
     <script src="assets/js/lib/user/add_user.js"></script>
 
     <script>

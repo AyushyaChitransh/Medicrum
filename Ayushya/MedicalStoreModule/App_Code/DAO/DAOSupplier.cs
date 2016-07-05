@@ -142,8 +142,9 @@ namespace MedicalStoreModule.App_Code.DAO
                 if (cm.OpenConnection() == true)
                 {
                     MySqlCommand cmd = new MySqlCommand();
-                    cmd.CommandText = "SELECT COUNT(*) FROM supplier WHERE delete_status=@delete_status AND contact_person_name like @searchText";
+                    cmd.CommandText = "SELECT COUNT(*) FROM supplier WHERE delete_status=@delete_status AND store_id=@store_id AND contact_person_name like @searchText";
                     cmd.Parameters.AddWithValue("@searchText", supplierStoreName + "%");
+                    cmd.Parameters.AddWithValue("@store_id", storeId);
                     cmd.Parameters.AddWithValue("@delete_status", 0);
                     cmd.Connection = cm.connection;
                     supplierCount = int.Parse(cmd.ExecuteScalar().ToString());
@@ -208,6 +209,7 @@ namespace MedicalStoreModule.App_Code.DAO
         public object UpdateSupplier(Supplier supplier)
         {
             string qry = @"UPDATE supplier SET 
+                                           contact_person_name=@contact_person_name
                                            address=@address, 
                                            country=@country, 
                                            district=@district, 
@@ -224,6 +226,7 @@ namespace MedicalStoreModule.App_Code.DAO
                                 WHERE supplier_id=@supplier_id";
 
             MySqlCommand cmd = new MySqlCommand(qry, cm.connection);
+            cmd.Parameters.AddWithValue("@contact_person_name", supplier.contactPersonName);
             cmd.Parameters.AddWithValue("@address", supplier.address);
             cmd.Parameters.AddWithValue("@country", supplier.country);
             cmd.Parameters.AddWithValue("@district", supplier.district);

@@ -1,6 +1,6 @@
 ﻿function response() {
-    $("#customer_list").jtable('load', {
-        customerName: $('#search_customer').val()
+    $("#product_list").jtable('load', {
+        productModelId: $('#search_product').val()
     });
 }
 
@@ -12,13 +12,13 @@ $(function () {
 altair_crud_table = {
     init: function () {
 
-        $('#customer_list').jtable({
+        $('#product_list').jtable({
             paging: true,
             pageSize: 10,
             sorting: true,
-            defaultSorting: 'customerName ASC',
+            defaultSorting: 'productModelId ASC',
             deleteConfirmation: function (data) {
-                data.deleteConfirmMessage = 'Are you sure to delete records of ' + data.record.customerName + '?';
+                data.deleteConfirmMessage = 'Are you sure to delete records of ' + data.record.productModelId + '?';
             },
             formCreated: function (event, data) {
                 // replace click event on some clickable elements
@@ -89,108 +89,89 @@ altair_crud_table = {
                 altair_md.inputs();
             },
             actions: {
-                listAction: '/ViewCustomer.aspx/CustomerList',
-                updateAction: '/ViewCustomer.aspx/UpdateCustomer',
-                deleteAction: '/ViewCustomer.aspx/DeleteCustomer'
+                listAction: '/EmptyStocks.aspx/ProductEmptyList',
+                updateAction: '/EmptyStocks.aspx/UpdateProduct',
+                deleteAction: '/EmptyStocks.aspx/DeleteProduct'
             },
             fields: {
-                customerId: {
+                productId: {
                     key: true,
+                    create: false,
                     edit: false,
                     list: false
                 },
-                storeId: {
-                    title: 'Store Id',
-                    edit: false,
+                productModelId: {
+                    title: 'Product Name',
+                    width: '20%',
+                    options: '/EmptyStocks.aspx/GetProductModelOptions'
+                },
+                supplierId: {
+                    title: 'Supplier Name',
+                    width: '20%',
+                    sorting: false,
+                    options: '/EmptyStocks.aspx/GetSupplierOptions'
+                },
+                barcode: {
+                    title: 'Barcode',
                     list: false
                 },
-                customerName: {
-                    title: 'Customer Name',
-                    width: '25%',
-                    edit: true,
-                    list: true
-                },
-                companyName: {
-                    title: 'Company Name',
-                    edit: true,
+                batchNumber: {
+                    title: 'Batch Number',
                     list: false
                 },
-                address: {
-                    title: 'Address',
-                    edit: true,
-                    list: false
-                },
-                district: {
-                    title: 'District',
-                    edit: true,
-                    list: false
-                },
-                state: {
-                    title: 'State',
-                    edit: true,
-                    list: false
-                },
-                country: {
-                    title: 'Country',
-                    edit: true,
-                    list: false
-                },
-                pincode: {
-                    title: 'Pincode',
-                    type: 'phone',
-                    edit: true,
-                    list: false
-                },
-                phoneNumber: {
-                    title: 'Phone Number',
-                    type: 'phone',
-                    edit: true,
-                    list: false
-                },
-                mobile: {
-                    title: 'Mobile',
-                    type: 'phone',
-                    edit: true,
-                    list: false
-                },
-                email: {
-                    title: 'Email',
-                    type: 'email',
-                    edit: true,
-                    list: false
-                },
-                dateOfBirth: {
-                    title: 'Birth Date',
+                manufactureDate: {
+                    title: 'Manufacture Date',
                     type: 'date',
                     displayFormat: 'dd-mm-yy',
-                    edit: true,
                     list: false
                 },
-                height: {
-                    title: 'Height',
-                    type: 'phone',
-                    edit: true,
+                expiryDate: {
+                    title: 'Expiry Date',
+                    sorting: false,
+                    type: 'date',
+                    displayFormat: 'dd-mm-yy',
+                    list: false
+                },
+                packageQuantity: {
+                    title: 'Package Quantity',
+                    list: false
+                },
+                price: {
+                    title: 'Price',
+                    list: false
+                },
+                manufactureLicenceNumber: {
+                    title: 'Manufacture Licence Number',
                     list: false
                 },
                 weight: {
                     title: 'Weight',
-                    edit: true,
                     list: false
                 },
-                bloodGroup: {
-                    title: 'Blood Group',
-                    edit: true,
+                volume: {
+                    title: 'Volume',
+                    list: false
+                },
+                quantity: {
+                    title: 'Quantity',
+                    list: false
+                },
+                tax: {
+                    title: 'Tax',
                     list: false
                 },
                 status: {
-                    create: false,
+                    title: 'Status',
                     edit: false,
                     list: false
                 },
-                deleteStatus: {
-                    create: false,
+                inStock: {
+                    title: 'Stock',
+                    width: '1%',
+                    sorting: false,
                     edit: false,
-                    list: false
+                    list: false,
+                    options: { '1': '<span class="uk-badge uk-badge-success">In stock</span>', '0': '<span class="uk-badge uk-badge-danger">Out of stock</span>' }
                 },
                 viewButton: {
                     width: '1%',
@@ -198,11 +179,11 @@ altair_crud_table = {
                     edit: false,
                     sorting: false,
                     display: function (data) {
-                        return '<a href="#" onclick="ViewDetailedCustomer(' + data.record.customerId + ')"><i class="material-icons md-24">&#xE8F4;</i></a>';
+                        return '<a href="#" onclick="ViewDetailedProduct(' + data.record.productId + ')"><i class="material-icons md-24">&#xE8F4;</i></a>';
                     }
                 }
             }
-        }).jtable('load', { customerName: '' });
+        }).jtable('load', { productModelId: '' });
 
         // change buttons visual style in ui-dialog
         $('.ui-dialog-buttonset')
@@ -211,5 +192,6 @@ altair_crud_table = {
             .addClass('md-btn md-btn-flat')
             .off('mouseenter focus');
         $('#AddRecordDialogSaveButton,#EditDialogSaveButton,#DeleteDialogButton').addClass('md-btn-flat-primary');
+
     }
 };

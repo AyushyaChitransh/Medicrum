@@ -30,19 +30,19 @@ namespace MedicalStoreModule
         }
 
         [WebMethod]
-        public static List<KeyValuePair<int, string>> GetProductModelForProduct()
+        public static object GetProductModelOptions()
         {
             int storeId = 1;
             DAOStockProduct accessStockProductdb = new DAOStockProduct();
-            return accessStockProductdb.GetProductModelForProduct(storeId);
+            return accessStockProductdb.GetProductModelOptions(storeId);
         }
 
         [WebMethod]
-        public static List<KeyValuePair<int, string>> GetSupplierForProduct()
+        public static object GetSupplierOptions()
         {
             int storeId = 1;
             DAOStockProduct accessStockProductdb = new DAOStockProduct();
-            return accessStockProductdb.GetSupplierForProduct(storeId);
+            return accessStockProductdb.GetSupplierOptions(storeId);
         }
     }
 }

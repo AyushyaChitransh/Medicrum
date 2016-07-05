@@ -1,6 +1,9 @@
 ﻿function validate() {
     var customerName = document.getElementById('wizard_customer_name').value;
-    if (!customerName) {
+    var email = document.getElementById('wizard_email').checkValidity();
+    var mobile = document.getElementById('wizard_mobile_number').checkValidity();
+    var phone = document.getElementById('wizard_phone_number').checkValidity();
+    if (!customerName || !mobile || !phone) {
         return false;
     }
     else {
@@ -9,26 +12,6 @@
 
 }
 function addDetails() {
-    $('#wizard_advanced_form')
-    .parsley()
-                .on('form:validated', function () {
-                    setTimeout(function () {
-                        altair_md.update_input($wizard_advanced_form.find('.md-input'));
-                        // adjust content height
-                        $window.resize();
-                    }, 100)
-                })
-                .on('field:validated', function (parsleyField) {
-
-                    var $this = $(parsleyField.$element);
-                    setTimeout(function () {
-                        altair_md.update_input($this);
-                        // adjust content height
-                        var currentIndex = $('#wizard_advanced').find('.body.current').attr('data-step');
-                        altair_wizard.content_height($('#wizard_advanced'), currentIndex);
-                    }, 100);
-
-                });
     var result = validate();
     if (result) {
         event.preventDefault();
@@ -55,3 +38,22 @@ function addDetails() {
         });
     }
 }
+$('#wizard_advanced_form')
+     .parsley()
+                 .on('form:validated', function () {
+                     setTimeout(function () {
+                         altair_md.update_input($('#wizard_advanced_form').find('.md-input'));
+                         // adjust content height
+                         $window.resize();
+                     }, 100)
+                 })
+                 .on('field:validated', function (parsleyField) {
+
+                     var $this = $(parsleyField.$element);
+                     setTimeout(function () {
+                         altair_md.update_input($this);
+                         // adjust content height
+                         var currentIndex = $('#wizard_advanced').find('.body.current').attr('data-step');
+                     }, 100);
+
+                 });

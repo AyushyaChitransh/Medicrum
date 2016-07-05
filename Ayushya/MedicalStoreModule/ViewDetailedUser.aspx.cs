@@ -15,14 +15,14 @@ namespace MedicalStoreModule
         private static string userName;
         protected void Page_Load(object sender, EventArgs e)
         {
-            if (Session["userName"] == null)
+            if (Session["userId"] == null)
             {
                 Response.Redirect("Error.aspx");
             }
             else
             {
-                userName = Session["userName"].ToString();
-                Session["userName"] = "";
+                userName = Session["userId"].ToString();
+                Session["userId"] = "";
             }
         }
         [WebMethod]

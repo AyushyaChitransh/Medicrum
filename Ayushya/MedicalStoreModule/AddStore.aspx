@@ -20,9 +20,42 @@
     <!-- altair admin -->
     <link rel="stylesheet" href="assets/css/main.min.css" media="all" />
 </head>
-<body class=" sidebar_main_open sidebar_main_swipe">
-   
-    <uc1:HeaderAndSideBar runat="server" ID="HeaderAndSideBar" />
+<body class="top_menu">
+
+    <!-- main header -->
+    <header id="header_main">
+        <div class="header_main_content">
+            <nav class="uk-navbar">
+                <div class="main_logo_top">
+                    <a href="index.html">
+                        <img src="assets/img/logo_main_white.png" alt="" height="15" width="71" /></a>
+                </div>
+
+                <!-- secondary sidebar switch -->
+                <a href="#" id="sidebar_secondary_toggle" class="sSwitch sSwitch_right sidebar_secondary_check">
+                    <span class="sSwitchIcon"></span>
+                </a>
+
+                <div class="uk-navbar-flip">
+                    <ul class="uk-navbar-nav user_actions">
+                        <li><a href="#" id="full_screen_toggle" class="user_action_icon uk-visible-large"><i class="material-icons md-24 md-light">&#xE5D0;</i></a></li>
+                    </ul>
+                </div>
+            </nav>
+        </div>
+    </header>
+    <!-- main header end -->
+
+    <!-- top bar -->
+    <div id="top_bar">
+        <div class="md-top-bar">
+            <ul id="menu_top" class="uk-clearfix">
+                <li><a href="AddStore.aspx"><i class="material-icons md-24">&#xE88A;</i></a></li>
+            </ul>
+        </div>
+    </div>
+    <!-- top bar end-->
+
 
     <div id="page_content">
         <div id="page_content_inner">
@@ -32,19 +65,12 @@
                     <form class="uk-form-stacked" id="wizard_advanced_form">
                         <div id="wizard_advanced" data-uk-observe="data-uk-observe">
                             <!-- first section -->
-                            <h3>Basic Information</h3>
+                            <h3>Store Registration</h3>
                             <section>
-                                <h2 class="heading_a">Basic Information About Your Store
-                                    <span class="sub-heading">Please fill all the fields.</span>
+                                <h2 class="heading_a">Admininistration Details
+                                    <span class="sub-heading">Please fill all the * marked fields</span>
                                 </h2>
                                 <hr class="md-hr" />
-                                <div class="uk-grid">
-                                    <div class="uk-width-medium-1-1 parsley-row">
-                                        <label for="wizard_store_id">Store ID<span class="req">*</span></label>
-                                        <input type="text" name="storeId" id="wizard_store_id" required="required" class="md-input" onkeyup="CheckStoreId()" />
-                                        <span class="md-color-red-600" id="storeIdCheck" style="display:none;">Store ID already taken.</span>
-                                    </div>
-                                </div>
                                 <div class="uk-grid">
                                     <div class="uk-width-medium-1-1 parsley-row">
                                         <label for="wizard_store_name">Store Name<span class="req">*</span></label>
@@ -53,33 +79,76 @@
                                 </div>
                                 <div class="uk-grid">
                                     <div class="uk-width-medium-1-1 parsley-row">
-                                        <label for="wizard_owner_name">Store Owner Name<span class="req">*</span></label>
+                                        <label for="wizard_owner_name">Store Admin Name<span class="req">*</span></label>
                                         <input type="text" name="contactPersonName" id="wizard_owner_name" required="required" class="md-input" />
                                     </div>
                                 </div>
                                 <div class="uk-grid">
                                     <div class="uk-width-medium-1-1 parsley-row">
+                                        <label for="wizard_user_name">User Name<span class="req">*</span></label>
+                                        <input type="text" name="userName" id="wizard_user_name" required="required" class="md-input" onkeyup="CheckUserName()" />
+                                        <span class="md-color-red-600" id="userNameCheck" style="display: none;">User Name already taken.</span>
+                                    </div>
+                                </div>
+                                <div class="uk-grid">
+                                    <div class="uk-width-medium-1-1 parsley-row">
                                         <label for="wizard_email">Email<span class="req">*</span></label>
-                                        <input type="email" name="email" id="wizard_email" data-parsley-trigger="change" required="required" class="md-input" />
+                                        <input type="email" name="email" id="wizard_email" data-parsley-trigger="change" required="required" class="md-input" onkeyup="CheckEmail()" />
+                                        <span class="md-color-red-600" id="emailCheck" style="display: none;">Email already in use.</span>
+                                    </div>
+                                </div>
+                                <div class="uk-grid">
+                                    <div class="uk-width-medium-1-1 parsley-row">
+                                        <label for="wizard_password">Password<span class="req">*</span></label>
+                                        <input type="password" name="password" id="wizard_password" required="required" class="md-input" />
+                                        <a href="#" class="uk-form-password-toggle" data-uk-form-password="">show</a>
+                                    </div>
+                                </div>
+                            </section>
+                            <!-- second section -->
+                            <h3>Store Information</h3>
+                            <section>
+                                <h2 class="heading_a">Information About Your Store
+                                    <span class="sub-heading">Please fill the * marked fields</span>
+                                </h2>
+                                <hr class="md-hr" />
+                                <div class="uk-grid" data-uk-grid-margin="data-uk-grid-margin">
+                                    <div class="uk-width-medium-1-3 parsley-row">
+                                        <label for="wizard_licence_number">Licence Number</label>
+                                        <input type="text" name="licenceNumber" id="wizard_licence_number" class="md-input" />
+                                    </div>
+                                    <div class="uk-width-medium-1-3 parsley-row">
+                                        <label for="wizard_phone_number">Phone Number</label>
+                                        <input type="text" name="phoneNumber" id="wizard_phone_number" pattern="[0-9]{7,20}" title="Phone Number" class="md-input" />
+                                    </div>
+                                    <div class="uk-width-medium-1-3 parsley-row">
+                                        <label for="wizard_mobile_number">Mobile Number</label>
+                                        <input type="text" name="mobileNumber" id="wizard_mobile_number" pattern="[0-9]{7,20}" title="Mobile Number" class="md-input" />
                                     </div>
                                 </div>
                                 <div class="uk-grid" data-uk-grid-margin="data-uk-grid-margin">
-                                    <div class="uk-width-medium-1-2 parsley-row">
-                                        <select id="wizard_currency" name="currency" required="required">
-                                            <option value="">Select Currency</option>
-                                            <option value="INR">Indian rupee</option>
-                                            <option value="USD">United States dollar</option>
-                                            <option value="CAD">Canadian dollar</option>
-                                            <option value="GBP">Pound sterling</option>
-                                            <option value="AUD">Australian dollar</option>
-                                            <option value="SGD">Singapore dollar</option>
-                                            <option value="AED">UAE dirham</option>
-                                            <option value="HKD">Hong Kong dollar</option>
-                                            <option value="CHF">Swiss franc</option>
-                                            <option value="SEK">Swedish krona</option>
-                                        </select>
+                                    <div class="uk-width-medium-1-1 parsley-row">
+                                        <label for="wizard_address">Address</label>
+                                        <input type="text" name="address" id="wizard_address" class="md-input" />
                                     </div>
-                                    <div class="uk-width-medium-1-2 parsley-row">
+                                </div>
+                                <div class="uk-grid" data-uk-grid-margin="data-uk-grid-margin">
+                                    <div class="uk-width-medium-1-3 parsley-row">
+                                        <label for="wizard_district">District</label>
+                                        <input type="text" name="district" id="wizard_district" class="md-input" />
+                                    </div>
+                                    <div class="uk-width-medium-1-3 parsley-row">
+                                        <label for="wizard_state">State</label>
+                                        <input type="text" name="state" id="wizard_state" class="md-input" />
+                                    </div>
+                                    <div class="uk-width-medium-1-3 parsley-row">
+                                        <label for="wizard_pincode">Pincode</label>
+                                        <input type="text" name="pincode" id="wizard_pincode" class="md-input" />
+                                    </div>
+                                </div>
+                                <div class="uk-grid" data-uk-grid-margin="data-uk-grid-margin">
+                                    <div class="uk-width-medium-1-3 parsley-row">
+                                        <label for="wizard_country">Country<span class="req">*</span></label>
                                         <select id="wizard_country" name="country" required="required">
                                             <option value="">Select Country</option>
                                             <option value="Afghanistan">Afghanistan</option>
@@ -323,54 +392,46 @@
                                             <option value="Zimbabwe">Zimbabwe</option>
                                         </select>
                                     </div>
-                                </div>
-                            </section>
-                            <!-- second section -->
-                            <h3>Additional information</h3>
-                            <section>
-                                <h2 class="heading_a">Additional Information About Your Store
-                                    <span class="sub-heading">Fill additional details here</span>
-                                </h2>
-                                <hr class="md-hr" />
-                                <div class="uk-grid" data-uk-grid-margin="data-uk-grid-margin">
                                     <div class="uk-width-medium-1-3 parsley-row">
-                                        <label for="wizard_licence_number">Licence Number</label>
-                                        <input type="text" name="licenceNumber" id="wizard_licence_number" class="md-input" />
-                                    </div>
-                                    <div class="uk-width-medium-1-3 parsley-row">
-                                        <label for="wizard_phone_number">Phone Number</label>
-                                        <input type="text" name="phoneNumber" id="wizard_phone_number" pattern="[0-9]{7,20}" title="Phone Number" class="md-input" />
+                                        <label for="wizard_currency">Currency<span class="req">*</span></label>
+                                        <select id="wizard_currency" name="currency" required="required">
+                                            <option value="">Select Currency</option>
+                                            <option value="INR">Indian rupee</option>
+                                            <option value="USD">United States dollar</option>
+                                            <option value="CAD">Canadian dollar</option>
+                                            <option value="GBP">Pound sterling</option>
+                                            <option value="AUD">Australian dollar</option>
+                                            <option value="SGD">Singapore dollar</option>
+                                            <option value="AED">UAE dirham</option>
+                                            <option value="HKD">Hong Kong dollar</option>
+                                            <option value="CHF">Swiss franc</option>
+                                            <option value="SEK">Swedish krona</option>
+                                        </select>
                                     </div>
                                     <div class="uk-width-medium-1-3 parsley-row">
-                                        <label for="wizard_mobile_number">Mobile Number</label>
-                                        <input type="text" name="mobileNumber" id="wizard_mobile_number" pattern="[0-9]{7,20}" title="Mobile Number" class="md-input" />
-                                    </div>
-                                </div>
-                                <div class="uk-grid" data-uk-grid-margin="data-uk-grid-margin">
-                                    <div class="uk-width-medium-1-1 parsley-row">
-                                        <label for="wizard_address">Address</label>
-                                        <input type="text" name="address" id="wizard_address" class="md-input" />
-                                    </div>
-                                </div>
-                                <div class="uk-grid" data-uk-grid-margin="data-uk-grid-margin">
-                                    <div class="uk-width-medium-1-3 parsley-row">
-                                        <label for="wizard_district">District</label>
-                                        <input type="text" name="district" id="wizard_district" class="md-input" />
-                                    </div>
-                                    <div class="uk-width-medium-1-3 parsley-row">
-                                        <label for="wizard_state">State</label>
-                                        <input type="text" name="state" id="wizard_state" class="md-input" />
-                                    </div>
-                                    <div class="uk-width-medium-1-3 parsley-row">
-                                        <label for="wizard_pincode">Pincode</label>
-                                        <input type="text" name="pincode" id="wizard_pincode" class="md-input" />
-                                    </div>
-                                </div>
-                                <div class="uk-grid" data-uk-grid-margin="data-uk-grid-margin">
-                                    <div class="uk-width-medium-1-1 parsley-row">
                                         <label for="wizard_website">Website</label>
                                         <input type="url" name="website" id="wizard_website" class="md-input" />
                                     </div>
+                                </div>
+                            </section>
+                            <!-- second section -->
+                            <h3>Confirm Registration</h3>
+                            <section>
+                                <h2 class="heading_a">Confirm Registration
+                                </h2>
+                                <hr class="md-hr" />
+                                <span class="uk-alert uk-alert-danger">If you would like to check your registration details please go back and have a look</span>
+                                <br />
+                                <br />
+                                <br />
+                                <div class="uk-grid" data-uk-grid-margin="data-uk-grid-margin">
+                                    <div class="uk-width-medium-1-3 parsley-row">
+                                    </div>
+                                    <div class="uk-width-medium-1-3 parsley-row">
+                                        <h5>By Clicking Finish You accept Your Registrtion For Store</h5>    
+                                    </div>
+                                    <div class="uk-width-medium-1-3 parsley-row">
+                                    </div>                                
                                 </div>
                             </section>
                         </div>

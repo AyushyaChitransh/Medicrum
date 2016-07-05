@@ -21,17 +21,18 @@
             document.getElementById("email").value = arr.email;
             document.getElementById("phone_number").value = arr.phoneNumber;
             document.getElementById("mobile").value = arr.mobile;
-            var date = new Date(parseInt(arr.dateOfBirth.substr(6)));
-            var dd = date.getDate();
-            var mm = date.getMonth() + 1;
-            var yyyy = date.getFullYear();
-            if (dd < 10) {
-                dd = '0' + dd;
-            }
-            if (mm < 10) {
-                mm = '0' + mm;
-            }
-            date = mm + '/' + dd + '/' + yyyy;
+            //var date = new Date(parseInt(arr.dateOfBirth.substr(6)));
+            //var dd = date.getDate();
+            //var mm = date.getMonth() + 1;
+            //var yyyy = date.getFullYear();
+            //if (dd < 10) {
+            //    dd = '0' + dd;
+            //}
+            //if (mm < 10) {
+            //    mm = '0' + mm;
+            //}
+            //date = mm + '/' + dd + '/' + yyyy;
+            var date = GetDate(arr.dateOfBirth);
             document.getElementById("date_of_birth").value = date;
             document.getElementById("height").value = arr.height;
             document.getElementById("weight").value = arr.weight;
@@ -40,7 +41,6 @@
             //document.getElementById("added_timestamp").value = arr.addedTimestamp;
             //document.getElementById("last_updated_by").value = arr.lastUpdatedBy;
             //document.getElementById("last_updated_timestamp").value = arr.lastUpdatedTimestamp;
-            //alert(arr.addedBy + "  " + arr.lastUpdatedBy);
         },
         error: function (error) {
             alert("Failed to load data!");

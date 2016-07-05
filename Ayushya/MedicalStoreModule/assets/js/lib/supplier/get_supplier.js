@@ -22,10 +22,10 @@
             document.getElementById("phone_number").value = arr.phoneNumber;
             document.getElementById("mobile").value = arr.mobile;
             document.getElementById("website").value = arr.website;
-            document.getElementById("added_by").value = arr.addedBy;
-            document.getElementById("added_timestamp").value = arr.addedTimestamp;
-            document.getElementById("last_updated_by").value = arr.lastUpdatedBy;
-            document.getElementById("last_updated_timestamp").value = arr.lastUpdatedTimestamp;
+            //document.getElementById("added_by").value = arr.addedBy;
+            //document.getElementById("added_timestamp").value = arr.addedTimestamp;
+            //document.getElementById("last_updated_by").value = arr.lastUpdatedBy;
+            //document.getElementById("last_updated_timestamp").value = arr.lastUpdatedTimestamp;
         },
         error: function (error) {
             alert("Failed to load data!");

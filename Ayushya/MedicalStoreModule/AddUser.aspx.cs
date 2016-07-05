@@ -16,6 +16,7 @@ namespace MedicalStoreModule
         {
 
         }
+
         [WebMethod]
         public static bool InsertUser(User data)
         {
@@ -26,12 +27,14 @@ namespace MedicalStoreModule
             DAOUser accessUserdb = new DAOUser();
             return accessUserdb.InsertUser(data);
         }
+
         [WebMethod]
         public static bool CheckUserName(string userName)
         {
             DAOUser accessUserDb = new DAOUser();
             return accessUserDb.CheckUserName(userName);
         }
+
         [WebMethod]
         public static bool CheckEmail(string email)
         {

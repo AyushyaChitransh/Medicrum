@@ -108,6 +108,7 @@ altair_crud_table = {
                 supplierId: {
                     title: 'Supplier Name',
                     width: '20%',
+                    sorting: false,
                     options: '/ViewProduct.aspx/GetSupplierOptions'
                 },
                 barcode: {
@@ -126,6 +127,7 @@ altair_crud_table = {
                 },
                 expiryDate: {
                     title: 'Expiry Date',
+                    sorting: false,
                     type: 'date',
                     displayFormat: 'dd-mm-yy',
                     width: '20%'
@@ -164,8 +166,9 @@ altair_crud_table = {
                     list: false
                 },
                 inStock: {
-                    title: 'In Stock',
+                    title: 'Stock',
                     width: '1%',
+                    sorting: false,
                     edit: false,
                     options: { '1': '<span class="uk-badge uk-badge-success">In stock</span>', '0': '<span class="uk-badge uk-badge-danger">Out of stock</span>' }
                 },

@@ -31,21 +31,22 @@
                 <div class="md-card-content">
                     <h2 class="heading_a">Product Stock Information
                     </h2>
+                    <br />
+                    <span id="inStock" class="uk-width-medium-1-10 uk-badge uk-badge-success" style="display: none">In stock</span>
+                    <span id="outOfStock" class="uk-width-medium-1-10 uk-badge uk-badge-danger" style="display: none">Out of stock</span>
                     <hr class="md-hr" />
                     <div class="uk-grid">
                         <div class="uk-width-medium-1-2 parsley-row">
-                            <span>Product Id</span>
-                            <input id="productId" class="md-input" disabled="disabled"/>
-                        </div>
-                        <div class="uk-width-medium-1-2 parsley-row">
                             <span>Product Model</span>
-                            <input id="productModelId" class="md-input" disabled="disabled"/>
+                            <input id="productModelId" class="md-input" disabled="disabled" />
                         </div>
                         <div class="uk-width-medium-1-2 parsley-row">
-                            <span>Supplier</span>
-                            <input id="supplierId" class="md-input" disabled="disabled" type="text"/>
+                            <span>Supplier Store Name</span>
+                            <input id="supplierId" class="md-input" disabled="disabled" type="text" />
                         </div>
                     </div>
+                    <br />
+                    <br />
                     <div class="uk-grid">
                         <div class="uk-width-medium-1-5 parsley-row">
                             <span>Barcode</span>
@@ -68,16 +69,20 @@
                             <input type="text" id="price" class="md-input" disabled="disabled" />
                         </div>
                     </div>
+                    <br />
+                    <br />
                     <div class="uk-grid">
                         <div class="uk-width-medium-1-2 parsley-row">
                             <span>Manufacture Date</span>
-                            <input type="text" id="manufactureDate" class="md-input" disabled="disabled"/>
+                            <input type="text" id="manufactureDate" class="md-input" disabled="disabled" />
                         </div>
                         <div class="uk-width-medium-1-2 parsley-row">
                             <span>Expiry Date</span>
-                            <input type="text" id="expiryDate" class="md-input" disabled="disabled"/>
+                            <input type="text" id="expiryDate" class="md-input" disabled="disabled" />
                         </div>
                     </div>
+                    <br />
+                    <br />
                     <div class="uk-grid" data-uk-grid-margin="data-uk-grid-margin">
                         <div class="uk-width-medium-1-4 parsley-row">
                             <span>Manufacture Licence Number</span>
@@ -132,6 +137,7 @@
     <uc1:StyleSwitcher runat="server" ID="StyleSwitcher1" />
 
     <!-- Page function scripts -->
+    <script src="assets/js/lib/json_decrypt_date.js"></script>
     <script src="assets/js/lib/stock_product/get_product.js"></script>
 
     <script>

@@ -35,12 +35,16 @@
                             <input id="customer_name" class="md-input" disabled="disabled" type="text" />
                         </div>
                     </div>
+                    <br />
+                    <br />
                     <div class="uk-grid">
                         <div class="uk-width-medium-1-1 parsley-row">
                             <span>Company Name</span>
                             <input id="company_name" class="md-input" disabled="disabled" type="text" />
                         </div>
                     </div>
+                    <br />
+                    <br />
                     <div class="uk-grid">
                         <div class="uk-width-medium-2-4 parsley-row">
                             <span>Email</span>
@@ -55,12 +59,16 @@
                             <input id="phone_number" class="md-input" disabled="disabled" type="text" />
                         </div>
                     </div>
+                    <br />
+                    <br />
                     <div class="uk-grid">
                         <div class="uk-width-medium-1-1 parsley-row">
                             <span>Address</span>
                             <input id="address" class="md-input" disabled="disabled" type="text" />
                         </div>
                     </div>
+                    <br />
+                    <br />
                     <div class="uk-grid">
                         <div class="uk-width-medium-1-4 parsley-row">
                             <span>District</span>
@@ -79,6 +87,8 @@
                             <input id="pincode" class="md-input" disabled="disabled" type="text" />
                         </div>
                     </div>
+                    <br />
+                    <br />
                     <div class="uk-grid">
                         <div class="uk-width-medium-1-4 parsley-row">
                             <span>Date of birth</span>
@@ -133,6 +143,7 @@
     <uc1:StyleSwitcher runat="server" ID="StyleSwitcher" />
 
     <!-- Page function scripts -->
+    <script src="assets/js/lib/json_decrypt_date.js"></script>
     <script src="assets/js/lib/customer/get_customer.js"></script>
 
     <script>
@@ -147,3 +158,4 @@
     </script>
 </body>
 </html>
+ml>

@@ -12,15 +12,16 @@ namespace MedicalStoreModule
 {
     public partial class ViewUser : System.Web.UI.Page
     {
-        private static DAOUser accessUserDb = new DAOUser();
         protected void Page_Load(object sender, EventArgs e)
         {
 
         }
+
         [WebMethod]
         public static object UserList(string userName, int jtStartIndex, int jtPageSize, string jtSorting)
         {
             int storeId = 1;
+            DAOUser accessUserDb = new DAOUser();
             return accessUserDb.UserList(userName, storeId, jtStartIndex, jtPageSize, jtSorting);
         }
 
@@ -28,19 +29,21 @@ namespace MedicalStoreModule
         public static object UpdateUser(User record)
         {
             record.storeId = 1;
+            DAOUser accessUserDb = new DAOUser();
             return accessUserDb.UpdateUser(record);
         }
 
         [WebMethod]
         public static object DeleteUser(string userName)
         {
+            DAOUser accessUserDb = new DAOUser();
             return accessUserDb.DeleteUser(userName);
         }
 
         [WebMethod]
         public static void SetUserSession(string userName)
         {
-            HttpContext.Current.Session["userName"] = userName;
+            HttpContext.Current.Session["userId"] = userName;
         }
     }
 }

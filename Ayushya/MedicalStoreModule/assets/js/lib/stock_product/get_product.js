@@ -11,26 +11,28 @@
         },
         success: function (response) {
             var arr = JSON.parse(response.d);
-            document.getElementById("productId").value = arr.productId;
-            document.getElementById("productModelId").value = arr.productModelId;
+            document.getElementById("productModelId").value = arr.productName;
             //document.getElementById("productModelName").value = arr.productModelName;
-            //document.getElementById("storeId").value = arr.storeId;
-            //document.getElementById("supplierId").value = arr.supplierId;
+            document.getElementById("supplierId").value = arr.supplierStoreName;
             document.getElementById("barcode").value = arr.barcode;
             document.getElementById("batchNumber").value = arr.batchNumber;
-            document.getElementById("manfactureDate").value = arr.manfactureDate;
-            document.getElementById("expiryDate").value = arr.expiryDate;
+            var date = GetDate(arr.manufactureDate);
+            document.getElementById("manufactureDate").value = date;
+            date = GetDate(arr.expiryDate);
+            document.getElementById("expiryDate").value = date;
             document.getElementById("packageQuantity").value = arr.packageQuantity;
             document.getElementById("price").value = arr.price;
-            document.getElementById("manufacturingLicenceNumber").value = arr.manufacturingLicenceNumber;
+            document.getElementById("manufactureLicenceNumber").value = arr.manufactureLicenceNumber;
             document.getElementById("weight").value = arr.weight;
             document.getElementById("volume").value = arr.volume;
             document.getElementById("quantity").value = arr.quantity;
             document.getElementById("tax").value = arr.tax;
-            document.getElementById("status").value = arr.status;
-            document.getElementById("inStock").value = arr.inStock;
-            document.getElementById("deleteStatus").value = arr.deleteStatus;
-            alert(arr.addedBy + "  " + arr.lastUpdatedBy);
+            if (arr.inStock == 1) {
+                document.getElementById("inStock").style.display = 'block';
+            }
+            else {
+                document.getElementById("outOfStock").style.display = 'block';
+            }
         },
         error: function (error) {
             alert("Failed to load data!");

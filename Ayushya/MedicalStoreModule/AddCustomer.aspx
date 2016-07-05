@@ -55,11 +55,11 @@
                                     </div>
                                     <div class="uk-width-medium-1-4 parsley-row">
                                         <label for="wizard_mobile_number">Mobile Number</label>
-                                        <input type="text" name="mobile" id="wizard_mobile_number" pattern="[0-9]{7,20}" title="Mobile Number" class="md-input" />
+                                        <input type="text" name="mobile" id="wizard_mobile_number" pattern="[0-9]{7,20}" data-parsley-trigger="change" title="Mobile Number" class="md-input" />
                                     </div>
                                     <div class="uk-width-medium-1-4 parsley-row">
                                         <label for="wizard_phone_number">Phone</label>
-                                        <input type="text" name="phoneNumber" id="wizard_phone" data-parsley-trigger="change" class="md-input" />
+                                        <input type="text" name="phoneNumber" id="wizard_phone" pattern="[0-9]{7,20}" data-parsley-trigger="change" title="Phone Number" class="md-input" />
                                     </div>
                                 </div>
                                 <div class="uk-grid">
@@ -330,7 +330,7 @@
                                 <div class="uk-grid">
                                     <div class="uk-width-medium-1-4 parsley-row">
                                         <label for="wizard_date_of_birth">Date of birth</label>
-                                        <input type="text" name="dateOfBirth" id="wizard_date_of_birth" class="md-input" data-uk-datepicker="{format:'DD/MM/YYYY'}"/>
+                                        <input type="text" name="dateOfBirth" id="wizard_date_of_birth" class="md-input" data-parsley-date="data-parsley-date" data-parsley-date-message="This value should be a valid date" data-uk-datepicker="{format:'MM.DD.YYYY'}" />
                                     </div>
                                     <div class="uk-width-medium-1-4 parsley-row">
                                         <label for="wizard_height">Height</label>

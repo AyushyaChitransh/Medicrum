@@ -165,8 +165,9 @@ namespace MedicalStoreModule.App_Code.DAO
                 if (cm.OpenConnection() == true)
                 {
                     MySqlCommand cmd = new MySqlCommand();
-                    cmd.CommandText = "SELECT COUNT(*) FROM customer WHERE delete_status=@delete_status AND customer_name like @searchText";
+                    cmd.CommandText = "SELECT COUNT(*) FROM customer WHERE delete_status=@delete_status AND store_id=@store_id AND customer_name like @searchText";
                     cmd.Parameters.AddWithValue("@searchText", customerName + "%");
+                    cmd.Parameters.AddWithValue("@store_id", storeId);
                     cmd.Parameters.AddWithValue("@delete_status", 0);
                     cmd.Connection = cm.connection;
                     customerCount = int.Parse(cmd.ExecuteScalar().ToString());
@@ -180,6 +181,7 @@ namespace MedicalStoreModule.App_Code.DAO
                 return new { Result = "ERROR", Message = ex.Message };
             }
         }
+
         public object UpdateCustomer(Customer record)
         {
             try
