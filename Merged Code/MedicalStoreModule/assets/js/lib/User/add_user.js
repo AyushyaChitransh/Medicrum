@@ -1,10 +1,11 @@
 ﻿function validate() {
-    var productName = document.getElementById('wizard_product_name').value;
-    var tradeName = document.getElementById('wizard_trade_name').value;
-    var company = document.getElementById('wizard_company').value;
-    var category = document.getElementById('wizard_category').value;
-    var type = document.getElementById('wizard_type').value;
-    if (!productName || !tradeName || !company || !category || !type) {
+    var userName = document.getElementById('wizard_user_name').value;
+    var validUesrName = CheckUserName();
+    var validEmail = CheckEmail();
+    var name = document.getElementById('wizard_name').value;
+    var role = document.getElementById('wizard_role').value;
+    var password = document.getElementById('wizard_password').value;
+    if (!validUesrName || !validEmail || !userName || !name || !role || !password) {
         return false;
     }
     else {
@@ -37,7 +38,7 @@ function addDetails() {
         var form_serialized = JSON.stringify($('#wizard_advanced_form').serializeObject(), null, 2);
         $.ajax({
             type: 'POST',
-            url: 'AddProductModel.aspx/InsertProductModel',
+            url: 'AddUser.aspx/InsertUser',
             contentType: 'application/json; charset=utf-8',
             data: "{ 'data': " + form_serialized + " }",
             dataType: "json",
@@ -45,7 +46,7 @@ function addDetails() {
                 if (response.d == true) {
                     Notification('s');
                     setTimeout(function () {
-                        window.location = "AddProductModel.aspx";
+                        window.location = "AddUser.aspx";
                     }, 1000);
                 }
                 else

@@ -275,6 +275,11 @@
     <Content Include="assets\js\lib\stock_product\view_product.js" />
     <Content Include="assets\js\lib\product_model\view_product_model.js" />
     <Content Include="assets\js\lib\supplier\view_supplier.js" />
+    <Content Include="assets\js\lib\User\add_user.js" />
+    <Content Include="assets\js\lib\User\get_user.js" />
+    <Content Include="assets\js\lib\User\user_table.js" />
+    <Content Include="assets\js\lib\User\validate_data.js" />
+    <Content Include="assets\js\lib\User\view_user.js" />
     <Content Include="assets\js\pages\components_nestable.js" />
     <Content Include="assets\js\pages\components_nestable.min.js" />
     <Content Include="assets\js\pages\components_notifications.js" />
@@ -5341,6 +5346,7 @@
     <Compile Include="App_Code\DAO\DAOStockProduct.cs" />
     <Compile Include="App_Code\DAO\DAOSupplier.cs" />
     <Compile Include="App_Code\DAO\DAOStore.cs" />
+    <Compile Include="App_Code\DAO\DAOUser.cs" />
     <Compile Include="App_Code\Model\BillingItems.cs" />
     <Compile Include="App_Code\Model\Customer.cs" />
     <Compile Include="App_Code\Model\Inovice.cs" />

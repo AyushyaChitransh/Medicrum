@@ -38,13 +38,13 @@
                                 <hr class="md-hr" />
                                 <div class="uk-grid" data-uk-grid-margin="data-uk-grid-margin">
                                     <div class="uk-width-medium-1-2 parsley-row">
-                                        <span>Product Model<span class="req">*</span></span>
-                                        <select id="wizard_product_model_id" name="productModelId" class="md-input" required="required">
+                                        <label for="wizard_product_model_id">Product Model<span class="req">*</span></label>
+                                        <select id="wizard_product_model_id" name="productModelId" class="md-input label-fixed" required="required">
                                         </select>
                                     </div>
                                     <div class="uk-width-medium-1-2 parsley-row">
-                                        <span>Supplier<span class="req">*</span></span>
-                                        <select id="wizard_supplier_id" name="supplierId" class="md-input" required="required">
+                                        <label for="wizard_supplier_id">Supplier<span class="req">*</span></label>
+                                        <select id="wizard_supplier_id" name="supplierId" class="md-input label-fixed" required="required">
                                         </select>
                                     </div>
                                 </div>

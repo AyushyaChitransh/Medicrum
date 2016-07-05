@@ -13,7 +13,7 @@ function addDetails() {
     .parsley()
                 .on('form:validated', function () {
                     setTimeout(function () {
-                        altair_md.update_input($wizard_advanced_form.find('.md-input'));
+                        altair_md.update_input($('#wizard_advanced_form').find('.md-input'));
                         // adjust content height
                         $window.resize();
                     }, 100)
@@ -25,7 +25,6 @@ function addDetails() {
                         altair_md.update_input($this);
                         // adjust content height
                         var currentIndex = $('#wizard_advanced').find('.body.current').attr('data-step');
-                        altair_wizard.content_height($('#wizard_advanced'), currentIndex);
                     }, 100);
 
                 });

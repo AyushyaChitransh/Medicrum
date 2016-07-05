@@ -31,12 +31,12 @@
                 <div class="md-card-content">
                     <div class="uk-grid" data-uk-grid-margin="">
                         <div class="uk-width-medium-4-6">
-                            <h3 class="heading_b uk-margin-bottom">Product List</h3>
+                            <h3 class="heading_b uk-margin-bottom">User List</h3>
                         </div>
                         <br />
                         <div class="uk-width-medium-2-6">
-                            <label for="search_product">Search Product</label>
-                            <input type="text" class="md-input" id="search_product" name="search_product" onkeyup="response()" />
+                            <label for="search_user">Search User</label>
+                            <input type="text" class="md-input" id="search_user" name="search_user" onkeyup="response()" />
                         </div>
                         <br />
                     </div>
@@ -45,7 +45,7 @@
             <br />
             <div class="md-card">
                 <div class="md-card-content">
-                    <div id="product_list"></div>
+                    <div id="user_list"></div>
                 </div>
             </div>
 
@@ -102,8 +102,8 @@
     <script src="bower_components/jtable/lib/extensions/jquery.jtable.aspnetpagemethods.js"></script>
 
     <!-- Page function scripts -->
-    <script src="assets/js/lib/view_product_model.js"></script>
-    <script src="assets/js/lib/product_model_table.js"></script>
+    <script src="assets/js/lib/User/view_user.js"></script>
+    <script src="assets/js/lib/user/user_table.js"></script>
 
     <script>
         $(function () {

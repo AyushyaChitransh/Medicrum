@@ -39,7 +39,7 @@ namespace MedicalStoreModule
             user.storeStatus = 1;
             user.deleteStatus = 0;
             DAOStore accessStoredb = new DAOStore();
-            return accessStoredb.InsertStore(store);
+            return accessStoredb.InsertDetails(store,user);
         }
     }
 }

@@ -40,15 +40,15 @@ namespace MedicalStoreModule.App_Code.DAO
             }
         }
 
-        public bool InsertStore(Store store)
+        public bool InsertDetails(Store store, User user)
         {
             try
             {
                 if (cm.OpenConnection() == true)
                 {
                     MySqlCommand cmd = new MySqlCommand();
-                    string parameters = "store_id, store_name, country, currency, contact_person_name, email, registration_date ";
-                    string values = "@store_id, @store_name, @country, @currency, @contact_person_name, @email, @registration_date";
+                    string parameters = "store_name, country, currency, contact_person_name, email, registration_date ";
+                    string values = "@store_name, @country, @currency, @contact_person_name, @email, @registration_date";
                     cm.AddIfNotNull(store.phoneNumber, "phone_number", ref parameters, ref values);
                     cm.AddIfNotNull(store.mobileNumber, "mobile", ref parameters, ref values);
                     cm.AddIfNotNull(store.website, "website", ref parameters, ref values);
@@ -61,8 +61,7 @@ namespace MedicalStoreModule.App_Code.DAO
                     cm.AddIfNotNull(store.state, "state", ref parameters, ref values);
                     cm.AddIfNotNull(store.pincode, "pincode", ref parameters, ref values);
                     cm.AddIfNotNull(store.licenceNumber, "licence_number", ref parameters, ref values);
-                    cmd.CommandText = "INSERT INTO store (" + parameters + ") VALUES (" + values + ")";
-                    cmd.Parameters.AddWithValue("@store_id", store.storeId);
+                    cmd.CommandText = "INSERT INTO store (" + parameters + ") VALUES (" + values + ");SELECT LAST_INSERT_ID();";
                     cmd.Parameters.AddWithValue("@store_name", store.storeName);
                     cmd.Parameters.AddWithValue("@currency", store.currency);
                     cmd.Parameters.AddWithValue("@contact_person_name", store.contactPersonName);
@@ -118,9 +117,23 @@ namespace MedicalStoreModule.App_Code.DAO
                         cmd.Parameters.AddWithValue("@store_mode", store.storeMode);
                     }
                     cmd.Connection = cm.connection;
-                    cmd.ExecuteNonQuery();
-                    cm.CloseConnection();
-                    return true;
+                    user.storeId = int.Parse(cmd.ExecuteScalar().ToString());
+                    DAOUser insertUser = new DAOUser();
+                    if (insertUser.InsertUser(user))
+                    {
+                        cm.CloseConnection();
+                        return true;
+                    }
+                    else
+                    {
+                        MySqlCommand myCmd = new MySqlCommand();
+                        myCmd.CommandText = "DELETE FROM store where store_id=@store_id";
+                        myCmd.Parameters.AddWithValue("@store_id", user.storeId);
+                        myCmd.Connection = cm.connection;
+                        myCmd.ExecuteNonQuery();
+                        cm.CloseConnection();
+                        return false;
+                    }
                 }
                 else
                 {
