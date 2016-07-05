@@ -74,7 +74,7 @@
                                     </div>
                                     <div class="uk-width-medium-1-2 parsley-row">
                                         <label for="wizard_phone_number">Phone</label>
-                                        <input type="text" name="phoneNumber" id="wizard_phone" class="md-input" />
+                                        <input type="text" name="phoneNumber" id="wizard_phone" pattern="[0-9]{7,20}" title="Phone Number" data-parsley-trigger="change" class="md-input" />
                                     </div>
                                 </div>
                                 <br />

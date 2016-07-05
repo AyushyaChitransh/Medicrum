@@ -12,13 +12,10 @@
                 if (response.d == false) {
                     document.getElementById("wizard_email").setAttribute("class", "md-input md-input-danger");
                     document.getElementById("emailCheck").style.display = 'block';
-                    $('#button').prop("disabled", true);
                 }
                 else {
                     document.getElementById("wizard_email").setAttribute("class", "md-input md-input-success");
                     document.getElementById("emailCheck").style.display = 'none';
-                    if (!$('#button').prop("disabled"))
-                        $('#button').prop("disabled", false);
                 }
                 result = response.d;
             },
@@ -48,8 +45,7 @@ function CheckUserName() {
                 else {
                     document.getElementById("wizard_user_name").setAttribute("class", "md-input md-input-success");
                     document.getElementById("userNameCheck").style.display = 'none';
-                    if (!$('#button').prop("disabled"))
-                        $('#button').prop("disabled", false);
+                    $('#button').prop("disabled", false);
                 }
                 result = response.d;
             },

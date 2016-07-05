@@ -1,10 +1,11 @@
 ﻿function validate() {
     var userName = document.getElementById('wizard_user_name').value;
     var email = document.getElementById('wizard_email').checkValidity();
+    var phone = document.getElementById('wizard_phone').checkValidity();
     var name = document.getElementById('wizard_name').value;
     var role = document.getElementById('wizard_role').value;
     var password = document.getElementById('wizard_password').value;
-    if (!userName || !name || !role || !password || !email) {
+    if (!userName || !name || !role || !password || !email || !phone) {
         return false;
     }
     else {
