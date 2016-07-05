@@ -160,7 +160,7 @@ altair_crud_table = {
                     edit: false,
                     sorting: false,
                     display: function (data) {
-                        return '<a href="#" onclick="ViewDetailedUser(' + data.record.userName + ')"><i class="material-icons md-24">&#xE8F4;</i></a>';
+                        return '<a href="#" onclick="ViewDetailedUser(\'' + data.record.userName + '\')"><i class="material-icons md-24">&#xE8F4;</i></a>';
                     }
                 }
             }

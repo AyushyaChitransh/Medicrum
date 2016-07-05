@@ -3,7 +3,7 @@
         type: 'POST',
         url: 'ViewUser.aspx/SetUserSession',
         contentType: 'application/json; charset=utf-8',
-        data: "{ 'userName': " + userName + " }",
+        data: "{ 'userName': '" + userName + "' }",
         success: function () {
         },
         error: function (error) {
