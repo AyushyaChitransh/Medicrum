@@ -11,7 +11,7 @@
         UIkit.notify({
             message: 'Unsuccessful',
             status: 'danger',
-            timeout: 5000,
+            timeout: 3000,
             group: null,
             pos: 'top-center'
         });
