@@ -102,7 +102,7 @@
                                 <br />
                                 <div class="uk-grid" data-uk-grid-margin="data-uk-grid-margin">
                                     <div class="uk-width-medium-1">
-                                        <button class="md-btn md-btn-primary md-btn-block" onclick="addDetails()">Finish</button>
+                                        <a href="#" class="md-btn md-btn-primary md-btn-block" onclick="addDetails();return false;">Finish</a>
                                     </div>
                                 </div>
                             </section>
