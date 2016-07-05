@@ -86,22 +86,21 @@
                                 <div class="uk-grid">
                                     <div class="uk-width-medium-1-1 parsley-row">
                                         <label for="wizard_user_name">User Name<span class="req">*</span></label>
-                                        <input type="text" name="userName" id="wizard_user_name" required="required" class="md-input" onkeyup="CheckUserName()" />
+                                        <input type="text" name="userName" id="wizard_user_name" required="required" class="md-input" onkeyup="CheckUserName(true)" />
                                         <span class="md-color-red-600" id="userNameCheck" style="display: none;">User Name already taken.</span>
                                     </div>
                                 </div>
                                 <div class="uk-grid">
                                     <div class="uk-width-medium-1-1 parsley-row">
                                         <label for="wizard_email">Email<span class="req">*</span></label>
-                                        <input type="email" name="email" id="wizard_email" data-parsley-trigger="change" required="required" class="md-input" onkeyup="CheckEmail()" />
-                                        <span class="md-color-red-600" id="emailCheck" style="display: none;">Email already in use.</span>
+                                        <input type="email" name="email" id="wizard_email" data-parsley-trigger="change" required="required" class="md-input" onkeyup="CheckEmail(true)" />
+                                        <span class="md-color-red-600" id="emailCheck" style="display: none;">Email ID already registered.</span>
                                     </div>
                                 </div>
                                 <div class="uk-grid">
                                     <div class="uk-width-medium-1-1 parsley-row">
                                         <label for="wizard_password">Password<span class="req">*</span></label>
                                         <input type="password" name="password" id="wizard_password" required="required" class="md-input" />
-                                        <a href="#" class="uk-form-password-toggle" data-uk-form-password="">show</a>
                                     </div>
                                 </div>
                             </section>
@@ -119,11 +118,11 @@
                                     </div>
                                     <div class="uk-width-medium-1-3 parsley-row">
                                         <label for="wizard_phone_number">Phone Number</label>
-                                        <input type="text" name="phoneNumber" id="wizard_phone_number" pattern="[0-9]{7,20}" title="Phone Number" class="md-input" />
+                                        <input type="text" name="phoneNumber" id="wizard_phone_number" pattern="[0-9]{7,20}" title="Phone Number" data-parsley-trigger="change" class="md-input" />
                                     </div>
                                     <div class="uk-width-medium-1-3 parsley-row">
                                         <label for="wizard_mobile_number">Mobile Number</label>
-                                        <input type="text" name="mobileNumber" id="wizard_mobile_number" pattern="[0-9]{7,20}" title="Mobile Number" class="md-input" />
+                                        <input type="text" name="mobileNumber" id="wizard_mobile_number" pattern="[0-9]{7,20}" title="Mobile Number" data-parsley-trigger="change" class="md-input" />
                                     </div>
                                 </div>
                                 <div class="uk-grid" data-uk-grid-margin="data-uk-grid-margin">
@@ -484,10 +483,11 @@
 
     <!-- Page function scripts -->
     <script src="assets/js/lib/notification.js"></script>
+    <script src="assets/js/lib/User/validate_data.js"></script>
     <script src="assets/js/lib/store/add_store.js"></script>
 
     <!--  forms wizard functions -->
-    <script src="assets/js/lib/form_wizard.js"></script>
+    <script src="assets/js/lib/store/form_wizard.js"></script>
 
     <script>
         $(function () {

@@ -56,7 +56,14 @@ altair_wizard = {
 
                     // adjust content height
                     $window.resize();
-                    return $current_step.find('.md-input-danger').length ? false : true;
+                    var email = CheckEmail(false);
+                    var emailValidity = document.getElementById('wizard_email').checkValidity();
+                    var userName = CheckUserName(false);
+                    var count = $current_step.find('.md-input-danger').length ? false : true;
+                    if (!email || !userName || !count || !emailValidity)
+                        return false;
+                    else
+                        return true;
                 },
                 onFinished: function () {
                     var form_serialized = JSON.stringify($wizard_advanced_form.serializeObject(), null, 2);

@@ -262,7 +262,7 @@
     <Content Include="assets\js\lib\store\add_store.js" />
     <Content Include="assets\js\lib\supplier\add_supplier.js" />
     <Content Include="assets\js\lib\customer\customer_table.js" />
-    <Content Include="assets\js\lib\form_wizard.js" />
+    <Content Include="assets\js\lib\store\form_wizard.js" />
     <Content Include="assets\js\lib\customer\get_customer.js" />
     <Content Include="assets\js\lib\product_model\get_product_model.js" />
     <Content Include="assets\js\lib\supplier\get_supplier.js" />
