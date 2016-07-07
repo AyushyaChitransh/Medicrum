@@ -13,15 +13,26 @@ namespace MedicalStoreModule
 {
     public partial class AddProduct : System.Web.UI.Page
     {
+        private static int storeId;
         protected void Page_Load(object sender, EventArgs e)
         {
-
+            if (!IsPostBack)
+            {
+                if (Session["storeId"] != null && Session["userName"] != null)
+                {
+                    storeId = int.Parse(Session["storeId"].ToString());
+                }
+                else
+                {
+                    Response.Redirect("Login.aspx");
+                }
+            }
         }
 
         [WebMethod]
         public static bool InsertProduct(StockProduct data)
         {
-            data.storeId = 1;
+            data.storeId = storeId;
             data.status = 1;
             data.inStock = 1;
             data.deleteStatus = 0;
@@ -32,7 +43,6 @@ namespace MedicalStoreModule
         [WebMethod]
         public static object GetProductModelOptions()
         {
-            int storeId = 1;
             DAOStockProduct accessStockProductdb = new DAOStockProduct();
             return accessStockProductdb.GetProductModelOptions(storeId);
         }
@@ -40,7 +50,6 @@ namespace MedicalStoreModule
         [WebMethod]
         public static object GetSupplierOptions()
         {
-            int storeId = 1;
             DAOStockProduct accessStockProductdb = new DAOStockProduct();
             return accessStockProductdb.GetSupplierOptions(storeId);
         }

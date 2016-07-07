@@ -12,15 +12,25 @@ namespace MedicalStoreModule
 {
     public partial class EmergencyStocks : System.Web.UI.Page
     {
+        private static int storeId;
         protected void Page_Load(object sender, EventArgs e)
         {
-
+            if (!IsPostBack)
+            {
+                if (Session["storeId"] != null && Session["userName"] != null)
+                {
+                    storeId = int.Parse(Session["storeId"].ToString());
+                }
+                else
+                {
+                    Response.Redirect("Login.aspx");
+                }
+            }
         }
 
         [WebMethod]
         public static object ProductEmergencyList(string productModelId, int jtStartIndex, int jtPageSize, string jtSorting)
         {
-            int storeId = 1;
             DAOStockProduct accessProductdb = new DAOStockProduct();
             return accessProductdb.ProductEmergencyList(productModelId, storeId, jtStartIndex, jtPageSize, jtSorting);
         }
@@ -28,7 +38,6 @@ namespace MedicalStoreModule
         [WebMethod]
         public static object GetProductModelOptions()
         {
-            int storeId = 1;
             DAOStockProduct accessProductdb = new DAOStockProduct();
             return accessProductdb.GetProductModelOptions(storeId);
         }
@@ -36,7 +45,6 @@ namespace MedicalStoreModule
         [WebMethod]
         public static object GetSupplierOptions()
         {
-            int storeId = 1;
             DAOStockProduct accessProductdb = new DAOStockProduct();
             return accessProductdb.GetSupplierOptions(storeId);
         }

@@ -1,4 +1,4 @@
-﻿<%@ Page Language="C#" AutoEventWireup="true" CodeBehind="AddStore.aspx.cs" Inherits="MedicalStoreModule.AddStore" %>
+﻿<%@ Page Language="C#" AutoEventWireup="true" CodeBehind="Register.aspx.cs" Inherits="MedicalStoreModule.AddStore" %>
 
 <!DOCTYPE html>
 

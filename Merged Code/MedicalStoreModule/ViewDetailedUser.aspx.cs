@@ -12,7 +12,7 @@ namespace MedicalStoreModule
 {
     public partial class ViewDetailedUser : System.Web.UI.Page
     {
-        private static string userName;
+        private static string userId;
         protected void Page_Load(object sender, EventArgs e)
         {
             if (Session["userId"] == null)
@@ -21,7 +21,7 @@ namespace MedicalStoreModule
             }
             else
             {
-                userName = Session["userId"].ToString();
+                userId = Session["userId"].ToString();
                 Session["userId"] = "";
             }
         }
@@ -30,7 +30,7 @@ namespace MedicalStoreModule
         {
             JavaScriptSerializer serializer = new JavaScriptSerializer();
             DAOUser accessUserDb = new DAOUser();
-            return serializer.Serialize(accessUserDb.GetUser(userName)).ToString();
+            return serializer.Serialize(accessUserDb.GetUser(userId)).ToString();
         }
     }
 }
