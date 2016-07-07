@@ -141,7 +141,7 @@ namespace MedicalStoreModule.App_Code.DAO
                     MySqlCommand cmd = new MySqlCommand();
                     cmd.CommandText = @"SELECT * FROM user 
                                         WHERE delete_status=@delete_status AND store_id=@store_id AND user_name LIKE @searchText 
-                                        ORDER BY user_name " + sortOrder[1] + " LIMIT @jtStartIndex,@jtPageSize";
+                                        ORDER BY name " + sortOrder[1] + " LIMIT @jtStartIndex,@jtPageSize";
                     cmd.Parameters.AddWithValue("@searchText", userName + '%');
                     cmd.Parameters.AddWithValue("@store_id", storeId);
                     cmd.Parameters.AddWithValue("@delete_status", 0);
@@ -208,7 +208,8 @@ namespace MedicalStoreModule.App_Code.DAO
                                           password=@password,
                                           email=@email,
                                           phone_number=@phone_number,
-                                          address=@address
+                                          address=@address,
+                                          status=@status
                                         WHERE 
                                           user_name=@user_name";
                     MySqlCommand cmd = new MySqlCommand(qry, cm.connection);
@@ -219,6 +220,7 @@ namespace MedicalStoreModule.App_Code.DAO
                     cmd.Parameters.AddWithValue("@email", record.email);
                     cmd.Parameters.AddWithValue("@phone_number", record.phoneNumber);
                     cmd.Parameters.AddWithValue("@address", record.address);
+                    cmd.Parameters.AddWithValue("@status", record.status);
                     cmd.ExecuteNonQuery();
                     cm.CloseConnection();
                 }
