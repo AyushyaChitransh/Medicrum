@@ -19,6 +19,7 @@
     <IISExpressAnonymousAuthentication />
     <IISExpressWindowsAuthentication />
     <IISExpressUseClassicPipelineMode />
+    <UseGlobalApplicationHostFile />
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
     <DebugSymbols>true</DebugSymbols>
@@ -64,7 +65,7 @@
     <Content Include="AddCustomer.aspx" />
     <Content Include="AddProduct.aspx" />
     <Content Include="AddProductModel.aspx" />
-    <Content Include="AddStore.aspx" />
+    <Content Include="Register.aspx" />
     <Content Include="AddSupplier.aspx" />
     <Content Include="AddUser.aspx" />
     <Content Include="assets\css\codemirror_themes.min.css" />
@@ -262,7 +263,7 @@
     <Content Include="assets\js\lib\store\add_store.js" />
     <Content Include="assets\js\lib\supplier\add_supplier.js" />
     <Content Include="assets\js\lib\customer\customer_table.js" />
-    <Content Include="assets\js\lib\form_wizard.js" />
+    <Content Include="assets\js\lib\store\form_wizard.js" />
     <Content Include="assets\js\lib\customer\get_customer.js" />
     <Content Include="assets\js\lib\product_model\get_product_model.js" />
     <Content Include="assets\js\lib\supplier\get_supplier.js" />
@@ -5318,12 +5319,12 @@
     <Compile Include="AddProductModel.aspx.designer.cs">
       <DependentUpon>AddProductModel.aspx</DependentUpon>
     </Compile>
-    <Compile Include="AddStore.aspx.cs">
-      <DependentUpon>AddStore.aspx</DependentUpon>
+    <Compile Include="Register.aspx.cs">
+      <DependentUpon>Register.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
     </Compile>
-    <Compile Include="AddStore.aspx.designer.cs">
-      <DependentUpon>AddStore.aspx</DependentUpon>
+    <Compile Include="Register.aspx.designer.cs">
+      <DependentUpon>Register.aspx</DependentUpon>
     </Compile>
     <Compile Include="AddSupplier.aspx.cs">
       <DependentUpon>AddSupplier.aspx</DependentUpon>

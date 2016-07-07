@@ -45,7 +45,7 @@
                                 <div class="uk-grid">
                                     <div class="uk-width-medium-1-2 parsley-row">
                                         <label for="wizard_user_name">User Name<span class="req">*</span></label>
-                                        <input type="text" name="userName" id="wizard_user_name" data-parsley-trigger="change" required="required" class="md-input" onkeyup="CheckUserName()" />
+                                        <input type="text" name="userName" id="wizard_user_name" data-parsley-trigger="change" required="required" class="md-input" onkeyup="CheckUserName(true)" />
                                         <span class="md-color-red-600" id="userNameCheck" style="display:none;">User Name already taken.</span>
                                     </div>
                                     <div class="uk-width-medium-1-2 parsley-row">
@@ -56,7 +56,7 @@
                                 <div class="uk-grid">
                                     <div class="uk-width-medium-1-2 parsley-row">
                                         <label for="wizard_email">Email</label>
-                                        <input type="email" name="email" id="wizard_email" data-parsley-trigger="change" class="md-input" onkeyup="CheckEmail()"/>
+                                        <input type="email" name="email" id="wizard_email" data-parsley-trigger="change" class="md-input" onkeyup="CheckEmail(true)"/>
                                         <span class="md-color-red-600" id="emailCheck" style="display:none;">Email ID already registered.</span>
                                     </div>
                                     <div class="uk-width-medium-1-2 parsley-row">

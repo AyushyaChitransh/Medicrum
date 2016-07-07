@@ -10,7 +10,16 @@
 namespace MedicalStoreModule {
     
     
-    public partial class AddStore {
+    public partial class Invoice {
+        
+        /// <summary>
+        /// HeaderAndSideBar control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::MedicalStoreModule.Controls.HeaderAndSideBar HeaderAndSideBar;
         
         /// <summary>
         /// StyleSwitcher control.

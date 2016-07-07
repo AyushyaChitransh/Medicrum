@@ -1,7 +1,7 @@
 ﻿function addDetails(form_serialized) {
     $.ajax({
         type: 'POST',
-        url: 'AddStore.aspx/InsertDetails',
+        url: 'Register.aspx/InsertDetails',
         contentType: 'application/json; charset=utf-8',
         data: "{ 'store': " + form_serialized + ", 'user': " + form_serialized + " }",
         dataType: "json",
@@ -24,7 +24,7 @@ function CheckStoreId() {
     var storeId = document.getElementById("wizard_store_id").value;
     $.ajax({
         type: 'POST',
-        url: 'AddStore.aspx/CheckStoreId',
+        url: 'Register.aspx/CheckStoreId',
         contentType: 'application/json; charset=utf-8',
         data: "{ 'StoreId': '" + storeId + "' }",
         success: function (response) {
