@@ -65,6 +65,10 @@
     <Content Include="AddCustomer.aspx" />
     <Content Include="AddProduct.aspx" />
     <Content Include="AddProductModel.aspx" />
+    <Content Include="assets\js\lib\invoice\page_invoices.js" />
+    <Content Include="assets\js\lib\login\login.js" />
+    <Content Include="Invoice.aspx" />
+    <Content Include="Login.aspx" />
     <Content Include="Register.aspx" />
     <Content Include="AddSupplier.aspx" />
     <Content Include="AddUser.aspx" />
@@ -5318,6 +5322,21 @@
     </Compile>
     <Compile Include="AddProductModel.aspx.designer.cs">
       <DependentUpon>AddProductModel.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="App_Code\DAO\DAOLogin.cs" />
+    <Compile Include="Invoice.aspx.cs">
+      <DependentUpon>Invoice.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Invoice.aspx.designer.cs">
+      <DependentUpon>Invoice.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Login.aspx.cs">
+      <DependentUpon>Login.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Login.aspx.designer.cs">
+      <DependentUpon>Login.aspx</DependentUpon>
     </Compile>
     <Compile Include="Register.aspx.cs">
       <DependentUpon>Register.aspx</DependentUpon>
