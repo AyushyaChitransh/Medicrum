@@ -12,23 +12,36 @@ namespace MedicalStoreModule
 {
     public partial class ViewCustomer : System.Web.UI.Page
     {
-        private static DAOCustomer accessCustomerDb = new DAOCustomer();
+        private static int storeId;
+        private static string userName;
         protected void Page_Load(object sender, EventArgs e)
         {
-
+            if (!IsPostBack)
+            {
+                if (Session["storeId"] != null && Session["userName"] != null)
+                {
+                    storeId = int.Parse(Session["storeId"].ToString());
+                    userName = Session["userName"].ToString();
+                }
+                else
+                {
+                    Response.Redirect("Login.aspx");
+                }
+            }
         }
 
         [WebMethod]
         public static object CustomerList(string customerName, int jtStartIndex, int jtPageSize, string jtSorting)
         {
-            int storeId = 1;
+            DAOCustomer accessCustomerDb = new DAOCustomer();
             return accessCustomerDb.CustomerList(customerName, storeId, jtStartIndex, jtPageSize, jtSorting);
         }
 
         [WebMethod]
         public static object UpdateCustomer(Customer record)
         {
-            record.lastUpdatedBy = "ravi.jain";
+            DAOCustomer accessCustomerDb = new DAOCustomer();
+            record.lastUpdatedBy = userName;
             record.lastUpdatedTimestamp = DateTime.Now;
             return accessCustomerDb.UpdateCustomer(record);
         }
@@ -36,6 +49,7 @@ namespace MedicalStoreModule
         [WebMethod]
         public static object DeleteCustomer(int customerId)
         {
+            DAOCustomer accessCustomerDb = new DAOCustomer();
             return accessCustomerDb.DeleteCustomer(customerId);
         }
 

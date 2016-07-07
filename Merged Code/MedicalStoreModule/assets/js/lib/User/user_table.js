@@ -16,7 +16,7 @@ altair_crud_table = {
             paging: true,
             pageSize: 10,
             sorting: true,
-            defaultSorting: 'userName ASC',
+            defaultSorting: 'name ASC',
             deleteConfirmation: function (data) {
                 data.deleteConfirmMessage = 'Are you sure to delete records of ' + data.record.userName + '?';
             },
@@ -75,10 +75,10 @@ altair_crud_table = {
                             increaseArea: '20%'
                         })
                         .on('ifChecked', function (event) {
-                            $this.parent('div.icheckbox_md').next('span').text('Active');
+                            $this.parent('div.icheckbox_md').next('span').text('Suspended');
                         })
                         .on('ifUnchecked', function (event) {
-                            $this.parent('div.icheckbox_md').next('span').text('Passive');
+                            $this.parent('div.icheckbox_md').next('span').text('Not Suspended');
                         })
                     });
                 // reinitialize inputs
@@ -105,6 +105,7 @@ altair_crud_table = {
                     title: 'User Name',
                     width: '20%',
                     edit: false,
+                    sorting: false,
                     list: true
                 },
                 role: {
@@ -145,14 +146,11 @@ altair_crud_table = {
                     list: false
                 },
                 status: {
-                    create: false,
-                    edit: false,
-                    list: false
-                },
-                deleteStatus: {
-                    create: false,
-                    edit: false,
-                    list: false
+                    title: 'Suspension',
+                    width: '1%',
+                    sorting: false,
+                    options: { '0': '<span class="uk-badge uk-badge-danger">Suspended</span>', '1': '<span class="uk-badge uk-badge-success">Not Suspended</span>' },
+
                 },
                 viewButton: {
                     width: '1%',

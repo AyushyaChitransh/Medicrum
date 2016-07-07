@@ -12,15 +12,27 @@ namespace MedicalStoreModule
 {
     public partial class ViewProductModel : System.Web.UI.Page
     {
+        private static int storeId;
+        private static string userName;
         protected void Page_Load(object sender, EventArgs e)
         {
-
+            if (!IsPostBack)
+            {
+                if (Session["storeId"] != null && Session["userName"] != null)
+                {
+                    storeId = int.Parse(Session["storeId"].ToString());
+                    userName = Session["userName"].ToString();
+                }
+                else
+                {
+                    Response.Redirect("Login.aspx");
+                }
+            }
         }
 
         [WebMethod]
         public static object ProductModelList(string productName, int jtStartIndex, int jtPageSize, string jtSorting)
         {
-            int storeId = 1;
             DAOProductModel accessProductModeldb = new DAOProductModel();
             return accessProductModeldb.ProductModelList(productName, storeId, jtStartIndex, jtPageSize, jtSorting);
         }
@@ -28,7 +40,7 @@ namespace MedicalStoreModule
         [WebMethod]
         public static object UpdateProductModel(ProductModel record)
         {
-            record.lastUpdatedBy = "ravi.jain";
+            record.lastUpdatedBy = userName;
             record.lastUpdatedTimestamp = DateTime.Now;
             DAOProductModel accessProductModeldb = new DAOProductModel();
             return accessProductModeldb.UpdateProductModel(record);

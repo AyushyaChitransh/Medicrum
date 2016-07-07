@@ -9,9 +9,22 @@ namespace MedicalStoreModule
 {
     public partial class Dashboard : System.Web.UI.Page
     {
+        private static int storeId;
+        private static string userName;
         protected void Page_Load(object sender, EventArgs e)
         {
-
+            if (!IsPostBack)
+            {
+                if (Session["storeId"] != null && Session["userName"] != null)
+                {
+                    storeId = int.Parse(Session["storeId"].ToString());
+                    userName = Session["userName"].ToString();
+                }
+                else
+                {
+                    Response.Redirect("Login.aspx");
+                }
+            }
         }
     }
 }

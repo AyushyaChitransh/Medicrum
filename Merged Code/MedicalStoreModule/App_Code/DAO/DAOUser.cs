@@ -39,6 +39,7 @@ namespace MedicalStoreModule.App_Code.DAO
                 return false;
             }
         }
+
         public bool CheckEmail(string email)
         {
             try
@@ -68,6 +69,7 @@ namespace MedicalStoreModule.App_Code.DAO
                 return false;
             }
         }
+
         public bool InsertUser(User record)
         {
             string qry = @"INSERT INTO user
@@ -126,6 +128,7 @@ namespace MedicalStoreModule.App_Code.DAO
                 return false;
             }
         }
+
         public object UserList(string userName, int storeId, int jtStartIndex, int jtPageSize, string jtSorting)
         {
             try
@@ -138,7 +141,7 @@ namespace MedicalStoreModule.App_Code.DAO
                     MySqlCommand cmd = new MySqlCommand();
                     cmd.CommandText = @"SELECT * FROM user 
                                         WHERE delete_status=@delete_status AND store_id=@store_id AND user_name LIKE @searchText 
-                                        ORDER BY user_name " + sortOrder[1] + " LIMIT @jtStartIndex,@jtPageSize";
+                                        ORDER BY name " + sortOrder[1] + " LIMIT @jtStartIndex,@jtPageSize";
                     cmd.Parameters.AddWithValue("@searchText", userName + '%');
                     cmd.Parameters.AddWithValue("@store_id", storeId);
                     cmd.Parameters.AddWithValue("@delete_status", 0);
@@ -192,6 +195,7 @@ namespace MedicalStoreModule.App_Code.DAO
                 return new { Result = "ERROR", Message = ex.Message };
             }
         }
+
         public object UpdateUser(User record)
         {
             try
@@ -201,12 +205,10 @@ namespace MedicalStoreModule.App_Code.DAO
                     string qry = @"UPDATE user SET
                                           name=@name,
                                           role=@role,
-                                          store_id=@store_id,
                                           password=@password,
                                           email=@email,
                                           phone_number=@phone_number,
                                           address=@address,
-                                          store_status=@store_status,
                                           status=@status
                                         WHERE 
                                           user_name=@user_name";
@@ -214,12 +216,10 @@ namespace MedicalStoreModule.App_Code.DAO
                     cmd.Parameters.AddWithValue("@user_name", record.userName);
                     cmd.Parameters.AddWithValue("@name", record.name);
                     cmd.Parameters.AddWithValue("@role", record.role);
-                    cmd.Parameters.AddWithValue("@store_id", record.storeId);
                     cmd.Parameters.AddWithValue("@password", record.password);
                     cmd.Parameters.AddWithValue("@email", record.email);
                     cmd.Parameters.AddWithValue("@phone_number", record.phoneNumber);
                     cmd.Parameters.AddWithValue("@address", record.address);
-                    cmd.Parameters.AddWithValue("@store_status", record.storeStatus);
                     cmd.Parameters.AddWithValue("@status", record.status);
                     cmd.ExecuteNonQuery();
                     cm.CloseConnection();
@@ -232,6 +232,7 @@ namespace MedicalStoreModule.App_Code.DAO
                 return new { Result = "ERROR", Message = ex.Message };
             }
         }
+
         public object DeleteUser(string userName)
         {
             try
@@ -256,6 +257,7 @@ namespace MedicalStoreModule.App_Code.DAO
                 return new { Result = "ERROR", Message = ex.Message };
             }
         }
+
         public User GetUser(string userName)
         {
             User user = new User();

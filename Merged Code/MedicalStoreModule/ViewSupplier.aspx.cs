@@ -12,15 +12,27 @@ namespace MedicalStoreModule
 {
     public partial class ViewSupplier : System.Web.UI.Page
     {
+        private static int storeId;
+        private static string userName;
         protected void Page_Load(object sender, EventArgs e)
         {
-
+            if (!IsPostBack)
+            {
+                if (Session["storeId"] != null && Session["userName"] != null)
+                {
+                    storeId = int.Parse(Session["storeId"].ToString());
+                    userName = Session["userName"].ToString();
+                }
+                else
+                {
+                    Response.Redirect("Login.aspx");
+                }
+            }
         }
 
         [WebMethod]
         public static object SupplierList(string supplierStoreName, int jtStartIndex, int jtPageSize, string jtSorting)
         {
-            int storeId = 1;
             DAOSupplier accessSupplierdb = new DAOSupplier();
             return accessSupplierdb.SupplierList(supplierStoreName, storeId, jtStartIndex, jtPageSize, jtSorting);
         }
@@ -28,7 +40,7 @@ namespace MedicalStoreModule
         [WebMethod]
         public static object UpdateSupplier(Supplier record)
         {
-            record.lastUpdatedBy = "ravi.jain";
+            record.lastUpdatedBy = userName;
             record.lastUpdatedTimestamp = DateTime.Now;
             DAOSupplier accessSupplierdb = new DAOSupplier();
             return accessSupplierdb.UpdateSupplier(record);
