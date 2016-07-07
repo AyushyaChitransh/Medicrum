@@ -15,7 +15,7 @@
 
     <title>Login Page</title>
 
-    <link href='http://fonts.googleapis.com/css?family=Roboto:300,400,500' rel='b stylesheet' type='text/css'>
+    <link href='http://fonts.googleapis.com/css?family=Roboto:300,400,500' rel='stylesheet' type='text/css'>
 
     <!-- uikit -->
     <link rel="stylesheet" href="bower_components/uikit/css/uikit.almost-flat.min.css"/>
@@ -110,6 +110,6 @@
     <script src="assets/js/altair_admin_common.min.js"></script>
 
     <!-- altair login page functions -->
-    <script src="assets/js/lib/login/login.js"></script>
+    <script src="assets/js/lib/login.js"></script>
 </body>
 </html>
