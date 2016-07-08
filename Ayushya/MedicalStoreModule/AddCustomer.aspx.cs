@@ -12,17 +12,31 @@ namespace MedicalStoreModule
 {
     public partial class AddCustomer : System.Web.UI.Page
     {
+        private static int storeId;
+        private static string userName;
         protected void Page_Load(object sender, EventArgs e)
         {
-
+            if (!IsPostBack)
+            {
+                if (Session["storeId"] != null && Session["userName"] != null)
+                {
+                    storeId = int.Parse(Session["storeId"].ToString());
+                    userName = Session["userName"].ToString();
+                }
+                else
+                {
+                    Response.Redirect("Login.aspx");
+                }
+            }
         }
+
         [WebMethod]
         public static bool InsertCustomer(Customer data)
         {
-            data.storeId = 1;
-            data.addedBy = "ravi.jain";
+            data.storeId = storeId;
+            data.addedBy = userName;
             data.addedTimestamp = DateTime.Now;
-            data.lastUpdatedBy = "ravi.jain";
+            data.lastUpdatedBy = userName;
             data.lastUpdatedTimestamp = DateTime.Now;
             data.status = 1;
             data.deleteStatus = 0;

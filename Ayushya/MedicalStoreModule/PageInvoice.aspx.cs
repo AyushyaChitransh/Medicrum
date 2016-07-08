@@ -13,9 +13,21 @@ namespace MedicalStoreModule
     public partial class PageInvoice : System.Web.UI.Page
     {
         static DAOInvoice accessInvoiceDb = new DAOInvoice();
+        private static int storeId;
+
         protected void Page_Load(object sender, EventArgs e)
         {
-
+            if (!IsPostBack)
+            {
+                if (Session["storeId"] != null && Session["userName"] != null)
+                {
+                    storeId = int.Parse(Session["storeId"].ToString());
+                }
+                else
+                {
+                    Response.Redirect("Login.aspx");
+                }
+            }
         }
         [WebMethod]
         public static object GetInvoice(int invoiceId)
