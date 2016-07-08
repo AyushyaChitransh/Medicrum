@@ -10,7 +10,7 @@
 namespace MedicalStoreModule {
     
     
-    public partial class Invoice {
+    public partial class PageInvoice {
         
         /// <summary>
         /// HeaderAndSideBar control.

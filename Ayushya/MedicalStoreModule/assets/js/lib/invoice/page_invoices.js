@@ -1,4 +1,4 @@
-﻿$(function () {
+$(function () {
     // init invoices
     altair_invoices.init();
 });
@@ -115,26 +115,42 @@ altair_invoices = {
             var template = $invoice_template.html(),
                 template_compiled = Handlebars.compile(template);
 
+            //var recievedData;
+            //$.ajax({
+            //        type: 'POST',
+            //        url: 'PageInvoice.aspx/GetInvoice',
+            //        contentType: 'application/json; charset=utf-8',
+            //        data: "{ 'invoiceId': " + 1 + " }",
+            //        dataType: "json",
+            //        success: function (response) {
+            //            recievedData = response.d;
+            //        },
+            //        error: function (error) {
+            //            alert('u');
+            //        }
+            //    });
             var invoice_id = parseInt($this.attr('data-invoice-id')),
                 context = {
                     invoice_id: {
                         invoice_number: Math.floor((Math.random() * 200) + 1) + '/2015',
                         invoice_date: moment().format('DD.MM.YYYY'),
                         invoice_due_date: moment().add(14, 'days').format('DD.MM.YYYY'),
-                        invoice_customer: 'Bailey-Lynch',
-                        invoice_customer_address: '2808 Robson St',
-                        invoice_customer_district: 'Vancouver, BC V6B 3K9',
-                        invoice_customer_state: 'Price Ltd',
-                        invoice_customer_country: '2894 Bond Street',
-                        invoice_customer_pincode: 'Providence, RI 02908',
+                        invoice_customer: 'Mr Scrum',
+                        invoice_address: 'Address of customer',
+                        invoice_district: 'In this district',
+                        invoice_state: 'State',
+                        invoice_country: 'India',
+                        invoice_pincode: 'Pincode info',
+                        invoice_email: 'someone@gmail.com',
+                        invoice_mobile: '8947029089',
                         invoice_total_value: '$3,751.50',
                         invoice_vat_value: '$862.85',
                         invoice_medicines: [
                             {
-                                medicine_name: "Website design & development",
-                                medicine_description: "Lorem ipsum dolor sit amet, consectetur adipisicing elit.",
+                                medicine_name: "Volini",
+                                medicine_description: "To be applied  on pain",
                                 medicine_rate: "$25.00",
-                                medicine_quantity: "32",
+                                medicine_qty: "32",
                                 medicine_vat: "23%",
                                 medicine_total: "$984.00"
                             },
@@ -142,21 +158,23 @@ altair_invoices = {
                                 medicine_name: "Search engine optimization",
                                 medicine_description: "Lorem ipsum dolor sit amet, consectetur adipisicing elit. Ab blanditiis cupiditate delectus deserunt.",
                                 medicine_rate: "$50.00",
-                                medicine_quantity: "20",
+                                medicine_qty: "20",
                                 medicine_vat: "23%",
                                 medicine_total: "$1,230.00"
                             },
                             {
-                                medicine_name: "Consulting medicine",
-                                medicine_description: "Lorem ipsum dolor sit amet, consectetur.",
+                                medicine_name: "Consulting charges",
+                                medicine_description: "Came twice here",
                                 medicine_rate: "$100.00",
-                                medicine_quantity: "12.5",
+                                medicine_qty: "12",
                                 medicine_vat: "23%",
-                                medicine_total: "$1,537.50"
+                                medicine_total: "$1,57.50"
                             }
                         ],
-                        invoice_payment_info: 'BANK XYZ<br/>IBAN 123 123 123 123',
-                        invoice_payment_due: '14'
+                        //invoice_payment_terms: recievedData.paymentTerms,
+                        //invoice_payment_mode: recievedData.paymentMode
+                        invoice_payment_terms: 'By next year in monthly installments',
+                        invoice_payment_mode: 'By cash'
                     }
                 },
                 theCompiledHtml = template_compiled(context);
@@ -205,9 +223,9 @@ altair_invoices = {
 
         invoices_list_sidebar.attr('id', 'invoices_list_sidebar');
 
-        $sidebar_secondary
-            .find('.sidebar_secondary_wrapper').html(invoices_list_sidebar)
-            .end();
+        //$sidebar_secondary
+        //    .find('.sidebar_secondary_wrapper').html(invoices_list_sidebar)
+        //    .end();
 
     }
 };

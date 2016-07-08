@@ -265,7 +265,7 @@
                     </ul>
                 </li>
                 <li title="Inovice" id="Inovice">
-                    <a href="#">
+                    <a href="Invoice.aspx">
                         <span class="menu_icon"><i class="material-icons">&#xE53E;</i></span>
                         <span class="menu_title">Inovice</span>
                     </a>

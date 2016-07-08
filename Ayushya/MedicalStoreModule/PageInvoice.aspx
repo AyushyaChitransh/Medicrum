@@ -1,7 +1,6 @@
-﻿<%@ Page Language="C#" AutoEventWireup="true" CodeBehind="Invoice.aspx.cs" Inherits="MedicalStoreModule.Invoice" %>
+﻿<%@ Page Language="C#" AutoEventWireup="true" CodeBehind="PageInvoice.aspx.cs" Inherits="MedicalStoreModule.PageInvoice" %>
 
-<!DOCTYPE html>
-
+<!doctype html>
 <!--[if lte IE 9]> <html class="lte-ie9" lang="en"> <![endif]-->
 <!--[if gt IE 9]><!-->
 <html lang="en">
@@ -16,7 +15,7 @@
     <link rel="icon" type="image/png" href="assets/img/favicon-16x16.png" sizes="16x16">
     <link rel="icon" type="image/png" href="assets/img/favicon-32x32.png" sizes="32x32">
 
-    <title>Altair Admin v2.2.0</title>
+    <title>Invoice</title>
 
 
     <!-- uikit -->
@@ -36,7 +35,6 @@
 
 </head>
 <body class=" sidebar_main_open sidebar_main_swipe header_double_height">
-
     <uc1:HeaderAndSideBar runat="server" ID="HeaderAndSideBar" />
     <div id="page_content">
         <div id="page_content_inner">
@@ -70,112 +68,6 @@
                                         <span class="uk-badge uk-badge-danger">Overdue</span>
                                         <span class="md-list-heading uk-text-truncate">Invoice 166/2015 <span class="uk-text-small uk-text-muted">(10 Nov)</span></span>
                                         <span class="uk-text-small uk-text-muted">Medhurst PLC</span>
-                                    </a>
-                                </li>
-                                <li>
-                                    <a href="#" class="md-list-content" data-invoice-id="1">
-                                        <span class="md-list-heading uk-text-truncate">Invoice 68/2015 <span class="uk-text-small uk-text-muted">(9 Nov)</span></span>
-                                        <span class="uk-text-small uk-text-muted">Friesen, Deckow and Hilpert</span>
-                                    </a>
-                                </li>
-                                <li>
-                                    <a href="#" class="md-list-content" data-invoice-id="1">
-                                        <span class="md-list-heading uk-text-truncate">Invoice 176/2015 <span class="uk-text-small uk-text-muted">(8 Nov)</span></span>
-                                        <span class="uk-text-small uk-text-muted">Fadel-West</span>
-                                    </a>
-                                </li>
-                                <li>
-                                    <a href="#" class="md-list-content" data-invoice-id="1">
-                                        <span class="md-list-heading uk-text-truncate">Invoice 54/2015 <span class="uk-text-small uk-text-muted">(7 Nov)</span></span>
-                                        <span class="uk-text-small uk-text-muted">Hettinger, Gusikowski and Kris</span>
-                                    </a>
-                                </li>
-
-                                <li class="heading_list">Oldest</li>
-                                <li>
-                                    <a href="#" class="md-list-content" data-invoice-id="1">
-                                        <span class="md-list-heading uk-text-truncate">Invoice 100/2015 <span class="uk-text-small uk-text-muted">(31 Aug)</span></span>
-                                        <span class="uk-text-small uk-text-muted">Hodkiewicz, Oberbrunner and Hayes</span>
-                                    </a>
-                                </li>
-                                <li>
-                                    <a href="#" class="md-list-content" data-invoice-id="1">
-                                        <span class="md-list-heading uk-text-truncate">Invoice 199/2015 <span class="uk-text-small uk-text-muted">(15 Sep)</span></span>
-                                        <span class="uk-text-small uk-text-muted">Kemmer Inc</span>
-                                    </a>
-                                </li>
-                                <li>
-                                    <a href="#" class="md-list-content" data-invoice-id="1">
-                                        <span class="md-list-heading uk-text-truncate">Invoice 101/2015 <span class="uk-text-small uk-text-muted">(1 Aug)</span></span>
-                                        <span class="uk-text-small uk-text-muted">Grady LLC</span>
-                                    </a>
-                                </li>
-                                <li>
-                                    <a href="#" class="md-list-content" data-invoice-id="1">
-                                        <span class="uk-badge uk-badge-danger">Overdue</span>
-                                        <span class="md-list-heading uk-text-truncate">Invoice 73/2015 <span class="uk-text-small uk-text-muted">(27 Jul)</span></span>
-                                        <span class="uk-text-small uk-text-muted">Steuber, Schaden and Considine</span>
-                                    </a>
-                                </li>
-                                <li>
-                                    <a href="#" class="md-list-content" data-invoice-id="1">
-                                        <span class="md-list-heading uk-text-truncate">Invoice 154/2015 <span class="uk-text-small uk-text-muted">(24 Aug)</span></span>
-                                        <span class="uk-text-small uk-text-muted">Moen and Sons</span>
-                                    </a>
-                                </li>
-                                <li>
-                                    <a href="#" class="md-list-content" data-invoice-id="1">
-                                        <span class="md-list-heading uk-text-truncate">Invoice 73/2015 <span class="uk-text-small uk-text-muted">(2 Aug)</span></span>
-                                        <span class="uk-text-small uk-text-muted">Bins, Padberg and Grant</span>
-                                    </a>
-                                </li>
-                                <li>
-                                    <a href="#" class="md-list-content" data-invoice-id="1">
-                                        <span class="uk-badge uk-badge-danger">Overdue</span>
-                                        <span class="md-list-heading uk-text-truncate">Invoice 73/2015 <span class="uk-text-small uk-text-muted">(19 Jun)</span></span>
-                                        <span class="uk-text-small uk-text-muted">Wintheiser and Sons</span>
-                                    </a>
-                                </li>
-                                <li>
-                                    <a href="#" class="md-list-content" data-invoice-id="1">
-                                        <span class="md-list-heading uk-text-truncate">Invoice 82/2015 <span class="uk-text-small uk-text-muted">(19 Aug)</span></span>
-                                        <span class="uk-text-small uk-text-muted">Denesik PLC</span>
-                                    </a>
-                                </li>
-                                <li>
-                                    <a href="#" class="md-list-content" data-invoice-id="1">
-                                        <span class="md-list-heading uk-text-truncate">Invoice 149/2015 <span class="uk-text-small uk-text-muted">(24 Aug)</span></span>
-                                        <span class="uk-text-small uk-text-muted">Kerluke, Huels and Glover</span>
-                                    </a>
-                                </li>
-                                <li>
-                                    <a href="#" class="md-list-content" data-invoice-id="1">
-                                        <span class="md-list-heading uk-text-truncate">Invoice 74/2015 <span class="uk-text-small uk-text-muted">(16 Aug)</span></span>
-                                        <span class="uk-text-small uk-text-muted">Lemke-Schultz</span>
-                                    </a>
-                                </li>
-                                <li>
-                                    <a href="#" class="md-list-content" data-invoice-id="1">
-                                        <span class="md-list-heading uk-text-truncate">Invoice 159/2015 <span class="uk-text-small uk-text-muted">(3 Sep)</span></span>
-                                        <span class="uk-text-small uk-text-muted">Murazik-Dietrich</span>
-                                    </a>
-                                </li>
-                                <li>
-                                    <a href="#" class="md-list-content" data-invoice-id="1">
-                                        <span class="md-list-heading uk-text-truncate">Invoice 145/2015 <span class="uk-text-small uk-text-muted">(29 Jun)</span></span>
-                                        <span class="uk-text-small uk-text-muted">Bauch-Farrell</span>
-                                    </a>
-                                </li>
-                                <li>
-                                    <a href="#" class="md-list-content" data-invoice-id="1">
-                                        <span class="md-list-heading uk-text-truncate">Invoice 19/2015 <span class="uk-text-small uk-text-muted">(11 Jul)</span></span>
-                                        <span class="uk-text-small uk-text-muted">Treutel, Botsford and Harber</span>
-                                    </a>
-                                </li>
-                                <li>
-                                    <a href="#" class="md-list-content" data-invoice-id="1">
-                                        <span class="md-list-heading uk-text-truncate">Invoice 131/2015 <span class="uk-text-small uk-text-muted">(26 Aug)</span></span>
-                                        <span class="uk-text-small uk-text-muted">Torp PLC</span>
                                     </a>
                                 </li>
                             </ul>
@@ -226,13 +118,19 @@
                 <div class="uk-width-small-3-5">
                     <div class="uk-margin-bottom">
                         <span class="uk-text-muted uk-text-small uk-text-italic">Customer:</span>
+                        <p><strong>{{invoice_id.invoice_customer}}</strong></p>
+                        <span class="uk-text-muted uk-text-small uk-text-italic">Location:</span>
                         <address>
-                            <p><strong>{{invoice_id.invoice_customer_name}}</strong></p>
-                            <p>{{invoice_id.invoice_customer_address}}</p>
-                            <p>{{invoice_id.invoice_customer_district}}</p>
-                            <p>{{invoice_id.invoice_customer_state}}</p>
-                            <p>{{invoice_id.invoice_customer_country}}</p>
-                            <p>{{invoice_id.invoice_customer_pincode}}</p>
+                            <p>{{invoice_id.invoice_address}}</p>
+                            <p>{{invoice_id.invoice_district}}</p>
+                            <p>{{invoice_id.invoice_state}}</p>
+                            <p>{{invoice_id.invoice_country}}</p>
+                            <p>{{invoice_id.invoice_pincode}}</p>
+                        </address>
+                        <span class="uk-text-muted uk-text-small uk-text-italic">Contact:</span>
+                        <address>
+                            <p>{{invoice_id.invoice_email}}</p>
+                            <p>{{invoice_id.invoice_mobile}}</p>
                         </address>
                     </div>
                 </div>
@@ -247,9 +145,9 @@
                     <table class="uk-table">
                         <thead>
                             <tr class="uk-text-upper">
-                                <th>Medicine</th>
+                                <th>Description</th>
                                 <th>Rate</th>
-                                <th class="uk-text-center">Quantity</th>
+                                <th class="uk-text-center">Qty</th>
                                 <th class="uk-text-center">Vat</th>
                                 <th class="uk-text-center">Total</th>
                             </tr>
@@ -264,7 +162,7 @@
                                 </td>
                                 <td>{{ medicine_rate }}
                                 </td>
-                                <td class="uk-text-center">{{ medicine_quantity }}
+                                <td class="uk-text-center">{{ medicine_qty }}
                                 </td>
                                 <td class="uk-text-center">{{ medicine_vat }}
                                 </td>
@@ -275,6 +173,16 @@
                        
                         </tbody>
                     </table>
+                </div>
+            </div>
+            <div class="uk-grid">
+                <div class="uk-width-1-1">
+                    <span class="uk-text-muted uk-text-small uk-text-italic">Payment info:</span>
+                    <p class="uk-margin-top-remove">
+                        {{{ invoice_id.invoice_payment_terms }}}
+                   
+                    </p>
+                    <p class="uk-text-small">Please pay within {{ invoice_id.invoice_payment_mode }} days</p>
                 </div>
             </div>
         </div>
@@ -318,8 +226,8 @@
                     <div class="uk-width-medium-1-2">
                         <label class="uk-form-label uk-margin-bottom" for="hobbies">From:</label>
                         <div class="uk-form-row">
-                            <label for="invoice_from_company">Company Name</label>
-                            <input type="text" class="md-input" id="invoice_from_company" name="invoice_from_company" />
+                            <label for="invoice_customer">Customer</label>
+                            <input type="text" class="md-input" id="invoice_customer" name="invoice_customer" />
                         </div>
                         <div class="uk-form-row">
                             <label for="invoice_from_address_1">Address 1</label>
@@ -378,8 +286,8 @@
                         <input type="text" class="md-input" id="inv_medicine_{{invoice_medicine_id}}_rate" name="inv_medicine_{{invoice_medicine_id}}_rate" />
                     </div>
                     <div class="uk-width-medium-1-10">
-                        <label for="inv_medicine_{{invoice_medicine_id}}_hours">Hours</label>
-                        <input type="text" class="md-input" id="inv_medicine_{{invoice_medicine_id}}_hours" name="inv_medicine_{{invoice_medicine_id}}_hours" />
+                        <label for="inv_medicine_{{invoice_medicine_id}}_qty">Qty</label>
+                        <input type="text" class="md-input" id="inv_medicine_{{invoice_medicine_id}}_qty" name="inv_medicine_{{invoice_medicine_id}}_qty" />
                     </div>
                     <div class="uk-width-medium-1-10">
                         <label for="inv_medicine_{{invoice_medicine_id}}_vat">VAT</label>
@@ -434,7 +342,7 @@
     <script src="assets/js/custom/handlebars_helpers.min.js"></script>
 
     <!--  invoices functions -->
-    <script src="assets/js/pages/page_invoices.min.js"></script>
+    <script src="assets/js/lib/invoice/page_invoices.js"></script>
 
     <script>
         $(function () {
@@ -446,6 +354,5 @@
             }
         });
     </script>
-
 </body>
 </html>
