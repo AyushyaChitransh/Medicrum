@@ -67,6 +67,7 @@
     <Content Include="AddProductModel.aspx" />
     <Content Include="assets\js\lib\invoice\page_invoices.js" />
     <Content Include="assets\js\lib\invoice\page_invoices1.js" />
+    <Content Include="Login.aspx" />
     <Content Include="PageInvoice.aspx" />
     <Content Include="Register.aspx" />
     <Content Include="AddSupplier.aspx" />
@@ -5323,6 +5324,14 @@
       <DependentUpon>AddProductModel.aspx</DependentUpon>
     </Compile>
     <Compile Include="App_Code\DAO\DAOInvoice.cs" />
+    <Compile Include="App_Code\DAO\DAOLogin.cs" />
+    <Compile Include="Login.aspx.cs">
+      <DependentUpon>Login.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Login.aspx.designer.cs">
+      <DependentUpon>Login.aspx</DependentUpon>
+    </Compile>
     <Compile Include="PageInvoice.aspx.cs">
       <DependentUpon>PageInvoice.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
