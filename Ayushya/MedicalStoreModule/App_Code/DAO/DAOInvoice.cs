@@ -91,7 +91,7 @@ namespace MedicalStoreModule.App_Code.DAO
                 return invoiceObj;
             }
         }
-        public bool InsertInvoice(Invoice record)
+        public bool InsertInvoice(Invoice invoice, List<BillingItems> billItems)
         {
             string qry = @"INSERT into invoice
                                                (invoice_id,
@@ -130,27 +130,33 @@ namespace MedicalStoreModule.App_Code.DAO
                                                 @status,
                                                 @delete_status)";
             MySqlCommand cmd = new MySqlCommand(qry, cm.connection);
-            cmd.Parameters.AddWithValue("@invoice_id", record.invoiceId);
-            cmd.Parameters.AddWithValue("@store_id", record.storeId);
-            cmd.Parameters.AddWithValue("@customer_id", record.customerId);
-            cmd.Parameters.AddWithValue("@invoice_date", record.invoiceDate);
-            cmd.Parameters.AddWithValue("@payment_terms", record.paymentTerms);
-            cmd.Parameters.AddWithValue("@payment_mode", record.paymentMode);
-            cmd.Parameters.AddWithValue("@total_amount", record.totalAmount);
-            cmd.Parameters.AddWithValue("@tax_amount", record.taxAmount);
-            cmd.Parameters.AddWithValue("@discount_type", record.discountType);
-            cmd.Parameters.AddWithValue("@discount_amount", record.discountAmount);
-            cmd.Parameters.AddWithValue("@coupon_code", record.couponCode);
-            cmd.Parameters.AddWithValue("@net_total", record.netTotal);
-            cmd.Parameters.AddWithValue("@amount_paid", record.amountPaid);
-            cmd.Parameters.AddWithValue("@status", record.status);
-            cmd.Parameters.AddWithValue("@delete_status", record.deleteStatus);
+            cmd.Parameters.AddWithValue("@invoice_id", invoice.invoiceId);
+            cmd.Parameters.AddWithValue("@store_id", invoice.storeId);
+            cmd.Parameters.AddWithValue("@customer_id", invoice.customerId);
+            cmd.Parameters.AddWithValue("@invoice_date", invoice.invoiceDate);
+            cmd.Parameters.AddWithValue("@payment_terms", invoice.paymentTerms);
+            cmd.Parameters.AddWithValue("@payment_mode", invoice.paymentMode);
+            cmd.Parameters.AddWithValue("@total_amount", invoice.totalAmount);
+            cmd.Parameters.AddWithValue("@tax_amount", invoice.taxAmount);
+            cmd.Parameters.AddWithValue("@discount_type", invoice.discountType);
+            cmd.Parameters.AddWithValue("@discount_amount", invoice.discountAmount);
+            cmd.Parameters.AddWithValue("@coupon_code", invoice.couponCode);
+            cmd.Parameters.AddWithValue("@net_total", invoice.netTotal);
+            cmd.Parameters.AddWithValue("@amount_paid", invoice.amountPaid);
+            cmd.Parameters.AddWithValue("@status", invoice.status);
+            cmd.Parameters.AddWithValue("@delete_status", invoice.deleteStatus);
             try
             {
                 if (cm.OpenConnection())
                 {
                     cmd.ExecuteNonQuery();
+                    int invoiceId = int.Parse(cmd.ExecuteScalar().ToString());
                     cm.CloseConnection();
+                    foreach (BillingItems item in billItems)
+                    {
+                        item.invoiceId = invoiceId;
+                        InsertBill(item);
+                    }
                     return true;
                 }
                 else
@@ -164,6 +170,86 @@ namespace MedicalStoreModule.App_Code.DAO
                 string message = ex.Message;
                 return false;
             }
+        }
+        private bool InsertBill(BillingItems record)
+        {
+            string qry = @"INSERT into billing_items
+                                       (invoice_id,
+                                        product_id,
+                                        quantity,
+                                        unit_price,
+                                        price,
+                                        status,
+                                        delete_status)
+                                  VALUES
+                                       (@invoice_id,
+                                        @product_id,
+                                        @quantity,
+                                        @unit_price,
+                                        @price,
+                                        @status,
+                                        @delete_status)";
+            MySqlCommand cmd = new MySqlCommand(qry, cm.connection);
+            cmd.Parameters.AddWithValue("@invoice_id", record.invoiceId);
+            cmd.Parameters.AddWithValue("@product_id", record.productId);
+            cmd.Parameters.AddWithValue("@quantity", record.quantity);
+            cmd.Parameters.AddWithValue("@unit_price", record.unitPrice);
+            cmd.Parameters.AddWithValue("@price", record.price);
+            cmd.Parameters.AddWithValue("@status", 1);
+            cmd.Parameters.AddWithValue("@delete_status", 0);
+            try
+            {
+                if (cm.OpenConnection())
+                {
+                    cmd.ExecuteNonQuery();
+                    cm.CloseConnection();
+                    return true;
+                }
+            }
+            catch (Exception ex)
+            {
+                cm.CloseConnection();
+                string msg = ex.Message;
+                return false;
+            }
+            return true;
+        }
+        public object GetProductOptions(int storeId)
+        {
+            List<object> productOption = new List<object>();
+            try
+            {
+                if (cm.OpenConnection() == true)
+                {
+                    MySqlCommand cmd = new MySqlCommand();
+                    cmd.CommandText = @"SELECT product_name, product_model_id FROM product_model 
+                                        WHERE delete_status=@delete_status AND store_id=@store_id";
+                    cmd.Parameters.AddWithValue("@store_id", storeId);
+                    cmd.Parameters.AddWithValue("@delete_status", 0);
+                    cmd.Connection = cm.connection;
+                    MySqlDataReader dataReader = cmd.ExecuteReader();
+                    while (dataReader.Read())
+                    {
+                        productOption.Add(new { DisplayText = dataReader["product_name"].ToString(), Value = int.Parse(dataReader["product_model_id"].ToString()) });
+                    }
+                    cm.CloseConnection();
+                }
+                return new { Result = "OK", Options = productOption };
+            }
+            catch (Exception ex)
+            {
+                cm.CloseConnection();
+                return new { Result = "ERROR", Message = ex.Message };
+            }
+        }
+        public static bool DeleteInvoiceAndBill(int invoiceId)
+        {
+            string qry = @"UPDATE invoice SET delete_status=@delete_status WHERE invoice_id=@invoice_id;
+                           UPDATE billing_items SET delete_status=@delete_status WHERE invoice_id=@invoice_id";
+            MySqlCommand cmd = new MySqlCommand();
+            cmd.Parameters.AddWithValue("@delete_status", 1);
+            cmd.Parameters.AddWithValue("@invoice_id", invoiceId);
+            return true;
         }
     }
 }

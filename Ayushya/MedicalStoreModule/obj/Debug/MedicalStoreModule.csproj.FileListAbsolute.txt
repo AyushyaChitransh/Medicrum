@@ -25,3 +25,4 @@ C:\Users\Ayushya\Documents\Internship\Medical-Store\Ayushya\MedicalStoreModule\b
 C:\Users\Ayushya\Documents\Internship\Medical-Store\Ayushya\MedicalStoreModule\bin\MySql.Data.dll
 C:\Users\Ayushya\Documents\Internship\Medical-Store\Ayushya\MedicalStoreModule\obj\Debug\MedicalStoreModule.dll
 C:\Users\Ayushya\Documents\Internship\Medical-Store\Ayushya\MedicalStoreModule\obj\Debug\MedicalStoreModule.pdb
+C:\Users\Ayushya\Documents\Internship\Medical-Store\Ayushya\MedicalStoreModule\obj\Debug\MedicalStoreModule.csprojResolveAssemblyReference.cache

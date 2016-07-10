@@ -93,15 +93,7 @@
         <div class="md-card-toolbar">
             <div class="md-card-toolbar-actions hidden-print">
                 <i class="md-icon material-icons" id="invoice_print">&#xE8ad;</i>
-                <div class="md-card-dropdown" data-uk-dropdown="{pos:'bottom-right'}">
-                    <i class="md-icon material-icons">&#xE5D4;</i>
-                    <div class="uk-dropdown uk-dropdown-small">
-                        <ul class="uk-nav">
-                            <li><a href="#">Archive</a></li>
-                            <li><a href="#" class="uk-text-danger">Remove</a></li>
-                        </ul>
-                    </div>
-                </div>
+                <i class="md-icon material-icons" onclick="deleteInvoice()">delete</i>
             </div>
             <h3 class="md-card-toolbar-heading-text large" id="invoice_name">Invoice {{invoice_id.invoice_number}}
             </h3>
@@ -198,16 +190,39 @@
             </div>
             <div class="md-card-content large-padding">
                 <div class="uk-grid" data-uk-grid-margin>
-                    <div class="uk-width-medium-1-2">
-                        <label class="uk-form-label" for="hobbies">Issue date:</label>
-                        <div class="uk-input-group">
-                            <span class="uk-input-group-addon"><i class="uk-input-group-icon uk-icon-calendar"></i></span>
-                            <label for="invoice_dp">Select date</label>
-                            <input class="md-input" type="text" id="invoice_dp" value="" data-uk-datepicker="{format:'DD.MM.YYYY'}">
-                        </div>
+                    <div class="uk-width-1-1">
+                        <label for="form_customer">Customer:</label>
+                        <input type="text" class="md-input" id="invoice_form_customer" name="invoice_customer" />
+                        <a href="AddUser.aspx" class="inline-label uk-badge uk-badge-success">+</a>
                     </div>
+                </div>
+                <div class="uk-grid" data-uk-grid-margin>
+                    <div class="uk-width-1-1">
+                        <%--<label for="invoice_customer">Available Products:</label>--%>
+                        <select class="md-input" id="invoice_form_available_product" name="invoice_customer">
+                            <option selected="selected" value="">Select Product</option>
+                            {{#each availableProducts.Options}}
+                        <option value="{{value}}" displayText="{{displayText}}"></option>
+                            {{/each}
+                        </select>
+                    </div>
+                </div>
+                <div class="uk-grid" data-uk-grid-margin>
                     <div class="uk-width-medium-1-2">
-                        <label class="uk-form-label uk-margin-bottom" for="hobbies">Due date (days):</label>
+                        <label class="uk-form-label uk-margin-bottom" for="invoice_discount">Add Discount:</label>
+                        <span class="icheck-inline">
+                            <input type="radio" name="invoice_discount" id="invoice_discount_flat" data-md-icheck />
+                            <label for="invoice_discount_flat" class="inline-label">Flat</label>
+                        </span>
+                        <span class="icheck-inline">
+                            <input type="radio" name="invoice_discount" id="invoice_discount_percent" data-md-icheck />
+                            <label for="invoice_discount_percent" class="inline-label">Percent</label>
+                        </span>
+                    </div>
+                </div>
+                <div class="uk-grid uk-grid-divider grid-block" data-uk-grid-margin>
+                    <div class="uk-width-medium-1-2">
+                        <label class="uk-form-label uk-margin-bottom" for="payment_terms">Due date (days):</label>
                         <span class="icheck-inline">
                             <input type="radio" name="invoice_due_date" id="invoice_due_date_7" data-md-icheck />
                             <label for="invoice_due_date_7" class="inline-label">7</label>
@@ -221,37 +236,16 @@
                             <label for="invoice_due_date_21" class="inline-label">21</label>
                         </span>
                     </div>
-                </div>
-                <div class="uk-grid uk-grid-divider grid-block" data-uk-grid-margin>
                     <div class="uk-width-medium-1-2">
-                        <label class="uk-form-label uk-margin-bottom" for="hobbies">From:</label>
-                        <div class="uk-form-row">
-                            <label for="invoice_customer">Customer</label>
-                            <input type="text" class="md-input" id="invoice_customer" name="invoice_customer" />
-                        </div>
-                        <div class="uk-form-row">
-                            <label for="invoice_from_address_1">Address 1</label>
-                            <input type="text" class="md-input" id="invoice_from_address_1" name="invoice_from_address_1" />
-                        </div>
-                        <div class="uk-form-row">
-                            <label for="invoice_from_address_2">Address 2</label>
-                            <input type="text" class="md-input" id="invoice_from_address_2" name="invoice_from_address_2" />
-                        </div>
-                    </div>
-                    <div class="uk-width-medium-1-2">
-                        <label class="uk-form-label uk-margin-bottom" for="hobbies">To:</label>
-                        <div class="uk-form-row">
-                            <label for="invoice_to_company">Company Name</label>
-                            <input type="text" class="md-input" id="invoice_to_company" name="invoice_to_company" />
-                        </div>
-                        <div class="uk-form-row">
-                            <label for="invoice_to_address_1">Address 1</label>
-                            <input type="text" class="md-input" id="invoice_to_address_1" name="invoice_to_address_1" />
-                        </div>
-                        <div class="uk-form-row">
-                            <label for="invoice_to_address_2">Address 2</label>
-                            <input type="text" class="md-input" id="invoice_to_address_2" name="invoice_to_address_2" />
-                        </div>
+                        <label class="uk-form-label uk-margin-bottom" for="payment_mode">Payment Mode:</label>
+                        <span class="icheck-inline">
+                            <input type="radio" name="invoice_payment_mode" id="invoice_payment_cash" data-md-icheck />
+                            <label for="invoice_payment_cash" class="inline-label">Cash</label>
+                        </span>
+                        <span class="icheck-inline">
+                            <input type="radio" name="invoice_payment_mode" id="invoice_payment_online" data-md-icheck />
+                            <label for="invoice_payment_online" class="inline-label">Online</label>
+                        </span>
                     </div>
                 </div>
                 <div class="uk-grid" data-uk-grid-margin>
@@ -263,6 +257,7 @@
                     </div>
                 </div>
             </div>
+
         </form>
     </script>
     <script id="invoice_form_template_medicines" type="text/x-handlebars-template">

@@ -23,6 +23,7 @@ altair_invoices = {
         altair_invoices.print_invoice();
     },
     add_new: function () {
+        var productList = $("[id*=invoice_form_available_product]");
         if ($invoice_add_btn) {
 
             var insert_form = function () {
@@ -105,6 +106,25 @@ altair_invoices = {
             })
 
         }
+        var availableProducts;
+        $.ajax({
+                type: "POST",
+                url: "PageInvoice.aspx/GetProductOptions",
+                data: "{}",
+                contentType: "application/json; charset=utf-8",
+                dataType: "json",
+                success: function (msg) {
+                    //productList.empty().append('<option selected="selected" value="">Select Product</option>');
+
+                    //$.each(msg.d.Options, function (index, item) {
+                    //    $("#invoice_form_available_product").get(0).options[index + 1] = new Option(item.DisplayText, item.Value);
+                    //});
+                    availableProducts = msg.d;
+                },
+                error: function () {
+                    alert("Failed to load");
+                }
+            });
     },
     open_invoice: function () {
 
@@ -115,20 +135,21 @@ altair_invoices = {
             var template = $invoice_template.html(),
                 template_compiled = Handlebars.compile(template);
 
-            //var recievedData;
-            //$.ajax({
-            //        type: 'POST',
-            //        url: 'PageInvoice.aspx/GetInvoice',
-            //        contentType: 'application/json; charset=utf-8',
-            //        data: "{ 'invoiceId': " + 1 + " }",
-            //        dataType: "json",
-            //        success: function (response) {
-            //            recievedData = response.d;
-            //        },
-            //        error: function (error) {
-            //            alert('u');
-            //        }
-            //    });
+            var recievedData;
+            $.ajax({
+                    type: 'POST',
+                    url: 'PageInvoice.aspx/GetInvoice',
+                    contentType: 'application/json; charset=utf-8',
+                    data: "{ 'invoiceId': " + 1 + " }",
+                    dataType: "json",
+                    success: function (response) {
+                        recievedData = response.d;
+                    },
+                    error: function (error) {
+                        alert('u');
+                    }
+            });
+
             var invoice_id = parseInt($this.attr('data-invoice-id')),
                 context = {
                     invoice_id: {
@@ -174,7 +195,7 @@ altair_invoices = {
                         //invoice_payment_terms: recievedData.paymentTerms,
                         //invoice_payment_mode: recievedData.paymentMode
                         invoice_payment_terms: 'By next year in monthly installments',
-                        invoice_payment_mode: 'By cash'
+                        invoice_payment_mode: '11'
                     }
                 },
                 theCompiledHtml = template_compiled(context);
@@ -223,9 +244,9 @@ altair_invoices = {
 
         invoices_list_sidebar.attr('id', 'invoices_list_sidebar');
 
-        //$sidebar_secondary
-        //    .find('.sidebar_secondary_wrapper').html(invoices_list_sidebar)
-        //    .end();
+        $sidebar_secondary
+            .find('.sidebar_secondary_wrapper').html(invoices_list_sidebar)
+            .end();
 
     }
 };
