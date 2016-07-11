@@ -22,7 +22,7 @@ namespace MedicalStoreModule
                 }
                 else
                 {
-                    Response.Redirect("Login.aspx");
+                    Server.Transfer("Login.aspx");
                 }
             }
         }

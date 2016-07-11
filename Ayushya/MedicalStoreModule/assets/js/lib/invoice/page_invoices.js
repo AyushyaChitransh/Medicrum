@@ -135,7 +135,7 @@ altair_invoices = {
             var template = $invoice_template.html(),
                 template_compiled = Handlebars.compile(template);
 
-            var recievedData;
+            var customerData = GetCustomerData(1);
 
             var invoice_id = parseInt($this.attr('data-invoice-id')),
                 context = {
@@ -244,20 +244,16 @@ function GetCustomerData(customerId){
         type: 'POST',
         url: 'ViewDetailedCustomer.aspx/GetCustomer',
         contentType: 'application/json; charset=utf-8',
-        beforeSend: function (modal) {
-            modal = UIkit.modal.blockUI('<div class=\'uk-text-center\'>Loading Details...<br/><img class=\'uk-margin-top\' src=\'assets/img/spinners/spinner.gif\' alt=\'\'>');
-            setTimeout(function () {
-                modal.hide()
-            }, 1000);
-        },
-        success: function(response){
-            customerObj = JSON.parse(response.d);
+        data: "{ 'requestedCustomerId': " + 1 + " }",
+        success: function (response) {
+            customerObj = response.d;
 
         },
         error: function (error) {
             alert("Failed to load data!");
         }
     });
+    return customerObj;
 };
 function GetInvoiceDetails(invoiceId) {
     var invoiceObj;
@@ -274,7 +270,7 @@ function GetInvoiceDetails(invoiceId) {
             alert('Failed to load Invoice');
         }
     });
-    return invoice;
+    return invoiceObj;
 }
 function GetListOfBillingItems(invoiceId) {
     var listBillingItems;
@@ -292,4 +288,20 @@ function GetListOfBillingItems(invoiceId) {
         }
     });
     return listBillingItems;
+}
+function DeleteInvoice() {
+    $.ajax({
+        type: 'POST',
+        url: 'PageInvoice.aspx/DeleteInvoiceAndBIll',
+        contentType: 'application/json; charset=utf-8',
+        data: "{ 'invoiceId': " + 1 + " }",
+        dataType: "json",
+        success: function (response) {
+            alert("Invoice and billing items moved to trash");
+
+        },
+        error: function (error) {
+            alert('Failed to delete Invoice and billing items');
+        }
+        });
 }

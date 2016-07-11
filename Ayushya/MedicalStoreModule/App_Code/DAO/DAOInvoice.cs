@@ -246,10 +246,28 @@ namespace MedicalStoreModule.App_Code.DAO
         {
             string qry = @"UPDATE invoice SET delete_status=@delete_status WHERE invoice_id=@invoice_id;
                            UPDATE billing_items SET delete_status=@delete_status WHERE invoice_id=@invoice_id";
-            MySqlCommand cmd = new MySqlCommand();
+            MySqlCommand cmd = new MySqlCommand(qry, cm.connection);
             cmd.Parameters.AddWithValue("@delete_status", 1);
             cmd.Parameters.AddWithValue("@invoice_id", invoiceId);
-            return true;
+            try
+            {
+                if (cm.OpenConnection())
+                {
+                    cmd.ExecuteNonQuery();
+                    cm.CloseConnection();
+                    return true;
+                }
+                else
+                {
+                    return false;
+                }
+            }
+            catch (Exception ex)
+            {
+                cm.CloseConnection();
+                string msg = ex.Message;
+                return false;
+            }
         }
         public List<BillingItems> GetBillingItems(int invoiceId)
         {

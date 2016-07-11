@@ -93,7 +93,7 @@
         <div class="md-card-toolbar">
             <div class="md-card-toolbar-actions hidden-print">
                 <i class="md-icon material-icons" id="invoice_print">&#xE8ad;</i>
-                <i class="md-icon material-icons" onclick="deleteInvoice()">delete</i>
+                <i class="md-icon material-icons" onclick="DeleteInvoice()">delete</i>
             </div>
             <h3 class="md-card-toolbar-heading-text large" id="invoice_name">Invoice {{invoice_id.invoice_number}}
             </h3>

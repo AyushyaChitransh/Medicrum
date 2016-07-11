@@ -42,7 +42,7 @@
                                         <i class="material-icons md-36">person</i>
                                         <span class="uk-text-muted uk-display-block">Customer</span>
                                     </a>
-                                    <a href="#">
+                                    <a href="PageInvoice.apsx">
                                         <i class="material-icons md-36">&#xE53E;</i>
                                         <span class="uk-text-muted uk-display-block">Inovice</span>
                                     </a>

@@ -54,5 +54,11 @@ namespace MedicalStoreModule
             DAOInvoice accessInvoiceDb = new DAOInvoice();
             return accessInvoiceDb.GetBillingItems(invoiceId);
         }
+        [WebMethod]
+        public static bool DeleteInvoiceAndBIll(int invoiceId)
+        {
+            DAOInvoice accessInvoiceDb = new DAOInvoice();
+            return accessInvoiceDb.DeleteInvoiceAndBill(invoiceId);
+        }
     }
 }
