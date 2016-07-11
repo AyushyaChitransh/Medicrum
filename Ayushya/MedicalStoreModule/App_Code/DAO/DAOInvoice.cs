@@ -242,7 +242,7 @@ namespace MedicalStoreModule.App_Code.DAO
                 return new { Result = "ERROR", Message = ex.Message };
             }
         }
-        public static bool DeleteInvoiceAndBill(int invoiceId)
+        public bool DeleteInvoiceAndBill(int invoiceId)
         {
             string qry = @"UPDATE invoice SET delete_status=@delete_status WHERE invoice_id=@invoice_id;
                            UPDATE billing_items SET delete_status=@delete_status WHERE invoice_id=@invoice_id";
@@ -250,6 +250,42 @@ namespace MedicalStoreModule.App_Code.DAO
             cmd.Parameters.AddWithValue("@delete_status", 1);
             cmd.Parameters.AddWithValue("@invoice_id", invoiceId);
             return true;
+        }
+        public List<BillingItems> GetBillingItems(int invoiceId)
+        {
+            List<BillingItems> listBillingItems = new List<BillingItems>();
+            string qry = @"SELECT * FROM billing_items WHERE invoice_id=@invoice_id AND delete_status=@delete_status";
+            MySqlCommand cmd = new MySqlCommand(qry, cm.connection);
+            cmd.Parameters.AddWithValue("@invoice_id", invoiceId);
+            cmd.Parameters.AddWithValue("@delete_status", 0);
+            try
+            {
+                if (cm.OpenConnection())
+                {
+                    MySqlDataReader dataReader = cmd.ExecuteReader();
+                    while (dataReader.Read())
+                    {
+                        BillingItems item = new BillingItems();
+                        item.invoiceId = invoiceId;
+                        item.billId = int.Parse(dataReader["bill_id"].ToString());
+                        item.productId = int.Parse(dataReader["product_id"].ToString());
+                        item.quantity = int.Parse(dataReader["quantity"].ToString());
+                        item.unitPrice = decimal.Parse(dataReader["unit_price"].ToString());
+                        item.price = decimal.Parse(dataReader["price"].ToString());
+                        item.status = int.Parse(dataReader["status"].ToString());
+                        listBillingItems.Add(item);
+                    }
+                    cm.CloseConnection();
+                    return listBillingItems;
+                }
+            }
+            catch (Exception ex)
+            {
+                cm.CloseConnection();
+                string msg = ex.Message;
+                return listBillingItems;
+            }
+            return listBillingItems;
         }
     }
 }

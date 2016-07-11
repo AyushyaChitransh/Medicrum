@@ -136,19 +136,6 @@ altair_invoices = {
                 template_compiled = Handlebars.compile(template);
 
             var recievedData;
-            $.ajax({
-                    type: 'POST',
-                    url: 'PageInvoice.aspx/GetInvoice',
-                    contentType: 'application/json; charset=utf-8',
-                    data: "{ 'invoiceId': " + 1 + " }",
-                    dataType: "json",
-                    success: function (response) {
-                        recievedData = response.d;
-                    },
-                    error: function (error) {
-                        alert('u');
-                    }
-            });
 
             var invoice_id = parseInt($this.attr('data-invoice-id')),
                 context = {
@@ -250,3 +237,59 @@ altair_invoices = {
 
     }
 };
+
+function GetCustomerData(customerId){
+    var customerObj;
+    $.ajax({
+        type: 'POST',
+        url: 'ViewDetailedCustomer.aspx/GetCustomer',
+        contentType: 'application/json; charset=utf-8',
+        beforeSend: function (modal) {
+            modal = UIkit.modal.blockUI('<div class=\'uk-text-center\'>Loading Details...<br/><img class=\'uk-margin-top\' src=\'assets/img/spinners/spinner.gif\' alt=\'\'>');
+            setTimeout(function () {
+                modal.hide()
+            }, 1000);
+        },
+        success: function(response){
+            customerObj = JSON.parse(response.d);
+
+        },
+        error: function (error) {
+            alert("Failed to load data!");
+        }
+    });
+};
+function GetInvoiceDetails(invoiceId) {
+    var invoiceObj;
+    $.ajax({
+        type: 'POST',
+        url: 'PageInvoice.aspx/GetInvoice',
+        contentType: 'application/json; charset=utf-8',
+        data: "{ 'invoiceId': " + 1 + " }",
+        dataType: "json",
+        success: function (response) {
+            invoiceObj = response.d;
+        },
+        error: function (error) {
+            alert('Failed to load Invoice');
+        }
+    });
+    return invoice;
+}
+function GetListOfBillingItems(invoiceId) {
+    var listBillingItems;
+    $.ajax({
+        type: 'POST',
+        url: 'PageInvoice.aspx/GetBillingItems',
+        contentType: 'application/json; charset=utf-8',
+        data: "{ 'invoiceId': " + 1 + " }",
+        dataType: "json",
+        success: function (response) {
+            listBillingItems = response.d;
+        },
+        error: function (error) {
+            alert('Failed to load Invoice billing items');
+        }
+    });
+    return listBillingItems;
+}

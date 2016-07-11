@@ -48,5 +48,11 @@ namespace MedicalStoreModule
             DAOCustomer accessCustomerDb = new DAOCustomer();
             return accessCustomerDb.GetCustomer(customerId);
         }
+        [WebMethod]
+        public static List<BillingItems> GetBillingItems(int invoiceId)
+        {
+            DAOInvoice accessInvoiceDb = new DAOInvoice();
+            return accessInvoiceDb.GetBillingItems(invoiceId);
+        }
     }
 }

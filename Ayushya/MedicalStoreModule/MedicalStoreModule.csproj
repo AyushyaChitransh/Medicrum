@@ -66,6 +66,7 @@
     <Content Include="AddProduct.aspx" />
     <Content Include="AddProductModel.aspx" />
     <Content Include="assets\js\lib\invoice\page_invoices.js" />
+    <Content Include="assets\js\lib\login\login.js" />
     <Content Include="Login.aspx" />
     <Content Include="PageInvoice.aspx" />
     <Content Include="Register.aspx" />
@@ -5288,6 +5289,7 @@
     <Content Include="EmergencyStocks.aspx" />
     <Content Include="EmptyStocks.aspx" />
     <Content Include="Error.aspx" />
+    <Content Include="UserProfile.aspx" />
     <Content Include="ViewCustomer.aspx" />
     <Content Include="ViewDetailedCustomer.aspx" />
     <Content Include="ViewDetailedProduct.aspx" />
@@ -5420,6 +5422,13 @@
       <DependentUpon>Error.aspx</DependentUpon>
     </Compile>
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="UserProfile.aspx.cs">
+      <DependentUpon>UserProfile.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="UserProfile.aspx.designer.cs">
+      <DependentUpon>UserProfile.aspx</DependentUpon>
+    </Compile>
     <Compile Include="ViewCustomer.aspx.cs">
       <DependentUpon>ViewCustomer.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
