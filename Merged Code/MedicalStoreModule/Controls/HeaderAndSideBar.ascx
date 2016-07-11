@@ -42,7 +42,7 @@
                                         <i class="material-icons md-36">person</i>
                                         <span class="uk-text-muted uk-display-block">Customer</span>
                                     </a>
-                                    <a href="#">
+                                    <a href="PageInvoice.aspx">
                                         <i class="material-icons md-36">&#xE53E;</i>
                                         <span class="uk-text-muted uk-display-block">Inovice</span>
                                     </a>
@@ -281,8 +281,8 @@
                     <li id="View Customer"><a href="ViewCustomer.aspx">View Customer</a></li>
                 </ul>
             </li>
-            <li title="Inovice" id="Inovice">
-                <a href="#">
+            <li title="Invoice" id="Invoice">
+                <a href="PageInvoice.aspx">
                     <span class="menu_icon"><i class="material-icons">&#xE53E;</i></span>
                     <span class="menu_title">Inovice</span>
                 </a>

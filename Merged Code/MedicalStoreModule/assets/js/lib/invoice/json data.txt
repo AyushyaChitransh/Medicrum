@@ -1,0 +1,43 @@
+﻿{
+    invoice_number: '',
+    invoice_date: '',
+    invoice_due_date: '',
+    invoice_customer: 'Mr Scrum',
+    invoice_address: 'Address of customer',
+    invoice_district: 'In this district',
+    invoice_state: 'State',
+    invoice_country: 'India',
+    invoice_pincode: 'Pincode info',
+    invoice_email: 'someone@gmail.com',
+    invoice_mobile: '8947029089',
+    invoice_total_value: '$3,751.50',
+    invoice_vat_value: '$862.85',
+    invoice_medicines: [
+      {
+          medicine_name: "Volini",
+          medicine_description: "To be applied  on pain",
+          medicine_rate: "$25.00",
+          medicine_qty: "32",
+          medicine_vat: "23%",
+          medicine_total: "$984.00"
+      },
+      {
+          medicine_name: "Search engine optimization",
+          medicine_description: "Lorem ipsum dolor sit amet, consectetur adipisicing elit. Ab blanditiis cupiditate delectus deserunt.",
+          medicine_rate: "$50.00",
+          medicine_qty: "20",
+          medicine_vat: "23%",
+          medicine_total: "$1,230.00"
+      },
+      {
+          medicine_name: "Consulting charges",
+          medicine_description: "Came twice here",
+          medicine_rate: "$100.00",
+          medicine_qty: "12",
+          medicine_vat: "23%",
+          medicine_total: "$1,57.50"
+      }
+    ],
+    invoice_payment_terms: 'By next year in monthly installments',
+    invoice_payment_mode: '11'
+}

@@ -5,7 +5,7 @@ using System.Web;
 
 namespace MedicalStoreModule.App_Code.Model
 {
-    public class InoviceTax
+    public class InvoiceTax
     {
         public int taxId { get; set; }
         public Nullable<int> invoiceId { get; set; }

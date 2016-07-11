@@ -5,7 +5,7 @@ using System.Web;
 
 namespace MedicalStoreModule.App_Code.Model
 {
-    public class Inovice
+    public class Invoice
     {
         public int invoiceId { get; set; }
         public int invoiceNumber { get; set; }

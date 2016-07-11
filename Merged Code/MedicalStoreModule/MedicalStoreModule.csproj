@@ -64,9 +64,13 @@
     <Content Include="AddCustomer.aspx" />
     <Content Include="AddProduct.aspx" />
     <Content Include="AddProductModel.aspx" />
+    <Content Include="assets\js\lib\invoice\jquery.serialize-object.min.js" />
+    <Content Include="assets\js\lib\invoice\json data.txt" />
+    <Content Include="assets\js\lib\invoice\page_invoices.js" />
     <Content Include="assets\js\lib\login\login.js" />
     <Content Include="assets\js\lib\User\user_profile.js" />
     <Content Include="Login.aspx" />
+    <Content Include="PageInvoice.aspx" />
     <Content Include="Register.aspx" />
     <Content Include="AddSupplier.aspx" />
     <Content Include="AddUser.aspx" />
@@ -5322,13 +5326,23 @@
     <Compile Include="AddProductModel.aspx.designer.cs">
       <DependentUpon>AddProductModel.aspx</DependentUpon>
     </Compile>
+    <Compile Include="App_Code\DAO\DAOInvoice.cs" />
     <Compile Include="App_Code\DAO\DAOLogin.cs" />
+    <Compile Include="App_Code\Model\Invoice.cs" />
+    <Compile Include="App_Code\Model\InvoiceTax.cs" />
     <Compile Include="Login.aspx.cs">
       <DependentUpon>Login.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
     </Compile>
     <Compile Include="Login.aspx.designer.cs">
       <DependentUpon>Login.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="PageInvoice.aspx.cs">
+      <DependentUpon>PageInvoice.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="PageInvoice.aspx.designer.cs">
+      <DependentUpon>PageInvoice.aspx</DependentUpon>
     </Compile>
     <Compile Include="Register.aspx.cs">
       <DependentUpon>Register.aspx</DependentUpon>
@@ -5361,8 +5375,6 @@
     <Compile Include="App_Code\DAO\DAOUser.cs" />
     <Compile Include="App_Code\Model\BillingItems.cs" />
     <Compile Include="App_Code\Model\Customer.cs" />
-    <Compile Include="App_Code\Model\Inovice.cs" />
-    <Compile Include="App_Code\Model\InoviceTax.cs" />
     <Compile Include="App_Code\Model\StockProduct.cs" />
     <Compile Include="App_Code\Model\Store.cs" />
     <Compile Include="App_Code\Model\Supplier.cs" />
