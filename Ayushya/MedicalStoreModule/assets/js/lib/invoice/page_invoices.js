@@ -232,6 +232,36 @@ function AddInvoice() {
     });
 }
 
+$.ajax({
+    type: "POST",
+    url: 'PageInvoice.aspx/InvoiceSidebarList',
+    data: "{}",
+    contentType: "application/json; charset=utf-8",
+    dataType: "json",
+    success: function (msg) {
+        sidebarList.innerHTML = msg;
+    },
+    error: function (e) {
+    }
+});
+
+//function UpdateSidebarList() {
+//    var sidebarList = document.getElementById('sidebarList');
+//    var searchText = document.getElementById('search_customer').value;
+//    $.ajax({
+//        type: "POST",
+//        url: 'PageInvoice.aspx/InvoiceSidebarList',
+//        data: "searchText:"+searchText,
+//        contentType: "application/json; charset=utf-8",
+//        dataType: "json",
+//        success: function (msg) {
+//            sidebarList.innerHTML = msg;
+//        },
+//        error: function (e) {
+//        }
+//    });
+//}
+
 //function GetCustomerData(customerId){
 //    var customerObj;
 //    $.ajax({
@@ -243,7 +273,7 @@ function AddInvoice() {
 //            customerObj = response.d;
 
 //        },
-//        error: function (error) {
+//        error: function (error) {upd
 //            alert("Failed to load data!");
 //        }
 //    });

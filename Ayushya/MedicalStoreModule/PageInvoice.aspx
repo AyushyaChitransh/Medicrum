@@ -38,11 +38,7 @@
                     <div class="uk-width-large-3-10 hidden-print uk-visible-large">
                         <div class="md-list-outside-wrapper">
                             <ul class="md-list md-list-outside invoices_list" id="invoices_list">
-                                <li class="heading_list">Search Customer</li>
-                                <li>
-                                    <label for="search_customer">Search Customer</label>
-                                    <input type="text" class="md-input" id="search_customer" name="search_customer"/>
-                                </li>
+                                <li class="heading_list">Avaliable Invoices</li>
                                 <%= InvoiceSidebarList("") %>
                             </ul>
                         </div>
