@@ -23,7 +23,6 @@ altair_invoices = {
         altair_invoices.print_invoice();
     },
     add_new: function () {
-        var productList = $("[id*=invoice_form_available_product]");
         if ($invoice_add_btn) {
 
             var insert_form = function () {
@@ -106,25 +105,6 @@ altair_invoices = {
             })
 
         }
-        var availableProducts;
-        $.ajax({
-                type: "POST",
-                url: "PageInvoice.aspx/GetProductOptions",
-                data: "{}",
-                contentType: "application/json; charset=utf-8",
-                dataType: "json",
-                success: function (msg) {
-                    //productList.empty().append('<option selected="selected" value="">Select Product</option>');
-
-                    //$.each(msg.d.Options, function (index, item) {
-                    //    $("#invoice_form_available_product").get(0).options[index + 1] = new Option(item.DisplayText, item.Value);
-                    //});
-                    availableProducts = msg.d;
-                },
-                error: function () {
-                    alert("Failed to load");
-                }
-            });
     },
     open_invoice: function () {
 
@@ -134,8 +114,6 @@ altair_invoices = {
 
             var template = $invoice_template.html(),
                 template_compiled = Handlebars.compile(template);
-
-            var customerData = GetCustomerData(1);
 
             var invoice_id = parseInt($this.attr('data-invoice-id')),
                 context = {
@@ -179,8 +157,6 @@ altair_invoices = {
                                 medicine_total: "$1,57.50"
                             }
                         ],
-                        //invoice_payment_terms: recievedData.paymentTerms,
-                        //invoice_payment_mode: recievedData.paymentMode
                         invoice_payment_terms: 'By next year in monthly installments',
                         invoice_payment_mode: '11'
                     }
@@ -189,7 +165,7 @@ altair_invoices = {
 
             $invoice_preview.html(theCompiledHtml);
             $invoice_form.html('');
-
+            
             $window.resize();
 
         };
@@ -238,70 +214,94 @@ altair_invoices = {
     }
 };
 
-function GetCustomerData(customerId){
-    var customerObj;
+function AddInvoice() {
+    event.preventDefault();
+    var data = JSON.stringify($('#form_invoice').serializeObject(), null, 2);
+    //UIkit.modal.alert('<p>Invoice data:</p><pre>' + data + '</pre>');
     $.ajax({
         type: 'POST',
-        url: 'ViewDetailedCustomer.aspx/GetCustomer',
+        url: 'PageInvoice.aspx/InsertInvoiceAndBillingItems',
         contentType: 'application/json; charset=utf-8',
-        data: "{ 'requestedCustomerId': " + 1 + " }",
+        data: data,
         success: function (response) {
-            customerObj = response.d;
 
         },
         error: function (error) {
             alert("Failed to load data!");
         }
     });
-    return customerObj;
-};
-function GetInvoiceDetails(invoiceId) {
-    var invoiceObj;
-    $.ajax({
-        type: 'POST',
-        url: 'PageInvoice.aspx/GetInvoice',
-        contentType: 'application/json; charset=utf-8',
-        data: "{ 'invoiceId': " + 1 + " }",
-        dataType: "json",
-        success: function (response) {
-            invoiceObj = response.d;
-        },
-        error: function (error) {
-            alert('Failed to load Invoice');
-        }
-    });
-    return invoiceObj;
 }
-function GetListOfBillingItems(invoiceId) {
-    var listBillingItems;
-    $.ajax({
-        type: 'POST',
-        url: 'PageInvoice.aspx/GetBillingItems',
-        contentType: 'application/json; charset=utf-8',
-        data: "{ 'invoiceId': " + 1 + " }",
-        dataType: "json",
-        success: function (response) {
-            listBillingItems = response.d;
-        },
-        error: function (error) {
-            alert('Failed to load Invoice billing items');
-        }
-    });
-    return listBillingItems;
-}
-function DeleteInvoice() {
-    $.ajax({
-        type: 'POST',
-        url: 'PageInvoice.aspx/DeleteInvoiceAndBIll',
-        contentType: 'application/json; charset=utf-8',
-        data: "{ 'invoiceId': " + 1 + " }",
-        dataType: "json",
-        success: function (response) {
-            alert("Invoice and billing items moved to trash");
 
-        },
-        error: function (error) {
-            alert('Failed to delete Invoice and billing items');
-        }
-        });
-}
+//function GetCustomerData(customerId){
+//    var customerObj;
+//    $.ajax({
+//        type: 'POST',
+//        url: 'ViewDetailedCustomer.aspx/GetCustomer',
+//        contentType: 'application/json; charset=utf-8',
+//        data: "{ 'requestedCustomerId': " + 1 + " }",
+//        success: function (response) {
+//            customerObj = response.d;
+
+//        },
+//        error: function (error) {
+//            alert("Failed to load data!");
+//        }
+//    });
+//    return customerObj;
+//}
+
+
+//function GetInvoiceDetails(invoiceId) {
+//    var invoiceObj;
+//    $.ajax({
+//        type: 'POST',
+//        url: 'PageInvoice.aspx/GetInvoice',
+//        contentType: 'application/json; charset=utf-8',
+//        data: "{ 'invoiceId': " + 1 + " }",
+//        dataType: "json",
+//        success: function (response) {
+//            invoiceObj = response.d;
+//        },
+//        error: function (error) {
+//            alert('Failed to load Invoice');
+//        }
+//    });
+//    return invoiceObj;
+//}
+
+
+//function GetListOfBillingItems(invoiceId) {
+//    var listBillingItems;
+//    $.ajax({
+//        type: 'POST',
+//        url: 'PageInvoice.aspx/GetBillingItems',
+//        contentType: 'application/json; charset=utf-8',
+//        data: "{ 'invoiceId': " + 1 + " }",
+//        dataType: "json",
+//        success: function (response) {
+//            listBillingItems = response.d;
+//        },
+//        error: function (error) {
+//            alert('Failed to load Invoice billing items');
+//        }
+//    });
+//    return listBillingItems;
+//}
+
+
+//function DeleteInvoice() {
+//    $.ajax({
+//        type: 'POST',
+//        url: 'PageInvoice.aspx/DeleteInvoiceAndBIll',
+//        contentType: 'application/json; charset=utf-8',
+//        data: "{ 'invoiceId': " + 1 + " }",
+//        dataType: "json",
+//        success: function (response) {
+//            alert("Invoice and billing items moved to trash");
+
+//        },
+//        error: function (error) {
+//            alert('Failed to delete Invoice and billing items');
+//        }
+//    });
+//}

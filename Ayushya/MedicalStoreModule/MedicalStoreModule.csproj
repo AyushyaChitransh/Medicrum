@@ -19,7 +19,6 @@
     <IISExpressAnonymousAuthentication />
     <IISExpressWindowsAuthentication />
     <IISExpressUseClassicPipelineMode />
-    <UseGlobalApplicationHostFile />
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
     <DebugSymbols>true</DebugSymbols>
@@ -65,8 +64,11 @@
     <Content Include="AddCustomer.aspx" />
     <Content Include="AddProduct.aspx" />
     <Content Include="AddProductModel.aspx" />
+    <Content Include="assets\js\lib\invoice\jquery.serialize-object.min.js" />
+    <Content Include="assets\js\lib\invoice\json data.txt" />
     <Content Include="assets\js\lib\invoice\page_invoices.js" />
     <Content Include="assets\js\lib\login\login.js" />
+    <Content Include="assets\js\lib\User\user_profile.js" />
     <Content Include="Login.aspx" />
     <Content Include="PageInvoice.aspx" />
     <Content Include="Register.aspx" />
@@ -5326,6 +5328,8 @@
     </Compile>
     <Compile Include="App_Code\DAO\DAOInvoice.cs" />
     <Compile Include="App_Code\DAO\DAOLogin.cs" />
+    <Compile Include="App_Code\Model\Invoice.cs" />
+    <Compile Include="App_Code\Model\InvoiceTax.cs" />
     <Compile Include="Login.aspx.cs">
       <DependentUpon>Login.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
@@ -5371,8 +5375,6 @@
     <Compile Include="App_Code\DAO\DAOUser.cs" />
     <Compile Include="App_Code\Model\BillingItems.cs" />
     <Compile Include="App_Code\Model\Customer.cs" />
-    <Compile Include="App_Code\Model\Invoice.cs" />
-    <Compile Include="App_Code\Model\InvoiceTax.cs" />
     <Compile Include="App_Code\Model\StockProduct.cs" />
     <Compile Include="App_Code\Model\Store.cs" />
     <Compile Include="App_Code\Model\Supplier.cs" />

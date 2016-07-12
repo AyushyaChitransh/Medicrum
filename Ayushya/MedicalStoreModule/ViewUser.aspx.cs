@@ -54,7 +54,6 @@ namespace MedicalStoreModule
         [WebMethod]
         public static void SetUserSession(string userName)
         {
-            //UserName is being used as UserId for session
             HttpContext.Current.Session["userId"] = userName;
         }
     }

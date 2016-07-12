@@ -29,42 +29,42 @@
             <h2 class="heading_b uk-margin-bottom">View User</h2>
             <div class="md-card uk-margin-large-bottom">
                 <div class="md-card-content">
-                        <h2 class="heading_a">User Information
+                    <h2 class="heading_a">User Information
                                     <span class="sub-heading">Enter details below</span>
-                        </h2>
-                        <hr class="md-hr" />
-                        <div class="uk-grid">
-                            <div class="uk-width-medium-1-1 parsley-row">
-                                <span>Name</span>
-                                <input type="text" name="name" id="name" class="md-input" disabled="disabled" />
-                            </div>
+                    </h2>
+                    <hr class="md-hr" />
+                    <div class="uk-grid">
+                        <div class="uk-width-medium-1-1 parsley-row">
+                            <span>Name</span>
+                            <input type="text" name="name" id="name" class="md-input" disabled="disabled" />
                         </div>
-                        <div class="uk-grid">
-                            <div class="uk-width-medium-1-2 parsley-row">
-                                <span>User Name</span>
-                                <input type="text" name="userName" id="user_name" required="required" class="md-input" disabled="disabled" onkeyup="CheckUserName()" />
-                            </div>
-                            <div class="uk-width-medium-1-2 parsley-row">
-                                <span>Email</span>
-                                <input type="text" id="email" class="md-input" disabled="disabled" onkeyup="CheckEmail()" />
-                            </div>
+                    </div>
+                    <div class="uk-grid">
+                        <div class="uk-width-medium-1-2 parsley-row">
+                            <span>User Name</span>
+                            <input type="text" name="userName" id="user_name" class="md-input" disabled="disabled" />
                         </div>
-                        <div class="uk-grid">
-                            <div class="uk-width-medium-1-1 parsley-row">
-                                <span>Address</span>
-                                <input type="text" id="address" class="md-input" disabled="disabled" />
-                            </div>                            
+                        <div class="uk-width-medium-1-2 parsley-row">
+                            <span>Email</span>
+                            <input type="text" id="email" class="md-input" disabled="disabled" onkeyup="CheckEmail()" />
                         </div>
-                        <div class="uk-grid">
-                            <div class="uk-width-medium-1-2 parsley-row">
-                                <span>Role</span>
-                                <input type="text" id="role" class="md-input" disabled="disabled" />
-                            </div>
-                            <div class="uk-width-medium-1-2 parsley-row">
-                                <span>Phone</span>
-                                <input type="text" id="phone_number" class="md-input" disabled="disabled" />
-                            </div>
+                    </div>
+                    <div class="uk-grid">
+                        <div class="uk-width-medium-1-1 parsley-row">
+                            <span>Address</span>
+                            <input type="text" id="address" class="md-input" disabled="disabled" />
                         </div>
+                    </div>
+                    <div class="uk-grid">
+                        <div class="uk-width-medium-1-2 parsley-row">
+                            <span>Role</span>
+                            <input type="text" id="role" class="md-input" disabled="disabled" />
+                        </div>
+                        <div class="uk-width-medium-1-2 parsley-row">
+                            <span>Phone</span>
+                            <input type="text" id="phone_number" class="md-input" disabled="disabled" />
+                        </div>
+                    </div>
                 </div>
             </div>
         </div>

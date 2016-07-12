@@ -29,12 +29,5 @@ namespace MedicalStoreModule
             DAOCustomer accessCustomerDb = new DAOCustomer();
             return serializer.Serialize(accessCustomerDb.GetCustomer(customerId)).ToString();
         }
-        [WebMethod]
-        public static string GetCustomer(int requestedCustomerId)
-        {
-            JavaScriptSerializer serializer = new JavaScriptSerializer();
-            DAOCustomer accessCustomerDb = new DAOCustomer();
-            return serializer.Serialize(accessCustomerDb.GetCustomer(requestedCustomerId)).ToString();
-        }
     }
 }

@@ -1,46 +1,34 @@
 ﻿<%@ Page Language="C#" AutoEventWireup="true" CodeBehind="PageInvoice.aspx.cs" Inherits="MedicalStoreModule.PageInvoice" %>
 
-<!doctype html>
-<!--[if lte IE 9]> <html class="lte-ie9" lang="en"> <![endif]-->
-<!--[if gt IE 9]><!-->
-<html lang="en">
-<!--<![endif]-->
+<!DOCTYPE html>
+
+<html xmlns="http://www.w3.org/1999/xhtml">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="initial-scale=1.0,maximum-scale=1.0,user-scalable=no">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="initial-scale=1.0,maximum-scale=1.0,user-scalable=no" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <!-- Remove Tap Highlight on Windows Phone IE -->
     <meta name="msapplication-tap-highlight" content="no" />
-
-    <link rel="icon" type="image/png" href="assets/img/favicon-16x16.png" sizes="16x16">
-    <link rel="icon" type="image/png" href="assets/img/favicon-32x32.png" sizes="32x32">
-
+    <link rel="icon" type="image/png" href="assets/img/favicon-16x16.png" sizes="16x16" />
+    <link rel="icon" type="image/png" href="assets/img/favicon-32x32.png" sizes="32x32" />
     <title>Invoice</title>
 
-
     <!-- uikit -->
-    <link rel="stylesheet" href="bower_components/uikit/css/uikit.almost-flat.min.css" media="all">
-
+    <link rel="stylesheet" href="bower_components/uikit/css/uikit.almost-flat.min.css" media="all" />
     <!-- flag icons -->
-    <link rel="stylesheet" href="assets/icons/flags/flags.min.css" media="all">
-
+    <link rel="stylesheet" href="assets/icons/flags/flags.min.css" media="all" />
     <!-- altair admin -->
-    <link rel="stylesheet" href="assets/css/main.min.css" media="all">
-
-    <!-- matchMedia polyfill for testing media queries in JS -->
-    <!--[if lte IE 9]>
-        <script type="text/javascript" src="bower_components/matchMedia/matchMedia.js"></script>
-        <script type="text/javascript" src="bower_components/matchMedia/matchMedia.addListener.js"></script>
-    <![endif]-->
-
+    <link rel="stylesheet" href="assets/css/main.min.css" media="all" />
 </head>
 <body class=" sidebar_main_open sidebar_main_swipe header_double_height">
+
     <uc1:HeaderAndSideBar runat="server" ID="HeaderAndSideBar" />
+
     <div id="page_content">
         <div id="page_content_inner">
 
             <div class="uk-width-medium-8-10 uk-container-center reset-print">
-                <div class="uk-grid uk-grid-collapse" data-uk-grid-margin>
+                <div class="uk-grid uk-grid-collapse" data-uk-grid-margin="data-uk-grid-margin">
                     <div class="uk-width-large-7-10">
                         <div class="md-card md-card-single main-print" id="invoice">
                             <div id="invoice_preview"></div>
@@ -58,13 +46,13 @@
                                     </a>
                                 </li>
                                 <li>
-                                    <a href="#" class="md-list-content" data-invoice-id="1">
+                                    <a href="#" class="md-list-content" data-invoice-id="2">
                                         <span class="md-list-heading uk-text-truncate">Invoice 9/2015 <span class="uk-text-small uk-text-muted">(11 Nov)</span></span>
                                         <span class="uk-text-small uk-text-muted">Hettinger-O'Connell</span>
                                     </a>
                                 </li>
                                 <li>
-                                    <a href="#" class="md-list-content" data-invoice-id="1">
+                                    <a href="#" class="md-list-content" data-invoice-id="3">
                                         <span class="uk-badge uk-badge-danger">Overdue</span>
                                         <span class="md-list-heading uk-text-truncate">Invoice 166/2015 <span class="uk-text-small uk-text-muted">(10 Nov)</span></span>
                                         <span class="uk-text-small uk-text-muted">Medhurst PLC</span>
@@ -181,74 +169,67 @@
     </script>
 
     <script id="invoice_form_template" type="text/x-handlebars-template">
-        <form action="" class="uk-form-stacked">
+        <form action="" class="uk-form-stacked" id="form_invoice">
             <div class="md-card-toolbar">
                 <div class="md-card-toolbar-actions">
-                    <i class="md-icon material-icons">&#xE161;</i>
+                    <i class="md-icon material-icons" id="invoice_submit" onclick="AddInvoice()">save</i>
                 </div>
-                <input name="invoice_number" id="invoice_number" class="md-card-toolbar-input" type="text" value="" placeholder="Invoice number" />
+                <input name="invoiceNumber" id="invoice_number" class="md-card-toolbar-input" type="text" value="" placeholder="Invoice number" />
             </div>
             <div class="md-card-content large-padding">
-                <div class="uk-grid" data-uk-grid-margin>
+                <div class="uk-grid" data-uk-grid-margin="data-uk-grid-margin">
                     <div class="uk-width-1-1">
                         <label for="form_customer">Customer:</label>
-                        <input type="text" class="md-input" id="invoice_form_customer" name="invoice_customer" />
-                        <a href="AddUser.aspx" class="inline-label uk-badge uk-badge-success">+</a>
+                        <input type="text" class="md-input" id="invoice_form_customer" name="customerId" />
                     </div>
+                    <hr style="width:100%" />
                 </div>
-                <div class="uk-grid" data-uk-grid-margin>
-                    <div class="uk-width-1-1">
-                        <%--<label for="invoice_customer">Available Products:</label>--%>
-                        <select class="md-input" id="invoice_form_available_product" name="invoice_customer">
-                            <option selected="selected" value="">Select Product</option>
-                            {{#each availableProducts.Options}}
-                        <option value="{{value}}" displayText="{{displayText}}"></option>
-                            {{/each}
+                <div class="uk-grid uk-grid-divider" data-uk-grid-margin="data-uk-grid-margin">
+                    <div class="uk-width-medium-1-3">
+                        <label class="uk-form-label uk-margin-bottom" for="invoice_type">Invoice Type</label>
+                        <select class="md-input label-fixed" id="invoice_type" name="invoiceType">
+                            <option selected="selected" value="">Invoice Type</option>
+                            <option value="Sale Invoice">Sale Invoice</option>
+                            <option value="Retail Invoice">Retail Invoice</option>
                         </select>
                     </div>
-                </div>
-                <div class="uk-grid" data-uk-grid-margin>
-                    <div class="uk-width-medium-1-2">
-                        <label class="uk-form-label uk-margin-bottom" for="invoice_discount">Add Discount:</label>
-                        <span class="icheck-inline">
-                            <input type="radio" name="invoice_discount" id="invoice_discount_flat" data-md-icheck />
-                            <label for="invoice_discount_flat" class="inline-label">Flat</label>
-                        </span>
-                        <span class="icheck-inline">
-                            <input type="radio" name="invoice_discount" id="invoice_discount_percent" data-md-icheck />
-                            <label for="invoice_discount_percent" class="inline-label">Percent</label>
-                        </span>
+                    <div class="uk-width-medium-1-3">
+                        <label class="uk-form-label uk-margin-bottom" for="payment_terms">Payment Terms:</label>
+                        <select class="md-input label-fixed" id="payment_terms" name="paymentTerms">
+                            <option selected="selected" value="">Payment Terms</option>
+                            <option value="1 Day">1 Day</option>
+                            <option value="7 Days">7 Days</option>
+                            <option value="15 Days">15 Days</option>
+                            <option value="30 Days">30 Days</option>
+                        </select>
                     </div>
-                </div>
-                <div class="uk-grid uk-grid-divider grid-block" data-uk-grid-margin>
-                    <div class="uk-width-medium-1-2">
-                        <label class="uk-form-label uk-margin-bottom" for="payment_terms">Due date (days):</label>
-                        <span class="icheck-inline">
-                            <input type="radio" name="invoice_due_date" id="invoice_due_date_7" data-md-icheck />
-                            <label for="invoice_due_date_7" class="inline-label">7</label>
-                        </span>
-                        <span class="icheck-inline">
-                            <input type="radio" name="invoice_due_date" id="invoice_due_date_14" data-md-icheck />
-                            <label for="invoice_due_date_14" class="inline-label">14</label>
-                        </span>
-                        <span class="icheck-inline">
-                            <input type="radio" name="invoice_due_date" id="invoice_due_date_21" data-md-icheck />
-                            <label for="invoice_due_date_21" class="inline-label">21</label>
-                        </span>
-                    </div>
-                    <div class="uk-width-medium-1-2">
+                    <div class="uk-width-medium-1-3">
                         <label class="uk-form-label uk-margin-bottom" for="payment_mode">Payment Mode:</label>
-                        <span class="icheck-inline">
-                            <input type="radio" name="invoice_payment_mode" id="invoice_payment_cash" data-md-icheck />
-                            <label for="invoice_payment_cash" class="inline-label">Cash</label>
-                        </span>
-                        <span class="icheck-inline">
-                            <input type="radio" name="invoice_payment_mode" id="invoice_payment_online" data-md-icheck />
-                            <label for="invoice_payment_online" class="inline-label">Online</label>
-                        </span>
+                        <select class="md-input label-fixed" id="payment_mode" name="paymentMode">
+                            <option selected="selected" value="">Payment Mode</option>
+                            <option value="Cash">Cash</option>
+                            <option value="Credit Card">Credit Card</option>
+                            <option value="Debit Card">Debit card</option>
+                        </select>
                     </div>
+                    <hr style="width:100%" />
                 </div>
-                <div class="uk-grid" data-uk-grid-margin>
+                <div class="uk-grid uk-grid-divider" data-uk-grid-margin="data-uk-grid-margin">
+                    <div class="uk-width-medium-1-2">
+                        <label class="uk-form-label uk-margin-bottom" for="discount_type">Discount Type</label>
+                        <select class="md-input label-fixed" id="discount_type" name="discountType">
+                            <option selected="selected" value="">Discount Type</option>
+                            <option value="Flat">Flat</option>
+                            <option value="Percent">Percent</option>
+                        </select>
+                    </div>
+                    <div class="uk-width-medium-1-2">
+                        <label class="uk-form-label uk-margin-bottom" for="coupon_code">Coupon Code:</label>
+                        <input type="text" class="md-input" id="coupon_code" name="couponCode" />
+                    </div>
+                    <hr style="width:100%" />
+                </div>
+                <div class="uk-grid" data-uk-grid-margin="data-uk-grid-margin">
                     <div class="uk-width-1-1">
                         <div id="form_invoice_medicines"></div>
                         <div class="uk-text-center uk-margin-medium-top uk-margin-bottom">
@@ -260,9 +241,9 @@
 
         </form>
     </script>
+
     <script id="invoice_form_template_medicines" type="text/x-handlebars-template">
         {{#ifCond invoice_medicine_id '!==' 1}}
-       
         <hr class="md-hr" />
         {{/ifCond}}
        
@@ -271,32 +252,26 @@
                 <p class="uk-text-large">{{invoice_medicine_id}}.</p>
             </div>
             <div class="uk-width-medium-9-10">
-                <div class="uk-grid uk-grid-small" data-uk-grid-margin>
+                <div class="uk-grid uk-grid-small" data-uk-grid-margin="data-uk-grid-margin">
                     <div class="uk-width-medium-5-10">
                         <label for="inv_medicine_{{invoice_medicine_id}}">Medicine Name</label>
-                        <input type="text" class="md-input" id="inv_medicine_{{invoice_medicine_id}}" name="inv_medicine_id_{{invoice_medicine_id}}" />
+                        <input type="text" class="md-input" id="inv_medicine_{{invoice_medicine_id}}" name="billingItems[{{invoice_medicine_id}}][productId]" />
                     </div>
                     <div class="uk-width-medium-1-10">
                         <label for="inv_medicine_{{invoice_medicine_id}}_rate">Rate</label>
-                        <input type="text" class="md-input" id="inv_medicine_{{invoice_medicine_id}}_rate" name="inv_medicine_{{invoice_medicine_id}}_rate" />
+                        <input type="text" class="md-input" id="inv_medicine_{{invoice_medicine_id}}_rate" name="billingItems[{{invoice_medicine_id}}][unitPrice]" />
                     </div>
                     <div class="uk-width-medium-1-10">
                         <label for="inv_medicine_{{invoice_medicine_id}}_qty">Qty</label>
-                        <input type="text" class="md-input" id="inv_medicine_{{invoice_medicine_id}}_qty" name="inv_medicine_{{invoice_medicine_id}}_qty" />
+                        <input type="text" class="md-input" id="inv_medicine_{{invoice_medicine_id}}_qty" name="billingItems[{{invoice_medicine_id}}][quantity]" />
                     </div>
                     <div class="uk-width-medium-1-10">
                         <label for="inv_medicine_{{invoice_medicine_id}}_vat">VAT</label>
-                        <input type="text" class="md-input" id="inv_medicine_{{invoice_medicine_id}}_vat" name="inv_medicine_{{invoice_medicine_id}}_vat" />
+                        <input type="text" class="md-input" id="inv_medicine_{{invoice_medicine_id}}_vat" name="billingItems[{{invoice_medicine_id}}][tax]" />
                     </div>
                     <div class="uk-width-medium-2-10">
                         <label for="inv_medicine_{{invoice_medicine_id}}_vat">Total</label>
-                        <input type="text" class="md-input" id="inv_medicine_{{invoice_medicine_id}}_vat" name="inv_medicine_{{invoice_medicine_id}}_vat" readonly />
-                    </div>
-                </div>
-                <div class="uk-grid" data-uk-grid-margin>
-                    <div class="uk-width-medium-1-1">
-                        <label for="inv_medicine_{{invoice_medicine_id}}_desc">Description</label>
-                        <textarea class="md-input" id="inv_medicine_{{invoice_medicine_id}}_desc" name="invoice_medicine_id_{{invoice_medicine_id}}_desc" cols="30" rows="2"></textarea>
+                        <input type="text" class="md-input" id="inv_medicine_{{invoice_medicine_id}}_total" name="billingItems[{{invoice_medicine_id}}][price]" />
                     </div>
                 </div>
             </div>
@@ -330,12 +305,15 @@
     <script src="assets/js/uikit_custom.min.js"></script>
     <!-- altair common functions/helpers -->
     <script src="assets/js/altair_admin_common.min.js"></script>
+
     <uc1:StyleSwitcher runat="server" ID="StyleSwitcher" />
+
     <!-- page specific plugins -->
     <!-- handlebars.js -->
     <script src="bower_components/handlebars/handlebars.min.js"></script>
     <script src="assets/js/custom/handlebars_helpers.min.js"></script>
-
+    
+    <script src="assets/js/lib/invoice/jquery.serialize-object.min.js"></script>
     <!--  invoices functions -->
     <script src="assets/js/lib/invoice/page_invoices.js"></script>
 
