@@ -38,26 +38,12 @@
                     <div class="uk-width-large-3-10 hidden-print uk-visible-large">
                         <div class="md-list-outside-wrapper">
                             <ul class="md-list md-list-outside invoices_list" id="invoices_list">
-                                <li class="heading_list">November 2015</li>
+                                <li class="heading_list">Search Customer</li>
                                 <li>
-                                    <a href="#" class="md-list-content" data-invoice-id="1">
-                                        <span class="md-list-heading uk-text-truncate">Invoice 9/2015 <span class="uk-text-small uk-text-muted">(12 Nov)</span></span>
-                                        <span class="uk-text-small uk-text-muted">Moore, Schimmel and Bernier</span>
-                                    </a>
+                                    <label for="search_customer">Search Customer</label>
+                                    <input type="text" class="md-input" id="search_customer" name="search_customer"/>
                                 </li>
-                                <li>
-                                    <a href="#" class="md-list-content" data-invoice-id="2">
-                                        <span class="md-list-heading uk-text-truncate">Invoice 9/2015 <span class="uk-text-small uk-text-muted">(11 Nov)</span></span>
-                                        <span class="uk-text-small uk-text-muted">Hettinger-O'Connell</span>
-                                    </a>
-                                </li>
-                                <li>
-                                    <a href="#" class="md-list-content" data-invoice-id="3">
-                                        <span class="uk-badge uk-badge-danger">Overdue</span>
-                                        <span class="md-list-heading uk-text-truncate">Invoice 166/2015 <span class="uk-text-small uk-text-muted">(10 Nov)</span></span>
-                                        <span class="uk-text-small uk-text-muted">Medhurst PLC</span>
-                                    </a>
-                                </li>
+                                <%= InvoiceSidebarList("") %>
                             </ul>
                         </div>
                     </div>
@@ -182,7 +168,7 @@
                         <label for="form_customer">Customer:</label>
                         <input type="text" class="md-input" id="invoice_form_customer" name="customerId" />
                     </div>
-                    <hr style="width:100%" />
+                    <hr style="width: 100%" />
                 </div>
                 <div class="uk-grid uk-grid-divider" data-uk-grid-margin="data-uk-grid-margin">
                     <div class="uk-width-medium-1-3">
@@ -212,7 +198,7 @@
                             <option value="Debit Card">Debit card</option>
                         </select>
                     </div>
-                    <hr style="width:100%" />
+                    <hr style="width: 100%" />
                 </div>
                 <div class="uk-grid uk-grid-divider" data-uk-grid-margin="data-uk-grid-margin">
                     <div class="uk-width-medium-1-2">
@@ -227,7 +213,7 @@
                         <label class="uk-form-label uk-margin-bottom" for="coupon_code">Coupon Code:</label>
                         <input type="text" class="md-input" id="coupon_code" name="couponCode" />
                     </div>
-                    <hr style="width:100%" />
+                    <hr style="width: 100%" />
                 </div>
                 <div class="uk-grid" data-uk-grid-margin="data-uk-grid-margin">
                     <div class="uk-width-1-1">
@@ -312,7 +298,7 @@
     <!-- handlebars.js -->
     <script src="bower_components/handlebars/handlebars.min.js"></script>
     <script src="assets/js/custom/handlebars_helpers.min.js"></script>
-    
+
     <script src="assets/js/lib/invoice/jquery.serialize-object.min.js"></script>
     <!--  invoices functions -->
     <script src="assets/js/lib/invoice/page_invoices.js"></script>

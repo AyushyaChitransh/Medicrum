@@ -58,6 +58,20 @@ namespace MedicalStoreModule
             return accessInvoiceDb.InsertInvoice(invoice, billingItems);
         }
 
+        public string InvoiceSidebarList(string searchText)
+        {
+            DAOInvoice accessInvoiceDb = new DAOInvoice();
+            List<Invoice> invoiceList = accessInvoiceDb.GetInvoiceList(searchText);
+            string sidebarList = "";
+            foreach (Invoice item in invoiceList)
+            {
+                sidebarList += "<li><a href='#' class='md-list-content' data-invoice-id=" + item.invoiceId + "/>";
+                sidebarList += "<span class='md-list-heading uk-text-truncate'>Invoice " + item.invoiceNumber + "<span class='uk-text-small uk-text-muted'> " + item.invoiceDate + "</span></span>";
+                sidebarList += "<span class='uk-text-small uk-text-muted'>CustommerId =" + item.customerId + "</span>";
+            }
+            return sidebarList;
+        }
+
         /*[WebMethod]
         public static object GetInvoice(int invoiceId)
         {
@@ -93,6 +107,6 @@ namespace MedicalStoreModule
         {
             DAOInvoice accessInvoiceDb = new DAOInvoice();
             return accessInvoiceDb.DeleteInvoiceAndBill(invoiceId);
-        }*/        
+        }*/
     }
 }

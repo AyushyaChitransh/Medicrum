@@ -138,6 +138,70 @@ namespace MedicalStoreModule.App_Code.DAO
             return true;
         }
 
+        public List<Invoice> GetInvoiceList(string customerName)
+        {
+            List<Invoice> invoiceList = new List<Invoice>();
+            string qry = "SELECT * FROM invoice";
+            MySqlCommand cmd = new MySqlCommand(qry, cm.connection);
+            cmd.Parameters.AddWithValue("@searchText", customerName + '%');
+            try
+            {
+                if (cm.OpenConnection())
+                {
+                    MySqlDataReader dataReader = cmd.ExecuteReader();
+                    while (dataReader.Read())
+                    {
+                        Invoice invoiceObj = new Invoice();
+                        invoiceObj.invoiceId = int.Parse(dataReader["invoice_id"].ToString());
+                        invoiceObj.invoiceNumber = int.Parse(dataReader["invoice_number"].ToString());
+                        invoiceObj.customerId = int.Parse(dataReader["customer_id"].ToString());
+                        invoiceObj.storeId = int.Parse(dataReader["store_id"].ToString());
+                        invoiceObj.invoiceDate = DateTime.Parse(dataReader["invoice_date"].ToString());
+                        invoiceObj.invoiceType = dataReader["invoice_type"].ToString();
+                        invoiceObj.paymentTerms = dataReader["payment_terms"].ToString();
+                        invoiceObj.paymentMode = dataReader["payment_mode"].ToString();
+                        decimal totalAmountTemp = new decimal();
+                        if (decimal.TryParse(dataReader["total_amount"].ToString(), out totalAmountTemp))
+                        {
+                            invoiceObj.totalAmount = totalAmountTemp;
+                        }
+                        decimal taxAmountTemp = new decimal();
+                        if (decimal.TryParse(dataReader["tax_amount"].ToString(), out taxAmountTemp))
+                        {
+                            invoiceObj.taxAmount = taxAmountTemp;
+                        }
+                        invoiceObj.discountType = dataReader["discount_type"].ToString();
+                        decimal discountAmountTemp = new decimal();
+                        if (decimal.TryParse(dataReader["discount_amount"].ToString(), out discountAmountTemp))
+                        {
+                            invoiceObj.discountAmount = discountAmountTemp;
+                        }
+                        invoiceObj.couponCode = dataReader["coupon_code"].ToString();
+                        decimal netTotalTemp = new decimal();
+                        if (decimal.TryParse(dataReader["net_total"].ToString(), out netTotalTemp))
+                        {
+                            invoiceObj.netTotal = netTotalTemp;
+                        }
+                        decimal amountPaidTemp = new decimal();
+                        if (decimal.TryParse(dataReader["amount_paid"].ToString(), out amountPaidTemp))
+                        {
+                            invoiceObj.amountPaid = amountPaidTemp;
+                        }
+                        invoiceObj.status = int.Parse(dataReader["status"].ToString());
+                        invoiceList.Add(invoiceObj);
+                    }
+                    cm.CloseConnection();
+                    return invoiceList;
+                }
+            }
+            catch (Exception ex)
+            {
+                cm.CloseConnection();
+                string msg = ex.Message;
+            }
+            return invoiceList;
+        }
+
         /*public Invoice GetInvoice(int invoiceId)
         {
             Invoice invoiceObj = new Invoice();
