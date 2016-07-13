@@ -235,7 +235,7 @@ namespace MedicalStoreModule.App_Code.DAO
             return invoiceList;
         }
 
-        /*public Invoice GetInvoice(int invoiceId)
+        public Invoice GetInvoice(int invoiceId)
         {
             Invoice invoiceObj = new Invoice();
             try
@@ -244,6 +244,7 @@ namespace MedicalStoreModule.App_Code.DAO
                 {
                     MySqlCommand cmd = new MySqlCommand();
                     cmd.CommandText = @"SELECT 
+                                                invoice_id,
                                                 invoice_number,
                                                 invoice.store_id,
                                                 invoice.customer_id,
@@ -315,7 +316,7 @@ namespace MedicalStoreModule.App_Code.DAO
                 string message = ex.Message;
                 return invoiceObj;
             }
-        }*/
+        }
 
         /*public object GetProductOptions(int storeId)
         {
@@ -374,7 +375,7 @@ namespace MedicalStoreModule.App_Code.DAO
             }
         }*/
 
-        /*public List<BillingItems> GetBillingItems(int invoiceId)
+        public List<BillingItems> GetBillingItems(int invoiceId)
         {
             List<BillingItems> listBillingItems = new List<BillingItems>();
             string qry = @"SELECT * FROM billing_items WHERE invoice_id=@invoice_id AND delete_status=@delete_status";
@@ -409,6 +410,6 @@ namespace MedicalStoreModule.App_Code.DAO
                 return listBillingItems;
             }
             return listBillingItems;
-        }*/
+        }
     }
 }

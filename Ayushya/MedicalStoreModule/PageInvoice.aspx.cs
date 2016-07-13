@@ -5,12 +5,14 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Reflection;
 using System.Web;
+using System.Web.Script.Serialization;
 using System.Web.Services;
 using System.Web.UI;
 using System.Web.UI.WebControls;
 
 namespace MedicalStoreModule
 {
+
     public partial class PageInvoice : System.Web.UI.Page
     {
         private static int storeId = 1;
@@ -66,7 +68,7 @@ namespace MedicalStoreModule
             string sidebarList = "";
             foreach (object item in invoiceList)
             {
-                var invoiceId = item.GetType().GetProperty("invoiceId").GetValue(item,null);
+                var invoiceId = item.GetType().GetProperty("invoiceId").GetValue(item, null);
                 var invoiceNumber = item.GetType().GetProperty("invoiceNumber").GetValue(item, null);
                 var invoiceDate = item.GetType().GetProperty("invoiceDate").GetValue(item, null);
                 var customerName = item.GetType().GetProperty("customerName").GetValue(item, null);
@@ -77,14 +79,28 @@ namespace MedicalStoreModule
             return sidebarList;
         }
 
-        /*[WebMethod]
+
+        [WebMethod]
         public static object GetInvoice(int invoiceId)
         {
-            Invoice record = new Invoice();
             DAOInvoice accessInvoiceDb = new DAOInvoice();
-            record = accessInvoiceDb.GetInvoice(invoiceId);
-            return record;
-        }*/
+            DAOCustomer accessCustomerDb = new DAOCustomer();
+            Invoice invoice = accessInvoiceDb.GetInvoice(invoiceId);
+            Customer customer = accessCustomerDb.GetCustomer(invoice.customerId);
+            List<BillingItems> billingItems = accessInvoiceDb.GetBillingItems(invoice.invoiceId);
+            InvoiceJson invoiceJson = new InvoiceJson(invoice,customer);
+            Invoice_Medicines[] invoiceMedicine = new Invoice_Medicines[billingItems.Count];
+            int i = 0;
+            foreach (BillingItems item in billingItems)
+            {
+                Invoice_Medicines med = new Invoice_Medicines(item);
+                invoiceMedicine[i++] = med;
+            }
+            invoiceJson.invoice_medicines = invoiceMedicine;
+            JavaScriptSerializer serializer = new JavaScriptSerializer();
+            string invoiceJsonData = serializer.Serialize(invoiceJson);
+            return invoiceJsonData;
+        }
 
         /*[WebMethod]
         public static object GetProductOptions()

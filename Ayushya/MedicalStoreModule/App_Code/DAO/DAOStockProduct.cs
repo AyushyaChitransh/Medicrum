@@ -386,7 +386,25 @@ namespace MedicalStoreModule.App_Code.DAO
                         int inStockVar = new int();
                         int.TryParse(dataReader["in_stock"].ToString(), out inStockVar);
 
-                        product = new { productName = dataReader["product_name"].ToString(), supplierStoreName = dataReader["supplier_store_name"].ToString(), batchNumber = dataReader["batch_number"].ToString(), barcode = barcodeVar, manufactureDate = manufactureDateVar, expiryDate = expiryDateVar, packageQuantity = packageQuantityVar, price = priceVar, manufactureLicenceNumber = dataReader["manufacture_licence_number"].ToString(), weight = weightVar, volume = volumeVar, quantity = quantityVar, tax = taxVar, inStock = inStockVar };
+                        string description = dataReader["description"].ToString();
+                        product = new
+                        {
+                            productName = dataReader["product_name"].ToString(),
+                            supplierStoreName = dataReader["supplier_store_name"].ToString(),
+                            description = description,
+                            batchNumber = dataReader["batch_number"].ToString(),
+                            barcode = barcodeVar,
+                            manufactureDate = manufactureDateVar,
+                            expiryDate = expiryDateVar,
+                            packageQuantity = packageQuantityVar,
+                            price = priceVar,
+                            manufactureLicenceNumber = dataReader["manufacture_licence_number"].ToString(),
+                            weight = weightVar,
+                            volume = volumeVar,
+                            quantity = quantityVar,
+                            tax = taxVar,
+                            inStock = inStockVar
+                        };
                     }
                     cm.CloseConnection();
                 }
