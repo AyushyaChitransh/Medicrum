@@ -65,41 +65,41 @@
                 <i class="md-icon material-icons" id="invoice_print">&#xE8ad;</i>
                 <i class="md-icon material-icons" onclick="DeleteInvoice()">delete</i>
             </div>
-            <h3 class="md-card-toolbar-heading-text large" id="invoice_name">Invoice {{invoice_id.invoice_number}}
+            <h3 class="md-card-toolbar-heading-text large" id="invoice_name">Invoice {{invoice_number}}
             </h3>
         </div>
         <div class="md-card-content">
             <div class="uk-margin-medium-bottom">
-                <span class="uk-text-muted uk-text-small uk-text-italic">Date:</span> {{invoice_id.invoice_date}}
+                <span class="uk-text-muted uk-text-small uk-text-italic">Date:</span> {{invoice_date}}
                
                 <br />
-                <span class="uk-text-muted uk-text-small uk-text-italic">Due Date:</span> {{invoice_id.invoice_due_date}}
+                <span class="uk-text-muted uk-text-small uk-text-italic">Due Date:</span> {{invoice_due_date}}
            
             </div>
             <div class="uk-grid" data-uk-grid-margin>
                 <div class="uk-width-small-3-5">
                     <div class="uk-margin-bottom">
                         <span class="uk-text-muted uk-text-small uk-text-italic">Customer:</span>
-                        <p><strong>{{invoice_id.invoice_customer}}</strong></p>
+                        <p><strong>{{invoice_customer}}</strong></p>
                         <span class="uk-text-muted uk-text-small uk-text-italic">Location:</span>
                         <address>
-                            <p>{{invoice_id.invoice_address}}</p>
-                            <p>{{invoice_id.invoice_district}}</p>
-                            <p>{{invoice_id.invoice_state}}</p>
-                            <p>{{invoice_id.invoice_country}}</p>
-                            <p>{{invoice_id.invoice_pincode}}</p>
+                            <p>{{invoice_address}}</p>
+                            <p>{{invoice_district}}</p>
+                            <p>{{invoice_state}}</p>
+                            <p>{{invoice_country}}</p>
+                            <p>{{invoice_pincode}}</p>
                         </address>
                         <span class="uk-text-muted uk-text-small uk-text-italic">Contact:</span>
                         <address>
-                            <p>{{invoice_id.invoice_email}}</p>
-                            <p>{{invoice_id.invoice_mobile}}</p>
+                            <p>{{invoice_email}}</p>
+                            <p>{{invoice_mobile}}</p>
                         </address>
                     </div>
                 </div>
                 <div class="uk-width-small-2-5">
                     <span class="uk-text-muted uk-text-small uk-text-italic">Total:</span>
-                    <p class="heading_b uk-text-success">{{invoice_id.invoice_total_value}}</p>
-                    <p class="uk-text-small uk-text-muted uk-margin-top-remove">Incl. VAT - {{invoice_id.invoice_vat_value}}</p>
+                    <p class="heading_b uk-text-success">{{invoice_total_value}}</p>
+                    <p class="uk-text-small uk-text-muted uk-margin-top-remove">Incl. VAT - {{invoice_vat_value}}</p>
                 </div>
             </div>
             <div class="uk-grid uk-margin-large-bottom">
@@ -115,7 +115,7 @@
                             </tr>
                         </thead>
                         <tbody>
-                            {{#each invoice_id.invoice_medicines}}
+                            {{#each invoice_medicines}}
                            
                             <tr class="uk-table-middle">
                                 <td>
@@ -141,10 +141,10 @@
                 <div class="uk-width-1-1">
                     <span class="uk-text-muted uk-text-small uk-text-italic">Payment info:</span>
                     <p class="uk-margin-top-remove">
-                        {{{ invoice_id.invoice_payment_terms }}}
+                        {{{ invoice_payment_terms }}}
                    
                     </p>
-                    <p class="uk-text-small">Please pay within {{ invoice_id.invoice_payment_mode }} days</p>
+                    <p class="uk-text-small">Please pay within {{ invoice_payment_mode }} days</p>
                 </div>
             </div>
         </div>
