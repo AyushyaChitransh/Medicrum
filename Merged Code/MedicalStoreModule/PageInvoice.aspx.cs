@@ -58,6 +58,20 @@ namespace MedicalStoreModule
             return accessInvoiceDb.InsertInvoice(invoice, billingItems);
         }
 
+        [WebMethod]
+        public static object GetProductOptions()
+        {
+            DAOInvoice accessInvoiceDb = new DAOInvoice();
+            return accessInvoiceDb.GetProductOptions(storeId);
+        }
+
+        [WebMethod]
+        public static object GetSupplierOptions()
+        {
+            DAOInvoice accessInvoiceDb = new DAOInvoice();
+            return accessInvoiceDb.GetCustomerOptions(storeId);
+        }
+
         /*[WebMethod]
         public static object GetInvoice(int invoiceId)
         {

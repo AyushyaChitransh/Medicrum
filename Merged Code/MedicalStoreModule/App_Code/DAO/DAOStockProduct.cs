@@ -495,7 +495,7 @@ namespace MedicalStoreModule.App_Code.DAO
 
         public object GetProductModelOptions(int storeId)
         {
-            List<object> productModelOption = new List<object>();
+            List<object> productModelOptions = new List<object>();
             try
             {
                 if (cm.OpenConnection() == true)
@@ -509,11 +509,11 @@ namespace MedicalStoreModule.App_Code.DAO
                     MySqlDataReader dataReader = cmd.ExecuteReader();
                     while (dataReader.Read())
                     {
-                        productModelOption.Add(new { DisplayText = dataReader["product_name"].ToString(), Value = int.Parse(dataReader["product_model_id"].ToString()) });
+                        productModelOptions.Add(new { DisplayText = dataReader["product_name"].ToString(), Value = int.Parse(dataReader["product_model_id"].ToString()) });
                     }
                     cm.CloseConnection();
                 }
-                return new { Result = "OK", Options = productModelOption };
+                return new { Result = "OK", Options = productModelOptions };
             }
             catch (Exception ex)
             {
