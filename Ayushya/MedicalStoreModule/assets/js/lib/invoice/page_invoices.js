@@ -233,8 +233,8 @@ function GetInvoiceDetails(invoiceId) {
         dataType: "json",
         success: function (response) {
             invoice_id = JSON.parse(response.d);
-            //console.log(invoice_id);
-            //alert("(1)Invoice_id==" + invoice_id);
+            invoice_id.invoice_date = parseJsonDate(invoice_id.invoice_date);
+            invoice_id.invoice_due_date = parseJsonDate(invoice_id.invoice_due_date);
         },
         error: function (error) {
             alert('Failed to load Invoice');
@@ -243,39 +243,7 @@ function GetInvoiceDetails(invoiceId) {
     return invoice_id;
 }
 
-
-//function GetListOfBillingItems(invoiceId) {
-//    var listBillingItems;
-//    $.ajax({
-//        type: 'POST',
-//        url: 'PageInvoice.aspx/GetBillingItems',
-//        contentType: 'application/json; charset=utf-8',
-//        data: "{ 'invoiceId': " + 1 + " }",
-//        dataType: "json",
-//        success: function (response) {
-//            listBillingItems = response.d;
-//        },
-//        error: function (error) {
-//            alert('Failed to load Invoice billing items');
-//        }
-//    });
-//    return listBillingItems;
-//}
-
-
-//function DeleteInvoice() {
-//    $.ajax({
-//        type: 'POST',
-//        url: 'PageInvoice.aspx/DeleteInvoiceAndBIll',
-//        contentType: 'application/json; charset=utf-8',
-//        data: "{ 'invoiceId': " + 1 + " }",
-//        dataType: "json",
-//        success: function (response) {
-//            alert("Invoice and billing items moved to trash");
-
-//        },
-//        error: function (error) {
-//            alert('Failed to delete Invoice and billing items');
-//        }
-//    });
-//}
+function parseJsonDate(jsonDateString) {
+    var dateObj = new Date(parseInt(jsonDateString.substr(6)));
+    return (dateObj.getMonth() + "." + dateObj.getDate() + "." + dateObj.getFullYear());
+}

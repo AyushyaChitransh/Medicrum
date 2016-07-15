@@ -73,7 +73,7 @@
                 <span class="uk-text-muted uk-text-small uk-text-italic">Date:</span> {{invoice_date}}
                
                 <br />
-                <span class="uk-text-muted uk-text-small uk-text-italic">Due Date:</span> {{invoice_due_date}}
+                <%--<span class="uk-text-muted uk-text-small uk-text-italic">Due Date:</span> {{invoice_due_date}}--%>
            
             </div>
             <div class="uk-grid" data-uk-grid-margin>
