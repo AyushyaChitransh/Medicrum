@@ -39,25 +39,7 @@
                         <div class="md-list-outside-wrapper">
                             <ul class="md-list md-list-outside invoices_list" id="invoices_list">
                                 <li class="heading_list">November 2015</li>
-                                <li>
-                                    <a href="#" class="md-list-content" data-invoice-id="1">
-                                        <span class="md-list-heading uk-text-truncate">Invoice 9/2015 <span class="uk-text-small uk-text-muted">(12 Nov)</span></span>
-                                        <span class="uk-text-small uk-text-muted">Moore, Schimmel and Bernier</span>
-                                    </a>
-                                </li>
-                                <li>
-                                    <a href="#" class="md-list-content" data-invoice-id="2">
-                                        <span class="md-list-heading uk-text-truncate">Invoice 9/2015 <span class="uk-text-small uk-text-muted">(11 Nov)</span></span>
-                                        <span class="uk-text-small uk-text-muted">Hettinger-O'Connell</span>
-                                    </a>
-                                </li>
-                                <li>
-                                    <a href="#" class="md-list-content" data-invoice-id="3">
-                                        <span class="uk-badge uk-badge-danger">Overdue</span>
-                                        <span class="md-list-heading uk-text-truncate">Invoice 166/2015 <span class="uk-text-small uk-text-muted">(10 Nov)</span></span>
-                                        <span class="uk-text-small uk-text-muted">Medhurst PLC</span>
-                                    </a>
-                                </li>
+                                <%= InvoiceSidebarList("") %>                         
                             </ul>
                         </div>
                     </div>
@@ -83,41 +65,41 @@
                 <i class="md-icon material-icons" id="invoice_print">&#xE8ad;</i>
                 <i class="md-icon material-icons" onclick="DeleteInvoice()">delete</i>
             </div>
-            <h3 class="md-card-toolbar-heading-text large" id="invoice_name">Invoice {{invoice_id.invoice_number}}
+            <h3 class="md-card-toolbar-heading-text large" id="invoice_name">Invoice {{invoice_number}}
             </h3>
         </div>
         <div class="md-card-content">
             <div class="uk-margin-medium-bottom">
-                <span class="uk-text-muted uk-text-small uk-text-italic">Date:</span> {{invoice_id.invoice_date}}
+                <span class="uk-text-muted uk-text-small uk-text-italic">Date:</span> {{invoice_date}}
                
                 <br />
-                <span class="uk-text-muted uk-text-small uk-text-italic">Due Date:</span> {{invoice_id.invoice_due_date}}
+                <%--<span class="uk-text-muted uk-text-small uk-text-italic">Due Date:</span> {{invoice_due_date}}--%>
            
             </div>
             <div class="uk-grid" data-uk-grid-margin>
                 <div class="uk-width-small-3-5">
                     <div class="uk-margin-bottom">
                         <span class="uk-text-muted uk-text-small uk-text-italic">Customer:</span>
-                        <p><strong>{{invoice_id.invoice_customer}}</strong></p>
+                        <p><strong>{{invoice_customer}}</strong></p>
                         <span class="uk-text-muted uk-text-small uk-text-italic">Location:</span>
                         <address>
-                            <p>{{invoice_id.invoice_address}}</p>
-                            <p>{{invoice_id.invoice_district}}</p>
-                            <p>{{invoice_id.invoice_state}}</p>
-                            <p>{{invoice_id.invoice_country}}</p>
-                            <p>{{invoice_id.invoice_pincode}}</p>
+                            <p>{{invoice_address}}</p>
+                            <p>{{invoice_district}}</p>
+                            <p>{{invoice_state}}</p>
+                            <p>{{invoice_country}}</p>
+                            <p>{{invoice_pincode}}</p>
                         </address>
                         <span class="uk-text-muted uk-text-small uk-text-italic">Contact:</span>
                         <address>
-                            <p>{{invoice_id.invoice_email}}</p>
-                            <p>{{invoice_id.invoice_mobile}}</p>
+                            <p>{{invoice_email}}</p>
+                            <p>{{invoice_mobile}}</p>
                         </address>
                     </div>
                 </div>
                 <div class="uk-width-small-2-5">
                     <span class="uk-text-muted uk-text-small uk-text-italic">Total:</span>
-                    <p class="heading_b uk-text-success">{{invoice_id.invoice_total_value}}</p>
-                    <p class="uk-text-small uk-text-muted uk-margin-top-remove">Incl. VAT - {{invoice_id.invoice_vat_value}}</p>
+                    <p class="heading_b uk-text-success">{{invoice_total_value}}</p>
+                    <p class="uk-text-small uk-text-muted uk-margin-top-remove">Incl. VAT - {{invoice_vat_value}}</p>
                 </div>
             </div>
             <div class="uk-grid uk-margin-large-bottom">
@@ -133,7 +115,7 @@
                             </tr>
                         </thead>
                         <tbody>
-                            {{#each invoice_id.invoice_medicines}}
+                            {{#each invoice_medicines}}
                            
                             <tr class="uk-table-middle">
                                 <td>
@@ -159,10 +141,10 @@
                 <div class="uk-width-1-1">
                     <span class="uk-text-muted uk-text-small uk-text-italic">Payment info:</span>
                     <p class="uk-margin-top-remove">
-                        {{{ invoice_id.invoice_payment_terms }}}
+                        {{{ invoice_payment_terms }}}
                    
                     </p>
-                    <p class="uk-text-small">Please pay within {{ invoice_id.invoice_payment_mode }} days</p>
+                    <p class="uk-text-small">Please pay within {{ invoice_payment_mode }} days</p>
                 </div>
             </div>
         </div>
@@ -179,8 +161,9 @@
             <div class="md-card-content large-padding">
                 <div class="uk-grid" data-uk-grid-margin="data-uk-grid-margin">
                     <div class="uk-width-1-1">
-                        <label for="form_customer">Customer:</label>
-                        <input type="text" class="md-input" id="invoice_form_customer" name="customerId" />
+                        <label for="form_customer">Customer<span class="req">*</span></label>
+                        <select class="md-input label-fixed" id="invoice_form_customer" name="customerId" required="required" data-uk-tooltip="{cls:'long-text',pos:'bottom'}" title="Name | Phone Number">
+                        </select>
                     </div>
                     <hr style="width:100%" />
                 </div>
@@ -253,25 +236,14 @@
             </div>
             <div class="uk-width-medium-9-10">
                 <div class="uk-grid uk-grid-small" data-uk-grid-margin="data-uk-grid-margin">
-                    <div class="uk-width-medium-5-10">
-                        <label for="inv_medicine_{{invoice_medicine_id}}">Medicine Name</label>
-                        <input type="text" class="md-input" id="inv_medicine_{{invoice_medicine_id}}" name="billingItems[{{invoice_medicine_id}}][productId]" />
+                    <div class="uk-width-medium-7-10">
+                        <label for="inv_medicine_{{invoice_medicine_id}}">Product Name<span class="req">*</span></label>
+                        <select class="md-input label-fixed" id="inv_medicine_{{invoice_medicine_id}}" name="billingItems[{{invoice_medicine_id}}][productId]" required="required" data-uk-tooltip="{cls:'long-text',pos:'bottom'}" title="Product Name | Batch Number">
+                        </select>
                     </div>
-                    <div class="uk-width-medium-1-10">
-                        <label for="inv_medicine_{{invoice_medicine_id}}_rate">Rate</label>
-                        <input type="text" class="md-input" id="inv_medicine_{{invoice_medicine_id}}_rate" name="billingItems[{{invoice_medicine_id}}][unitPrice]" />
-                    </div>
-                    <div class="uk-width-medium-1-10">
-                        <label for="inv_medicine_{{invoice_medicine_id}}_qty">Qty</label>
+                    <div class="uk-width-medium-3-10">
+                        <label for="inv_medicine_{{invoice_medicine_id}}_qty">Quantity<span class="req">*</span></label>
                         <input type="text" class="md-input" id="inv_medicine_{{invoice_medicine_id}}_qty" name="billingItems[{{invoice_medicine_id}}][quantity]" />
-                    </div>
-                    <div class="uk-width-medium-1-10">
-                        <label for="inv_medicine_{{invoice_medicine_id}}_vat">VAT</label>
-                        <input type="text" class="md-input" id="inv_medicine_{{invoice_medicine_id}}_vat" name="billingItems[{{invoice_medicine_id}}][tax]" />
-                    </div>
-                    <div class="uk-width-medium-2-10">
-                        <label for="inv_medicine_{{invoice_medicine_id}}_vat">Total</label>
-                        <input type="text" class="md-input" id="inv_medicine_{{invoice_medicine_id}}_total" name="billingItems[{{invoice_medicine_id}}][price]" />
                     </div>
                 </div>
             </div>
@@ -315,6 +287,8 @@
     
     <script src="assets/js/lib/invoice/jquery.serialize-object.min.js"></script>
     <!--  invoices functions -->
+    <script src="assets/js/lib/json_decrypt_date.js"></script>
+    <script src="assets/js/lib/invoice/invoice_functions.js"></script>
     <script src="assets/js/lib/invoice/page_invoices.js"></script>
 
     <script>

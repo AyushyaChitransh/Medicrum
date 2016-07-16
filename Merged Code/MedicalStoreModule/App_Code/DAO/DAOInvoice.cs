@@ -199,6 +199,218 @@ namespace MedicalStoreModule.App_Code.DAO
             }
         }
 
+        public List<object> GetInvoiceList(string customerName, int storeId)
+        {
+            //Hardcoded customer search text
+            customerName = "";
+            List<object> invoiceList = new List<object>();
+            string qry = @"SELECT * FROM invoice
+                                    LEFT JOIN customer ON invoice.customer_id = customer.customer_id
+                                    WHERE invoice.delete_status=@delete_status AND
+                                          invoice.store_id = @store_id";
+            MySqlCommand cmd = new MySqlCommand(qry, cm.connection);
+            cmd.Parameters.AddWithValue("@searchText", customerName + '%');
+            cmd.Parameters.AddWithValue("@store_id", storeId);
+            cmd.Parameters.AddWithValue("@delete_status", 0);
+            try
+            {
+                if (cm.OpenConnection())
+                {
+                    MySqlDataReader dataReader = cmd.ExecuteReader();
+                    while (dataReader.Read())
+                    {
+                        Invoice invoiceObj = new Invoice();
+                        object listObj = new object();
+                        invoiceObj.invoiceId = int.Parse(dataReader["invoice_id"].ToString());
+                        invoiceObj.invoiceNumber = int.Parse(dataReader["invoice_number"].ToString());
+                        invoiceObj.customerId = int.Parse(dataReader["customer_id"].ToString());
+                        invoiceObj.storeId = int.Parse(dataReader["store_id"].ToString());
+                        invoiceObj.invoiceDate = DateTime.Parse(dataReader["invoice_date"].ToString());
+                        invoiceObj.invoiceType = dataReader["invoice_type"].ToString();
+                        invoiceObj.paymentTerms = dataReader["payment_terms"].ToString();
+                        invoiceObj.paymentMode = dataReader["payment_mode"].ToString();
+                        decimal totalAmountTemp = new decimal();
+                        if (decimal.TryParse(dataReader["total_amount"].ToString(), out totalAmountTemp))
+                        {
+                            invoiceObj.totalAmount = totalAmountTemp;
+                        }
+                        decimal taxAmountTemp = new decimal();
+                        if (decimal.TryParse(dataReader["tax_amount"].ToString(), out taxAmountTemp))
+                        {
+                            invoiceObj.taxAmount = taxAmountTemp;
+                        }
+                        invoiceObj.discountType = dataReader["discount_type"].ToString();
+                        decimal discountAmountTemp = new decimal();
+                        if (decimal.TryParse(dataReader["discount_amount"].ToString(), out discountAmountTemp))
+                        {
+                            invoiceObj.discountAmount = discountAmountTemp;
+                        }
+                        invoiceObj.couponCode = dataReader["coupon_code"].ToString();
+                        decimal netTotalTemp = new decimal();
+                        if (decimal.TryParse(dataReader["net_total"].ToString(), out netTotalTemp))
+                        {
+                            invoiceObj.netTotal = netTotalTemp;
+                        }
+                        decimal amountPaidTemp = new decimal();
+                        if (decimal.TryParse(dataReader["amount_paid"].ToString(), out amountPaidTemp))
+                        {
+                            invoiceObj.amountPaid = amountPaidTemp;
+                        }
+                        invoiceObj.status = int.Parse(dataReader["status"].ToString());
+                        listObj = new
+                        {
+                            invoiceId = invoiceObj.invoiceId,
+                            invoiceNumber = invoiceObj.invoiceNumber,
+                            storeId = invoiceObj.storeId,
+                            customerId = invoiceObj.customerId,
+                            customerName = dataReader["customer_name"].ToString(),
+                            invoiceDate = invoiceObj.invoiceDate,
+                            invoiceType = invoiceObj.invoiceType,
+                            paymentTerms = invoiceObj.paymentTerms,
+                            paymentMode = invoiceObj.paymentMode,
+                            totalAmount = invoiceObj.totalAmount,
+                            discountType = invoiceObj.discountType,
+                            discountAmount = invoiceObj.discountAmount,
+                            couponCode = invoiceObj.couponCode,
+                            netTotal = invoiceObj.netTotal,
+                            amountPaid = invoiceObj.amountPaid,
+                            status = invoiceObj.status,
+                            deleteStatus = invoiceObj.deleteStatus
+                        };
+                        invoiceList.Add(listObj);
+                    }
+                    cm.CloseConnection();
+                    return invoiceList;
+                }
+            }
+            catch (Exception ex)
+            {
+                cm.CloseConnection();
+                string msg = ex.Message;
+            }
+            return invoiceList;
+        }
+
+        public Invoice GetInvoice(int invoiceId)
+        {
+            Invoice invoiceObj = new Invoice();
+            try
+            {
+                if (cm.OpenConnection() == true)
+                {
+                    MySqlCommand cmd = new MySqlCommand();
+                    cmd.CommandText = @"SELECT 
+                                                invoice_id,
+                                                invoice_number,
+                                                invoice.store_id,
+                                                invoice.customer_id,
+                                                invoice.invoice_date,
+                                                invoice_type,
+                                                payment_terms,
+                                                payment_mode,
+                                                total_amount,
+                                                tax_amount,
+                                                discount_type,
+                                                discount_amount,
+                                                coupon_code,
+                                                net_total,
+                                                amount_paid,
+                                                invoice.status,
+                                                invoice.delete_status
+                                        FROM invoice
+                                        WHERE invoice_id=@invoice_id AND delete_status=@delete_status";
+                    cmd.Parameters.AddWithValue("@invoice_id", invoiceId);
+                    cmd.Parameters.AddWithValue("@delete_status", 0);
+                    cmd.Connection = cm.connection;
+                    MySqlDataReader dataReader = cmd.ExecuteReader();
+                    while (dataReader.Read())
+                    {
+                        invoiceObj.invoiceId = int.Parse(dataReader["invoice_id"].ToString());
+                        invoiceObj.invoiceNumber = int.Parse(dataReader["invoice_number"].ToString());
+                        invoiceObj.customerId = int.Parse(dataReader["customer_id"].ToString());
+                        invoiceObj.storeId = int.Parse(dataReader["store_id"].ToString());
+                        invoiceObj.invoiceDate = DateTime.Parse(dataReader["invoice_date"].ToString());
+                        invoiceObj.invoiceType = dataReader["invoice_type"].ToString();
+                        invoiceObj.paymentTerms = dataReader["payment_terms"].ToString();
+                        invoiceObj.paymentMode = dataReader["payment_mode"].ToString();
+                        decimal totalAmountTemp = new decimal();
+                        if (decimal.TryParse(dataReader["total_amount"].ToString(), out totalAmountTemp))
+                        {
+                            invoiceObj.totalAmount = totalAmountTemp;
+                        }
+                        decimal taxAmountTemp = new decimal();
+                        if (decimal.TryParse(dataReader["tax_amount"].ToString(), out taxAmountTemp))
+                        {
+                            invoiceObj.taxAmount = taxAmountTemp;
+                        }
+                        invoiceObj.discountType = dataReader["discount_type"].ToString();
+                        decimal discountAmountTemp = new decimal();
+                        if (decimal.TryParse(dataReader["discount_amount"].ToString(), out discountAmountTemp))
+                        {
+                            invoiceObj.discountAmount = discountAmountTemp;
+                        }
+                        invoiceObj.couponCode = dataReader["coupon_code"].ToString();
+                        decimal netTotalTemp = new decimal();
+                        if (decimal.TryParse(dataReader["net_total"].ToString(), out netTotalTemp))
+                        {
+                            invoiceObj.netTotal = netTotalTemp;
+                        }
+                        decimal amountPaidTemp = new decimal();
+                        if (decimal.TryParse(dataReader["amount_paid"].ToString(), out amountPaidTemp))
+                        {
+                            invoiceObj.amountPaid = amountPaidTemp;
+                        }
+                        invoiceObj.status = int.Parse(dataReader["status"].ToString());
+                    }
+                    cm.CloseConnection();
+                }
+                return invoiceObj;
+            }
+            catch (Exception ex)
+            {
+                cm.CloseConnection();
+                string message = ex.Message;
+                return invoiceObj;
+            }
+        }
+
+        public List<BillingItems> GetBillingItems(int invoiceId)
+        {
+            List<BillingItems> listBillingItems = new List<BillingItems>();
+            string qry = @"SELECT * FROM billing_items WHERE invoice_id=@invoice_id AND delete_status=@delete_status";
+            MySqlCommand cmd = new MySqlCommand(qry, cm.connection);
+            cmd.Parameters.AddWithValue("@invoice_id", invoiceId);
+            cmd.Parameters.AddWithValue("@delete_status", 0);
+            try
+            {
+                if (cm.OpenConnection())
+                {
+                    MySqlDataReader dataReader = cmd.ExecuteReader();
+                    while (dataReader.Read())
+                    {
+                        BillingItems item = new BillingItems();
+                        item.invoiceId = invoiceId;
+                        item.billId = int.Parse(dataReader["bill_id"].ToString());
+                        item.productId = int.Parse(dataReader["product_id"].ToString());
+                        item.quantity = int.Parse(dataReader["quantity"].ToString());
+                        item.unitPrice = decimal.Parse(dataReader["unit_price"].ToString());
+                        item.price = decimal.Parse(dataReader["price"].ToString());
+                        item.status = int.Parse(dataReader["status"].ToString());
+                        listBillingItems.Add(item);
+                    }
+                    cm.CloseConnection();
+                    return listBillingItems;
+                }
+            }
+            catch (Exception ex)
+            {
+                cm.CloseConnection();
+                string msg = ex.Message;
+                return listBillingItems;
+            }
+            return listBillingItems;
+        }
+
         /*public Invoice GetInvoice(int invoiceId)
         {
             Invoice invoiceObj = new Invoice();

@@ -1,9 +1,11 @@
 ﻿using MedicalStoreModule.App_Code.DAO;
 using MedicalStoreModule.App_Code.Model;
+using MedicalStoreModule.App_Code.Utility;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Web;
+using System.Web.Script.Serialization;
 using System.Web.Services;
 using System.Web.UI;
 using System.Web.UI.WebControls;
@@ -66,10 +68,50 @@ namespace MedicalStoreModule
         }
 
         [WebMethod]
-        public static object GetSupplierOptions()
+        public static object GetCustomerOptions()
         {
             DAOInvoice accessInvoiceDb = new DAOInvoice();
             return accessInvoiceDb.GetCustomerOptions(storeId);
+        }
+
+        public string InvoiceSidebarList(string searchText)
+        {
+            DAOInvoice accessInvoiceDb = new DAOInvoice();
+            List<object> invoiceList = accessInvoiceDb.GetInvoiceList(searchText, storeId);
+            string sidebarList = "";
+            foreach (object item in invoiceList)
+            {
+                var invoiceId = item.GetType().GetProperty("invoiceId").GetValue(item, null);
+                var invoiceNumber = item.GetType().GetProperty("invoiceNumber").GetValue(item, null);
+                var invoiceDate = item.GetType().GetProperty("invoiceDate").GetValue(item, null);
+                var customerName = item.GetType().GetProperty("customerName").GetValue(item, null);
+                sidebarList += "<li><a href='#' class='md-list-content' data-invoice-id=" + invoiceId + "/>";
+                sidebarList += "<span class='md-list-heading uk-text-truncate'>Invoice " + invoiceNumber + "<span class='uk-text-small uk-text-muted'> " + invoiceDate + "</span></span>";
+                sidebarList += "<span class='uk-text-small uk-text-muted'>Customer " + customerName + "</span>";
+            }
+            return sidebarList;
+        }
+
+        [WebMethod]
+        public static object GetInvoice(int invoiceId)
+        {
+            DAOInvoice accessInvoiceDb = new DAOInvoice();
+            DAOCustomer accessCustomerDb = new DAOCustomer();
+            Invoice invoice = accessInvoiceDb.GetInvoice(invoiceId);
+            Customer customer = accessCustomerDb.GetCustomer(invoice.customerId);
+            List<BillingItems> billingItems = accessInvoiceDb.GetBillingItems(invoice.invoiceId);
+            InvoiceJson invoiceJson = new InvoiceJson(invoice, customer);
+            Invoice_Medicines[] invoiceMedicine = new Invoice_Medicines[billingItems.Count];
+            int i = 0;
+            foreach (BillingItems item in billingItems)
+            {
+                Invoice_Medicines med = new Invoice_Medicines(item);
+                invoiceMedicine[i++] = med;
+            }
+            invoiceJson.invoice_medicines = invoiceMedicine;
+            JavaScriptSerializer serializer = new JavaScriptSerializer();
+            string invoiceJsonData = serializer.Serialize(invoiceJson);
+            return invoiceJsonData;
         }
 
         /*[WebMethod]

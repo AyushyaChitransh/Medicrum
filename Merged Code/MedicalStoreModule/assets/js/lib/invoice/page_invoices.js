@@ -26,7 +26,7 @@ altair_invoices = {
         if ($invoice_add_btn) {
 
             var insert_form = function () {
-
+                GetCustomerOptions();
                 var $invoice_form_template = $('#invoice_form_template'),
                     card_height = $invoice_card.height(),
                     content_height = $invoice_card.find('.md-card-content').innerHeight(),
@@ -60,6 +60,8 @@ altair_invoices = {
                         theCompiledHtml = template_compiled(context);
 
                     $invoice_medicines.append(theCompiledHtml);
+
+                    GetProductOptions(medicine_id);
 
                     // invoice md inputs
                     altair_md.inputs();
@@ -116,51 +118,7 @@ altair_invoices = {
                 template_compiled = Handlebars.compile(template);
 
             var invoice_id = parseInt($this.attr('data-invoice-id')),
-                context = {
-                    invoice_id: {
-                        invoice_number: Math.floor((Math.random() * 200) + 1) + '/2015',
-                        invoice_date: moment().format('DD.MM.YYYY'),
-                        invoice_due_date: moment().add(14, 'days').format('DD.MM.YYYY'),
-                        invoice_customer: 'Mr Scrum',
-                        invoice_address: 'Address of customer',
-                        invoice_district: 'In this district',
-                        invoice_state: 'State',
-                        invoice_country: 'India',
-                        invoice_pincode: 'Pincode info',
-                        invoice_email: 'someone@gmail.com',
-                        invoice_mobile: '8947029089',
-                        invoice_total_value: '$3,751.50',
-                        invoice_vat_value: '$862.85',
-                        invoice_medicines: [
-                            {
-                                medicine_name: "Volini",
-                                medicine_description: "To be applied  on pain",
-                                medicine_rate: "$25.00",
-                                medicine_qty: "32",
-                                medicine_vat: "23%",
-                                medicine_total: "$984.00"
-                            },
-                            {
-                                medicine_name: "Search engine optimization",
-                                medicine_description: "Lorem ipsum dolor sit amet, consectetur adipisicing elit. Ab blanditiis cupiditate delectus deserunt.",
-                                medicine_rate: "$50.00",
-                                medicine_qty: "20",
-                                medicine_vat: "23%",
-                                medicine_total: "$1,230.00"
-                            },
-                            {
-                                medicine_name: "Consulting charges",
-                                medicine_description: "Came twice here",
-                                medicine_rate: "$100.00",
-                                medicine_qty: "12",
-                                medicine_vat: "23%",
-                                medicine_total: "$1,57.50"
-                            }
-                        ],
-                        invoice_payment_terms: 'By next year in monthly installments',
-                        invoice_payment_mode: '11'
-                    }
-                },
+                context = GetInvoiceDetails(invoice_id),
                 theCompiledHtml = template_compiled(context);
 
             $invoice_preview.html(theCompiledHtml);
@@ -213,95 +171,3 @@ altair_invoices = {
 
     }
 };
-
-function AddInvoice() {
-    event.preventDefault();
-    var data = JSON.stringify($('#form_invoice').serializeObject(), null, 2);
-    //UIkit.modal.alert('<p>Invoice data:</p><pre>' + data + '</pre>');
-    $.ajax({
-        type: 'POST',
-        url: 'PageInvoice.aspx/InsertInvoiceAndBillingItems',
-        contentType: 'application/json; charset=utf-8',
-        data: data,
-        success: function (response) {
-
-        },
-        error: function (error) {
-            alert("Failed to load data!");
-        }
-    });
-}
-
-//function GetCustomerData(customerId){
-//    var customerObj;
-//    $.ajax({
-//        type: 'POST',
-//        url: 'ViewDetailedCustomer.aspx/GetCustomer',
-//        contentType: 'application/json; charset=utf-8',
-//        data: "{ 'requestedCustomerId': " + 1 + " }",
-//        success: function (response) {
-//            customerObj = response.d;
-
-//        },
-//        error: function (error) {
-//            alert("Failed to load data!");
-//        }
-//    });
-//    return customerObj;
-//}
-
-
-//function GetInvoiceDetails(invoiceId) {
-//    var invoiceObj;
-//    $.ajax({
-//        type: 'POST',
-//        url: 'PageInvoice.aspx/GetInvoice',
-//        contentType: 'application/json; charset=utf-8',
-//        data: "{ 'invoiceId': " + 1 + " }",
-//        dataType: "json",
-//        success: function (response) {
-//            invoiceObj = response.d;
-//        },
-//        error: function (error) {
-//            alert('Failed to load Invoice');
-//        }
-//    });
-//    return invoiceObj;
-//}
-
-
-//function GetListOfBillingItems(invoiceId) {
-//    var listBillingItems;
-//    $.ajax({
-//        type: 'POST',
-//        url: 'PageInvoice.aspx/GetBillingItems',
-//        contentType: 'application/json; charset=utf-8',
-//        data: "{ 'invoiceId': " + 1 + " }",
-//        dataType: "json",
-//        success: function (response) {
-//            listBillingItems = response.d;
-//        },
-//        error: function (error) {
-//            alert('Failed to load Invoice billing items');
-//        }
-//    });
-//    return listBillingItems;
-//}
-
-
-//function DeleteInvoice() {
-//    $.ajax({
-//        type: 'POST',
-//        url: 'PageInvoice.aspx/DeleteInvoiceAndBIll',
-//        contentType: 'application/json; charset=utf-8',
-//        data: "{ 'invoiceId': " + 1 + " }",
-//        dataType: "json",
-//        success: function (response) {
-//            alert("Invoice and billing items moved to trash");
-
-//        },
-//        error: function (error) {
-//            alert('Failed to delete Invoice and billing items');
-//        }
-//    });
-//}
