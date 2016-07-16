@@ -146,7 +146,7 @@ namespace MedicalStoreModule.App_Code.DAO
                 if (cm.OpenConnection() == true)
                 {
                     MySqlCommand cmd = new MySqlCommand();
-                    cmd.CommandText = @"SELECT s.product_id, s.batch_number, p.product_name FROM stock_product s
+                    cmd.CommandText = @"SELECT s.product_id, s.batch_number, p.product_name, s.price FROM stock_product s
                                         LEFT JOIN product_model p ON s.product_model_id = p.product_model_id
                                         WHERE s.delete_status=@delete_status AND s.store_id=@store_id";
                     cmd.Parameters.AddWithValue("@store_id", storeId);
@@ -155,7 +155,7 @@ namespace MedicalStoreModule.App_Code.DAO
                     MySqlDataReader dataReader = cmd.ExecuteReader();
                     while (dataReader.Read())
                     {
-                        productOptions.Add(new { DisplayText = dataReader["product_name"].ToString(), Value = int.Parse(dataReader["product_id"].ToString()), AdditionalText = dataReader["batch_number"].ToString() });
+                        productOptions.Add(new { DisplayText = dataReader["product_name"].ToString(), Value = int.Parse(dataReader["product_id"].ToString()), AdditionalText1 = dataReader["batch_number"].ToString(), AdditionalText2 = dataReader["price"].ToString() });
                     }
                     cm.CloseConnection();
                 }

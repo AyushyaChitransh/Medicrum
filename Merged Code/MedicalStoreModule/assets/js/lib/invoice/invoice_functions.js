@@ -57,7 +57,7 @@ function GetProductOptions(id) {
             var product = $("[id*=inv_medicine_" + id + "]");
             product.empty().append('<option selected="selected" value="">Select Product</option>');
             $.each(msg.d, function (index, item) {
-                var displayText = item.DisplayText + " | " + item.AdditionalText;
+                var displayText = item.DisplayText + " | " + item.AdditionalText1 + " | " + item.AdditionalText2;
                 $("#inv_medicine_" + id).get(0).options[index + 1] = new Option(displayText, item.Value);
             });
         },

@@ -154,7 +154,7 @@
         <form action="" class="uk-form-stacked" id="form_invoice">
             <div class="md-card-toolbar">
                 <div class="md-card-toolbar-actions">
-                    <i class="md-icon material-icons" id="invoice_submit" onclick="AddInvoice()">save</i>
+                    <i class="md-icon material-icons" id="invoice_submit" onclick="AddInvoice()" data-uk-tooltip="{cls:'long-text',pos:'bottom'}" title="View Invoice">save</i>
                 </div>
                 <input name="invoiceNumber" id="invoice_number" class="md-card-toolbar-input" type="text" value="" placeholder="Invoice number" />
             </div>
@@ -162,7 +162,7 @@
                 <div class="uk-grid" data-uk-grid-margin="data-uk-grid-margin">
                     <div class="uk-width-1-1">
                         <label for="form_customer">Customer<span class="req">*</span></label>
-                        <select class="md-input label-fixed" id="invoice_form_customer" name="customerId" required="required" data-uk-tooltip="{cls:'long-text',pos:'bottom'}" title="Name | Phone Number">
+                        <select class="md-input label-fixed" id="invoice_form_customer" name="customerId" required="required" data-uk-tooltip="{cls:'long-text',pos:'bottom'}" title="Name | Contact">
                         </select>
                     </div>
                     <hr style="width:100%" />
@@ -238,7 +238,7 @@
                 <div class="uk-grid uk-grid-small" data-uk-grid-margin="data-uk-grid-margin">
                     <div class="uk-width-medium-7-10">
                         <label for="inv_medicine_{{invoice_medicine_id}}">Product Name<span class="req">*</span></label>
-                        <select class="md-input label-fixed" id="inv_medicine_{{invoice_medicine_id}}" name="billingItems[{{invoice_medicine_id}}][productId]" required="required" data-uk-tooltip="{cls:'long-text',pos:'bottom'}" title="Product Name | Batch Number">
+                        <select class="md-input label-fixed" id="inv_medicine_{{invoice_medicine_id}}" name="billingItems[{{invoice_medicine_id}}][productId]" required="required" data-uk-tooltip="{cls:'long-text',pos:'bottom'}" title="Name | Batch | Price">
                         </select>
                     </div>
                     <div class="uk-width-medium-3-10">
