@@ -1,4 +1,10 @@
-﻿//Add Invoice
+﻿//Add Customer
+function AddCustomer()
+{
+    window.location = "AddCustomer.aspx";
+}
+
+//Add Invoice
 function AddInvoice() {
     event.preventDefault();
     var data = JSON.stringify($('#form_invoice').serializeObject(), null, 2);

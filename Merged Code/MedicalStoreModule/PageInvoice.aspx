@@ -160,10 +160,13 @@
             </div>
             <div class="md-card-content large-padding">
                 <div class="uk-grid" data-uk-grid-margin="data-uk-grid-margin">
-                    <div class="uk-width-1-1">
+                    <div class="uk-width-9-10">
                         <label for="form_customer">Customer<span class="req">*</span></label>
-                        <select class="md-input label-fixed" id="invoice_form_customer" name="customerId" required="required" data-uk-tooltip="{cls:'long-text',pos:'bottom'}" title="Name | Contact">
+                        <select class="md-input label-fixed" id="invoice_form_customer" name="customerId" required="required" data-uk-tooltip="{cls:'long-text',pos:'top'}" title="Name | Contact">
                         </select>
+                    </div>
+                    <div class="uk-width-1-10">
+                        <i class="md-icon material-icons" id="invoice_add_customer" onclick="AddCustomer()" data-uk-tooltip="{cls:'long-text',pos:'bottom'}" title="Add Customer">add</i>
                     </div>
                     <hr style="width:100%" />
                 </div>
@@ -216,7 +219,7 @@
                     <div class="uk-width-1-1">
                         <div id="form_invoice_medicines"></div>
                         <div class="uk-text-center uk-margin-medium-top uk-margin-bottom">
-                            <a href="#" class="md-btn md-btn-flat md-btn-flat-primary" id="invoice_form_append_medicine_btn">Add new</a>
+                            <a href="#" class="md-btn md-btn-flat md-btn-flat-primary" id="invoice_form_append_medicine_btn" data-uk-tooltip="{cls:'long-text',pos:'bottom'}" title="click only if you want to add new product to invoice">Add new</a>
                         </div>
                     </div>
                 </div>
