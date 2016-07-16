@@ -14,57 +14,88 @@ namespace MedicalStoreModule.App_Code.DAO
         {
             try
             {
+                int productId = new int();
                 if (cm.OpenConnection() == true)
                 {
-                    MySqlCommand cmd = new MySqlCommand();
-                    string parameters = "product_model_id, store_id, supplier_id, batch_number, manufacture_date, expiry_date, package_quantity, price, quantity, in_stock, delete_status";
-                    string values = "@product_model_id, @store_id, @supplier_id, @batch_number, @manufacture_date, @expiry_date, @package_quantity, @price, @quantity, @in_stock, @delete_status";
-                    cm.AddIfNotNull(stockProduct.barcode.ToString(), "barcode", ref parameters, ref values);
-                    cm.AddIfNotNull(stockProduct.manufactureLicenceNumber, "manufacture_licence_number", ref parameters, ref values);
-                    cm.AddIfNotNull(stockProduct.weight.ToString(), "weight", ref parameters, ref values);
-                    cm.AddIfNotNull(stockProduct.volume.ToString(), "volume", ref parameters, ref values);
-                    cm.AddIfNotNull(stockProduct.tax.ToString(), "tax", ref parameters, ref values);
-                    cm.AddIfNotNull(stockProduct.status.ToString(), "status", ref parameters, ref values);
-                    cmd.CommandText = "INSERT INTO stock_product (" + parameters + ") VALUES (" + values + ")";
-                    cmd.Parameters.AddWithValue("@product_model_id", stockProduct.productModelId);
-                    cmd.Parameters.AddWithValue("@store_id", stockProduct.storeId);
-                    cmd.Parameters.AddWithValue("@supplier_id", stockProduct.supplierId);
-                    cmd.Parameters.AddWithValue("@batch_number", stockProduct.batchNumber);
-                    cmd.Parameters.AddWithValue("@manufacture_date", stockProduct.manufactureDate);
-                    cmd.Parameters.AddWithValue("@expiry_date", stockProduct.expiryDate);
-                    cmd.Parameters.AddWithValue("@package_quantity", stockProduct.packageQuantity);
-                    cmd.Parameters.AddWithValue("@price", stockProduct.price);
-                    cmd.Parameters.AddWithValue("@quantity", stockProduct.quantity);
-                    cmd.Parameters.AddWithValue("@in_stock", stockProduct.inStock);
-                    cmd.Parameters.AddWithValue("@delete_status", stockProduct.deleteStatus);
-                    if (stockProduct.barcode != null)
+                    MySqlCommand cmd1 = new MySqlCommand();
+                    cmd1.CommandText = @"SELECT product_id from stock_product 
+                                        WHERE product_model_id=@product_model_id 
+                                            AND batch_number=@batch_number 
+                                            AND delete_status=@delete_status 
+                                            AND store_id=@store_id";
+                    cmd1.Parameters.AddWithValue("@product_model_id", stockProduct.productModelId);
+                    cmd1.Parameters.AddWithValue("@store_id", stockProduct.storeId);
+                    cmd1.Parameters.AddWithValue("@batch_number", stockProduct.batchNumber);
+                    cmd1.Parameters.AddWithValue("@delete_status", 0);
+                    cmd1.Connection = cm.connection;
+                    MySqlDataReader dataReader = cmd1.ExecuteReader();
+                    while (dataReader.Read())
                     {
-                        cmd.Parameters.AddWithValue("@barcode", stockProduct.barcode);
+                        int.TryParse(dataReader["product_id"].ToString(), out productId);
+                        int t = productId;
                     }
-                    if (stockProduct.manufactureLicenceNumber != null)
+                    if(productId == 0)
                     {
-                        cmd.Parameters.AddWithValue("@manufacture_licence_number", stockProduct.manufactureLicenceNumber);
+                        MySqlCommand cmd2 = new MySqlCommand();
+                        string parameters = "product_model_id, store_id, supplier_id, batch_number, manufacture_date, expiry_date, package_quantity, price, quantity, in_stock, delete_status";
+                        string values = "@product_model_id, @store_id, @supplier_id, @batch_number, @manufacture_date, @expiry_date, @package_quantity, @price, @quantity, @in_stock, @delete_status";
+                        cm.AddIfNotNull(stockProduct.barcode.ToString(), "barcode", ref parameters, ref values);
+                        cm.AddIfNotNull(stockProduct.manufactureLicenceNumber, "manufacture_licence_number", ref parameters, ref values);
+                        cm.AddIfNotNull(stockProduct.weight.ToString(), "weight", ref parameters, ref values);
+                        cm.AddIfNotNull(stockProduct.volume.ToString(), "volume", ref parameters, ref values);
+                        cm.AddIfNotNull(stockProduct.tax.ToString(), "tax", ref parameters, ref values);
+                        cm.AddIfNotNull(stockProduct.status.ToString(), "status", ref parameters, ref values);
+                        cmd2.CommandText = "INSERT INTO stock_product (" + parameters + ") VALUES (" + values + ")";
+                        cmd2.Parameters.AddWithValue("@product_model_id", stockProduct.productModelId);
+                        cmd2.Parameters.AddWithValue("@store_id", stockProduct.storeId);
+                        cmd2.Parameters.AddWithValue("@supplier_id", stockProduct.supplierId);
+                        cmd2.Parameters.AddWithValue("@batch_number", stockProduct.batchNumber);
+                        cmd2.Parameters.AddWithValue("@manufacture_date", stockProduct.manufactureDate);
+                        cmd2.Parameters.AddWithValue("@expiry_date", stockProduct.expiryDate);
+                        cmd2.Parameters.AddWithValue("@package_quantity", stockProduct.packageQuantity);
+                        cmd2.Parameters.AddWithValue("@price", stockProduct.price);
+                        cmd2.Parameters.AddWithValue("@quantity", stockProduct.quantity);
+                        cmd2.Parameters.AddWithValue("@in_stock", stockProduct.inStock);
+                        cmd2.Parameters.AddWithValue("@delete_status", stockProduct.deleteStatus);
+                        if (stockProduct.barcode != null)
+                        {
+                            cmd2.Parameters.AddWithValue("@barcode", stockProduct.barcode);
+                        }
+                        if (stockProduct.manufactureLicenceNumber != null)
+                        {
+                            cmd2.Parameters.AddWithValue("@manufacture_licence_number", stockProduct.manufactureLicenceNumber);
+                        }
+                        if (stockProduct.weight != null)
+                        {
+                            cmd2.Parameters.AddWithValue("@weight", stockProduct.weight);
+                        }
+                        if (stockProduct.volume != null)
+                        {
+                            cmd2.Parameters.AddWithValue("@volume", stockProduct.volume);
+                        }
+                        if (stockProduct.tax != null)
+                        {
+                            cmd2.Parameters.AddWithValue("@tax", stockProduct.tax);
+                        }
+                        if (stockProduct.status != null)
+                        {
+                            cmd2.Parameters.AddWithValue("@status", stockProduct.status);
+                        }
+                        cmd2.Connection = cm.connection;
+                        cmd2.ExecuteNonQuery();
+                        cm.CloseConnection();
+                        return true;
                     }
-                    if (stockProduct.weight != null)
+                    else
                     {
-                        cmd.Parameters.AddWithValue("@weight", stockProduct.weight);
+                        MySqlCommand cmd2 = new MySqlCommand();
+                        cmd2.CommandText = @"UPDATE stock_product
+                                                SET quantity = quantity + " + stockProduct.quantity + " WHERE product_id=@product_id;";
+                        cmd2.Parameters.AddWithValue("@product_id", productId);
+                        cmd2.ExecuteNonQuery();
+                        cm.CloseConnection();
+                        return true;
                     }
-                    if (stockProduct.volume != null)
-                    {
-                        cmd.Parameters.AddWithValue("@volume", stockProduct.volume);
-                    }
-                    if (stockProduct.tax != null)
-                    {
-                        cmd.Parameters.AddWithValue("@tax", stockProduct.tax);
-                    }
-                    if (stockProduct.status != null)
-                    {
-                        cmd.Parameters.AddWithValue("@status", stockProduct.status);
-                    }
-                    cmd.Connection = cm.connection;
-                    cmd.ExecuteNonQuery();
-                    cm.CloseConnection();
-                    return true;
                 }
                 else
                 {
@@ -482,7 +513,7 @@ namespace MedicalStoreModule.App_Code.DAO
 
         public object GetProductModelOptions(int storeId)
         {
-            List<object> productModelOption = new List<object>();
+            List<object> productModelOptions = new List<object>();
             try
             {
                 if (cm.OpenConnection() == true)
@@ -496,11 +527,11 @@ namespace MedicalStoreModule.App_Code.DAO
                     MySqlDataReader dataReader = cmd.ExecuteReader();
                     while (dataReader.Read())
                     {
-                        productModelOption.Add(new { DisplayText = dataReader["product_name"].ToString(), Value = int.Parse(dataReader["product_model_id"].ToString()) });
+                        productModelOptions.Add(new { DisplayText = dataReader["product_name"].ToString(), Value = int.Parse(dataReader["product_model_id"].ToString()) });
                     }
                     cm.CloseConnection();
                 }
-                return new { Result = "OK", Options = productModelOption };
+                return new { Result = "OK", Options = productModelOptions };
             }
             catch (Exception ex)
             {

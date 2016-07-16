@@ -1,9 +1,9 @@
 ﻿using MedicalStoreModule.App_Code.DAO;
 using MedicalStoreModule.App_Code.Model;
+using MedicalStoreModule.App_Code.Utility;
 using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Reflection;
 using System.Web;
 using System.Web.Script.Serialization;
 using System.Web.Services;
@@ -12,7 +12,6 @@ using System.Web.UI.WebControls;
 
 namespace MedicalStoreModule
 {
-
     public partial class PageInvoice : System.Web.UI.Page
     {
         private static int storeId = 1;
@@ -61,6 +60,20 @@ namespace MedicalStoreModule
             return accessInvoiceDb.InsertInvoice(invoice, billingItems);
         }
 
+        [WebMethod]
+        public static object GetProductOptions()
+        {
+            DAOInvoice accessInvoiceDb = new DAOInvoice();
+            return accessInvoiceDb.GetProductOptions(storeId);
+        }
+
+        [WebMethod]
+        public static object GetCustomerOptions()
+        {
+            DAOInvoice accessInvoiceDb = new DAOInvoice();
+            return accessInvoiceDb.GetCustomerOptions(storeId);
+        }
+
         public string InvoiceSidebarList(string searchText)
         {
             DAOInvoice accessInvoiceDb = new DAOInvoice();
@@ -79,12 +92,6 @@ namespace MedicalStoreModule
             return sidebarList;
         }
 
-        /// <summary>
-        /// Supply invoice details in JSON format
-        /// </summary>
-        /// <param name="invoiceId"></param>
-        /// <returns>JSON format invoice details 
-        /// which are required in view invoice</returns>
         [WebMethod]
         public static object GetInvoice(int invoiceId)
         {
@@ -93,7 +100,7 @@ namespace MedicalStoreModule
             Invoice invoice = accessInvoiceDb.GetInvoice(invoiceId);
             Customer customer = accessCustomerDb.GetCustomer(invoice.customerId);
             List<BillingItems> billingItems = accessInvoiceDb.GetBillingItems(invoice.invoiceId);
-            InvoiceJson invoiceJson = new InvoiceJson(invoice,customer);
+            InvoiceJson invoiceJson = new InvoiceJson(invoice, customer);
             Invoice_Medicines[] invoiceMedicine = new Invoice_Medicines[billingItems.Count];
             int i = 0;
             foreach (BillingItems item in billingItems)

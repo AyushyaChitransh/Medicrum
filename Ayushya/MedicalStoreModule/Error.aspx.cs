@@ -11,7 +11,13 @@ namespace MedicalStoreModule
     {
         protected void Page_Load(object sender, EventArgs e)
         {
-
+            if (!IsPostBack)
+            {
+                if (Session["storeId"] == null && Session["userName"] == null)
+                {
+                    Response.Redirect("Login.aspx");
+                }
+            }
         }
     }
 }

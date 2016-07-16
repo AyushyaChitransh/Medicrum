@@ -38,9 +38,8 @@
                     <div class="uk-width-large-3-10 hidden-print uk-visible-large">
                         <div class="md-list-outside-wrapper">
                             <ul class="md-list md-list-outside invoices_list" id="invoices_list">
-                                <li class="heading_list">Avaliable Invoices</li>
-                                <%-- To generate list items --%>
-                                <%= InvoiceSidebarList("") %>
+                                <li class="heading_list">November 2015</li>
+                                <%= InvoiceSidebarList("") %>                         
                             </ul>
                         </div>
                     </div>
@@ -59,7 +58,7 @@
     <div id="sidebar_secondary">
         <div class="sidebar_secondary_wrapper uk-margin-remove"></div>
     </div>
-    <%-- View Invoice template --%>
+
     <script id="invoice_template" type="text/x-handlebars-template">
         <div class="md-card-toolbar">
             <div class="md-card-toolbar-actions hidden-print">
@@ -155,17 +154,21 @@
         <form action="" class="uk-form-stacked" id="form_invoice">
             <div class="md-card-toolbar">
                 <div class="md-card-toolbar-actions">
-                    <i class="md-icon material-icons" id="invoice_submit" onclick="AddInvoice()">save</i>
+                    <i class="md-icon material-icons" id="invoice_submit" onclick="AddInvoice()" data-uk-tooltip="{cls:'long-text',pos:'bottom'}" title="View Invoice">save</i>
                 </div>
                 <input name="invoiceNumber" id="invoice_number" class="md-card-toolbar-input" type="text" value="" placeholder="Invoice number" />
             </div>
             <div class="md-card-content large-padding">
                 <div class="uk-grid" data-uk-grid-margin="data-uk-grid-margin">
-                    <div class="uk-width-1-1">
-                        <label for="form_customer">Customer:</label>
-                        <input type="text" class="md-input" id="invoice_form_customer" name="customerId" />
+                    <div class="uk-width-9-10">
+                        <label for="form_customer">Customer<span class="req">*</span></label>
+                        <select class="md-input label-fixed" id="invoice_form_customer" name="customerId" required="required" data-uk-tooltip="{cls:'long-text',pos:'top'}" title="Name | Contact">
+                        </select>
                     </div>
-                    <hr style="width: 100%" />
+                    <div class="uk-width-1-10">
+                        <i class="md-icon material-icons" id="invoice_add_customer" onclick="AddCustomer()" data-uk-tooltip="{cls:'long-text',pos:'bottom'}" title="Add Customer">add</i>
+                    </div>
+                    <hr style="width:100%" />
                 </div>
                 <div class="uk-grid uk-grid-divider" data-uk-grid-margin="data-uk-grid-margin">
                     <div class="uk-width-medium-1-3">
@@ -195,7 +198,7 @@
                             <option value="Debit Card">Debit card</option>
                         </select>
                     </div>
-                    <hr style="width: 100%" />
+                    <hr style="width:100%" />
                 </div>
                 <div class="uk-grid uk-grid-divider" data-uk-grid-margin="data-uk-grid-margin">
                     <div class="uk-width-medium-1-2">
@@ -210,13 +213,13 @@
                         <label class="uk-form-label uk-margin-bottom" for="coupon_code">Coupon Code:</label>
                         <input type="text" class="md-input" id="coupon_code" name="couponCode" />
                     </div>
-                    <hr style="width: 100%" />
+                    <hr style="width:100%" />
                 </div>
                 <div class="uk-grid" data-uk-grid-margin="data-uk-grid-margin">
                     <div class="uk-width-1-1">
                         <div id="form_invoice_medicines"></div>
                         <div class="uk-text-center uk-margin-medium-top uk-margin-bottom">
-                            <a href="#" class="md-btn md-btn-flat md-btn-flat-primary" id="invoice_form_append_medicine_btn">Add new</a>
+                            <a href="#" class="md-btn md-btn-flat md-btn-flat-primary" id="invoice_form_append_medicine_btn" data-uk-tooltip="{cls:'long-text',pos:'bottom'}" title="click only if you want to add new product to invoice">Add new</a>
                         </div>
                     </div>
                 </div>
@@ -224,8 +227,7 @@
 
         </form>
     </script>
-    
-    <%-- Template to generate medicine objects --%>
+
     <script id="invoice_form_template_medicines" type="text/x-handlebars-template">
         {{#ifCond invoice_medicine_id '!==' 1}}
         <hr class="md-hr" />
@@ -237,25 +239,14 @@
             </div>
             <div class="uk-width-medium-9-10">
                 <div class="uk-grid uk-grid-small" data-uk-grid-margin="data-uk-grid-margin">
-                    <div class="uk-width-medium-5-10">
-                        <label for="inv_medicine_{{invoice_medicine_id}}">Medicine Name</label>
-                        <input type="text" class="md-input" id="inv_medicine_{{invoice_medicine_id}}" name="billingItems[{{invoice_medicine_id}}][productId]" />
+                    <div class="uk-width-medium-7-10">
+                        <label for="inv_medicine_{{invoice_medicine_id}}">Product Name<span class="req">*</span></label>
+                        <select class="md-input label-fixed" id="inv_medicine_{{invoice_medicine_id}}" name="billingItems[{{invoice_medicine_id}}][productId]" required="required" data-uk-tooltip="{cls:'long-text',pos:'bottom'}" title="Name | Batch | Price">
+                        </select>
                     </div>
-                    <div class="uk-width-medium-1-10">
-                        <label for="inv_medicine_{{invoice_medicine_id}}_rate">Rate</label>
-                        <input type="text" class="md-input" id="inv_medicine_{{invoice_medicine_id}}_rate" name="billingItems[{{invoice_medicine_id}}][unitPrice]" />
-                    </div>
-                    <div class="uk-width-medium-1-10">
-                        <label for="inv_medicine_{{invoice_medicine_id}}_qty">Qty</label>
+                    <div class="uk-width-medium-3-10">
+                        <label for="inv_medicine_{{invoice_medicine_id}}_qty">Quantity<span class="req">*</span></label>
                         <input type="text" class="md-input" id="inv_medicine_{{invoice_medicine_id}}_qty" name="billingItems[{{invoice_medicine_id}}][quantity]" />
-                    </div>
-                    <div class="uk-width-medium-1-10">
-                        <label for="inv_medicine_{{invoice_medicine_id}}_vat">VAT</label>
-                        <input type="text" class="md-input" id="inv_medicine_{{invoice_medicine_id}}_vat" name="billingItems[{{invoice_medicine_id}}][tax]" />
-                    </div>
-                    <div class="uk-width-medium-2-10">
-                        <label for="inv_medicine_{{invoice_medicine_id}}_vat">Total</label>
-                        <input type="text" class="md-input" id="inv_medicine_{{invoice_medicine_id}}_total" name="billingItems[{{invoice_medicine_id}}][price]" />
                     </div>
                 </div>
             </div>
@@ -292,17 +283,16 @@
 
     <uc1:StyleSwitcher runat="server" ID="StyleSwitcher" />
 
-    <!-- page specific plugins starts -->
+    <!-- page specific plugins -->
     <!-- handlebars.js -->
     <script src="bower_components/handlebars/handlebars.min.js"></script>
     <script src="assets/js/custom/handlebars_helpers.min.js"></script>
-
-    <script src="assets/js/lib/invoice/jquery.serialize-object.min.js"></script>
     
+    <script src="assets/js/lib/invoice/jquery.serialize-object.min.js"></script>
     <!--  invoices functions -->
+    <script src="assets/js/lib/json_decrypt_date.js"></script>
+    <script src="assets/js/lib/invoice/invoice_functions.js"></script>
     <script src="assets/js/lib/invoice/page_invoices.js"></script>
-    <script src="assets/js/lib/invoice/ViewInvoice.js"></script>
-    <%-- Page specific functions close --%>
 
     <script>
         $(function () {

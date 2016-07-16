@@ -26,7 +26,7 @@ altair_invoices = {
         if ($invoice_add_btn) {
 
             var insert_form = function () {
-
+                GetCustomerOptions();
                 var $invoice_form_template = $('#invoice_form_template'),
                     card_height = $invoice_card.height(),
                     content_height = $invoice_card.find('.md-card-content').innerHeight(),
@@ -60,6 +60,8 @@ altair_invoices = {
                         theCompiledHtml = template_compiled(context);
 
                     $invoice_medicines.append(theCompiledHtml);
+
+                    GetProductOptions(medicine_id);
 
                     // invoice md inputs
                     altair_md.inputs();
@@ -116,11 +118,14 @@ altair_invoices = {
                 template_compiled = Handlebars.compile(template);
 
             var invoice_id = parseInt($this.attr('data-invoice-id')),
-                context = GetInvoiceDetails(invoice_id),//to get the details of invoice which is clicked
+                context = GetInvoiceDetails(invoice_id),
                 theCompiledHtml = template_compiled(context);
+
             $invoice_preview.html(theCompiledHtml);
             $invoice_form.html('');
+            
             $window.resize();
+
         };
 
         $(invoice_list_class)
@@ -155,29 +160,14 @@ altair_invoices = {
     copy_list_sidebar: function () {
         // hide secondary sidebar toggle btn for large screens
         $sidebar_secondary_toggle.addClass('uk-hidden-large');
+
         var invoices_list_sidebar = $invoices_list_main.clone();
+
         invoices_list_sidebar.attr('id', 'invoices_list_sidebar');
+
         $sidebar_secondary
             .find('.sidebar_secondary_wrapper').html(invoices_list_sidebar)
             .end();
 
     }
 };
-
-function AddInvoice() {
-    event.preventDefault();
-    var data = JSON.stringify($('#form_invoice').serializeObject(), null, 2);
-    //UIkit.modal.alert('<p>Invoice data:</p><pre>' + data + '</pre>');
-    $.ajax({
-        type: 'POST',
-        url: 'PageInvoice.aspx/InsertInvoiceAndBillingItems',
-        contentType: 'application/json; charset=utf-8',
-        data: data,
-        success: function (response) {
-
-        },
-        error: function (error) {
-            alert("Failed to load data!");
-        }
-    });
-}
