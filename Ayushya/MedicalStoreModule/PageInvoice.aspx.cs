@@ -74,12 +74,17 @@ namespace MedicalStoreModule
                 var customerName = item.GetType().GetProperty("customerName").GetValue(item, null);
                 sidebarList += "<li><a href='#' class='md-list-content' data-invoice-id=" + invoiceId + "/>";
                 sidebarList += "<span class='md-list-heading uk-text-truncate'>Invoice " + invoiceNumber + "<span class='uk-text-small uk-text-muted'> " + invoiceDate + "</span></span>";
-                sidebarList += "<span class='uk-text-small uk-text-muted'>Custommer =" + customerName + "</span>";
+                sidebarList += "<span class='uk-text-small uk-text-muted'>Customer " + customerName + "</span>";
             }
             return sidebarList;
         }
 
-
+        /// <summary>
+        /// Supply invoice details in JSON format
+        /// </summary>
+        /// <param name="invoiceId"></param>
+        /// <returns>JSON format invoice details 
+        /// which are required in view invoice</returns>
         [WebMethod]
         public static object GetInvoice(int invoiceId)
         {
@@ -101,33 +106,5 @@ namespace MedicalStoreModule
             string invoiceJsonData = serializer.Serialize(invoiceJson);
             return invoiceJsonData;
         }
-
-        /*[WebMethod]
-        public static object GetProductOptions()
-        {
-            DAOInvoice accessInvoiceDb = new DAOInvoice();
-            return accessInvoiceDb.GetProductOptions(storeId);
-        }*/
-
-        /*[WebMethod]
-        public static Customer GetCustomerDetails(int customerId)
-        {
-            DAOCustomer accessCustomerDb = new DAOCustomer();
-            return accessCustomerDb.GetCustomer(customerId);
-        }*/
-
-        /*[WebMethod]
-        public static List<BillingItems> GetBillingItems(int invoiceId)
-        {
-            DAOInvoice accessInvoiceDb = new DAOInvoice();
-            return accessInvoiceDb.GetBillingItems(invoiceId);
-        }*/
-
-        /*[WebMethod]
-        public static bool DeleteInvoiceAndBIll(int invoiceId)
-        {
-            DAOInvoice accessInvoiceDb = new DAOInvoice();
-            return accessInvoiceDb.DeleteInvoiceAndBill(invoiceId);
-        }*/
     }
 }

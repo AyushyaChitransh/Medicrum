@@ -39,6 +39,7 @@
                         <div class="md-list-outside-wrapper">
                             <ul class="md-list md-list-outside invoices_list" id="invoices_list">
                                 <li class="heading_list">Avaliable Invoices</li>
+                                <%-- To generate list items --%>
                                 <%= InvoiceSidebarList("") %>
                             </ul>
                         </div>
@@ -58,7 +59,7 @@
     <div id="sidebar_secondary">
         <div class="sidebar_secondary_wrapper uk-margin-remove"></div>
     </div>
-
+    <%-- View Invoice template --%>
     <script id="invoice_template" type="text/x-handlebars-template">
         <div class="md-card-toolbar">
             <div class="md-card-toolbar-actions hidden-print">
@@ -223,7 +224,8 @@
 
         </form>
     </script>
-
+    
+    <%-- Template to generate medicine objects --%>
     <script id="invoice_form_template_medicines" type="text/x-handlebars-template">
         {{#ifCond invoice_medicine_id '!==' 1}}
         <hr class="md-hr" />
@@ -290,14 +292,17 @@
 
     <uc1:StyleSwitcher runat="server" ID="StyleSwitcher" />
 
-    <!-- page specific plugins -->
+    <!-- page specific plugins starts -->
     <!-- handlebars.js -->
     <script src="bower_components/handlebars/handlebars.min.js"></script>
     <script src="assets/js/custom/handlebars_helpers.min.js"></script>
 
     <script src="assets/js/lib/invoice/jquery.serialize-object.min.js"></script>
+    
     <!--  invoices functions -->
     <script src="assets/js/lib/invoice/page_invoices.js"></script>
+    <script src="assets/js/lib/invoice/ViewInvoice.js"></script>
+    <%-- Page specific functions close --%>
 
     <script>
         $(function () {

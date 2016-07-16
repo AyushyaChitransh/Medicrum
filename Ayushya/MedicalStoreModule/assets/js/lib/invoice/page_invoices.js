@@ -116,7 +116,7 @@ altair_invoices = {
                 template_compiled = Handlebars.compile(template);
 
             var invoice_id = parseInt($this.attr('data-invoice-id')),
-                context = GetInvoiceDetails(invoice_id),
+                context = GetInvoiceDetails(invoice_id),//to get the details of invoice which is clicked
                 theCompiledHtml = template_compiled(context);
             $invoice_preview.html(theCompiledHtml);
             $invoice_form.html('');
@@ -155,11 +155,8 @@ altair_invoices = {
     copy_list_sidebar: function () {
         // hide secondary sidebar toggle btn for large screens
         $sidebar_secondary_toggle.addClass('uk-hidden-large');
-
         var invoices_list_sidebar = $invoices_list_main.clone();
-
         invoices_list_sidebar.attr('id', 'invoices_list_sidebar');
-
         $sidebar_secondary
             .find('.sidebar_secondary_wrapper').html(invoices_list_sidebar)
             .end();
@@ -183,67 +180,4 @@ function AddInvoice() {
             alert("Failed to load data!");
         }
     });
-}
-
-
-//function UpdateSidebarList() {
-//    var sidebarList = document.getElementById('sidebarList');
-//    var searchText = document.getElementById('search_customer').value;
-//    $.ajax({
-//        type: "POST",
-//        url: 'PageInvoice.aspx/InvoiceSidebarList',
-//        data: "searchText:"+searchText,
-//        contentType: "application/json; charset=utf-8",
-//        dataType: "json",
-//        success: function (msg) {
-//            sidebarList.innerHTML = msg;
-//        },
-//        error: function (e) {
-//        }
-//    });
-//}
-
-//function GetCustomerData(customerId){
-//    var customerObj;
-//    $.ajax({
-//        type: 'POST',
-//        url: 'ViewDetailedCustomer.aspx/GetCustomer',
-//        contentType: 'application/json; charset=utf-8',
-//        data: "{ 'requestedCustomerId': " + 1 + " }",
-//        success: function (response) {
-//            customerObj = response.d;
-
-//        },
-//        error: function (error) {upd
-//            alert("Failed to load data!");
-//        }
-//    });
-//    return customerObj;
-//}
-
-
-function GetInvoiceDetails(invoiceId) {
-    var invoice_id;
-    $.ajax({
-        type: 'POST',
-        url: 'PageInvoice.aspx/GetInvoice',
-        contentType: 'application/json; charset=utf-8',
-        async: false,
-        data: "{ 'invoiceId': " + invoiceId + " }",
-        dataType: "json",
-        success: function (response) {
-            invoice_id = JSON.parse(response.d);
-            invoice_id.invoice_date = parseJsonDate(invoice_id.invoice_date);
-            invoice_id.invoice_due_date = parseJsonDate(invoice_id.invoice_due_date);
-        },
-        error: function (error) {
-            alert('Failed to load Invoice');
-        }
-    });
-    return invoice_id;
-}
-
-function parseJsonDate(jsonDateString) {
-    var dateObj = new Date(parseInt(jsonDateString.substr(6)));
-    return (dateObj.getMonth() + "." + dateObj.getDate() + "." + dateObj.getFullYear());
 }

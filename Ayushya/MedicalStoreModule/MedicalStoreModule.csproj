@@ -68,6 +68,7 @@
     <Content Include="assets\js\lib\invoice\jquery.serialize-object.min.js" />
     <Content Include="assets\js\lib\invoice\json data.txt" />
     <Content Include="assets\js\lib\invoice\page_invoices.js" />
+    <Content Include="assets\js\lib\invoice\ViewInvoice.js" />
     <Content Include="assets\js\lib\login\login.js" />
     <Content Include="assets\js\lib\User\user_profile.js" />
     <Content Include="Login.aspx" />
