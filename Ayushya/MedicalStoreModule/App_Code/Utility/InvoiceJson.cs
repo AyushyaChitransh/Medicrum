@@ -22,7 +22,7 @@ namespace MedicalStoreModule.App_Code.Utility
         public string invoice_mobile { get; set; }
         public decimal? invoice_total_value { get; set; }
         public decimal? invoice_vat_value { get; set; }
-        public decimal? invoice_discount_amount { get; set; }
+        public decimal invoice_discount_amount { get; set; }
         public decimal? invoice_payable_amount { get; set; }
         public Invoice_Medicines[] invoice_medicines { get; set; }
         public string invoice_payment_terms { get; set; }
@@ -51,7 +51,11 @@ namespace MedicalStoreModule.App_Code.Utility
             invoice_pincode = customer.pincode;
             invoice_email = customer.email;
             invoice_mobile = customer.mobile;
-            invoice_discount_amount = invoice.discountAmount;
+            decimal tempDiscountAmount = new decimal();
+            if (decimal.TryParse(invoice.discountAmount.ToString(), out tempDiscountAmount))
+            {
+                invoice_discount_amount = tempDiscountAmount;
+            }
             invoice_payable_amount = invoice.totalAmount + invoice.taxAmount - invoice.discountAmount;
             invoice_total_value = invoice.totalAmount;
             invoice_vat_value = invoice.taxAmount;
