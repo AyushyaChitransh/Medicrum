@@ -19,6 +19,7 @@
     <IISExpressAnonymousAuthentication />
     <IISExpressWindowsAuthentication />
     <IISExpressUseClassicPipelineMode />
+    <UseGlobalApplicationHostFile />
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
     <DebugSymbols>true</DebugSymbols>
@@ -64,6 +65,7 @@
     <Content Include="AddCustomer.aspx" />
     <Content Include="AddProduct.aspx" />
     <Content Include="AddProductModel.aspx" />
+    <Content Include="assets\img\MedicrumLogo2-1.png" />
     <Content Include="assets\js\lib\invoice\invoice_functions.js" />
     <Content Include="assets\js\lib\invoice\jquery.serialize-object.min.js" />
     <Content Include="assets\js\lib\invoice\json data.txt" />

@@ -80,14 +80,11 @@
                 <div class="uk-width-small-3-5">
                     <div class="uk-margin-bottom">
                         <span class="uk-text-muted uk-text-small uk-text-italic">Customer:</span>
-                        <p><strong>{{invoice_customer}}</strong></p>
+                        <p class="uk-text-upper"><strong>{{invoice_customer}}</strong></p>
                         <span class="uk-text-muted uk-text-small uk-text-italic">Location:</span>
                         <address>
-                            <p>{{invoice_address}}</p>
-                            <p>{{invoice_district}}</p>
-                            <p>{{invoice_state}}</p>
-                            <p>{{invoice_country}}</p>
-                            <p>{{invoice_pincode}}</p>
+                            <p>{{invoice_address}}, {{invoice_district}}, {{invoice_state}}</p>
+                            <p>{{invoice_country}} - {{invoice_pincode}}</p>
                         </address>
                         <span class="uk-text-muted uk-text-small uk-text-italic">Contact:</span>
                         <address>
@@ -96,11 +93,7 @@
                         </address>
                     </div>
                 </div>
-                <div class="uk-width-small-2-5">
-                    <span class="uk-text-muted uk-text-small uk-text-italic">Total:</span>
-                    <p class="heading_b uk-text-success">{{invoice_total_value}}</p>
-                    <p class="uk-text-small uk-text-muted uk-margin-top-remove">Incl. VAT - {{invoice_vat_value}}</p>
-                </div>
+                
             </div>
             <div class="uk-grid uk-margin-large-bottom">
                 <div class="uk-width-1-1">
@@ -108,9 +101,8 @@
                         <thead>
                             <tr class="uk-text-upper">
                                 <th>Description</th>
-                                <th>Rate</th>
+                                <th>Rate(In Rs)</th>
                                 <th class="uk-text-center">Qty</th>
-                                <th class="uk-text-center">Vat</th>
                                 <th class="uk-text-center">Total</th>
                             </tr>
                         </thead>
@@ -118,15 +110,11 @@
                             {{#each invoice_medicines}}
                            
                             <tr class="uk-table-middle">
-                                <td>
-                                    <span class="uk-text-large">{{ medicine_name }}</span><br />
-                                    <span class="uk-text-muted uk-text-small">{{ medicine_description }}</span>
+                                <td>{{ medicine_name }}
                                 </td>
                                 <td>{{ medicine_rate }}
                                 </td>
                                 <td class="uk-text-center">{{ medicine_qty }}
-                                </td>
-                                <td class="uk-text-center">{{ medicine_vat }}
                                 </td>
                                 <td class="uk-text-center">{{ medicine_total }}
                                 </td>
@@ -137,14 +125,21 @@
                     </table>
                 </div>
             </div>
+            <div class="uk-width-small-2-5">
+                    <p class="uk-text-small uk-text-muted uk-margin-top-remove">Total:Rs {{invoice_total_value}}</br>
+                    Esclusive VAT : Rs {{invoice_vat_value}}
+                    </br>Discount : Rs {{invoice_discount_amount}}</p>
+                    <span class="uk-text-muted uk-text-small uk-text-italic">Payable Amount:</span>
+                    <p class="heading_a uk-text-success">Rs {{invoice_payable_amount}}</p>
+                </div>
             <div class="uk-grid">
                 <div class="uk-width-1-1">
                     <span class="uk-text-muted uk-text-small uk-text-italic">Payment info:</span>
                     <p class="uk-margin-top-remove">
-                        {{{ invoice_payment_terms }}}
+                        {{{ invoice_payment_mode }}}
                    
                     </p>
-                    <p class="uk-text-small">Please pay within {{ invoice_payment_mode }} days</p>
+                    <p class="uk-text-small">Please pay within {{ invoice_payment_terms }}</p>
                 </div>
             </div>
         </div>
@@ -162,7 +157,7 @@
                 <div class="uk-grid" data-uk-grid-margin="data-uk-grid-margin">
                     <div class="uk-width-9-10">
                         <label for="form_customer">Customer<span class="req">*</span></label>
-                        <select class="md-input label-fixed" id="invoice_form_customer" name="customerId" required="required" data-uk-tooltip="{cls:'long-text',pos:'top'}" title="Name | Contact">
+                        <select class="md-input label-fixed" id="invoice_form_customer" name="customerId" data-uk-tooltip="{cls:'long-text',pos:'top'}" title="Name | Contact">
                         </select>
                     </div>
                     <div class="uk-width-1-10">

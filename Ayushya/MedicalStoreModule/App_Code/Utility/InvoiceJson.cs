@@ -22,6 +22,8 @@ namespace MedicalStoreModule.App_Code.Utility
         public string invoice_mobile { get; set; }
         public decimal? invoice_total_value { get; set; }
         public decimal? invoice_vat_value { get; set; }
+        public decimal? invoice_discount_amount { get; set; }
+        public decimal? invoice_payable_amount { get; set; }
         public Invoice_Medicines[] invoice_medicines { get; set; }
         public string invoice_payment_terms { get; set; }
         public string invoice_payment_mode { get; set; }
@@ -37,9 +39,9 @@ namespace MedicalStoreModule.App_Code.Utility
         }
         public InvoiceJson(Invoice invoice, Customer customer)
         {
-
             invoice_number = invoice.invoiceNumber;
             invoice_date = invoice.invoiceDate;
+            invoice_payment_mode = invoice.paymentMode;
             invoice_payment_terms = invoice.paymentTerms;
             invoice_customer = customer.customerName;
             invoice_address = customer.address;
@@ -49,7 +51,9 @@ namespace MedicalStoreModule.App_Code.Utility
             invoice_pincode = customer.pincode;
             invoice_email = customer.email;
             invoice_mobile = customer.mobile;
-            invoice_total_value = invoice.netTotal;
+            invoice_discount_amount = invoice.discountAmount;
+            invoice_payable_amount = invoice.totalAmount + invoice.taxAmount - invoice.discountAmount;
+            invoice_total_value = invoice.totalAmount;
             invoice_vat_value = invoice.taxAmount;
         }
     }
@@ -60,7 +64,6 @@ namespace MedicalStoreModule.App_Code.Utility
         public string medicine_description { get; set; }
         public decimal medicine_rate { get; set; }
         public int medicine_qty { get; set; }
-        public decimal medicine_vat { get; set; }
         public decimal medicine_total { get; set; }
         public Invoice_Medicines(BillingItems bill)
         {
@@ -70,13 +73,7 @@ namespace MedicalStoreModule.App_Code.Utility
             //medicine_description = (product.GetType().GetProperty("description").GetValue(product, null)).ToString();
             medicine_rate = bill.unitPrice;
             medicine_qty = bill.quantity;
-            decimal vatTemp = new decimal();
-            if (decimal.TryParse((product.GetType().GetProperty("tax").GetValue(product, null)).ToString(), out vatTemp))
-            {
-                medicine_vat = vatTemp;
-            }
-            //medicine_total = medicine_rate * medicine_qty + medicine_vat; Am not sure how to calculate it
-            medicine_total = bill.price;
+            medicine_total = medicine_rate * medicine_qty;
         }
     }
 }

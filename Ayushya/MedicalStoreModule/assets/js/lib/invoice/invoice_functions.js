@@ -15,7 +15,13 @@ function AddInvoice() {
         contentType: 'application/json; charset=utf-8',
         data: data,
         success: function (response) {
-
+            UIkit.notify({
+                message: 'Saved the invoice!',
+                status: 'success',
+                timeout: 2000,
+                group: null,
+                pos: 'top-center'
+            });
         },
         error: function (error) {
             UIkit.notify({
