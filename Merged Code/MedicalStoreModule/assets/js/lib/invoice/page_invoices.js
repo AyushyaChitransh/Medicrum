@@ -26,6 +26,7 @@ altair_invoices = {
         if ($invoice_add_btn) {
 
             var insert_form = function () {
+                GetInvoiceNumber();
                 GetCustomerOptions();
                 var $invoice_form_template = $('#invoice_form_template'),
                     card_height = $invoice_card.height(),

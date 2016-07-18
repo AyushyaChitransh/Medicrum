@@ -31,7 +31,7 @@ namespace MedicalStoreModule
         }
 
         [WebMethod]
-        public static bool InsertInvoiceAndBillingItems(string couponCode, int customerId, string discountType, int invoiceNumber, string invoiceType, string paymentMode, string paymentTerms, List<BillingItems> billingItems)
+        public static bool InsertInvoiceAndBillingItems(string couponCode, int customerId, string discountType, int invoiceNumber, string invoiceType, string paymentMode, string paymentTerms, List<BillingItems> billingItems, string tax, string discount)
         {
             billingItems.RemoveAt(0);
             Invoice invoice = new Invoice();
@@ -44,20 +44,46 @@ namespace MedicalStoreModule
             invoice.paymentMode = paymentMode;
             invoice.discountType = discountType;
             invoice.couponCode = couponCode;
-
-            //hardcoded values
-            invoice.totalAmount = 1;
-            invoice.taxAmount = 1;
-            invoice.discountAmount = 1;
-
-            invoice.netTotal = invoice.totalAmount + invoice.taxAmount;
+            // calculate total amount
+            invoice.totalAmount = 0;
+            foreach (BillingItems item in billingItems)
+            {
+                invoice.totalAmount += item.price;
+            }
+            decimal temp = new decimal();
+            //calculate tax amount
+            if (decimal.TryParse(tax, out temp))
+            {
+                invoice.taxAmount = invoice.totalAmount * (temp / 100);
+            }
+            else
+            {
+                invoice.taxAmount = 0;
+            }
+            //calculate discount amount
+            if (decimal.TryParse(discount, out temp))
+            {
+                invoice.discountAmount = invoice.totalAmount * (temp / 100);
+            }
+            else
+            {
+                invoice.discountAmount = 0;
+            }
+            //calculate net total
+            invoice.netTotal = invoice.totalAmount + invoice.taxAmount - invoice.discountAmount;
             invoice.amountPaid = invoice.netTotal;
-
             invoice.status = 1;
             invoice.deleteStatus = 0;
 
             DAOInvoice accessInvoiceDb = new DAOInvoice();
             return accessInvoiceDb.InsertInvoice(invoice, billingItems);
+        }
+
+        [WebMethod]
+        public static object GetInvoiceNumber()
+        {
+            DAOInvoice accessInvoiceDb = new DAOInvoice();
+            return accessInvoiceDb.GetInvoiceNumber(storeId);
         }
 
         [WebMethod]
@@ -72,6 +98,13 @@ namespace MedicalStoreModule
         {
             DAOInvoice accessInvoiceDb = new DAOInvoice();
             return accessInvoiceDb.GetCustomerOptions(storeId);
+        }
+
+        [WebMethod]
+        public static object GetProductPrice(int productId)
+        {
+            DAOInvoice accessInvoiceDb = new DAOInvoice();
+            return accessInvoiceDb.GetProductPrice(productId);
         }
 
         public string InvoiceSidebarList()

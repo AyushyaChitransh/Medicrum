@@ -98,7 +98,8 @@
                         Total:Rs {{invoice_total_value}}<br />
                         Esclusive VAT : Rs {{invoice_vat_value}}
                         {{#ifCond invoice_discount_amount '!==' 0}}
-                            <br />Discount : Rs {{invoice_discount_amount}}
+                            <br />
+                        Discount : Rs {{invoice_discount_amount}}
                         {{/ifCond}}
                     </p>
                 </div>
@@ -153,7 +154,7 @@
                 <div class="md-card-toolbar-actions">
                     <i class="md-icon material-icons" id="invoice_submit" onclick="AddInvoice()" data-uk-tooltip="{cls:'long-text',pos:'bottom'}" title="View Invoice">save</i>
                 </div>
-                <input name="invoiceNumber" id="invoice_number" class="md-card-toolbar-input" type="text" value="" placeholder="Invoice number" />
+                <label class="md-card-toolbar-input">Invoice </label><input name="invoiceNumber" id="invoice_number" class="md-card-toolbar-input" type="text" placeholder="Invoice number" readonly="readonly" />
             </div>
             <div class="md-card-content large-padding">
                 <div class="uk-grid" data-uk-grid-margin="data-uk-grid-margin">
@@ -216,8 +217,19 @@
                     <div class="uk-width-1-1">
                         <div id="form_invoice_medicines"></div>
                         <div class="uk-text-center uk-margin-medium-top uk-margin-bottom">
-                            <a href="#" class="md-btn md-btn-flat md-btn-flat-primary" id="invoice_form_append_medicine_btn" data-uk-tooltip="{cls:'long-text',pos:'bottom'}" title="click only if you want to add new product to invoice">Add new</a>
+                            <a href="#" class="md-btn md-btn-flat md-btn-flat-primary" id="invoice_form_append_medicine_btn" data-uk-tooltip="{cls:'long-text',pos:'bottom'}" title="click only if you want to add new product to invoice">Add New Product</a>
                         </div>
+                    </div>
+                    <hr style="width: 100%" />
+                </div>
+                <div class="uk-grid uk-grid-divider" data-uk-grid-margin="data-uk-grid-margin">
+                    <div class="uk-width-medium-1-2">
+                        <label class="uk-form-label uk-margin-bottom" for="tax">Tax (in %)</label>
+                        <input type="number" step="any" class="md-input" id="tax" name="tax" />
+                    </div>
+                    <div class="uk-width-medium-1-2">
+                        <label class="uk-form-label uk-margin-bottom" for="discount">Discount (in %)</label>
+                        <input type="number" step="any" class="md-input" id="discount" name="discount" />
                     </div>
                 </div>
             </div>
@@ -236,14 +248,22 @@
             </div>
             <div class="uk-width-medium-9-10">
                 <div class="uk-grid uk-grid-small" data-uk-grid-margin="data-uk-grid-margin">
-                    <div class="uk-width-medium-7-10">
+                    <div class="uk-width-medium-4-10">
                         <label for="inv_medicine_{{invoice_medicine_id}}">Product Name<span class="req">*</span></label>
-                        <select class="md-input label-fixed" id="inv_medicine_{{invoice_medicine_id}}" name="billingItems[{{invoice_medicine_id}}][productId]" required="required" data-uk-tooltip="{cls:'long-text',pos:'bottom'}" title="Name | Batch | Price">
+                        <select class="md-input label-fixed" id="inv_medicine_{{invoice_medicine_id}}" name="billingItems[{{invoice_medicine_id}}][productId]" required="required" data-uk-tooltip="{cls:'long-text',pos:'bottom'}" title="Name | Batch" onchange="GetUnitPrice({{invoice_medicine_id}})">
                         </select>
                     </div>
-                    <div class="uk-width-medium-3-10">
+                    <div class="uk-width-medium-2-10">
+                        <label for="inv_medicine_{{invoice_medicine_id}}_unit_price">Unit Price</label>
+                        <input type="text" class="md-input label-fixed" id="inv_medicine_{{invoice_medicine_id}}_unit_price" name="billingItems[{{invoice_medicine_id}}][unitPrice]" readonly="readonly" />
+                    </div>
+                    <div class="uk-width-medium-2-10">
                         <label for="inv_medicine_{{invoice_medicine_id}}_qty">Quantity<span class="req">*</span></label>
-                        <input type="text" class="md-input" id="inv_medicine_{{invoice_medicine_id}}_qty" name="billingItems[{{invoice_medicine_id}}][quantity]" />
+                        <input type="text" class="md-input" id="inv_medicine_{{invoice_medicine_id}}_qty" name="billingItems[{{invoice_medicine_id}}][quantity]" onkeyup="CalculateTotal({{invoice_medicine_id}})" />
+                    </div>
+                    <div class="uk-width-medium-2-10">
+                        <label for="inv_medicine_{{invoice_medicine_id}}_price">Total</label>
+                        <input type="text" class="md-input label-fixed" id="inv_medicine_{{invoice_medicine_id}}_price" name="billingItems[{{invoice_medicine_id}}][price]" readonly="readonly" />
                     </div>
                 </div>
             </div>
