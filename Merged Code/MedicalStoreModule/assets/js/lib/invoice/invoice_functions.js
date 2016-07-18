@@ -8,14 +8,14 @@ function AddCustomer()
 function AddInvoice() {
     event.preventDefault();
     var data = JSON.stringify($('#form_invoice').serializeObject(), null, 2);
-    UIkit.modal.alert('<p>Invoice data:</p><pre>' + data + '</pre>');
+    //UIkit.modal.alert('<p>Invoice data:</p><pre>' + data + '</pre>');
     $.ajax({
         type: 'POST',
-        url: 'PageInvoice.aspx/InsertInvoiceAndBillingItems',
+        url: 'PageInvoice.aspx/InsertInvoice',
         contentType: 'application/json; charset=utf-8',
         data: data,
         success: function (response) {
-
+            window.location = "PageInvoice.aspx";
         },
         error: function (error) {
             UIkit.notify({
@@ -30,7 +30,24 @@ function AddInvoice() {
 }
 
 
+
 //Load Customer and Product Details
+function GetInvoiceNumber() {
+    $.ajax({
+        type: "POST",
+        url: "PageInvoice.aspx/GetInvoiceNumber",
+        data: "{}",
+        contentType: "application/json; charset=utf-8",
+        dataType: "json",
+        success: function (msg) {
+            document.getElementById('invoice_number').value = msg.d;
+        },
+        error: function () {
+            alert("Failed to load");
+        }
+    });
+}
+
 function GetCustomerOptions() {
     $.ajax({
         type: "POST",
@@ -63,7 +80,7 @@ function GetProductOptions(id) {
             var product = $("[id*=inv_medicine_" + id + "]");
             product.empty().append('<option selected="selected" value="">Select Product</option>');
             $.each(msg.d, function (index, item) {
-                var displayText = item.DisplayText + " | " + item.AdditionalText1 + " | " + item.AdditionalText2;
+                var displayText = item.DisplayText + " | " + item.AdditionalText;
                 $("#inv_medicine_" + id).get(0).options[index + 1] = new Option(displayText, item.Value);
             });
         },
@@ -73,6 +90,28 @@ function GetProductOptions(id) {
     });
 }
 
+function GetUnitPrice(id) {
+    var productId = document.getElementById('inv_medicine_' + id).value;
+    $.ajax({
+        type: "POST",
+        url: "PageInvoice.aspx/GetProductPrice",
+        data: "{ 'productId': " + productId + " }",
+        contentType: "application/json; charset=utf-8",
+        dataType: "json",
+        success: function (msg) {
+            document.getElementById('inv_medicine_' + id + '_unit_price').value = msg.d;
+        },
+        error: function () {
+            alert("Failed to load");
+        }
+    });
+}
+
+function CalculateTotal(id) {
+    var quantity = document.getElementById('inv_medicine_' + id + '_qty').value;
+    var unitPrice = document.getElementById('inv_medicine_' + id + '_unit_price').value;
+    document.getElementById('inv_medicine_' + id + '_price').value = quantity * unitPrice;
+}
 
 //View Invoice
 function GetInvoiceDetails(invoiceId) {
@@ -94,4 +133,21 @@ function GetInvoiceDetails(invoiceId) {
         }
     });
     return invoice_id;
+}
+
+function response() {
+    var searchText = document.getElementById('search_invoice').value;
+    $.ajax({
+        type: 'POST',
+        url: 'PageInvoice.aspx/InvoiceSideBar',
+        contentType: 'application/json; charset=utf-8',
+        data: "{ 'searchText': '" + searchText + "' }",
+        dataType: "json",
+        success: function (response) {
+            document.getElementById('invoices_list').innerHTML = response.d;
+        },
+        error: function (error) {
+            alert('Failed to load Invoice');
+        }
+    });
 }

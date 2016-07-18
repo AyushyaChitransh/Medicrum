@@ -31,15 +31,30 @@
                 <div class="uk-grid uk-grid-collapse" data-uk-grid-margin="data-uk-grid-margin">
                     <div class="uk-width-large-7-10">
                         <div class="md-card md-card-single main-print" id="invoice">
+                            <div id="page_invoice">
+                                <div class="md-card-toolbar">
+                                    <h3 class="md-card-toolbar-heading-text large">Invoices</h3>
+                                </div>
+                                <div class="md-card-content">
+                                    <p class="uk-text-muted uk-text-large uk-text-center uk-margin-large-top">
+                                        Click the 
+                                            <a class="uk-badge uk-badge-success" href="#">
+                                                <strong>+</strong>
+                                            </a> button to create a new invoice<br />
+                                        or<br />
+                                        open invoice from the list.
+                                    </p>
+                                </div>
+                            </div>
                             <div id="invoice_preview"></div>
                             <div id="invoice_form"></div>
                         </div>
                     </div>
                     <div class="uk-width-large-3-10 hidden-print uk-visible-large">
                         <div class="md-list-outside-wrapper">
+                            <input type='text' class='md-input uk-margin-top' id='search_invoice' name='search_invoice' placeholder='Search Invoice' onkeyup='response()' />
                             <ul class="md-list md-list-outside invoices_list" id="invoices_list">
-                                <li class="heading_list">November 2015</li>
-                                <%= InvoiceSidebarList("") %>                         
+                                <%= InvoiceSidebarList() %>
                             </ul>
                         </div>
                     </div>
@@ -74,20 +89,16 @@
                
                 <br />
                 <%--<span class="uk-text-muted uk-text-small uk-text-italic">Due Date:</span> {{invoice_due_date}}--%>
-           
             </div>
-            <div class="uk-grid" data-uk-grid-margin>
+            <div class="uk-grid" data-uk-grid-margin="data-uk-grid-margin">
                 <div class="uk-width-small-3-5">
                     <div class="uk-margin-bottom">
                         <span class="uk-text-muted uk-text-small uk-text-italic">Customer:</span>
-                        <p><strong>{{invoice_customer}}</strong></p>
+                        <p class="uk-text-upper"><strong>{{invoice_customer}}</strong></p>
                         <span class="uk-text-muted uk-text-small uk-text-italic">Location:</span>
                         <address>
-                            <p>{{invoice_address}}</p>
-                            <p>{{invoice_district}}</p>
-                            <p>{{invoice_state}}</p>
-                            <p>{{invoice_country}}</p>
-                            <p>{{invoice_pincode}}</p>
+                            <p>{{invoice_address}}, {{invoice_district}}, {{invoice_state}}</p>
+                            <p>{{invoice_country}} - {{invoice_pincode}}</p>
                         </address>
                         <span class="uk-text-muted uk-text-small uk-text-italic">Contact:</span>
                         <address>
@@ -97,9 +108,16 @@
                     </div>
                 </div>
                 <div class="uk-width-small-2-5">
-                    <span class="uk-text-muted uk-text-small uk-text-italic">Total:</span>
-                    <p class="heading_b uk-text-success">{{invoice_total_value}}</p>
-                    <p class="uk-text-small uk-text-muted uk-margin-top-remove">Incl. VAT - {{invoice_vat_value}}</p>
+                    <span class="uk-text-muted uk-text-small uk-text-italic">Payable Amount:</span>
+                    <p class="heading_a uk-text-success">Rs {{invoice_payable_amount}}</p>
+                    <p class="uk-text-small uk-text-muted uk-margin-top-remove">
+                        Total:Rs {{invoice_total_value}}<br />
+                        Esclusive VAT : Rs {{invoice_vat_value}}
+                        {{#ifCond invoice_discount_amount '!==' 0}}
+                            <br />
+                        Discount : Rs {{invoice_discount_amount}}
+                        {{/ifCond}}
+                    </p>
                 </div>
             </div>
             <div class="uk-grid uk-margin-large-bottom">
@@ -107,10 +125,9 @@
                     <table class="uk-table">
                         <thead>
                             <tr class="uk-text-upper">
-                                <th>Description</th>
-                                <th>Rate</th>
+                                <th>Product</th>
+                                <th class="uk-text-center">Unit Price</th>
                                 <th class="uk-text-center">Qty</th>
-                                <th class="uk-text-center">Vat</th>
                                 <th class="uk-text-center">Total</th>
                             </tr>
                         </thead>
@@ -118,15 +135,11 @@
                             {{#each invoice_medicines}}
                            
                             <tr class="uk-table-middle">
-                                <td>
-                                    <span class="uk-text-large">{{ medicine_name }}</span><br />
-                                    <span class="uk-text-muted uk-text-small">{{ medicine_description }}</span>
+                                <td>{{ medicine_name }}
                                 </td>
-                                <td>{{ medicine_rate }}
+                                <td class="uk-text-center">{{ medicine_rate }}
                                 </td>
                                 <td class="uk-text-center">{{ medicine_qty }}
-                                </td>
-                                <td class="uk-text-center">{{ medicine_vat }}
                                 </td>
                                 <td class="uk-text-center">{{ medicine_total }}
                                 </td>
@@ -137,14 +150,15 @@
                     </table>
                 </div>
             </div>
+
             <div class="uk-grid">
                 <div class="uk-width-1-1">
                     <span class="uk-text-muted uk-text-small uk-text-italic">Payment info:</span>
                     <p class="uk-margin-top-remove">
-                        {{{ invoice_payment_terms }}}
+                        {{{ invoice_payment_mode }}}
                    
                     </p>
-                    <p class="uk-text-small">Please pay within {{ invoice_payment_mode }} days</p>
+                    <p class="uk-text-small">Please pay within {{ invoice_payment_terms }}</p>
                 </div>
             </div>
         </div>
@@ -156,19 +170,20 @@
                 <div class="md-card-toolbar-actions">
                     <i class="md-icon material-icons" id="invoice_submit" onclick="AddInvoice()" data-uk-tooltip="{cls:'long-text',pos:'bottom'}" title="View Invoice">save</i>
                 </div>
-                <input name="invoiceNumber" id="invoice_number" class="md-card-toolbar-input" type="text" value="" placeholder="Invoice number" />
+                <label class="md-card-toolbar-input">Invoice </label>
+                <input name="invoiceNumber" id="invoice_number" class="md-card-toolbar-input" type="text" placeholder="Invoice number" readonly="readonly" />
             </div>
             <div class="md-card-content large-padding">
                 <div class="uk-grid" data-uk-grid-margin="data-uk-grid-margin">
                     <div class="uk-width-9-10">
                         <label for="form_customer">Customer<span class="req">*</span></label>
-                        <select class="md-input label-fixed" id="invoice_form_customer" name="customerId" required="required" data-uk-tooltip="{cls:'long-text',pos:'top'}" title="Name | Contact">
+                        <select class="md-input label-fixed" id="invoice_form_customer" name="customerId" data-uk-tooltip="{cls:'long-text',pos:'top'}" title="Name | Contact">
                         </select>
                     </div>
                     <div class="uk-width-1-10">
                         <i class="md-icon material-icons" id="invoice_add_customer" onclick="AddCustomer()" data-uk-tooltip="{cls:'long-text',pos:'bottom'}" title="Add Customer">add</i>
                     </div>
-                    <hr style="width:100%" />
+                    <hr style="width: 100%" />
                 </div>
                 <div class="uk-grid uk-grid-divider" data-uk-grid-margin="data-uk-grid-margin">
                     <div class="uk-width-medium-1-3">
@@ -198,7 +213,7 @@
                             <option value="Debit Card">Debit card</option>
                         </select>
                     </div>
-                    <hr style="width:100%" />
+                    <hr style="width: 100%" />
                 </div>
                 <div class="uk-grid uk-grid-divider" data-uk-grid-margin="data-uk-grid-margin">
                     <div class="uk-width-medium-1-2">
@@ -213,14 +228,25 @@
                         <label class="uk-form-label uk-margin-bottom" for="coupon_code">Coupon Code:</label>
                         <input type="text" class="md-input" id="coupon_code" name="couponCode" />
                     </div>
-                    <hr style="width:100%" />
+                    <hr style="width: 100%" />
                 </div>
                 <div class="uk-grid" data-uk-grid-margin="data-uk-grid-margin">
                     <div class="uk-width-1-1">
                         <div id="form_invoice_medicines"></div>
-                        <div class="uk-text-center uk-margin-medium-top uk-margin-bottom">
-                            <a href="#" class="md-btn md-btn-flat md-btn-flat-primary" id="invoice_form_append_medicine_btn" data-uk-tooltip="{cls:'long-text',pos:'bottom'}" title="click only if you want to add new product to invoice">Add new</a>
+                        <div class="uk-text-center uk-margin-medium-top">
+                            <a href="#" class="md-btn md-btn-flat md-btn-flat-primary" id="invoice_form_append_medicine_btn" data-uk-tooltip="{cls:'long-text',pos:'bottom'}" title="click only if you want to add new product to invoice">Add New Product</a>
                         </div>
+                    </div>
+                    <hr style="width: 100%" />
+                </div>
+                <div class="uk-grid uk-grid-divider" data-uk-grid-margin="data-uk-grid-margin">
+                    <div class="uk-width-medium-1-2">
+                        <label class="uk-form-label uk-margin-bottom" for="tax">Tax (in %)</label>
+                        <input type="number" step="any" class="md-input" id="tax" name="tax" />
+                    </div>
+                    <div class="uk-width-medium-1-2">
+                        <label class="uk-form-label uk-margin-bottom" for="discount">Discount (in %)</label>
+                        <input type="number" step="any" class="md-input" id="discount" name="discount" />
                     </div>
                 </div>
             </div>
@@ -239,14 +265,22 @@
             </div>
             <div class="uk-width-medium-9-10">
                 <div class="uk-grid uk-grid-small" data-uk-grid-margin="data-uk-grid-margin">
-                    <div class="uk-width-medium-7-10">
+                    <div class="uk-width-medium-4-10">
                         <label for="inv_medicine_{{invoice_medicine_id}}">Product Name<span class="req">*</span></label>
-                        <select class="md-input label-fixed" id="inv_medicine_{{invoice_medicine_id}}" name="billingItems[{{invoice_medicine_id}}][productId]" required="required" data-uk-tooltip="{cls:'long-text',pos:'bottom'}" title="Name | Batch | Price">
+                        <select class="md-input label-fixed" id="inv_medicine_{{invoice_medicine_id}}" name="billingItems[{{invoice_medicine_id}}][productId]" required="required" data-uk-tooltip="{cls:'long-text',pos:'bottom'}" title="Name | Batch" onchange="GetUnitPrice({{invoice_medicine_id}})">
                         </select>
                     </div>
-                    <div class="uk-width-medium-3-10">
+                    <div class="uk-width-medium-2-10">
+                        <label for="inv_medicine_{{invoice_medicine_id}}_unit_price">Unit Price</label>
+                        <input type="text" class="md-input label-fixed" id="inv_medicine_{{invoice_medicine_id}}_unit_price" name="billingItems[{{invoice_medicine_id}}][unitPrice]" readonly="readonly" />
+                    </div>
+                    <div class="uk-width-medium-2-10">
                         <label for="inv_medicine_{{invoice_medicine_id}}_qty">Quantity<span class="req">*</span></label>
-                        <input type="text" class="md-input" id="inv_medicine_{{invoice_medicine_id}}_qty" name="billingItems[{{invoice_medicine_id}}][quantity]" />
+                        <input type="text" pattern="{0-9}" title="Quantity" class="md-input" id="inv_medicine_{{invoice_medicine_id}}_qty" name="billingItems[{{invoice_medicine_id}}][quantity]" onkeyup="CalculateTotal({{invoice_medicine_id}})" />
+                    </div>
+                    <div class="uk-width-medium-2-10">
+                        <label for="inv_medicine_{{invoice_medicine_id}}_price">Total</label>
+                        <input type="text" class="md-input label-fixed" id="inv_medicine_{{invoice_medicine_id}}_price" name="billingItems[{{invoice_medicine_id}}][price]" readonly="readonly" />
                     </div>
                 </div>
             </div>
@@ -287,7 +321,7 @@
     <!-- handlebars.js -->
     <script src="bower_components/handlebars/handlebars.min.js"></script>
     <script src="assets/js/custom/handlebars_helpers.min.js"></script>
-    
+
     <script src="assets/js/lib/invoice/jquery.serialize-object.min.js"></script>
     <!--  invoices functions -->
     <script src="assets/js/lib/json_decrypt_date.js"></script>
