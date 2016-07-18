@@ -65,7 +65,7 @@
                 <i class="md-icon material-icons" id="invoice_print">&#xE8ad;</i>
                 <i class="md-icon material-icons" onclick="DeleteInvoice()">delete</i>
             </div>
-            <h3 class="md-card-toolbar-heading-text large" id="invoice_name">Invoice {{invoice_number}}
+            <h3 class="md-card-toolbar-heading-text large" id="invoice_name">Invoice Number: {{invoice_number}}
             </h3>
         </div>
         <div class="md-card-content">
@@ -76,11 +76,11 @@
                 <%--<span class="uk-text-muted uk-text-small uk-text-italic">Due Date:</span> {{invoice_due_date}}--%>
             </div>
             <div class="uk-grid" data-uk-grid-margin>
-                <div class="uk-width-small-3-5">
+                <div class="uk-width-small-1-5">
                     <div class="uk-margin-bottom">
-                        <span class="uk-text-muted uk-text-small uk-text-italic">Customer:</span>
+                        <span class="uk-text-muted uk-text-small uk-text-italic">Customer Name:</span>
                         <p class="uk-text-upper"><strong>{{invoice_customer}}</strong></p>
-                        <span class="uk-text-muted uk-text-small uk-text-italic">Location:</span>
+                        <span class="uk-text-muted uk-text-small uk-text-italic">Address:</span>
                         <address>
                             <p>{{invoice_address}}, {{invoice_district}}, {{invoice_state}}</p>
                             <p>{{invoice_country}} - {{invoice_pincode}}</p>
@@ -92,7 +92,23 @@
                         </address>
                     </div>
                 </div>
-                <div class="uk-width-small-2-5">
+                <div class="uk-width-small-1-5">
+                    <div class="uk-margin-bottom">
+                        <span class="uk-text-muted uk-text-small uk-text-italic">Store Name:</span>
+                        <p class="uk-text-upper"><strong>{{invoice_store_name}}</strong></p>
+                        <span class="uk-text-muted uk-text-small uk-text-italic">Address:</span>
+                        <address>
+                            <p>{{invoice_store_address}}, {{invoice_store_district}}, {{invoice_store_state}}</p>
+                            <p>{{invoice_store_country}} - {{invoice_store_pincode}}</p>
+                        </address>
+                        <span class="uk-text-muted uk-text-small uk-text-italic">Contact:</span>
+                        <address>
+                            <p>{{invoice_store_email}}</p>
+                            <p>{{invoice_store_mobile}}</p>
+                        </address>
+                    </div>
+                </div>
+                <div class="uk-width-small-3-5">
                     <span class="uk-text-muted uk-text-small uk-text-italic">Payable Amount:</span>
                     <p class="heading_a uk-text-success">Rs {{invoice_payable_amount}}</p>
                     <p class="uk-text-small uk-text-muted uk-margin-top-remove">
@@ -145,6 +161,7 @@
                     <p class="uk-text-small">Please pay within {{ invoice_payment_terms }}</p>
                 </div>
             </div>
+        <div class="uk-text-center uk-text-italic">Powered by Medicrum</div>
         </div>
     </script>
 

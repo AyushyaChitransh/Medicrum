@@ -20,6 +20,13 @@ namespace MedicalStoreModule.App_Code.Utility
         public string invoice_pincode { get; set; }
         public string invoice_email { get; set; }
         public string invoice_mobile { get; set; }
+        public string invoice_store_name { get; set; }
+        public string invoice_store_address { get; set; }
+        public string invoice_store_district { get; set; }
+        public string invoice_store_state { get; set; }
+        public string invoice_store_country { get; set; }
+        public string invoice_store_pincode { get; set; }
+        public string invoice_store_mobile { get; set; }
         public decimal? invoice_total_value { get; set; }
         public decimal? invoice_vat_value { get; set; }
         public decimal invoice_discount_amount { get; set; }
@@ -51,6 +58,36 @@ namespace MedicalStoreModule.App_Code.Utility
             invoice_pincode = customer.pincode;
             invoice_email = customer.email;
             invoice_mobile = customer.mobile;
+            decimal tempDiscountAmount = new decimal();
+            if (decimal.TryParse(invoice.discountAmount.ToString(), out tempDiscountAmount))
+            {
+                invoice_discount_amount = tempDiscountAmount;
+            }
+            invoice_payable_amount = invoice.totalAmount + invoice.taxAmount - invoice.discountAmount;
+            invoice_total_value = invoice.totalAmount;
+            invoice_vat_value = invoice.taxAmount;
+        }
+        public InvoiceJson(Invoice invoice, Customer customer, Store store)
+        {
+            invoice_number = invoice.invoiceNumber;
+            invoice_date = invoice.invoiceDate;
+            invoice_payment_mode = invoice.paymentMode;
+            invoice_payment_terms = invoice.paymentTerms;
+            invoice_customer = customer.customerName;
+            invoice_address = customer.address;
+            invoice_district = customer.district;
+            invoice_state = customer.state;
+            invoice_country = customer.country;
+            invoice_pincode = customer.pincode;
+            invoice_email = customer.email;
+            invoice_mobile = customer.mobile;
+            invoice_store_name = store.storeName;
+            invoice_store_address = store.address;
+            invoice_store_district = store.district;
+            invoice_store_state = store.state;
+            invoice_store_country = store.country;
+            invoice_store_pincode = store.pincode;
+            invoice_store_mobile = store.mobileNumber;
             decimal tempDiscountAmount = new decimal();
             if (decimal.TryParse(invoice.discountAmount.ToString(), out tempDiscountAmount))
             {

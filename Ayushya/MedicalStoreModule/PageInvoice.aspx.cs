@@ -97,10 +97,12 @@ namespace MedicalStoreModule
         {
             DAOInvoice accessInvoiceDb = new DAOInvoice();
             DAOCustomer accessCustomerDb = new DAOCustomer();
+            DAOStore accessStoreDb = new DAOStore();
             Invoice invoice = accessInvoiceDb.GetInvoice(invoiceId);
             Customer customer = accessCustomerDb.GetCustomer(invoice.customerId);
+            Store store = accessStoreDb.GetStore(invoice.storeId);
             List<BillingItems> billingItems = accessInvoiceDb.GetBillingItems(invoice.invoiceId);
-            InvoiceJson invoiceJson = new InvoiceJson(invoice, customer);
+            InvoiceJson invoiceJson = new InvoiceJson(invoice, customer, store);
             Invoice_Medicines[] invoiceMedicine = new Invoice_Medicines[billingItems.Count];
             int i = 0;
             foreach (BillingItems item in billingItems)
