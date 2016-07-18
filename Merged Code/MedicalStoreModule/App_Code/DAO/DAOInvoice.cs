@@ -10,7 +10,7 @@ namespace MedicalStoreModule.App_Code.DAO
     public class DAOInvoice
     {
         ConnectionManager cm = new ConnectionManager();
-        public bool InsertInvoice(Invoice invoice, List<BillingItems> billingItems, string tax)
+        public object InsertInvoice(Invoice invoice, List<BillingItems> billingItems, string tax)
         {
             int invoiceId = new int();
             string qry = @"INSERT into invoice
@@ -79,18 +79,14 @@ namespace MedicalStoreModule.App_Code.DAO
                         InsertBill(item);
                     }
                     InsertTax(tax, (decimal)invoice.taxAmount, invoiceId);
-                    return true;
                 }
-                else
-                {
-                    return false;
-                }
+                return invoiceId;
             }
             catch (Exception ex)
             {
                 cm.CloseConnection();
                 string message = ex.Message;
-                return false;
+                return invoiceId;
             }
         }
 
@@ -297,14 +293,13 @@ namespace MedicalStoreModule.App_Code.DAO
 
         public List<object> GetInvoiceList(string customerName, int storeId)
         {
-            //Hardcoded customer search text
-            //customerName = "";
             List<object> invoiceList = new List<object>();
             string qry = @"SELECT * FROM invoice i
                                     LEFT JOIN customer c ON i.customer_id = c.customer_id
                                     WHERE i.delete_status=@delete_status AND
                                           i.store_id=@store_id AND
-                                          c.customer_name LIKE @searchText";
+                                          c.customer_name LIKE @searchText
+                                    ORDER BY invoice_number DESC";
             MySqlCommand cmd = new MySqlCommand(qry, cm.connection);
             cmd.Parameters.AddWithValue("@searchText", customerName + '%');
             cmd.Parameters.AddWithValue("@store_id", storeId);

@@ -31,7 +31,7 @@ namespace MedicalStoreModule
         }
 
         [WebMethod]
-        public static bool InsertInvoiceAndBillingItems(string couponCode, int customerId, string discountType, int invoiceNumber, string invoiceType, string paymentMode, string paymentTerms, List<BillingItems> billingItems, string tax, string discount)
+        public static object InsertInvoice(string couponCode, int customerId, string discountType, int invoiceNumber, string invoiceType, string paymentMode, string paymentTerms, List<BillingItems> billingItems, string tax, string discount)
         {
             billingItems.RemoveAt(0);
             Invoice invoice = new Invoice();

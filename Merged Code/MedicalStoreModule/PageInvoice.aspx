@@ -276,7 +276,7 @@
                     </div>
                     <div class="uk-width-medium-2-10">
                         <label for="inv_medicine_{{invoice_medicine_id}}_qty">Quantity<span class="req">*</span></label>
-                        <input type="number" min="0" class="md-input" id="inv_medicine_{{invoice_medicine_id}}_qty" name="billingItems[{{invoice_medicine_id}}][quantity]" onkeyup="CalculateTotal({{invoice_medicine_id}})" />
+                        <input type="text" pattern="{0-9}" title="Quantity" class="md-input" id="inv_medicine_{{invoice_medicine_id}}_qty" name="billingItems[{{invoice_medicine_id}}][quantity]" onkeyup="CalculateTotal({{invoice_medicine_id}})" />
                     </div>
                     <div class="uk-width-medium-2-10">
                         <label for="inv_medicine_{{invoice_medicine_id}}_price">Total</label>

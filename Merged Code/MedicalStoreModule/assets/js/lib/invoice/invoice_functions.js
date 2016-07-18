@@ -11,17 +11,11 @@ function AddInvoice() {
     //UIkit.modal.alert('<p>Invoice data:</p><pre>' + data + '</pre>');
     $.ajax({
         type: 'POST',
-        url: 'PageInvoice.aspx/InsertInvoiceAndBillingItems',
+        url: 'PageInvoice.aspx/InsertInvoice',
         contentType: 'application/json; charset=utf-8',
         data: data,
         success: function (response) {
-            UIkit.notify({
-                message: 'Saved the invoice!',
-                status: 'success',
-                timeout: 2000,
-                group: null,
-                pos: 'top-center'
-            });
+            window.location = "PageInvoice.aspx";
         },
         error: function (error) {
             UIkit.notify({
@@ -34,6 +28,7 @@ function AddInvoice() {
         }
     });
 }
+
 
 
 //Load Customer and Product Details
