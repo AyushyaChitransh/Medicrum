@@ -202,12 +202,13 @@ namespace MedicalStoreModule.App_Code.DAO
         public List<object> GetInvoiceList(string customerName, int storeId)
         {
             //Hardcoded customer search text
-            customerName = "";
+            //customerName = "";
             List<object> invoiceList = new List<object>();
-            string qry = @"SELECT * FROM invoice
-                                    LEFT JOIN customer ON invoice.customer_id = customer.customer_id
-                                    WHERE invoice.delete_status=@delete_status AND
-                                          invoice.store_id = @store_id";
+            string qry = @"SELECT * FROM invoice i
+                                    LEFT JOIN customer c ON i.customer_id = c.customer_id
+                                    WHERE i.delete_status=@delete_status AND
+                                          i.store_id=@store_id AND
+                                          c.customer_name LIKE @searchText";
             MySqlCommand cmd = new MySqlCommand(qry, cm.connection);
             cmd.Parameters.AddWithValue("@searchText", customerName + '%');
             cmd.Parameters.AddWithValue("@store_id", storeId);

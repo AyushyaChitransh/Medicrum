@@ -74,11 +74,30 @@ namespace MedicalStoreModule
             return accessInvoiceDb.GetCustomerOptions(storeId);
         }
 
-        public string InvoiceSidebarList(string searchText)
+        public string InvoiceSidebarList()
+        {
+            DAOInvoice accessInvoiceDb = new DAOInvoice();
+            List<object> invoiceList = accessInvoiceDb.GetInvoiceList("", storeId);
+            string sidebarList = "<li class='heading_list'><input type='text' class='md-input' id='search_invoice' name='search_invoice' placeholder='Search Invoice' onkeyup='response()' /></li>";
+            foreach (object item in invoiceList)
+            {
+                var invoiceId = item.GetType().GetProperty("invoiceId").GetValue(item, null);
+                var invoiceNumber = item.GetType().GetProperty("invoiceNumber").GetValue(item, null);
+                var invoiceDate = item.GetType().GetProperty("invoiceDate").GetValue(item, null);
+                var customerName = item.GetType().GetProperty("customerName").GetValue(item, null);
+                sidebarList += "<li><a href='#' class='md-list-content' data-invoice-id=" + invoiceId + "/>";
+                sidebarList += "<span class='md-list-heading uk-text-truncate'>Invoice " + invoiceNumber + "<span class='uk-text-small uk-text-muted'> " + invoiceDate + "</span></span>";
+                sidebarList += "<span class='uk-text-small uk-text-muted'>Customer " + customerName + "</span>";
+            }
+            return sidebarList;
+        }
+
+        [WebMethod]
+        public static object InvoiceSideBar(string searchText)
         {
             DAOInvoice accessInvoiceDb = new DAOInvoice();
             List<object> invoiceList = accessInvoiceDb.GetInvoiceList(searchText, storeId);
-            string sidebarList = "";
+            string sidebarList = "<li class='heading_list'><input type='text' class='md-input' id='search_invoice' name='search_invoice' onkeyup='response()' placeholder='Search Invoice' value='" + searchText + "' /></li>";
             foreach (object item in invoiceList)
             {
                 var invoiceId = item.GetType().GetProperty("invoiceId").GetValue(item, null);
@@ -113,42 +132,5 @@ namespace MedicalStoreModule
             string invoiceJsonData = serializer.Serialize(invoiceJson);
             return invoiceJsonData;
         }
-
-        /*[WebMethod]
-        public static object GetInvoice(int invoiceId)
-        {
-            Invoice record = new Invoice();
-            DAOInvoice accessInvoiceDb = new DAOInvoice();
-            record = accessInvoiceDb.GetInvoice(invoiceId);
-            return record;
-        }*/
-
-        /*[WebMethod]
-        public static object GetProductOptions()
-        {
-            DAOInvoice accessInvoiceDb = new DAOInvoice();
-            return accessInvoiceDb.GetProductOptions(storeId);
-        }*/
-
-        /*[WebMethod]
-        public static Customer GetCustomerDetails(int customerId)
-        {
-            DAOCustomer accessCustomerDb = new DAOCustomer();
-            return accessCustomerDb.GetCustomer(customerId);
-        }*/
-
-        /*[WebMethod]
-        public static List<BillingItems> GetBillingItems(int invoiceId)
-        {
-            DAOInvoice accessInvoiceDb = new DAOInvoice();
-            return accessInvoiceDb.GetBillingItems(invoiceId);
-        }*/
-
-        /*[WebMethod]
-        public static bool DeleteInvoiceAndBIll(int invoiceId)
-        {
-            DAOInvoice accessInvoiceDb = new DAOInvoice();
-            return accessInvoiceDb.DeleteInvoiceAndBill(invoiceId);
-        }*/        
     }
 }

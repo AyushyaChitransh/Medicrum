@@ -11,3 +11,4 @@ C:\Users\VINEET\Desktop\Scrum Technology\BitBucket Repository\Merged Code\Medica
 C:\Users\VINEET\Desktop\Scrum Technology\BitBucket Repository\Merged Code\MedicalStoreModule\bin\MySql.Data.dll
 C:\Users\VINEET\Desktop\Scrum Technology\BitBucket Repository\Merged Code\MedicalStoreModule\obj\Debug\MedicalStoreModule.dll
 C:\Users\VINEET\Desktop\Scrum Technology\BitBucket Repository\Merged Code\MedicalStoreModule\obj\Debug\MedicalStoreModule.pdb
+C:\Users\VINEET\Desktop\Scrum Technology\BitBucket Repository\Merged Code\MedicalStoreModule\obj\Debug\MedicalStoreModule.csprojResolveAssemblyReference.cache

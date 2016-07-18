@@ -15,7 +15,13 @@ function AddInvoice() {
         contentType: 'application/json; charset=utf-8',
         data: data,
         success: function (response) {
-
+            UIkit.notify({
+                message: 'Saved the invoice!',
+                status: 'success',
+                timeout: 2000,
+                group: null,
+                pos: 'top-center'
+            });
         },
         error: function (error) {
             UIkit.notify({
@@ -94,4 +100,20 @@ function GetInvoiceDetails(invoiceId) {
         }
     });
     return invoice_id;
+}
+function response() {
+    var searchText = document.getElementById('search_invoice').value;
+    $.ajax({
+        type: 'POST',
+        url: 'PageInvoice.aspx/InvoiceSideBar',
+        contentType: 'application/json; charset=utf-8',
+        data: "{ 'searchText': '" + searchText + "' }",
+        dataType: "json",
+        success: function (response) {
+            document.getElementById('invoices_list').innerHTML = response.d;
+        },
+        error: function (error) {
+            alert('Failed to load Invoice');
+        }
+    });
 }

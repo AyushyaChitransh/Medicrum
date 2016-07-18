@@ -209,7 +209,7 @@
     <div class="sidebar_main_header">
         <div class="sidebar_logo">
             <a href="#" class="sSidebar_hide">
-                <img src="assets/img/logo_main.png" alt="" height="15" width="71" /></a>
+                <img src="assets/img/MedicrumLogo2-1.png" alt="" height="55" width="120" /></a>
             <a href="#" class="sSidebar_show">
                 <img src="assets/img/logo_main_small.png" alt="" height="32" width="32" /></a>
         </div>
