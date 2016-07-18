@@ -74,7 +74,7 @@
                 <br />
                 <%--<span class="uk-text-muted uk-text-small uk-text-italic">Due Date:</span> {{invoice_due_date}}--%>
             </div>
-            <div class="uk-grid" data-uk-grid-margin>
+            <div class="uk-grid" data-uk-grid-margin="data-uk-grid-margin">
                 <div class="uk-width-small-3-5">
                     <div class="uk-margin-bottom">
                         <span class="uk-text-muted uk-text-small uk-text-italic">Customer:</span>
@@ -95,10 +95,10 @@
                     <span class="uk-text-muted uk-text-small uk-text-italic">Payable Amount:</span>
                     <p class="heading_a uk-text-success">Rs {{invoice_payable_amount}}</p>
                     <p class="uk-text-small uk-text-muted uk-margin-top-remove">
-                        Total:Rs {{invoice_total_value}}</br>
+                        Total:Rs {{invoice_total_value}}<br />
                         Esclusive VAT : Rs {{invoice_vat_value}}
                         {{#ifCond invoice_discount_amount '!==' 0}}
-                            </br>Discount : Rs {{invoice_discount_amount}}
+                            <br />Discount : Rs {{invoice_discount_amount}}
                         {{/ifCond}}
                     </p>
                 </div>
