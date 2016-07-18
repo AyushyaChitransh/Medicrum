@@ -76,7 +76,7 @@ namespace MedicalStoreModule
             invoice.deleteStatus = 0;
 
             DAOInvoice accessInvoiceDb = new DAOInvoice();
-            return accessInvoiceDb.InsertInvoice(invoice, billingItems);
+            return accessInvoiceDb.InsertInvoice(invoice, billingItems, tax);
         }
 
         [WebMethod]

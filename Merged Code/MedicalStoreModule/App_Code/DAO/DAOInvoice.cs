@@ -10,7 +10,7 @@ namespace MedicalStoreModule.App_Code.DAO
     public class DAOInvoice
     {
         ConnectionManager cm = new ConnectionManager();
-        public bool InsertInvoice(Invoice invoice, List<BillingItems> billingItems)
+        public bool InsertInvoice(Invoice invoice, List<BillingItems> billingItems, string tax)
         {
             int invoiceId = new int();
             string qry = @"INSERT into invoice
@@ -78,6 +78,7 @@ namespace MedicalStoreModule.App_Code.DAO
                         item.deleteStatus = 0;
                         InsertBill(item);
                     }
+                    InsertTax(tax, (decimal)invoice.taxAmount, invoiceId);
                     return true;
                 }
                 else
@@ -119,6 +120,44 @@ namespace MedicalStoreModule.App_Code.DAO
             cmd.Parameters.AddWithValue("@quantity", record.quantity);
             cmd.Parameters.AddWithValue("@unit_price", record.unitPrice);
             cmd.Parameters.AddWithValue("@price", record.price);
+            cmd.Parameters.AddWithValue("@status", 1);
+            cmd.Parameters.AddWithValue("@delete_status", 0);
+            try
+            {
+                if (cm.OpenConnection())
+                {
+                    cmd.ExecuteNonQuery();
+                    cm.CloseConnection();
+                    return true;
+                }
+            }
+            catch (Exception ex)
+            {
+                cm.CloseConnection();
+                string msg = ex.Message;
+                return false;
+            }
+            return true;
+        }
+
+        private bool InsertTax(string tax, decimal taxAmount, int invoiceId)
+        {
+            string qry = @"INSERT into invoice_tax
+                                       (invoice_id,
+                                        tax_type,
+                                        tax_amount,
+                                        status,
+                                        delete_status)
+                                  VALUES
+                                       (@invoice_id,
+                                        @tax_type,
+                                        @tax_amount,
+                                        @status,
+                                        @delete_status);";
+            MySqlCommand cmd = new MySqlCommand(qry, cm.connection);
+            cmd.Parameters.AddWithValue("@invoice_id", invoiceId);
+            cmd.Parameters.AddWithValue("@tax_type", tax);
+            cmd.Parameters.AddWithValue("@tax_amount", taxAmount);
             cmd.Parameters.AddWithValue("@status", 1);
             cmd.Parameters.AddWithValue("@delete_status", 0);
             try
