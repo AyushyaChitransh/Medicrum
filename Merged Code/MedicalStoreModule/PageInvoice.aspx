@@ -31,6 +31,21 @@
                 <div class="uk-grid uk-grid-collapse" data-uk-grid-margin="data-uk-grid-margin">
                     <div class="uk-width-large-7-10">
                         <div class="md-card md-card-single main-print" id="invoice">
+                            <div id="page_invoice">
+                                <div class="md-card-toolbar">
+                                    <h3 class="md-card-toolbar-heading-text large">Invoices</h3>
+                                </div>
+                                <div class="md-card-content">
+                                    <p class="uk-text-muted uk-text-large uk-text-center uk-margin-large-top">
+                                        Click the 
+                                            <a class="uk-badge uk-badge-success" href="#">
+                                                <strong>+</strong>
+                                            </a> button to create a new invoice<br />
+                                        or<br />
+                                        open invoice from the list.
+                                    </p>
+                                </div>
+                            </div>
                             <div id="invoice_preview"></div>
                             <div id="invoice_form"></div>
                         </div>
@@ -154,7 +169,8 @@
                 <div class="md-card-toolbar-actions">
                     <i class="md-icon material-icons" id="invoice_submit" onclick="AddInvoice()" data-uk-tooltip="{cls:'long-text',pos:'bottom'}" title="View Invoice">save</i>
                 </div>
-                <label class="md-card-toolbar-input">Invoice </label><input name="invoiceNumber" id="invoice_number" class="md-card-toolbar-input" type="text" placeholder="Invoice number" readonly="readonly" />
+                <label class="md-card-toolbar-input">Invoice </label>
+                <input name="invoiceNumber" id="invoice_number" class="md-card-toolbar-input" type="text" placeholder="Invoice number" readonly="readonly" />
             </div>
             <div class="md-card-content large-padding">
                 <div class="uk-grid" data-uk-grid-margin="data-uk-grid-margin">
@@ -216,7 +232,7 @@
                 <div class="uk-grid" data-uk-grid-margin="data-uk-grid-margin">
                     <div class="uk-width-1-1">
                         <div id="form_invoice_medicines"></div>
-                        <div class="uk-text-center uk-margin-medium-top uk-margin-bottom">
+                        <div class="uk-text-center uk-margin-medium-top">
                             <a href="#" class="md-btn md-btn-flat md-btn-flat-primary" id="invoice_form_append_medicine_btn" data-uk-tooltip="{cls:'long-text',pos:'bottom'}" title="click only if you want to add new product to invoice">Add New Product</a>
                         </div>
                     </div>
@@ -259,7 +275,7 @@
                     </div>
                     <div class="uk-width-medium-2-10">
                         <label for="inv_medicine_{{invoice_medicine_id}}_qty">Quantity<span class="req">*</span></label>
-                        <input type="text" class="md-input" id="inv_medicine_{{invoice_medicine_id}}_qty" name="billingItems[{{invoice_medicine_id}}][quantity]" onkeyup="CalculateTotal({{invoice_medicine_id}})" />
+                        <input type="number" min="0" class="md-input" id="inv_medicine_{{invoice_medicine_id}}_qty" name="billingItems[{{invoice_medicine_id}}][quantity]" onkeyup="CalculateTotal({{invoice_medicine_id}})" />
                     </div>
                     <div class="uk-width-medium-2-10">
                         <label for="inv_medicine_{{invoice_medicine_id}}_price">Total</label>

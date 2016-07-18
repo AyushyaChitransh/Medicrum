@@ -104,6 +104,7 @@ altair_invoices = {
             // show invoice form on fab click event
             $invoice_add_btn.on('click', function (e) {
                 e.preventDefault();
+                document.getElementById("page_invoice").style.display = 'none';
                 altair_md.card_show_hide($invoice_card, insert_form, show_form, undefined);
             })
 
@@ -133,15 +134,14 @@ altair_invoices = {
             .on('click', 'a', function (e) {
                 e.preventDefault();
                 e.stopPropagation();
+                document.getElementById("page_invoice").style.display = 'none';
                 altair_md.card_show_hide($invoice_card, undefined, show_invoice, $(this));
                 $(this).closest('li').siblings('li').removeClass('md-list-item-active').end().addClass('md-list-item-active');
                 setTimeout(function () {
                     // reinitialize uikit margin
                     altair_uikit.reinitialize_grid_margin();
                 }, 560); //2 x animation duration
-            })
-            .find('a').eq(2).click();
-
+            });
     },
     print_invoice: function () {
         $body.on('click', '#invoice_print', function (e) {
