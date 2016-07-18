@@ -52,6 +52,7 @@
                     </div>
                     <div class="uk-width-large-3-10 hidden-print uk-visible-large">
                         <div class="md-list-outside-wrapper">
+                            <input type='text' class='md-input uk-margin-top' id='search_invoice' name='search_invoice' placeholder='Search Invoice' onkeyup='response()' />
                             <ul class="md-list md-list-outside invoices_list" id="invoices_list">
                                 <%= InvoiceSidebarList() %>
                             </ul>

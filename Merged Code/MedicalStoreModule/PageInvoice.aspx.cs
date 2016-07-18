@@ -111,7 +111,7 @@ namespace MedicalStoreModule
         {
             DAOInvoice accessInvoiceDb = new DAOInvoice();
             List<object> invoiceList = accessInvoiceDb.GetInvoiceList("", storeId);
-            string sidebarList = "<li class='heading_list'><input type='text' class='md-input' id='search_invoice' name='search_invoice' placeholder='Search Invoice' onkeyup='response()' /></li>";
+            string sidebarList = "";
             foreach (object item in invoiceList)
             {
                 var invoiceId = item.GetType().GetProperty("invoiceId").GetValue(item, null);
@@ -130,7 +130,7 @@ namespace MedicalStoreModule
         {
             DAOInvoice accessInvoiceDb = new DAOInvoice();
             List<object> invoiceList = accessInvoiceDb.GetInvoiceList(searchText, storeId);
-            string sidebarList = "<li class='heading_list'><input type='text' class='md-input' id='search_invoice' name='search_invoice' onkeyup='response()' placeholder='Search Invoice' value='" + searchText + "' /></li>";
+            string sidebarList = "";
             foreach (object item in invoiceList)
             {
                 var invoiceId = item.GetType().GetProperty("invoiceId").GetValue(item, null);
