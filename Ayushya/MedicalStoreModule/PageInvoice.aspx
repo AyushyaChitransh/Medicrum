@@ -40,7 +40,7 @@
                                         Click the 
                                             <a class="uk-badge uk-badge-success" href="#">
                                                 <strong>+</strong>
-                                            </a> button to create a new invoice<br />
+                                            </a>button to create a new invoice<br />
                                         or<br />
                                         open invoice from the list.
                                     </p>
@@ -73,15 +73,15 @@
     <div id="sidebar_secondary">
         <div class="sidebar_secondary_wrapper uk-margin-remove"></div>
     </div>
-    
+
     <script id="invoice_template" type="text/x-handlebars-template">
         <div class="md-card-toolbar">
             <div class="md-card-toolbar-actions hidden-print">
                 <i class="md-icon material-icons" id="invoice_print">&#xE8ad;</i>
                 <i class="md-icon material-icons" onclick="DeleteInvoice()">delete</i>
             </div>
-            <h3 class="md-card-toolbar-heading-text large" id="invoice_name">Invoice Number: {{invoice_number}}
-            </h3>
+            <h3 class="md-card-toolbar-heading-text large" id="invoice_name">{{invoice_type}}<span class="uk-text-muted uk-text-small uk-text-italic uk-text-center">  Invoice Number: {{invoice_number}}</span></h3>
+            
         </div>
         <div class="md-card-content">
             <div class="uk-margin-medium-bottom">
@@ -95,32 +95,40 @@
                     <div class="uk-margin-bottom">
                         <span class="uk-text-muted uk-text-small uk-text-italic">Customer Name:</span>
                         <p class="uk-text-upper"><strong>{{invoice_customer}}</strong></p>
+                        {{#ifCond invoice_address '!==' ""}}
                         <span class="uk-text-muted uk-text-small uk-text-italic">Address:</span>
                         <address>
                             <p>{{invoice_address}}, {{invoice_district}}, {{invoice_state}}</p>
                             <p>{{invoice_country}} - {{invoice_pincode}}</p>
                         </address>
+                        {{/ifCond}}
+                        {{#ifCond invoice_email '!==' ""}}
                         <span class="uk-text-muted uk-text-small uk-text-italic">Contact:</span>
                         <address>
                             <p>{{invoice_email}}</p>
                             <p>{{invoice_mobile}}</p>
                         </address>
+                        {{/ifCond}}
                     </div>
                 </div>
                 <div class="uk-width-small-3-10">
                     <div class="uk-margin-bottom">
                         <span class="uk-text-muted uk-text-small uk-text-italic">Store Name:</span>
                         <p class="uk-text-upper"><strong>{{invoice_store_name}}</strong></p>
+                        {{#ifCond invoice_store_address '!==' ""}}
                         <span class="uk-text-muted uk-text-small uk-text-italic">Address:</span>
                         <address>
                             <p>{{invoice_store_address}}, {{invoice_store_district}}, {{invoice_store_state}}</p>
                             <p>{{invoice_store_country}} - {{invoice_store_pincode}}</p>
                         </address>
+                        {{/ifCond}}
+                        {{#ifCond invoice_store_email '!==' ""}}
                         <span class="uk-text-muted uk-text-small uk-text-italic">Contact:</span>
                         <address>
                             <p>{{invoice_store_email}}</p>
                             <p>{{invoice_store_mobile}}</p>
                         </address>
+                        {{/ifCond}}
                     </div>
                 </div>
                 <div class="uk-width-small-4-10">
@@ -176,7 +184,7 @@
                     <p class="uk-text-small">Please pay within {{ invoice_payment_terms }}</p>
                 </div>
             </div>
-        <div class="uk-text-center uk-text-italic blog_list_footer">Powered by Medicrum</div>
+            <div class="uk-text-center uk-text-italic blog_list_footer">Powered by Medicrum</div>
         </div>
     </script>
 

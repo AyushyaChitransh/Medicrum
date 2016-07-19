@@ -60,6 +60,19 @@
                 <p>First, try the easiest thing: if you remember your password but it isn’t working, make sure that Caps Lock is turned off, and that your username is spelled correctly, and then try again.</p>
                 <p>If your password still isn’t working, it’s time to <a href="#" id="password_reset_show">contact you store admin</a>.</p>
             </div>
+            <div class="md-card-content large-padding" id="login_password_reset" style="display: none">
+                <button type="button" class="uk-position-top-right uk-close uk-margin-right uk-margin-top back_to_login"></button>
+                <h2 class="heading_a uk-margin-large-bottom">Reset password</h2>
+                <form>
+                    <div class="uk-form-row">
+                        <label for="login_email_reset">Your email address</label>
+                        <input class="md-input" type="email" id="login_email_reset" name="login_email_reset" onclick="ResetPassword()" />
+                    </div>
+                    <div class="uk-margin-medium-top">
+                        <a class="md-btn md-btn-primary md-btn-block md-btn-large">Reset Password</a>
+                    </div>
+                </form>
+            </div>
         </div>
     </div>
 

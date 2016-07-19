@@ -10,6 +10,7 @@ namespace MedicalStoreModule.App_Code.Utility
     public class InvoiceJson
     {
         public int invoice_number { get; set; }
+        public string invoice_type { get; set; }
         public DateTime invoice_date { get; set; }
         public DateTime invoice_due_date { get; set; }
         public string invoice_customer { get; set; }
@@ -26,6 +27,7 @@ namespace MedicalStoreModule.App_Code.Utility
         public string invoice_store_state { get; set; }
         public string invoice_store_country { get; set; }
         public string invoice_store_pincode { get; set; }
+        public string invoice_store_email { get; set; }
         public string invoice_store_mobile { get; set; }
         public decimal? invoice_total_value { get; set; }
         public decimal? invoice_vat_value { get; set; }
@@ -70,6 +72,7 @@ namespace MedicalStoreModule.App_Code.Utility
         public InvoiceJson(Invoice invoice, Customer customer, Store store)
         {
             invoice_number = invoice.invoiceNumber;
+            invoice_type = invoice.invoiceType;
             invoice_date = invoice.invoiceDate;
             invoice_payment_mode = invoice.paymentMode;
             invoice_payment_terms = invoice.paymentTerms;
@@ -88,6 +91,7 @@ namespace MedicalStoreModule.App_Code.Utility
             invoice_store_country = store.country;
             invoice_store_pincode = store.pincode;
             invoice_store_mobile = store.mobileNumber;
+            invoice_store_email = store.email;
             decimal tempDiscountAmount = new decimal();
             if (decimal.TryParse(invoice.discountAmount.ToString(), out tempDiscountAmount))
             {
