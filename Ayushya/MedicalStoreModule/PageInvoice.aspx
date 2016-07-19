@@ -31,15 +31,30 @@
                 <div class="uk-grid uk-grid-collapse" data-uk-grid-margin="data-uk-grid-margin">
                     <div class="uk-width-large-7-10">
                         <div class="md-card md-card-single main-print" id="invoice">
+                            <div id="page_invoice">
+                                <div class="md-card-toolbar">
+                                    <h3 class="md-card-toolbar-heading-text large">Invoices</h3>
+                                </div>
+                                <div class="md-card-content">
+                                    <p class="uk-text-muted uk-text-large uk-text-center uk-margin-large-top">
+                                        Click the 
+                                            <a class="uk-badge uk-badge-success" href="#">
+                                                <strong>+</strong>
+                                            </a> button to create a new invoice<br />
+                                        or<br />
+                                        open invoice from the list.
+                                    </p>
+                                </div>
+                            </div>
                             <div id="invoice_preview"></div>
                             <div id="invoice_form"></div>
                         </div>
                     </div>
                     <div class="uk-width-large-3-10 hidden-print uk-visible-large">
                         <div class="md-list-outside-wrapper">
+                            <input type='text' class='md-input uk-margin-top' id='search_invoice' name='search_invoice' placeholder='Search Invoice' onkeyup='response()' />
                             <ul class="md-list md-list-outside invoices_list" id="invoices_list">
-                                <li class="heading_list">November 2015</li>
-                                <%= InvoiceSidebarList("") %>
+                                <%= InvoiceSidebarList() %>
                             </ul>
                         </div>
                     </div>
@@ -58,7 +73,7 @@
     <div id="sidebar_secondary">
         <div class="sidebar_secondary_wrapper uk-margin-remove"></div>
     </div>
-
+    
     <script id="invoice_template" type="text/x-handlebars-template">
         <div class="md-card-toolbar">
             <div class="md-card-toolbar-actions hidden-print">
@@ -76,7 +91,7 @@
                 <%--<span class="uk-text-muted uk-text-small uk-text-italic">Due Date:</span> {{invoice_due_date}}--%>
             </div>
             <div class="uk-grid" data-uk-grid-margin>
-                <div class="uk-width-small-1-5">
+                <div class="uk-width-small-3-10">
                     <div class="uk-margin-bottom">
                         <span class="uk-text-muted uk-text-small uk-text-italic">Customer Name:</span>
                         <p class="uk-text-upper"><strong>{{invoice_customer}}</strong></p>
@@ -92,7 +107,7 @@
                         </address>
                     </div>
                 </div>
-                <div class="uk-width-small-1-5">
+                <div class="uk-width-small-3-10">
                     <div class="uk-margin-bottom">
                         <span class="uk-text-muted uk-text-small uk-text-italic">Store Name:</span>
                         <p class="uk-text-upper"><strong>{{invoice_store_name}}</strong></p>
@@ -108,7 +123,7 @@
                         </address>
                     </div>
                 </div>
-                <div class="uk-width-small-3-5">
+                <div class="uk-width-small-4-10">
                     <span class="uk-text-muted uk-text-small uk-text-italic">Payable Amount:</span>
                     <p class="heading_a uk-text-success">Rs {{invoice_payable_amount}}</p>
                     <p class="uk-text-small uk-text-muted uk-margin-top-remove">
@@ -161,9 +176,10 @@
                     <p class="uk-text-small">Please pay within {{ invoice_payment_terms }}</p>
                 </div>
             </div>
-        <div class="uk-text-center uk-text-italic">Powered by Medicrum</div>
+        <div class="uk-text-center uk-text-italic blog_list_footer">Powered by Medicrum</div>
         </div>
     </script>
+
 
     <script id="invoice_form_template" type="text/x-handlebars-template">
         <form action="" class="uk-form-stacked" id="form_invoice">
@@ -171,7 +187,8 @@
                 <div class="md-card-toolbar-actions">
                     <i class="md-icon material-icons" id="invoice_submit" onclick="AddInvoice()" data-uk-tooltip="{cls:'long-text',pos:'bottom'}" title="View Invoice">save</i>
                 </div>
-                <input name="invoiceNumber" id="invoice_number" class="md-card-toolbar-input" type="text" value="" placeholder="Invoice number" />
+                <label class="md-card-toolbar-input">Invoice </label>
+                <input name="invoiceNumber" id="invoice_number" class="md-card-toolbar-input" type="text" placeholder="Invoice number" readonly="readonly" />
             </div>
             <div class="md-card-content large-padding">
                 <div class="uk-grid" data-uk-grid-margin="data-uk-grid-margin">
@@ -233,9 +250,20 @@
                 <div class="uk-grid" data-uk-grid-margin="data-uk-grid-margin">
                     <div class="uk-width-1-1">
                         <div id="form_invoice_medicines"></div>
-                        <div class="uk-text-center uk-margin-medium-top uk-margin-bottom">
-                            <a href="#" class="md-btn md-btn-flat md-btn-flat-primary" id="invoice_form_append_medicine_btn" data-uk-tooltip="{cls:'long-text',pos:'bottom'}" title="click only if you want to add new product to invoice">Add new</a>
+                        <div class="uk-text-center uk-margin-medium-top">
+                            <a href="#" class="md-btn md-btn-flat md-btn-flat-primary" id="invoice_form_append_medicine_btn" data-uk-tooltip="{cls:'long-text',pos:'bottom'}" title="click only if you want to add new product to invoice">Add New Product</a>
                         </div>
+                    </div>
+                    <hr style="width: 100%" />
+                </div>
+                <div class="uk-grid uk-grid-divider" data-uk-grid-margin="data-uk-grid-margin">
+                    <div class="uk-width-medium-1-2">
+                        <label class="uk-form-label uk-margin-bottom" for="tax">Tax (in %)</label>
+                        <input type="number" step="any" class="md-input" id="tax" name="tax" />
+                    </div>
+                    <div class="uk-width-medium-1-2">
+                        <label class="uk-form-label uk-margin-bottom" for="discount">Discount (in %)</label>
+                        <input type="number" step="any" class="md-input" id="discount" name="discount" />
                     </div>
                 </div>
             </div>
@@ -254,14 +282,22 @@
             </div>
             <div class="uk-width-medium-9-10">
                 <div class="uk-grid uk-grid-small" data-uk-grid-margin="data-uk-grid-margin">
-                    <div class="uk-width-medium-7-10">
+                    <div class="uk-width-medium-4-10">
                         <label for="inv_medicine_{{invoice_medicine_id}}">Product Name<span class="req">*</span></label>
-                        <select class="md-input label-fixed" id="inv_medicine_{{invoice_medicine_id}}" name="billingItems[{{invoice_medicine_id}}][productId]" required="required" data-uk-tooltip="{cls:'long-text',pos:'bottom'}" title="Name | Batch | Price">
+                        <select class="md-input label-fixed" id="inv_medicine_{{invoice_medicine_id}}" name="billingItems[{{invoice_medicine_id}}][productId]" required="required" data-uk-tooltip="{cls:'long-text',pos:'bottom'}" title="Name | Batch" onchange="GetUnitPrice({{invoice_medicine_id}})">
                         </select>
                     </div>
-                    <div class="uk-width-medium-3-10">
+                    <div class="uk-width-medium-2-10">
+                        <label for="inv_medicine_{{invoice_medicine_id}}_unit_price">Unit Price</label>
+                        <input type="text" class="md-input label-fixed" id="inv_medicine_{{invoice_medicine_id}}_unit_price" name="billingItems[{{invoice_medicine_id}}][unitPrice]" readonly="readonly" />
+                    </div>
+                    <div class="uk-width-medium-2-10">
                         <label for="inv_medicine_{{invoice_medicine_id}}_qty">Quantity<span class="req">*</span></label>
-                        <input type="text" class="md-input" id="inv_medicine_{{invoice_medicine_id}}_qty" name="billingItems[{{invoice_medicine_id}}][quantity]" />
+                        <input type="text" pattern="{0-9}" title="Quantity" class="md-input" id="inv_medicine_{{invoice_medicine_id}}_qty" name="billingItems[{{invoice_medicine_id}}][quantity]" onkeyup="CalculateTotal({{invoice_medicine_id}})" />
+                    </div>
+                    <div class="uk-width-medium-2-10">
+                        <label for="inv_medicine_{{invoice_medicine_id}}_price">Total</label>
+                        <input type="text" class="md-input label-fixed" id="inv_medicine_{{invoice_medicine_id}}_price" name="billingItems[{{invoice_medicine_id}}][price]" readonly="readonly" />
                     </div>
                 </div>
             </div>

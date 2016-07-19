@@ -31,7 +31,7 @@ namespace MedicalStoreModule
         }
 
         [WebMethod]
-        public static bool InsertInvoiceAndBillingItems(string couponCode, int customerId, string discountType, int invoiceNumber, string invoiceType, string paymentMode, string paymentTerms, List<BillingItems> billingItems)
+        public static object InsertInvoice(string couponCode, int customerId, string discountType, int invoiceNumber, string invoiceType, string paymentMode, string paymentTerms, List<BillingItems> billingItems, string tax, string discount)
         {
             billingItems.RemoveAt(0);
             Invoice invoice = new Invoice();
@@ -44,20 +44,46 @@ namespace MedicalStoreModule
             invoice.paymentMode = paymentMode;
             invoice.discountType = discountType;
             invoice.couponCode = couponCode;
-
-            //hardcoded values
-            invoice.totalAmount = 1;
-            invoice.taxAmount = 1;
-            invoice.discountAmount = 1;
-
-            invoice.netTotal = invoice.totalAmount + invoice.taxAmount;
+            // calculate total amount
+            invoice.totalAmount = 0;
+            foreach (BillingItems item in billingItems)
+            {
+                invoice.totalAmount += item.price;
+            }
+            decimal temp = new decimal();
+            //calculate tax amount
+            if (decimal.TryParse(tax, out temp))
+            {
+                invoice.taxAmount = invoice.totalAmount * (temp / 100);
+            }
+            else
+            {
+                invoice.taxAmount = 0;
+            }
+            //calculate discount amount
+            if (decimal.TryParse(discount, out temp))
+            {
+                invoice.discountAmount = invoice.totalAmount * (temp / 100);
+            }
+            else
+            {
+                invoice.discountAmount = 0;
+            }
+            //calculate net total
+            invoice.netTotal = invoice.totalAmount + invoice.taxAmount - invoice.discountAmount;
             invoice.amountPaid = invoice.netTotal;
-
             invoice.status = 1;
             invoice.deleteStatus = 0;
 
             DAOInvoice accessInvoiceDb = new DAOInvoice();
-            return accessInvoiceDb.InsertInvoice(invoice, billingItems);
+            return accessInvoiceDb.InsertInvoice(invoice, billingItems, tax);
+        }
+
+        [WebMethod]
+        public static object GetInvoiceNumber()
+        {
+            DAOInvoice accessInvoiceDb = new DAOInvoice();
+            return accessInvoiceDb.GetInvoiceNumber(storeId);
         }
 
         [WebMethod]
@@ -74,7 +100,33 @@ namespace MedicalStoreModule
             return accessInvoiceDb.GetCustomerOptions(storeId);
         }
 
-        public string InvoiceSidebarList(string searchText)
+        [WebMethod]
+        public static object GetProductPrice(int productId)
+        {
+            DAOInvoice accessInvoiceDb = new DAOInvoice();
+            return accessInvoiceDb.GetProductPrice(productId);
+        }
+
+        public string InvoiceSidebarList()
+        {
+            DAOInvoice accessInvoiceDb = new DAOInvoice();
+            List<object> invoiceList = accessInvoiceDb.GetInvoiceList("", storeId);
+            string sidebarList = "";
+            foreach (object item in invoiceList)
+            {
+                var invoiceId = item.GetType().GetProperty("invoiceId").GetValue(item, null);
+                var invoiceNumber = item.GetType().GetProperty("invoiceNumber").GetValue(item, null);
+                var invoiceDate = item.GetType().GetProperty("invoiceDate").GetValue(item, null);
+                var customerName = item.GetType().GetProperty("customerName").GetValue(item, null);
+                sidebarList += "<li><a href='#' class='md-list-content' data-invoice-id=" + invoiceId + "/>";
+                sidebarList += "<span class='md-list-heading uk-text-truncate'>Invoice " + invoiceNumber + "<span class='uk-text-small uk-text-muted'> " + invoiceDate + "</span></span>";
+                sidebarList += "<span class='uk-text-small uk-text-muted'>Customer " + customerName + "</span>";
+            }
+            return sidebarList;
+        }
+
+        [WebMethod]
+        public static object InvoiceSideBar(string searchText)
         {
             DAOInvoice accessInvoiceDb = new DAOInvoice();
             List<object> invoiceList = accessInvoiceDb.GetInvoiceList(searchText, storeId);

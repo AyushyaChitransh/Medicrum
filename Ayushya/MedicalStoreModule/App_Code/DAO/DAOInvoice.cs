@@ -10,7 +10,7 @@ namespace MedicalStoreModule.App_Code.DAO
     public class DAOInvoice
     {
         ConnectionManager cm = new ConnectionManager();
-        public bool InsertInvoice(Invoice invoice, List<BillingItems> billingItems)
+        public object InsertInvoice(Invoice invoice, List<BillingItems> billingItems, string tax)
         {
             int invoiceId = new int();
             string qry = @"INSERT into invoice
@@ -46,7 +46,8 @@ namespace MedicalStoreModule.App_Code.DAO
                                                 @net_total,
                                                 @amount_paid,
                                                 @status,
-                                                @delete_status);SELECT LAST_INSERT_ID();";
+                                                @delete_status);
+                                        SELECT LAST_INSERT_ID();";
             MySqlCommand cmd = new MySqlCommand(qry, cm.connection);
             cmd.Parameters.AddWithValue("@invoice_number", invoice.invoiceNumber);
             cmd.Parameters.AddWithValue("@store_id", invoice.storeId);
@@ -77,18 +78,15 @@ namespace MedicalStoreModule.App_Code.DAO
                         item.deleteStatus = 0;
                         InsertBill(item);
                     }
-                    return true;
+                    InsertTax(tax, (decimal)invoice.taxAmount, invoiceId);
                 }
-                else
-                {
-                    return false;
-                }
+                return invoiceId;
             }
             catch (Exception ex)
             {
                 cm.CloseConnection();
                 string message = ex.Message;
-                return false;
+                return invoiceId;
             }
         }
 
@@ -138,6 +136,71 @@ namespace MedicalStoreModule.App_Code.DAO
             return true;
         }
 
+        private bool InsertTax(string tax, decimal taxAmount, int invoiceId)
+        {
+            string qry = @"INSERT into invoice_tax
+                                       (invoice_id,
+                                        tax_type,
+                                        tax_amount,
+                                        status,
+                                        delete_status)
+                                  VALUES
+                                       (@invoice_id,
+                                        @tax_type,
+                                        @tax_amount,
+                                        @status,
+                                        @delete_status);";
+            MySqlCommand cmd = new MySqlCommand(qry, cm.connection);
+            cmd.Parameters.AddWithValue("@invoice_id", invoiceId);
+            cmd.Parameters.AddWithValue("@tax_type", tax);
+            cmd.Parameters.AddWithValue("@tax_amount", taxAmount);
+            cmd.Parameters.AddWithValue("@status", 1);
+            cmd.Parameters.AddWithValue("@delete_status", 0);
+            try
+            {
+                if (cm.OpenConnection())
+                {
+                    cmd.ExecuteNonQuery();
+                    cm.CloseConnection();
+                    return true;
+                }
+            }
+            catch (Exception ex)
+            {
+                cm.CloseConnection();
+                string msg = ex.Message;
+                return false;
+            }
+            return true;
+        }
+
+        public object GetInvoiceNumber(int storeId)
+        {
+            try
+            {
+                if (cm.OpenConnection() == true)
+                {
+                    MySqlCommand cmd = new MySqlCommand();
+                    cmd.CommandText = "SELECT MAX(invoice_number) FROM invoice WHERE store_id=@store_id";
+                    cmd.Parameters.AddWithValue("@store_id", storeId);
+                    cmd.Connection = cm.connection;
+                    int invoiceNumber = int.Parse(cmd.ExecuteScalar().ToString());
+                    cm.CloseConnection();
+                    return invoiceNumber + 1;
+                }
+                else
+                {
+                    return 0;
+                }
+            }
+            catch (Exception ex)
+            {
+                cm.CloseConnection();
+                string message = ex.Message;
+                return 0;
+            }
+        }
+
         public object GetProductOptions(int storeId)
         {
             List<object> productOptions = new List<object>();
@@ -146,16 +209,16 @@ namespace MedicalStoreModule.App_Code.DAO
                 if (cm.OpenConnection() == true)
                 {
                     MySqlCommand cmd = new MySqlCommand();
-                    cmd.CommandText = @"SELECT s.product_id, s.batch_number, p.product_name, s.price FROM stock_product s
+                    cmd.CommandText = @"SELECT s.product_id, s.batch_number, p.product_name FROM stock_product s
                                         LEFT JOIN product_model p ON s.product_model_id = p.product_model_id
-                                        WHERE s.delete_status=@delete_status AND s.store_id=@store_id";
+                                        WHERE s.delete_status=@delete_status AND s.store_id=@store_id AND s.quantity > 0 AND s.expiry_date >= CURDATE()";
                     cmd.Parameters.AddWithValue("@store_id", storeId);
                     cmd.Parameters.AddWithValue("@delete_status", 0);
                     cmd.Connection = cm.connection;
                     MySqlDataReader dataReader = cmd.ExecuteReader();
                     while (dataReader.Read())
                     {
-                        productOptions.Add(new { DisplayText = dataReader["product_name"].ToString(), Value = int.Parse(dataReader["product_id"].ToString()), AdditionalText1 = dataReader["batch_number"].ToString(), AdditionalText2 = dataReader["price"].ToString() });
+                        productOptions.Add(new { DisplayText = dataReader["product_name"].ToString(), Value = int.Parse(dataReader["product_id"].ToString()), AdditionalText = dataReader["batch_number"].ToString() });
                     }
                     cm.CloseConnection();
                 }
@@ -199,15 +262,44 @@ namespace MedicalStoreModule.App_Code.DAO
             }
         }
 
+        public object GetProductPrice(int productId)
+        {
+            decimal unitPrice = new decimal();
+            try
+            {
+                if (cm.OpenConnection() == true)
+                {
+                    MySqlCommand cmd = new MySqlCommand();
+                    cmd.CommandText = @"SELECT price FROM stock_product 
+                                        WHERE product_id=@product_id";
+                    cmd.Parameters.AddWithValue("@product_id", productId);
+                    cmd.Connection = cm.connection;
+                    MySqlDataReader dataReader = cmd.ExecuteReader();
+                    while (dataReader.Read())
+                    {
+                        unitPrice = decimal.Parse(dataReader["price"].ToString());
+                    }
+                    cm.CloseConnection();
+                }
+                return unitPrice;
+            }
+            catch (Exception ex)
+            {
+                cm.CloseConnection();
+                string message = ex.Message;
+                return unitPrice;
+            }
+        }
+
         public List<object> GetInvoiceList(string customerName, int storeId)
         {
-            //Hardcoded customer search text
-            customerName = "";
             List<object> invoiceList = new List<object>();
-            string qry = @"SELECT * FROM invoice
-                                    LEFT JOIN customer ON invoice.customer_id = customer.customer_id
-                                    WHERE invoice.delete_status=@delete_status AND
-                                          invoice.store_id = @store_id";
+            string qry = @"SELECT * FROM invoice i
+                                    LEFT JOIN customer c ON i.customer_id = c.customer_id
+                                    WHERE i.delete_status=@delete_status AND
+                                          i.store_id=@store_id AND
+                                          c.customer_name LIKE @searchText
+                                    ORDER BY invoice_number DESC";
             MySqlCommand cmd = new MySqlCommand(qry, cm.connection);
             cmd.Parameters.AddWithValue("@searchText", customerName + '%');
             cmd.Parameters.AddWithValue("@store_id", storeId);
@@ -411,117 +503,6 @@ namespace MedicalStoreModule.App_Code.DAO
             return listBillingItems;
         }
 
-        /*public Invoice GetInvoice(int invoiceId)
-        {
-            Invoice invoiceObj = new Invoice();
-            try
-            {
-                if (cm.OpenConnection() == true)
-                {
-                    MySqlCommand cmd = new MySqlCommand();
-                    cmd.CommandText = @"SELECT 
-                                                invoice_number,
-                                                invoice.store_id,
-                                                invoice.customer_id,
-                                                invoice.invoice_date,
-                                                invoice_type,
-                                                payment_terms,
-                                                payment_mode,
-                                                total_amount,
-                                                tax_amount,
-                                                discount_type,
-                                                discount_amount,
-                                                coupon_code,
-                                                net_total,
-                                                amount_paid,
-                                                invoice.status,
-                                                invoice.delete_status
-                                        FROM invoice
-                                        WHERE invoice_id=@invoice_id AND delete_status=@delete_status";
-                    cmd.Parameters.AddWithValue("@invoice_id", invoiceId);
-                    cmd.Parameters.AddWithValue("@delete_status", 0);
-                    cmd.Connection = cm.connection;
-                    MySqlDataReader dataReader = cmd.ExecuteReader();
-                    while (dataReader.Read())
-                    {
-                        invoiceObj.invoiceId = int.Parse(dataReader["invoice_id"].ToString());
-                        invoiceObj.invoiceNumber = int.Parse(dataReader["invoice_number"].ToString());
-                        invoiceObj.customerId = int.Parse(dataReader["customer_id"].ToString());
-                        invoiceObj.storeId = int.Parse(dataReader["store_id"].ToString());
-                        invoiceObj.invoiceDate = DateTime.Parse(dataReader["invoice_date"].ToString());
-                        invoiceObj.invoiceType = dataReader["invoice_type"].ToString();
-                        invoiceObj.paymentTerms = dataReader["payment_terms"].ToString();
-                        invoiceObj.paymentMode = dataReader["payment_mode"].ToString();
-                        decimal totalAmountTemp = new decimal();
-                        if (decimal.TryParse(dataReader["total_amount"].ToString(), out totalAmountTemp))
-                        {
-                            invoiceObj.totalAmount = totalAmountTemp;
-                        }
-                        decimal taxAmountTemp = new decimal();
-                        if (decimal.TryParse(dataReader["tax_amount"].ToString(), out taxAmountTemp))
-                        {
-                            invoiceObj.taxAmount = taxAmountTemp;
-                        }
-                        invoiceObj.discountType = dataReader["discount_type"].ToString();
-                        decimal discountAmountTemp = new decimal();
-                        if (decimal.TryParse(dataReader["discount_amount"].ToString(), out discountAmountTemp))
-                        {
-                            invoiceObj.discountAmount = discountAmountTemp;
-                        }
-                        invoiceObj.couponCode = dataReader["coupon_code"].ToString();
-                        decimal netTotalTemp = new decimal();
-                        if (decimal.TryParse(dataReader["net_total"].ToString(), out netTotalTemp))
-                        {
-                            invoiceObj.netTotal = netTotalTemp;
-                        }
-                        decimal amountPaidTemp = new decimal();
-                        if (decimal.TryParse(dataReader["amount_paid"].ToString(), out amountPaidTemp))
-                        {
-                            invoiceObj.amountPaid = amountPaidTemp;
-                        }
-                        invoiceObj.status = int.Parse(dataReader["status"].ToString());
-                    }
-                    cm.CloseConnection();
-                }
-                return invoiceObj;
-            }
-            catch (Exception ex)
-            {
-                cm.CloseConnection();
-                string message = ex.Message;
-                return invoiceObj;
-            }
-        }*/
-
-        /*public object GetProductOptions(int storeId)
-        {
-            List<object> productOption = new List<object>();
-            try
-            {
-                if (cm.OpenConnection() == true)
-                {
-                    MySqlCommand cmd = new MySqlCommand();
-                    cmd.CommandText = @"SELECT product_name, product_model_id FROM product_model 
-                                        WHERE delete_status=@delete_status AND store_id=@store_id";
-                    cmd.Parameters.AddWithValue("@store_id", storeId);
-                    cmd.Parameters.AddWithValue("@delete_status", 0);
-                    cmd.Connection = cm.connection;
-                    MySqlDataReader dataReader = cmd.ExecuteReader();
-                    while (dataReader.Read())
-                    {
-                        productOption.Add(new { DisplayText = dataReader["product_name"].ToString(), Value = int.Parse(dataReader["product_model_id"].ToString()) });
-                    }
-                    cm.CloseConnection();
-                }
-                return new { Result = "OK", Options = productOption };
-            }
-            catch (Exception ex)
-            {
-                cm.CloseConnection();
-                return new { Result = "ERROR", Message = ex.Message };
-            }
-        }*/
-
         /*public bool DeleteInvoiceAndBill(int invoiceId)
         {
             string qry = @"UPDATE invoice SET delete_status=@delete_status WHERE invoice_id=@invoice_id;
@@ -550,41 +531,5 @@ namespace MedicalStoreModule.App_Code.DAO
             }
         }*/
 
-        /*public List<BillingItems> GetBillingItems(int invoiceId)
-        {
-            List<BillingItems> listBillingItems = new List<BillingItems>();
-            string qry = @"SELECT * FROM billing_items WHERE invoice_id=@invoice_id AND delete_status=@delete_status";
-            MySqlCommand cmd = new MySqlCommand(qry, cm.connection);
-            cmd.Parameters.AddWithValue("@invoice_id", invoiceId);
-            cmd.Parameters.AddWithValue("@delete_status", 0);
-            try
-            {
-                if (cm.OpenConnection())
-                {
-                    MySqlDataReader dataReader = cmd.ExecuteReader();
-                    while (dataReader.Read())
-                    {
-                        BillingItems item = new BillingItems();
-                        item.invoiceId = invoiceId;
-                        item.billId = int.Parse(dataReader["bill_id"].ToString());
-                        item.productId = int.Parse(dataReader["product_id"].ToString());
-                        item.quantity = int.Parse(dataReader["quantity"].ToString());
-                        item.unitPrice = decimal.Parse(dataReader["unit_price"].ToString());
-                        item.price = decimal.Parse(dataReader["price"].ToString());
-                        item.status = int.Parse(dataReader["status"].ToString());
-                        listBillingItems.Add(item);
-                    }
-                    cm.CloseConnection();
-                    return listBillingItems;
-                }
-            }
-            catch (Exception ex)
-            {
-                cm.CloseConnection();
-                string msg = ex.Message;
-                return listBillingItems;
-            }
-            return listBillingItems;
-        }*/
     }
 }
