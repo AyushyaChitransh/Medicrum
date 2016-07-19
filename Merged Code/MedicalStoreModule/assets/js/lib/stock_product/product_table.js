@@ -170,7 +170,7 @@ altair_crud_table = {
                     width: '1%',
                     sorting: false,
                     edit: false,
-                    options: { '1': '<span class="uk-badge uk-badge-success">In stock</span>', '0': '<span class="uk-badge uk-badge-danger">Out of stock</span>' }
+                    options: { '1': '<span class="uk-badge uk-badge-success">&nbsp&nbsp&nbsp&nbspIn stock&nbsp&nbsp&nbsp&nbsp</span>', '0': '<span class="uk-badge uk-badge-danger">Out of stock</span>' }
                 },
                 viewButton: {
                     width: '1%',

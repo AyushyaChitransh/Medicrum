@@ -147,5 +147,53 @@ namespace MedicalStoreModule.App_Code.DAO
                 return false;
             }
         }
+
+        public Store GetStore(int storeId)
+        {
+            Store store = new Store();
+            try
+            {
+                if (cm.OpenConnection() == true)
+                {
+                    MySqlCommand cmd = new MySqlCommand();
+                    cmd.CommandText = @"SELECT store_id,
+                                           store_name,
+                                           address,
+                                           district,
+                                           state,
+                                           country,
+                                           pincode,
+                                           phone_number,
+                                           mobile,
+                                           email
+                                    FROM store
+                                    WHERE store_id=@store_id";
+                    cmd.Parameters.AddWithValue("@store_id", storeId);
+                    cmd.Connection = cm.connection;
+                    MySqlDataReader dataReader = cmd.ExecuteReader();
+                    while (dataReader.Read())
+                    {
+                        store.storeId = int.Parse(dataReader["store_id"].ToString());
+                        store.storeName = dataReader["store_name"].ToString();
+                        store.address = dataReader["address"].ToString();
+                        store.district = dataReader["district"].ToString();
+                        store.state = dataReader["state"].ToString();
+                        store.country = dataReader["country"].ToString();
+                        store.pincode = dataReader["pincode"].ToString();
+                        store.phoneNumber = dataReader["phone_number"].ToString();
+                        store.mobileNumber = dataReader["mobile"].ToString();
+                        store.email = dataReader["email"].ToString();
+                    }
+                    cm.CloseConnection();
+                }
+                return store;
+            }
+            catch (Exception ex)
+            {
+                cm.CloseConnection();
+                string message = ex.Message;
+                return store;
+            }
+        }
     }
 }

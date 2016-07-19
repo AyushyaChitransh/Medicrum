@@ -2,7 +2,7 @@
     var customerName = document.getElementById('wizard_customer_name').value;
     var email = document.getElementById('wizard_email').checkValidity();
     var mobile = document.getElementById('wizard_mobile_number').checkValidity();
-    var phone = document.getElementById('wizard_phone_number').checkValidity();
+    var phone = document.getElementById('wizard_phone').checkValidity();
     if (!customerName || !mobile || !phone) {
         return false;
     }
