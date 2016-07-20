@@ -317,7 +317,7 @@ namespace MedicalStoreModule.App_Code.DAO
                 {
                     string qry = @"UPDATE user SET
                                           reset_password_code=@reset_password_code,
-                                          reset_password_flag=@reset_password_flag,
+                                          reset_password_flag=@reset_password_flag
                                         WHERE 
                                           email=@email";
                     MySqlCommand cmd = new MySqlCommand(qry, cm.connection);

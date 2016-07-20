@@ -6,7 +6,6 @@
 // variables
 var $login_card = $('#login_card'),
     $login_form = $('#login_form'),
-    $login_help = $('#login_help'),
     $submit_login_details = $('submit_login_details'),
     $login_password_reset = $('#login_password_reset');
 
@@ -20,14 +19,6 @@ altair_login_page = {
                 .hide();
         };
 
-        // show login help (hide other forms)
-        var login_help_show = function () {
-            $login_help
-                .show()
-                .siblings()
-                .hide();
-        };
-
         // show password reset form (hide other forms)
         var password_reset_show = function () {
             $login_password_reset
@@ -35,12 +26,6 @@ altair_login_page = {
                 .siblings()
                 .hide();
         };
-
-        $('#login_help_show').on('click', function (e) {
-            e.preventDefault();
-            // card animation & complete callback: login_help_show
-            altair_md.card_show_hide($login_card, undefined, login_help_show, undefined);
-        });
 
         $('.back_to_login').on('click', function (e) {
             e.preventDefault();

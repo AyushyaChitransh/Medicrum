@@ -47,7 +47,7 @@ namespace MedicalStoreModule
         public static bool SendResetCode(string email)
         {
             DAOUser accessUserDb = new DAOUser();
-            if (accessUserDb.CheckEmail(email))
+            if (!accessUserDb.CheckEmail(email))
             {
                 string randomString = GenerateRandomString();
                 accessUserDb.AddResetCode(email, randomString);
