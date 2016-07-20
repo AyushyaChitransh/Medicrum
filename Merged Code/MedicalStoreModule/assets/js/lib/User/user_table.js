@@ -149,7 +149,7 @@ altair_crud_table = {
                     title: 'Suspension',
                     width: '1%',
                     sorting: false,
-                    options: { '0': '<span class="uk-badge uk-badge-danger">Suspended</span>', '1': '<span class="uk-badge uk-badge-success">Not Suspended</span>' },
+                    options: { '0': '<span class="uk-badge uk-badge-danger">&nbsp&nbsp&nbsp&nbspSuspended&nbsp&nbsp&nbsp&nbsp</span>', '1': '<span class="uk-badge uk-badge-success">Not Suspended</span>' },
 
                 },
                 viewButton: {

@@ -5936,6 +5936,9 @@
     <Content Include="bower_components\weather-icons\sass\weather-icons.min.scss" />
     <Content Include="bower_components\weather-icons\sass\weather-icons.scss" />
     <Content Include="packages.config" />
+    <Content Include="assets\js\altair_admin_common.min.js.map">
+      <DependentUpon>altair_admin_common.min.js</DependentUpon>
+    </Content>
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>

@@ -240,7 +240,7 @@ namespace MedicalStoreModule.App_Code.DAO
                 if (cm.OpenConnection() == true)
                 {
                     MySqlCommand cmd = new MySqlCommand();
-                    cmd.CommandText = @"SELECT * FROM customer 
+                    cmd.CommandText = @"SELECT * FROM customer
                                         WHERE delete_status=@delete_status AND store_id=@store_id";
                     cmd.Parameters.AddWithValue("@store_id", storeId);
                     cmd.Parameters.AddWithValue("@delete_status", 0);
@@ -270,7 +270,7 @@ namespace MedicalStoreModule.App_Code.DAO
                 if (cm.OpenConnection() == true)
                 {
                     MySqlCommand cmd = new MySqlCommand();
-                    cmd.CommandText = @"SELECT price FROM stock_product 
+                    cmd.CommandText = @"SELECT price FROM stock_product
                                         WHERE product_id=@product_id";
                     cmd.Parameters.AddWithValue("@product_id", productId);
                     cmd.Connection = cm.connection;
@@ -391,7 +391,7 @@ namespace MedicalStoreModule.App_Code.DAO
                 if (cm.OpenConnection() == true)
                 {
                     MySqlCommand cmd = new MySqlCommand();
-                    cmd.CommandText = @"SELECT 
+                    cmd.CommandText = @"SELECT
                                                 invoice_id,
                                                 invoice_number,
                                                 invoice.store_id,

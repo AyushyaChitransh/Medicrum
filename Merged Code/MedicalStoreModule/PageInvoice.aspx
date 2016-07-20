@@ -36,13 +36,16 @@
                                     <h3 class="md-card-toolbar-heading-text large">Invoices</h3>
                                 </div>
                                 <div class="md-card-content">
-                                    <p class="uk-text-muted uk-text-large uk-text-center uk-margin-large-top">
+                                    <p class="uk-text-muted uk-text-large uk-text-center uk-margin-large-top uk-margin-large-bottom">
                                         Click the 
                                             <a class="uk-badge uk-badge-success" href="#">
                                                 <strong>+</strong>
-                                            </a> button to create a new invoice<br />
+                                            </a>&nbspbutton to create a new invoice<br />
                                         or<br />
                                         open invoice from the list.
+                                    </p>
+                                    <p class="uk-text-center uk-margin-large-top uk-alert uk-alert-info">
+                                        To print or view the latest inserted invoice click the invoice below the search bar.
                                     </p>
                                 </div>
                             </div>
@@ -80,42 +83,66 @@
                 <i class="md-icon material-icons" id="invoice_print">&#xE8ad;</i>
                 <i class="md-icon material-icons" onclick="DeleteInvoice()">delete</i>
             </div>
-            <h3 class="md-card-toolbar-heading-text large" id="invoice_name">Invoice {{invoice_number}}
-            </h3>
+            <h3 class="md-card-toolbar-heading-text large" id="invoice_name">Invoice Number: {{invoice_number}}</h3>
+
         </div>
         <div class="md-card-content">
             <div class="uk-margin-medium-bottom">
+                <p class="uk-text-large uk-text-center"><u>{{invoice_type}}</u></p>
                 <span class="uk-text-muted uk-text-small uk-text-italic">Date:</span> {{invoice_date}}
                
                 <br />
                 <%--<span class="uk-text-muted uk-text-small uk-text-italic">Due Date:</span> {{invoice_due_date}}--%>
             </div>
             <div class="uk-grid" data-uk-grid-margin="data-uk-grid-margin">
-                <div class="uk-width-small-3-5">
+                <div class="uk-width-small-3-10">
                     <div class="uk-margin-bottom">
-                        <span class="uk-text-muted uk-text-small uk-text-italic">Customer:</span>
+                        <span class="uk-text-muted uk-text-small uk-text-italic">Customer Name:</span>
                         <p class="uk-text-upper"><strong>{{invoice_customer}}</strong></p>
-                        <span class="uk-text-muted uk-text-small uk-text-italic">Location:</span>
+                        {{#ifCond invoice_address '!==' ""}}
+                        <span class="uk-text-muted uk-text-small uk-text-italic">Address:</span>
                         <address>
-                            <p>{{invoice_address}}, {{invoice_district}}, {{invoice_state}}</p>
-                            <p>{{invoice_country}} - {{invoice_pincode}}</p>
+                            <p>{{invoice_address}}{{#ifCond invoice_district '!==' ""}}, {{invoice_district}}{{/ifCond}}{{#ifCond invoice_state '!==' ""}}, {{invoice_state}}{{/ifCond}}</p>
+                            <p>{{invoice_country}}{{#ifCond invoice_pincode '!==' ""}} - {{invoice_pincode}}{{/ifCond}}</p>
                         </address>
+                        {{/ifCond}}
+                        {{#ifCond invoice_mobile '!==' ""}}
                         <span class="uk-text-muted uk-text-small uk-text-italic">Contact:</span>
                         <address>
-                            <p>{{invoice_email}}</p>
                             <p>{{invoice_mobile}}</p>
+                            <p>{{invoice_email}}</p>
                         </address>
+                        {{/ifCond}}
                     </div>
                 </div>
-                <div class="uk-width-small-2-5">
+                <div class="uk-width-small-3-10">
+                    <div class="uk-margin-bottom">
+                        <span class="uk-text-muted uk-text-small uk-text-italic">Store Name:</span>
+                        <p class="uk-text-upper"><strong>{{invoice_store_name}}</strong></p>
+                        {{#ifCond invoice_store_address '!==' ""}}
+                        <span class="uk-text-muted uk-text-small uk-text-italic">Address:</span>
+                        <address>
+                            <p>{{invoice_store_address}}{{#ifCond invoice_store_district '!==' ""}}, {{invoice_store_district}}{{/ifCond}}{{#ifCond invoice_store_state '!==' ""}}, {{invoice_store_state}}{{/ifCond}}</p>
+                            <p>{{invoice_store_country}}{{#ifCond invoice_store_pincode '!==' ""}} - {{invoice_store_pincode}}{{/ifCond}}</p>
+                        </address>
+                        {{/ifCond}}
+                        {{#ifCond invoice_store_mobile '!==' ""}}
+                        <span class="uk-text-muted uk-text-small uk-text-italic">Contact:</span>
+                        <address>
+                            <p>{{invoice_store_mobile}}</p>
+                            <p>{{invoice_store_email}}</p>
+                        </address>
+                        {{/ifCond}}
+                    </div>
+                </div>
+                <div class="uk-width-small-4-10">
                     <span class="uk-text-muted uk-text-small uk-text-italic">Payable Amount:</span>
                     <p class="heading_a uk-text-success">Rs {{invoice_payable_amount}}</p>
                     <p class="uk-text-small uk-text-muted uk-margin-top-remove">
                         Total:Rs {{invoice_total_value}}<br />
                         Esclusive VAT : Rs {{invoice_vat_value}}
                         {{#ifCond invoice_discount_amount '!==' 0}}
-                            <br />
-                        Discount : Rs {{invoice_discount_amount}}
+                            <br />Discount : Rs {{invoice_discount_amount}}
                         {{/ifCond}}
                     </p>
                 </div>
@@ -127,7 +154,7 @@
                             <tr class="uk-text-upper">
                                 <th>Product</th>
                                 <th class="uk-text-center">Unit Price</th>
-                                <th class="uk-text-center">Qty</th>
+                                <th class="uk-text-center">Quantity</th>
                                 <th class="uk-text-center">Total</th>
                             </tr>
                         </thead>
@@ -153,14 +180,19 @@
 
             <div class="uk-grid">
                 <div class="uk-width-1-1">
+                    {{#ifCond invoice_payment_mode '!==' ""}}
                     <span class="uk-text-muted uk-text-small uk-text-italic">Payment info:</span>
                     <p class="uk-margin-top-remove">
                         {{{ invoice_payment_mode }}}
                    
                     </p>
+                    {{/ifCond}}
+                    {{#ifCond invoice_payment_terms '!==' ""}}
                     <p class="uk-text-small">Please pay within {{ invoice_payment_terms }}</p>
+                    {{/ifCond}}
                 </div>
             </div>
+            <div class="uk-text-center uk-text-italic blog_list_footer">Powered by Medicrum</div>
         </div>
     </script>
 

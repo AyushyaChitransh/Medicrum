@@ -80,7 +80,7 @@
                                     <div class="uk-width-medium-1-4 parsley-row">
                                         <label for="wizard_country">Country</label>
                                         <select id="wizard_country" name="country" class="md-input">
-                                            <option value="Unselected">Select Country</option>
+                                            <option value="">Select Country</option>
                                             <option value="Afghanistan">Afghanistan</option>
                                             <option value="Albania">Albania</option>
                                             <option value="Algeria">Algeria</option>
@@ -334,11 +334,11 @@
                                     </div>
                                     <div class="uk-width-medium-1-4 parsley-row">
                                         <label for="wizard_height">Height</label>
-                                        <input type="number" name="height" id="wizard_height" class="md-input" />
+                                        <input type="number" min="0" name="height" id="wizard_height" class="md-input" />
                                     </div>
                                     <div class="uk-width-medium-1-4 parsley-row">
                                         <label for="wizard_weight">Weight</label>
-                                        <input type="number" step="any" name="weight" id="wizard_weight" class="md-input" />
+                                        <input type="number" step="any" min="0" name="weight" id="wizard_weight" class="md-input" />
                                     </div>
                                     <div class="uk-width-medium-1-4 parsley-row">
                                         <label for="wizard_blood_group">Blood Group</label>
