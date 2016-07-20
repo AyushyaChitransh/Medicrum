@@ -97,7 +97,7 @@ namespace MedicalStoreModule.App_Code.Utility
             {
                 invoice_discount_amount = tempDiscountAmount;
             }
-            invoice_payable_amount = invoice.totalAmount + invoice.taxAmount - invoice.discountAmount;
+            invoice_payable_amount = invoice.netTotal;
             invoice_total_value = invoice.totalAmount;
             invoice_vat_value = invoice.taxAmount;
         }
@@ -115,7 +115,6 @@ namespace MedicalStoreModule.App_Code.Utility
             DAOStockProduct accessProductDb = new DAOStockProduct();
             object product = accessProductDb.GetProduct(bill.productId);
             medicine_name = (product.GetType().GetProperty("productName").GetValue(product, null)).ToString();
-            //medicine_description = (product.GetType().GetProperty("description").GetValue(product, null)).ToString();
             medicine_rate = bill.unitPrice;
             medicine_qty = bill.quantity;
             medicine_total = medicine_rate * medicine_qty;

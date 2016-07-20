@@ -69,7 +69,7 @@
                                     </div>
                                     <div class="uk-width-medium-1-4 parsley-row">
                                         <select id="wizard_country" name="country" class="md-input">
-                                            <option value="Unselected">Select Country</option>
+                                            <option value="">Select Country</option>
                                             <option value="Afghanistan">Afghanistan</option>
                                             <option value="Albania">Albania</option>
                                             <option value="Algeria">Algeria</option>

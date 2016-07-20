@@ -147,10 +147,15 @@ altair_invoices = {
         $body.on('click', '#invoice_print', function (e) {
             e.preventDefault();
             UIkit.modal.confirm('Do you want to print this invoice?', function () {
+                altair_main_sidebar.hide_sidebar();
                 // wait for dialog to fully hide
                 setTimeout(function () {
                     window.print();
-                }, 300)
+                }, 300);
+                setTimeout(function () {
+                    if ($window.width() > 1220)
+                        altair_main_sidebar.show_sidebar();
+                }, 500);
             }, {
                 labels: {
                     'Ok': 'print'

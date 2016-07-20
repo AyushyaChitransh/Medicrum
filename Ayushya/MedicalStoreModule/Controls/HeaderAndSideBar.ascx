@@ -164,7 +164,7 @@
                     </li>--%>
                     <li data-uk-dropdown="{mode:'click',pos:'bottom-right'}">
                         <a href="#" class="user_action_icon">
-                            <span><i class="material-icons md-24 md-light">menu</i></span></a>
+                            <span><i class="material-icons md-24 md-light">settings_input_composite</i></span></a>
                         <div class="uk-dropdown uk-dropdown-small">
                             <ul class="uk-nav js-uk-prevent">
                                 <li><a href="UserProfile.aspx">My profile</a></li>

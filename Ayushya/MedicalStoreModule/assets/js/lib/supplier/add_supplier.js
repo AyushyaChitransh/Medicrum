@@ -27,7 +27,7 @@ function addDetails() {
                 if (response.d == true) {
                     Notification('s');
                     setTimeout(function () {
-                        window.location = "AddUser.aspx";
+                        window.location = "AddSupplier.aspx";
                     }, 1000);
                 }
                 else
