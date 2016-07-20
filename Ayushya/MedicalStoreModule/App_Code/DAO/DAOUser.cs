@@ -306,5 +306,163 @@ namespace MedicalStoreModule.App_Code.DAO
                 return user;
             }
         }
+        
+        #region Password Reset
+
+        public bool AddResetCode(string email, string resetPasswordCode)
+        {
+            try
+            {
+                if (cm.OpenConnection() == true)
+                {
+                    string qry = @"UPDATE user SET
+                                          reset_password_code=@reset_password_code,
+                                          reset_password_flag=@reset_password_flag,
+                                        WHERE 
+                                          email=@email";
+                    MySqlCommand cmd = new MySqlCommand(qry, cm.connection);
+                    cmd.Parameters.AddWithValue("@reset_password_code", resetPasswordCode);
+                    cmd.Parameters.AddWithValue("@reset_password_flag", true);
+                    cmd.Parameters.AddWithValue("@email", email);
+                    cmd.ExecuteNonQuery();
+                    cm.CloseConnection();
+                }
+                return true;
+            }
+            catch (Exception ex)
+            {
+                cm.CloseConnection();
+                return false;
+            }
+        }
+
+        public bool CheckUpdateRequest(string resetPasswordCode, out User userLoginDetails)
+        {
+            userLoginDetails = new User();
+            try
+            {
+                if (cm.OpenConnection() == true)
+                {
+                    string qry = @"SELECT 
+                                          store_name,
+                                          user_name,
+                                        FROM User
+                                        WHERE 
+                                          reset_password_code=@reset_password_code AND
+                                          reset_password_flag=@reset_password_flag";
+                    MySqlCommand cmd = new MySqlCommand(qry, cm.connection);
+                    cmd.Parameters.AddWithValue("@reset_password_code", resetPasswordCode);
+                    cmd.Parameters.AddWithValue("@reset_password_flag", true);
+                    MySqlDataReader dataReader = cmd.ExecuteReader();
+                    if (dataReader.Read())
+                    {
+                        userLoginDetails.storeId = int.Parse(dataReader["store_id"].ToString());
+                        userLoginDetails.userName = dataReader["user_name"].ToString();
+                        cm.CloseConnection();
+                        return true;
+                    }
+                    else
+                    {
+                        cm.CloseConnection();
+                        return false;
+                    }
+                }
+                return true;
+            }
+            catch (Exception ex)
+            {
+                cm.CloseConnection();
+                return false;
+            }
+        }
+       
+        //used by random string generator to generte unique code, 
+        //db needs modifocation to make password reset code unique
+        public bool CheckUpdateRequest(string resetPasswordCode)
+        {
+            try
+            {
+                if (cm.OpenConnection() == true)
+                {
+                    MySqlCommand cmd = new MySqlCommand();
+                    cmd.CommandText = "SELECT COUNT(*) FROM user WHERE reset_password_code=@reset_password_code";
+                    cmd.Parameters.AddWithValue("@reset_password_code", resetPasswordCode);
+                    cmd.Connection = cm.connection;
+                    int count = int.Parse(cmd.ExecuteScalar().ToString());
+                    cm.CloseConnection();
+                    if (count == 0)
+                        return true;
+                    else
+                        return false;
+                }
+                else
+                {
+                    return false;
+                }
+            }
+            catch (Exception ex)
+            {
+                cm.CloseConnection();
+                string message = ex.Message;
+                return false;
+            }
+        }
+
+        public bool ExpireResetCode(string email)
+        {
+            try
+            {
+                if (cm.OpenConnection() == true)
+                {
+                    string qry = @"UPDATE user SET
+                                          reset_password_code=@reset_password_code,
+                                          reset_password_flag=@reset_password_flag,
+                                        WHERE 
+                                          email=@email";
+                    MySqlCommand cmd = new MySqlCommand(qry, cm.connection);
+                    cmd.Parameters.AddWithValue("@reset_password_code", DBNull.Value);
+                    cmd.Parameters.AddWithValue("@reset_password_flag", false);
+                    cmd.Parameters.AddWithValue("@email", email);
+                    cmd.ExecuteNonQuery();
+                    cm.CloseConnection();
+                }
+                return true;
+            }
+            catch (Exception ex)
+            {
+                cm.CloseConnection();
+                return false;
+            }
+        }
+        public bool UpdatePassword(string password, string userName)
+        {
+            try
+            {
+                if (cm.OpenConnection() == true)
+                {
+                    string qry = @"UPDATE user SET
+                                          password=@password,
+                                          reset_password_code,
+                                          reset_password_flag
+                                        WHERE 
+                                          user_name=@userName";
+                    MySqlCommand cmd = new MySqlCommand(qry, cm.connection);
+                    cmd.Parameters.AddWithValue("@user_name", userName);
+                    cmd.Parameters.AddWithValue("@password", password);
+                    cmd.Parameters.AddWithValue("@reset_password_code", DBNull.Value);
+                    cmd.Parameters.AddWithValue("@reset_password_flag", false);
+                    cmd.ExecuteNonQuery();
+                    cm.CloseConnection();
+                }
+                return true;
+            }
+            catch (Exception ex)
+            {
+                cm.CloseConnection();
+                return false;
+            }
+        }
+        #endregion
+
     }
 }

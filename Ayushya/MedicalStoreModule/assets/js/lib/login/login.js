@@ -78,11 +78,10 @@ function VerifyCredentials() {
     });
 }
 function ResetPassword() {
-    var email = document.getElementById('login_username').value;
-    var password = document.getElementById('login_password').value;
+    var email = document.getElementById('login_reset_email').value;
     $.ajax({
         type: 'POST',
-        url: 'Login.aspx/ResetPassword',
+        url: 'Login.aspx/SendResetCode',
         contentType: 'application/json; charset=utf-8',
         data: "{ 'email': '" + email + "' }",
         success: function (response) {
