@@ -52,7 +52,7 @@ namespace MedicalStoreModule
                 string randomString = GenerateRandomString();
                 accessUserDb.AddResetCode(email, randomString);
 
-                MailAddress frm = new MailAddress("ayushyachitransh@gmail.com", "Medicrum Admin");
+                MailAddress frm = new MailAddress("youremail@gmail.com", "Medicrum Admin");
                 MailAddress to = new MailAddress(email);
                 MailMessage msg = new MailMessage();
                 msg.From = frm;
@@ -85,14 +85,14 @@ namespace MedicalStoreModule
 
         public static bool SendEmail(string email, MailMessage msg)
         {
+            var smtp = new SmtpClient("smtp.gmail.com", 587)
+            {
+                //change these to send email
+                Credentials = new NetworkCredential("youremail@gmail.com", "password"),
+                EnableSsl = true
+            };
+            //smtp.Send("ayushyachitransh@gmail.com", "ayushyachitransh@gmail.com", "test", "testbody");
 
-
-            SmtpClient smtp = new SmtpClient();
-            smtp.Host = "smtp.gmail.com";
-            smtp.Port = 587;
-            NetworkCredential nkc = new NetworkCredential("ayushyachitransh@gmail.com", "mypassword");
-            smtp.Credentials = nkc;
-            smtp.EnableSsl = true;
 
 
             try

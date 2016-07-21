@@ -29,7 +29,7 @@ altair_login_page = {
 
         $('.back_to_login').on('click', function (e) {
             e.preventDefault();
-            $('#signup_form_show').fadeIn('280');
+            //$('#signup_form_show').fadeIn('100');
             // card animation & complete callback: login_form_show
             altair_md.card_show_hide($login_card, undefined, login_form_show, undefined);
         });
@@ -68,10 +68,16 @@ function ResetPassword() {
         type: 'POST',
         url: 'Login.aspx/SendResetCode',
         contentType: 'application/json; charset=utf-8',
+        beforeSend: function (modal) {
+            modal = UIkit.modal.blockUI('<div class=\'uk-text-center\'>Sending Email...<br/><img class=\'uk-margin-top\' src=\'assets/img/spinners/spinner.gif\' alt=\'\'>');
+            setTimeout(function () {
+                modal.hide()
+            }, 1000);
+        },
         data: "{ 'email': '" + email + "' }",
         success: function (response) {
             if (response.d == true) {
-                window.location = "ResetPassword.aspx";
+                window.location = "Login.aspx";
             }
             else {
                 Notification('i');
