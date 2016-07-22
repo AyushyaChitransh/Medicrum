@@ -18,7 +18,7 @@ altair_crud_table = {
             sorting: true,
             defaultSorting: 'productModelId ASC',
             deleteConfirmation: function (data) {
-                data.deleteConfirmMessage = 'Are you sure to delete records of ' + data.record.productModelId + '?';
+                data.deleteConfirmMessage = 'Are you sure to delete this record?';
             },
             formCreated: function (event, data) {
                 // replace click event on some clickable elements

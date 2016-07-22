@@ -59,7 +59,7 @@
                 <h2 class="heading_a uk-margin-large-bottom">Reset password</h2>
                 <form>
                     <div class="uk-form-row">
-                        <label for="login_reset_email">Your email address</label>
+                        <label for="login_reset_email">Your registered email address</label>
                         <input class="md-input" type="email" id="login_reset_email" name="login_email_reset"" />
                     </div>
                     <div class="uk-margin-medium-top">

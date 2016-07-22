@@ -27,8 +27,8 @@
         <div class="header_main_content">
             <nav class="uk-navbar">
                 <div class="main_logo_top">
-                    <a href="index.html">
-                        <img src="assets/img/logo_main_white.png" alt="" height="15" width="71" /></a>
+                    <a href="#">
+                        <img src="assets/img/MedicrumLogo2-1.png" alt="" height="15" width="71" /></a>
                 </div>
 
                 <!-- secondary sidebar switch -->
@@ -50,7 +50,7 @@
     <div id="top_bar">
         <div class="md-top-bar">
             <ul id="menu_top" class="uk-clearfix">
-                <li><a href="AddStore.aspx"><i class="material-icons md-24">&#xE88A;</i></a></li>
+                <li><a href="#"><i class="material-icons md-24">&#xE88A;</i></a></li>
             </ul>
         </div>
     </div>
