@@ -29,6 +29,11 @@ namespace MedicalStoreModule
                     Session["storeId"] = user.storeId;
                     Session["userName"] = user.userName;
                 }
+                else
+                {
+                    Response.Write(@"<script>if(window.confirm('Link does not exist!')){window.location.href='Login.aspx';}</script>");
+                    //Response.Redirect("Login.aspx");
+                }
                 // else if there is no update request and user wants to change password then use existing session
             }
         }

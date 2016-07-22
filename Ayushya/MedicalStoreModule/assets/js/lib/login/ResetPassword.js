@@ -2,7 +2,8 @@
     var password = document.getElementById('login_password').value;
     var passwordConfirmation = document.getElementById('login_password_confirm').value;
     if (password != passwordConfirmation) {
-        Notification('i');
+        UIkit.modal.alert('Passwords do not match!');
+        // passwords do not match notification to be sent
     }
     else {
         $.ajax({

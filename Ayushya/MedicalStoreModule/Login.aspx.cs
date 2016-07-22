@@ -52,7 +52,7 @@ namespace MedicalStoreModule
                 string randomString = GenerateRandomString();
                 accessUserDb.AddResetCode(email, randomString);
 
-                MailAddress frm = new MailAddress("youremail@gmail.com", "Medicrum Admin");
+                MailAddress frm = new MailAddress("ayushyachitransh@gmail.com", "Medicrum Admin");
                 MailAddress to = new MailAddress(email);
                 MailMessage msg = new MailMessage();
                 msg.From = frm;

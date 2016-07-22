@@ -344,8 +344,8 @@ namespace MedicalStoreModule.App_Code.DAO
                 if (cm.OpenConnection() == true)
                 {
                     string qry = @"SELECT 
-                                          store_name,
-                                          user_name,
+                                          store_id,
+                                          user_name
                                         FROM User
                                         WHERE 
                                           reset_password_code=@reset_password_code AND
@@ -442,10 +442,10 @@ namespace MedicalStoreModule.App_Code.DAO
                 {
                     string qry = @"UPDATE user SET
                                           password=@password,
-                                          reset_password_code,
-                                          reset_password_flag
+                                          reset_password_code=@reset_password_code,
+                                          reset_password_flag=@reset_password_flag
                                         WHERE 
-                                          user_name=@userName";
+                                          user_name=@user_name";
                     MySqlCommand cmd = new MySqlCommand(qry, cm.connection);
                     cmd.Parameters.AddWithValue("@user_name", userName);
                     cmd.Parameters.AddWithValue("@password", password);
