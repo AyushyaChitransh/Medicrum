@@ -43,6 +43,7 @@ namespace MedicalStoreModule
             HttpContext.Current.Session["storeId"] = null;
             HttpContext.Current.Session["userName"] = null;
         }
+
         [WebMethod]
         public static bool SendResetCode(string email)
         {
@@ -66,6 +67,7 @@ namespace MedicalStoreModule
                 return false;
             }
         }
+
         public static string GenerateRandomString()
         {
             char[] charArr = "0123456789ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz".ToCharArray();
@@ -77,7 +79,7 @@ namespace MedicalStoreModule
                 randomString += charArr.GetValue(x);
             }
             DAOUser accessUserDb = new DAOUser();
-            bool result = accessUserDb.CheckUpdateRequest(randomString);
+            bool result = accessUserDb.CheckForResetPasswordCodeUniqueness(randomString);
             if (result == false)
                 GenerateRandomString();
             return randomString;

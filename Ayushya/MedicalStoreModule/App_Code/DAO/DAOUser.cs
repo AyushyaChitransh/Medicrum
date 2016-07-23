@@ -306,9 +306,8 @@ namespace MedicalStoreModule.App_Code.DAO
                 return user;
             }
         }
-        
-        #region Password Reset
 
+        #region Password Reset
         public bool AddResetCode(string email, string resetPasswordCode)
         {
             try
@@ -332,11 +331,12 @@ namespace MedicalStoreModule.App_Code.DAO
             catch (Exception ex)
             {
                 cm.CloseConnection();
+                string message = ex.Message;
                 return false;
             }
         }
 
-        public bool CheckUpdateRequest(string resetPasswordCode, out User userLoginDetails)
+        public bool CheckForResetPasswordCodeUniqueness(string resetPasswordCode, out User userLoginDetails)
         {
             userLoginDetails = new User();
             try
@@ -372,13 +372,12 @@ namespace MedicalStoreModule.App_Code.DAO
             catch (Exception ex)
             {
                 cm.CloseConnection();
+                string message = ex.Message;
                 return false;
             }
         }
-       
-        //used by random string generator to generte unique code, 
-        //db needs modifocation to make password reset code unique
-        public bool CheckUpdateRequest(string resetPasswordCode)
+
+        public bool CheckForResetPasswordCodeUniqueness(string resetPasswordCode)
         {
             try
             {
@@ -431,9 +430,11 @@ namespace MedicalStoreModule.App_Code.DAO
             catch (Exception ex)
             {
                 cm.CloseConnection();
+                string message = ex.Message;
                 return false;
             }
         }
+
         public bool UpdatePassword(string password, string userName)
         {
             try
@@ -459,10 +460,10 @@ namespace MedicalStoreModule.App_Code.DAO
             catch (Exception ex)
             {
                 cm.CloseConnection();
+                string message = ex.Message;
                 return false;
             }
         }
         #endregion
-
     }
 }

@@ -14,20 +14,20 @@ namespace MedicalStoreModule
 {
     public partial class PageInvoice : System.Web.UI.Page
     {
-        private static int storeId = 1;
+        private static int storeId;
         protected void Page_Load(object sender, EventArgs e)
         {
-            //if (!IsPostBack)
-            //{
-            //    if (Session["storeId"] != null && Session["userName"] != null)
-            //    {
-            //        storeId = int.Parse(Session["storeId"].ToString());
-            //    }
-            //    else
-            //    {
-            //        Response.Redirect("Login.aspx");
-            //    }
-            //}
+            if (!IsPostBack)
+            {
+                if (Session["storeId"] != null && Session["userName"] != null)
+                {
+                    storeId = int.Parse(Session["storeId"].ToString());
+                }
+                else
+                {
+                    Response.Redirect("Login.aspx");
+                }
+            }
         }
 
         [WebMethod]

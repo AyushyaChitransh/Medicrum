@@ -40,8 +40,8 @@
                         <label for="login_password_confirm">Confirm Password</label>
                         <input class="md-input" type="password" id="login_password_confirm" name="login_password_confirm" required="required" />
                     </div>
-                    <div class="uk-margin-medium-top" id="submit_login_details" onclick="VerifyCredentials()">
-                        <a class="md-btn md-btn-primary md-btn-block md-btn-large" onclick="UpdatePassword()">Update Password</a>
+                    <div class="uk-margin-medium-top" id="submit_login_details" onclick="UpdatePassword()">
+                        <a class="md-btn md-btn-primary md-btn-block md-btn-large">Update Password</a>
                     </div>
                 </form>
             </div>

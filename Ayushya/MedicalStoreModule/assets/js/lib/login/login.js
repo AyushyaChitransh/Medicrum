@@ -41,6 +41,7 @@ altair_login_page = {
         });
     }
 };
+
 function VerifyCredentials() {
     var email = document.getElementById('login_username').value;
     var password = document.getElementById('login_password').value;
@@ -62,6 +63,7 @@ function VerifyCredentials() {
         }
     });
 }
+
 function ResetPassword() {
     var email = document.getElementById('login_reset_email').value;
     $.ajax({
