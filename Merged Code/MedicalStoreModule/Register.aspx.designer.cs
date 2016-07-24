@@ -10,7 +10,7 @@
 namespace MedicalStoreModule {
     
     
-    public partial class AddStore {
+    public partial class Register {
         
         /// <summary>
         /// StyleSwitcher control.
