@@ -16,7 +16,7 @@
                 Notification('u');
         },
         error: function (error) {
-            Notification('u');
+            UIkit.alert('Connections to  server failed');
         }
     });
 }

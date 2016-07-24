@@ -336,7 +336,7 @@ namespace MedicalStoreModule.App_Code.DAO
             }
         }
 
-        public bool CheckForResetPasswordCodeUniqueness(string resetPasswordCode, out User userLoginDetails)
+        public bool CheckUpdateRequest(string resetPasswordCode, out User userLoginDetails)
         {
             userLoginDetails = new User();
             try

@@ -23,7 +23,7 @@ namespace MedicalStoreModule
                 DAOUser accessUserDb = new DAOUser();
                 User user = new User();
                 // if reset is requested, then generate session and validate login details
-                if (accessUserDb.CheckForResetPasswordCodeUniqueness(Request.QueryString["q"], out user))
+                if (accessUserDb.CheckUpdateRequest(Request.QueryString["q"], out user))
                 {
                     Session["storeId"] = user.storeId;
                     Session["userName"] = user.userName;
