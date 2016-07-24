@@ -1,4 +1,5 @@
 ﻿using MedicalStoreModule.App_Code.Model;
+using MedicalStoreModule.App_Code.Utility;
 using MySql.Data.MySqlClient;
 using System;
 using System.Collections.Generic;
@@ -381,6 +382,123 @@ namespace MedicalStoreModule.App_Code.DAO
                 string msg = ex.Message;
             }
             return invoiceList;
+        }
+
+        public InvoiceJson GetInvoiceJson(int invoiceId)
+        {
+            InvoiceJson invoiceJson = new InvoiceJson();
+            try
+            {
+                if (cm.OpenConnection() == true)
+                {
+                    MySqlCommand cmd = new MySqlCommand();
+                    cmd.CommandText = @"SELECT 
+                                                invoice_number,
+                                                invoice_type,
+                                                invoice.invoice_date as invoice_date,
+                                                customer.customer_name as invoice_customer,
+                                                customer.address as invoice_address,
+                                                customer.district as invoice_district,
+                                                customer.state as invoice_state,
+                                                customer.country as invoice_country,
+                                                customer.pincode as invoice_pincode,
+                                                customer.email as invoice_email,
+                                                customer.mobile as invoice_mobile,
+                                                store.store_name as invoice_store_name,
+                                                store.address as invoice_store_address,
+                                                store.district as invoice_store_district,
+                                                store.state as invoice_store_state,
+                                                store.country as invoice_store_country,
+                                                store.pincode as invoice_store_pincode,
+                                                store.email as invoice_store_email,
+                                                store.mobile as invoice_store_mobile,
+                                                total_amount as invoice_total_value,
+                                                discount_amount as invoice_discount_amount,
+                                                net_total as invoice_payable_amount,
+                                                tax_amount as invoice_vat_value,
+                                                discount_type,
+                                                coupon_code,
+                                                amount_paid,
+                                                payment_terms as invoice_payment_terms,
+                                                payment_mode as invoice_payment_mode
+                                        FROM invoice 
+                                             LEFT JOIN customer on invoice.customer_id = customer.customer_id 
+                                             LEFT JOIN store on store.store_id = invoice.store_id
+                                        WHERE invoice_id=@invoice_id AND invoice.delete_status=@delete_status";
+                    cmd.Parameters.AddWithValue("@invoice_id", invoiceId);
+                    cmd.Parameters.AddWithValue("@delete_status", 0);
+                    cmd.Connection = cm.connection;
+                    MySqlDataReader dataReader = cmd.ExecuteReader();
+                    while (dataReader.Read())
+                    {
+                        invoiceJson.invoice_number = int.Parse(dataReader["invoice_number"].ToString());
+                        invoiceJson.invoice_type = dataReader["invoice_type"].ToString();
+                        invoiceJson.invoice_date = DateTime.Parse(dataReader["invoice_date"].ToString());
+                        invoiceJson.invoice_customer = dataReader["invoice_customer"].ToString();
+                        invoiceJson.invoice_address = dataReader["invoice_address"].ToString();
+                        invoiceJson.invoice_district = dataReader["invoice_district"].ToString();
+                        invoiceJson.invoice_state = dataReader["invoice_state"].ToString();
+                        invoiceJson.invoice_country = dataReader["invoice_country"].ToString();
+                        invoiceJson.invoice_pincode = dataReader["invoice_pincode"].ToString();
+                        invoiceJson.invoice_email = dataReader["invoice_email"].ToString();
+                        invoiceJson.invoice_mobile = dataReader["invoice_mobile"].ToString();
+                        invoiceJson.invoice_store_name = dataReader["invoice_store_name"].ToString();
+                        invoiceJson.invoice_store_address = dataReader["invoice_store_address"].ToString();
+                        invoiceJson.invoice_store_district = dataReader["invoice_store_district"].ToString();
+                        invoiceJson.invoice_store_state = dataReader["invoice_store_state"].ToString();
+                        invoiceJson.invoice_store_country = dataReader["invoice_store_country"].ToString();
+                        invoiceJson.invoice_store_pincode = dataReader["invoice_store_pincode"].ToString();
+                        invoiceJson.invoice_store_email = dataReader["invoice_store_email"].ToString();
+                        invoiceJson.invoice_store_mobile = dataReader["invoice_store_mobile"].ToString();
+                        //this thing consfuses me
+                        decimal totalValueTemp = new decimal();
+                        if (decimal.TryParse(dataReader["invoice_total_value"].ToString(), out totalValueTemp))
+                        {
+                            invoiceJson.invoice_total_value = totalValueTemp;
+                        }
+
+                        decimal vatValueTemp = new decimal();
+                        if (decimal.TryParse(dataReader["invoice_vat_value"].ToString(), out vatValueTemp))
+                        {
+                            invoiceJson.invoice_vat_value = vatValueTemp;
+                        }
+                        decimal discountAmountTemp = new decimal();
+                        if (decimal.TryParse(dataReader["invoice_discount_amount"].ToString(), out discountAmountTemp))
+                        {
+                            invoiceJson.invoice_discount_amount = discountAmountTemp;
+                        }
+                        // and this too
+                        decimal netTotalTemp = new decimal();
+                        if (decimal.TryParse(dataReader["invoice_total_value"].ToString(), out netTotalTemp))
+                        {
+                            invoiceJson.invoice_total_value = netTotalTemp;
+                        }
+                        //among these three i dunno which to choose where
+                        decimal amountPaidTemp = new decimal();
+                        if (decimal.TryParse(dataReader["amount_paid"].ToString(), out amountPaidTemp))
+                        {
+                            invoiceJson.invoice_payable_amount = amountPaidTemp;
+                        }
+                    }
+                    cm.CloseConnection();
+                    List<BillingItems> billingItems = GetBillingItems(invoiceId);
+                    Invoice_Medicines[] invoiceMedicine = new Invoice_Medicines[billingItems.Count];
+                    int i = 0;
+                    foreach (BillingItems item in billingItems)
+                    {
+                        Invoice_Medicines med = new Invoice_Medicines(item);
+                        invoiceMedicine[i++] = med;
+                    }
+                    invoiceJson.invoice_medicines = invoiceMedicine;
+                }
+                return invoiceJson;
+            }
+            catch (Exception ex)
+            {
+                cm.CloseConnection();
+                string message = ex.Message;
+                return invoiceJson;
+            }
         }
 
         public Invoice GetInvoice(int invoiceId)

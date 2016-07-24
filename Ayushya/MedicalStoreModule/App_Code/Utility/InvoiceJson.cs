@@ -101,6 +101,10 @@ namespace MedicalStoreModule.App_Code.Utility
             invoice_total_value = invoice.totalAmount;
             invoice_vat_value = invoice.taxAmount;
         }
+
+        public InvoiceJson()
+        {
+        }
     }
 
     public class Invoice_Medicines
