@@ -10,7 +10,7 @@ using System.Web.UI.WebControls;
 
 namespace MedicalStoreModule
 {
-    public partial class AddProductModel : System.Web.UI.Page
+    public partial class UserList : System.Web.UI.Page
     {
         private static int storeId;
         private static string userName;
@@ -31,24 +31,30 @@ namespace MedicalStoreModule
         }
 
         [WebMethod]
-        public static bool InsertProductModel(ProductModel data)
+        public static object UserLists(string userName, int jtStartIndex, int jtPageSize, string jtSorting)
         {
-            data.storeId = storeId;
-            data.addedBy = userName;
-            data.addedTimestamp = DateTime.Now;
-            data.lastUpdatedBy = userName;
-            data.lastUpdatedTimestamp = DateTime.Now;
-            data.status = 1;
-            data.deleteStatus = 0;
-            DAOProductModel accessProductModeldb = new DAOProductModel();
-            return accessProductModeldb.InsertProductModel(data);
+            DAOUser accessUserDb = new DAOUser();
+            return accessUserDb.UserList(userName, storeId, jtStartIndex, jtPageSize, jtSorting);
         }
 
         [WebMethod]
-        public static object GetCompanyName()
+        public static object UpdateUser(User record)
         {
-            DAOProductModel accessProductModeldb = new DAOProductModel();
-            return accessProductModeldb.GetCompanyName(storeId);
+            DAOUser accessUserDb = new DAOUser();
+            return accessUserDb.UpdateUser(record);
+        }
+
+        [WebMethod]
+        public static object DeleteUser(string userName)
+        {
+            DAOUser accessUserDb = new DAOUser();
+            return accessUserDb.DeleteUser(userName);
+        }
+
+        [WebMethod]
+        public static void SetUserSession(string userName)
+        {
+            HttpContext.Current.Session["userId"] = userName;
         }
     }
 }

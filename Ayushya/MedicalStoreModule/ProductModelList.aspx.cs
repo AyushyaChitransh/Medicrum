@@ -10,7 +10,7 @@ using System.Web.UI.WebControls;
 
 namespace MedicalStoreModule
 {
-    public partial class AddProductModel : System.Web.UI.Page
+    public partial class ProductModelList : System.Web.UI.Page
     {
         private static int storeId;
         private static string userName;
@@ -31,24 +31,32 @@ namespace MedicalStoreModule
         }
 
         [WebMethod]
-        public static bool InsertProductModel(ProductModel data)
+        public static object ProductModelLists(string productName, int jtStartIndex, int jtPageSize, string jtSorting)
         {
-            data.storeId = storeId;
-            data.addedBy = userName;
-            data.addedTimestamp = DateTime.Now;
-            data.lastUpdatedBy = userName;
-            data.lastUpdatedTimestamp = DateTime.Now;
-            data.status = 1;
-            data.deleteStatus = 0;
             DAOProductModel accessProductModeldb = new DAOProductModel();
-            return accessProductModeldb.InsertProductModel(data);
+            return accessProductModeldb.ProductModelList(productName, storeId, jtStartIndex, jtPageSize, jtSorting);
         }
 
         [WebMethod]
-        public static object GetCompanyName()
+        public static object UpdateProductModel(ProductModel record)
+        {
+            record.lastUpdatedBy = userName;
+            record.lastUpdatedTimestamp = DateTime.Now;
+            DAOProductModel accessProductModeldb = new DAOProductModel();
+            return accessProductModeldb.UpdateProductModel(record);
+        }
+
+        [WebMethod]
+        public static object DeleteProductModel(int productModelId)
         {
             DAOProductModel accessProductModeldb = new DAOProductModel();
-            return accessProductModeldb.GetCompanyName(storeId);
+            return accessProductModeldb.DeleteProductModel(productModelId);
+        }
+
+        [WebMethod]
+        public static void SetProductModelSession(int productModelId)
+        {
+            HttpContext.Current.Session["productModelId"] = productModelId;
         }
     }
 }

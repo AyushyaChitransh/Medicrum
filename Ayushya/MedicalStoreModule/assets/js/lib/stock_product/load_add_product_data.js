@@ -10,12 +10,11 @@
             productModel.empty().append('<option selected="selected" value="">Select Product Model</option>');
 
             $.each(msg.d.Options, function (index, item) {
-                //$("#wizard_product_model_id").get(0).options[index + 1] = new Option(item.Value, item.Key);
                 $("#wizard_product_model_id").get(0).options[index + 1] = new Option(item.DisplayText, item.Value);
             });
         },
         error: function () {
-            alert("Failed to load");
+            Notification('u');
         }
     });
     $.ajax({
@@ -29,12 +28,11 @@
             supplier.empty().append('<option selected="selected" value="">Select Supplier</option>');
 
             $.each(msg.d.Options, function (index, item) {
-                //$("#wizard_supplier_id").get(0).options[index + 1] = new Option(item.Value, item.Key);
                 $("#wizard_supplier_id").get(0).options[index + 1] = new Option(item.DisplayText, item.Value);
             });
         },
         error: function () {
-            alert("Failed to load");
+            Notification('u');
         }
     });
 });

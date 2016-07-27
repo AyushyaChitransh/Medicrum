@@ -81,7 +81,7 @@
         <div class="md-card-toolbar">
             <div class="md-card-toolbar-actions hidden-print">
                 <i class="md-icon material-icons" id="invoice_print">&#xE8ad;</i>
-                <i class="md-icon material-icons" onclick="DeleteInvoice()">delete</i>
+                <i class="md-icon material-icons" onclick="DeleteInvoice({{invoice_id}})">delete</i>
             </div>
             <h3 class="md-card-toolbar-heading-text large" id="invoice_name">Invoice Number: {{invoice_number}}</h3>
 
@@ -140,7 +140,7 @@
                     <p class="heading_a uk-text-success">Rs {{invoice_payable_amount}}</p>
                     <p class="uk-text-small uk-text-muted uk-margin-top-remove">
                         Total:Rs {{invoice_total_value}}<br />
-                        Esclusive VAT : Rs {{invoice_vat_value}}
+                        Exclusive VAT : Rs {{invoice_vat_value}}
                         {{#ifCond invoice_discount_amount '!==' 0}}
                             <br />Discount : Rs {{invoice_discount_amount}}
                         {{/ifCond}}

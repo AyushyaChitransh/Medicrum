@@ -1,13 +1,13 @@
 ﻿function ViewDetailedProductModel(productModelId) {
     $.ajax({
         type: 'POST',
-        url: 'ViewProductModel.aspx/SetProductModelSession',
+        url: 'ProductModelList.aspx/SetProductModelSession',
         contentType: 'application/json; charset=utf-8',
         data: "{ 'productModelId': " + productModelId + " }",
         success: function () {
         },
         error: function (error) {
-            alert("Failed!");
+            Notification('u');
         }
     });
     setTimeout(function () {

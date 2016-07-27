@@ -10,7 +10,7 @@
 namespace MedicalStoreModule {
     
     
-    public partial class AddProductModel {
+    public partial class SupplierList {
         
         /// <summary>
         /// HeaderAndSideBar control.
@@ -20,5 +20,14 @@ namespace MedicalStoreModule {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::MedicalStoreModule.Controls.HeaderAndSideBar HeaderAndSideBar;
+        
+        /// <summary>
+        /// StyleSwitcher control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::MedicalStoreModule.Controls.StyleSwitcher StyleSwitcher;
     }
 }

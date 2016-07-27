@@ -34,11 +34,11 @@
                 <form>
                     <div class="uk-form-row">
                         <label for="login_username">Username/Email</label>
-                        <input class="md-input" type="text" id="login_username" name="login_username" required="required" />
+                        <input class="md-input" type="text" id="login_username" name="login_username" required="required" value="ravi.jain" />
                     </div>
                     <div class="uk-form-row">
                         <label for="login_password">Password</label>
-                        <input class="md-input" type="password" id="login_password" name="login_password" required="required" />
+                        <input class="md-input" type="password" id="login_password" name="login_password" required="required" value="abcd" />
                     </div>
                     <div class="uk-margin-medium-top" id="submit_login_details" onclick="VerifyCredentials()">
                         <a class="md-btn md-btn-primary md-btn-block md-btn-large">Sign In</a>

@@ -19,6 +19,10 @@
     <link rel="stylesheet" href="assets/icons/flags/flags.min.css" media="all" />
     <!-- altair admin -->
     <link rel="stylesheet" href="assets/css/main.min.css" media="all" />
+    <!-- additional styles for plugins -->
+    <!-- kendo UI -->
+    <link rel="stylesheet" href="bower_components/kendo-ui/styles/kendo.common-material.min.css"/>
+    <link rel="stylesheet" href="bower_components/kendo-ui/styles/kendo.material.min.css"/>
 </head>
 <body class=" sidebar_main_open sidebar_main_swipe">
 
@@ -39,83 +43,83 @@
                                 <div class="uk-grid">
                                     <div class="uk-width-medium-1-1 parsley-row">
                                         <label for="wizard_product_name">Product Name<span class="req">*</span></label>
-                                        <input type="text" name="productName" id="wizard_product_name" required="required" class="md-input" />
+                                        <input type="text" name="productName" id="wizard_product_name" required="required" class="md-input" data-uk-tooltip="{cls:'long-text',pos:'bottom'}" title="Name of product" />
                                     </div>
                                 </div>
                                 <div class="uk-grid">
                                     <div class="uk-width-medium-1-2 parsley-row">
                                         <label for="wizard_company">Company<span class="req">*</span></label>
-                                        <input type="text" name="company" id="wizard_company" required="required" class="md-input" />
+                                        <input type="text" name="company" id="wizard_company" required="required" style="width:100%;" data-uk-tooltip="{cls:'long-text',pos:'bottom'}" title="Manufacturer" />
                                     </div>
                                     <div class="uk-width-medium-1-2 parsley-row">
                                         <label for="wizard_trade_name">Trade Name<span class="req">*</span></label>
-                                        <input type="text" name="tradeName" id="wizard_trade_name" required="required" class="md-input" />
+                                        <input type="text" name="tradeName" id="wizard_trade_name" required="required" class="md-input" data-uk-tooltip="{cls:'long-text',pos:'bottom'}" title="Trade Name of product" />
                                     </div>
                                 </div>
                                 <div class="uk-grid" data-uk-grid-margin="data-uk-grid-margin">
                                     <div class="uk-width-medium-1-4 parsley-row">
                                         <label for="wizard_category">Category<span class="req">*</span></label>
-                                        <input type="text" name="category" id="wizard_category" required="required" class="md-input" />
+                                        <input type="text" name="category" id="wizard_category" required="required" style="width:100%;" placeholder="Category" data-uk-tooltip="{cls:'long-text',pos:'bottom'}" title="Select Category for the product" />
                                     </div>
                                     <div class="uk-width-medium-1-4 parsley-row">
-                                        <label for="wizard_sub_category">Sub Category</label>
-                                        <input type="text" name="subCategory" id="wizard_sub_category" class="md-input" />
+                                        <label for="wizard_sub_category">Sub-Category</label>
+                                        <input type="text" name="subCategory" id="wizard_sub_category" style="width:100%;" placeholder="Sub-Category" data-uk-tooltip="{cls:'long-text',pos:'bottom'}" title="Select Sub-Category for the product" />
                                     </div>
                                     <div class="uk-width-medium-1-4 parsley-row">
                                         <label for="wizard_type">Type<span class="req">*</span></label>
-                                        <input type="text" name="type" id="wizard_type" required="required" class="md-input" />
+                                        <input type="text" name="type" id="wizard_type" required="required" style="width:100%;" placeholder="Type" data-uk-tooltip="{cls:'long-text',pos:'bottom'}" title="Type of product" />
                                     </div>
                                     <div class="uk-width-medium-1-4 parsley-row">
                                         <label for="wizard_schedule">Schedule</label>
-                                        <input type="text" name="schedule" id="wizard_schedule" class="input-count md-input" maxlength="10" />
+                                        <input type="text" name="schedule" id="wizard_schedule" class="input-count md-input" maxlength="10" data-uk-tooltip="{cls:'long-text',pos:'bottom'}" title="Add Schedule of medicine if any" />
                                     </div>
                                 </div>
                                 <div class="uk-grid" data-uk-grid-margin="data-uk-grid-margin">
                                     <div class="uk-width-medium-1-1 parsley-row">
                                         <label for="wizard_composition">Composition</label>
-                                        <textarea name="composition" id="wizard_composition" data-uk-tooltip="{pos:'bottom'}" title="composition of product" cols="30" rows="4" class="input-count md-input" maxlength="2000"></textarea>
+                                        <textarea name="composition" id="wizard_composition" data-uk-tooltip="{cls:'long-text',pos:'bottom'}" title="Please write all the composition of the product in detail" cols="30" rows="4" class="input-count md-input" maxlength="2000"></textarea>
                                     </div>
                                 </div>
                                 <div class="uk-grid" data-uk-grid-margin="data-uk-grid-margin">
                                     <div class="uk-width-medium-1-1 parsley-row">
                                         <label for="wizard_description">Description</label>
-                                        <textarea name="description" id="wizard_description" data-uk-tooltip="{pos:'bottom'}" title="description of product" cols="30" rows="4" class="input-count md-input" maxlength="2000"></textarea>
+                                        <textarea name="description" id="wizard_description" data-uk-tooltip="{cls:'long-text',pos:'bottom'}" title="Description of the product" cols="30" rows="4" class="input-count md-input" maxlength="2000"></textarea>
                                     </div>
                                 </div>
                                 <div class="uk-grid" data-uk-grid-margin="data-uk-grid-margin">
                                     <div class="uk-width-medium-1-1 parsley-row">
                                         <label for="wizard_purpose">Purpose</label>
-                                        <textarea name="purpose" id="wizard_purpose" data-uk-tooltip="{pos:'bottom'}" title="purpose of product" cols="30" rows="4" class="input-count md-input" maxlength="2000"></textarea>
+                                        <textarea name="purpose" id="wizard_purpose" data-uk-tooltip="{cls:'long-text',pos:'bottom'}" title="Please write purpose of product" cols="30" rows="4" class="input-count md-input" maxlength="2000"></textarea>
                                     </div>
                                 </div>
                                 <div class="uk-grid" data-uk-grid-margin="data-uk-grid-margin">
                                     <div class="uk-width-medium-1-1 parsley-row">
                                         <label for="wizard_dosage_instruction">Dosage Instruction</label>
-                                        <textarea name="dosageInstruction" id="wizard_dosage_instruction" data-uk-tooltip="{pos:'bottom'}" title="dosage instruction" cols="30" rows="4" class="input-count md-input" maxlength="2000"></textarea>
+                                        <textarea name="dosageInstruction" id="wizard_dosage_instruction" data-uk-tooltip="{cls:'long-text',pos:'bottom'}" title="Dosage Instruction of the product" cols="30" rows="4" class="input-count md-input" maxlength="2000"></textarea>
                                     </div>
                                 </div>
                                 <div class="uk-grid" data-uk-grid-margin="data-uk-grid-margin">
                                     <div class="uk-width-medium-1-1 parsley-row">
                                         <label for="wizard_storage_instruction">Storage Instruction</label>
-                                        <textarea name="storageInstruction" id="wizard_storage_instruction" data-uk-tooltip="{pos:'bottom'}" title="storage instruction" cols="30" rows="4" class="input-count md-input" maxlength="2000"></textarea>
+                                        <textarea name="storageInstruction" id="wizard_storage_instruction" data-uk-tooltip="{cls:'long-text',pos:'bottom'}" title="Storage Instruction of the product" cols="30" rows="4" class="input-count md-input" maxlength="2000"></textarea>
                                     </div>
                                 </div>
                                 <div class="uk-grid" data-uk-grid-margin="data-uk-grid-margin">
                                     <div class="uk-width-medium-1-1 parsley-row">
                                         <label for="wizard_indications">Indications</label>
-                                        <textarea name="indications" id="wizard_indications" data-uk-tooltip="{pos:'bottom'}" title="indication for product" cols="30" rows="4" class="input-count md-input" maxlength="2000"></textarea>
+                                        <textarea name="indications" id="wizard_indications" data-uk-tooltip="{cls:'long-text',pos:'bottom'}" title="Add Indication if any" cols="30" rows="4" class="input-count md-input" maxlength="2000"></textarea>
                                     </div>
                                 </div>
                                 <div class="uk-grid" data-uk-grid-margin="data-uk-grid-margin">
                                     <div class="uk-width-medium-1-1 parsley-row">
                                         <label for="wizard_warning">Warning</label>
-                                        <textarea name="warning" id="wizard_warning" data-uk-tooltip="{pos:'bottom'}" title="warning for product" cols="30" rows="4" class="input-count md-input" maxlength="2000"></textarea>
+                                        <textarea name="warning" id="wizard_warning" data-uk-tooltip="{cls:'long-text',pos:'bottom'}" title="Add Warning if any" cols="30" rows="4" class="input-count md-input" maxlength="2000"></textarea>
                                     </div>
                                 </div>
                                 <div class="uk-grid" data-uk-grid-margin="data-uk-grid-margin">
                                     <div class="uk-width-medium-1-1 parsley-row">
                                         <label for="wizard_other_information">Other Information</label>
-                                        <textarea name="otherInformation" id="wizard_other_information" data-uk-tooltip="{pos:'bottom'}" title="other details" cols="30" rows="4" class="input-count md-input" maxlength="2000"></textarea>
+                                        <textarea name="otherInformation" id="wizard_other_information" cols="30" rows="4" class="input-count md-input" maxlength="2000"></textarea>
                                     </div>
                                 </div>
                                 <br />
@@ -159,10 +163,10 @@
     <script src="assets/js/uikit_custom.min.js"></script>
     <!-- altair common functions/helpers -->
     <script src="assets/js/altair_admin_common.min.js"></script>
-    
-    <uc1:StyleSwitcher runat="server" ID="StyleSwitcher1" />
 
     <!-- page specific plugins -->
+    <!-- kendo UI -->
+    <script src="assets/js/kendoui_custom.min.js"></script>
     <!-- parsley (validation) -->
     <script>
         // load parsley config (altair_admin_common.js)
@@ -175,6 +179,7 @@
     <!-- Page function scripts -->
     <script src="assets/js/lib/notification.js"></script>
     <script src="assets/js/lib/product_model/add_product_model.js"></script>
+    <script src="assets/js/lib/product_model/combo_box.js"></script>
 
     <script>
         $(function () {

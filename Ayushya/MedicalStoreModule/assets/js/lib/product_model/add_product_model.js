@@ -26,11 +26,11 @@ function addDetails() {
                 if (response.d == true) {
                     Notification('s');
                     setTimeout(function () {
-                        window.location = "AddProductModel.aspx";
+                        window.location = "ProductModelList.aspx";
                     }, 1000);
                 }
                 else
-                    Notification('u');
+                    Notification('e');
             },
             error: function (error) {
                 Notification('u');

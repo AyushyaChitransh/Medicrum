@@ -19,7 +19,7 @@
             document.getElementById("phone_number").value = arr.phoneNumber;
         },
         error: function (error) {
-            alert("Failed to load data!");
+            Notification('u');
         }
     });
 });

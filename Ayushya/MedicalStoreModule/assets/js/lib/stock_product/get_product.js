@@ -35,7 +35,7 @@
             }
         },
         error: function (error) {
-            alert("Failed to load data!");
+            Notification('u');
         }
     });
 });

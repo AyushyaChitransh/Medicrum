@@ -18,9 +18,12 @@ namespace MedicalStoreModule
         {
             if (!IsPostBack)
             {
+                Session["storeId"] = 1;
+                Session["userName"] = "ravi.jain";
                 if (Session["storeId"] != null && Session["userName"] != null)
                 {
-                    Response.Write(@"<script>if(window.confirm('Use existing login?!')){window.location.href='Dashboard.aspx';}</script>");
+                    //Response.Write(@"<script>if(window.confirm('Use existing login?!')){window.location.href='Dashboard.aspx';}</script>");
+                    Response.Write(@"<script>window.location.href='Dashboard.aspx';</script>");
                 }
             }
         }
@@ -46,8 +49,7 @@ namespace MedicalStoreModule
         [WebMethod]
         public static void Logout()
         {
-            HttpContext.Current.Session["storeId"] = null;
-            HttpContext.Current.Session["userName"] = null;
+            HttpContext.Current.Session.Abandon();
         }
 
         [WebMethod]

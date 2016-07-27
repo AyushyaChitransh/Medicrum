@@ -431,6 +431,7 @@ namespace MedicalStoreModule.App_Code.DAO
                     MySqlDataReader dataReader = cmd.ExecuteReader();
                     while (dataReader.Read())
                     {
+                        invoiceJson.invoice_id = invoiceId;
                         invoiceJson.invoice_number = int.Parse(dataReader["invoice_number"].ToString());
                         invoiceJson.invoice_type = dataReader["invoice_type"].ToString();
                         invoiceJson.invoice_date = DateTime.Parse(dataReader["invoice_date"].ToString());
@@ -450,7 +451,8 @@ namespace MedicalStoreModule.App_Code.DAO
                         invoiceJson.invoice_store_pincode = dataReader["invoice_store_pincode"].ToString();
                         invoiceJson.invoice_store_email = dataReader["invoice_store_email"].ToString();
                         invoiceJson.invoice_store_mobile = dataReader["invoice_store_mobile"].ToString();
-                        //this thing consfuses me
+                        invoiceJson.invoice_payment_mode = dataReader["invoice_payment_mode"].ToString();
+                        invoiceJson.invoice_payment_terms = dataReader["invoice_payment_terms"].ToString();
                         decimal totalValueTemp = new decimal();
                         if (decimal.TryParse(dataReader["invoice_total_value"].ToString(), out totalValueTemp))
                         {
@@ -467,17 +469,10 @@ namespace MedicalStoreModule.App_Code.DAO
                         {
                             invoiceJson.invoice_discount_amount = discountAmountTemp;
                         }
-                        // and this too
-                        decimal netTotalTemp = new decimal();
-                        if (decimal.TryParse(dataReader["invoice_total_value"].ToString(), out netTotalTemp))
+                        decimal netAmountTemp = new decimal();
+                        if (decimal.TryParse(dataReader["invoice_payable_amount"].ToString(), out netAmountTemp))
                         {
-                            invoiceJson.invoice_total_value = netTotalTemp;
-                        }
-                        //among these three i dunno which to choose where
-                        decimal amountPaidTemp = new decimal();
-                        if (decimal.TryParse(dataReader["amount_paid"].ToString(), out amountPaidTemp))
-                        {
-                            invoiceJson.invoice_payable_amount = amountPaidTemp;
+                            invoiceJson.invoice_payable_amount = netAmountTemp;
                         }
                     }
                     cm.CloseConnection();
@@ -498,89 +493,6 @@ namespace MedicalStoreModule.App_Code.DAO
                 cm.CloseConnection();
                 string message = ex.Message;
                 return invoiceJson;
-            }
-        }
-
-        public Invoice GetInvoice(int invoiceId)
-        {
-            Invoice invoiceObj = new Invoice();
-            try
-            {
-                if (cm.OpenConnection() == true)
-                {
-                    MySqlCommand cmd = new MySqlCommand();
-                    cmd.CommandText = @"SELECT 
-                                                invoice_id,
-                                                invoice_number,
-                                                invoice.store_id,
-                                                invoice.customer_id,
-                                                invoice.invoice_date,
-                                                invoice_type,
-                                                payment_terms,
-                                                payment_mode,
-                                                total_amount,
-                                                tax_amount,
-                                                discount_type,
-                                                discount_amount,
-                                                coupon_code,
-                                                net_total,
-                                                amount_paid,
-                                                invoice.status,
-                                                invoice.delete_status
-                                        FROM invoice
-                                        WHERE invoice_id=@invoice_id AND delete_status=@delete_status";
-                    cmd.Parameters.AddWithValue("@invoice_id", invoiceId);
-                    cmd.Parameters.AddWithValue("@delete_status", 0);
-                    cmd.Connection = cm.connection;
-                    MySqlDataReader dataReader = cmd.ExecuteReader();
-                    while (dataReader.Read())
-                    {
-                        invoiceObj.invoiceId = int.Parse(dataReader["invoice_id"].ToString());
-                        invoiceObj.invoiceNumber = int.Parse(dataReader["invoice_number"].ToString());
-                        invoiceObj.customerId = int.Parse(dataReader["customer_id"].ToString());
-                        invoiceObj.storeId = int.Parse(dataReader["store_id"].ToString());
-                        invoiceObj.invoiceDate = DateTime.Parse(dataReader["invoice_date"].ToString());
-                        invoiceObj.invoiceType = dataReader["invoice_type"].ToString();
-                        invoiceObj.paymentTerms = dataReader["payment_terms"].ToString();
-                        invoiceObj.paymentMode = dataReader["payment_mode"].ToString();
-                        decimal totalAmountTemp = new decimal();
-                        if (decimal.TryParse(dataReader["total_amount"].ToString(), out totalAmountTemp))
-                        {
-                            invoiceObj.totalAmount = totalAmountTemp;
-                        }
-                        decimal taxAmountTemp = new decimal();
-                        if (decimal.TryParse(dataReader["tax_amount"].ToString(), out taxAmountTemp))
-                        {
-                            invoiceObj.taxAmount = taxAmountTemp;
-                        }
-                        invoiceObj.discountType = dataReader["discount_type"].ToString();
-                        decimal discountAmountTemp = new decimal();
-                        if (decimal.TryParse(dataReader["discount_amount"].ToString(), out discountAmountTemp))
-                        {
-                            invoiceObj.discountAmount = discountAmountTemp;
-                        }
-                        invoiceObj.couponCode = dataReader["coupon_code"].ToString();
-                        decimal netTotalTemp = new decimal();
-                        if (decimal.TryParse(dataReader["net_total"].ToString(), out netTotalTemp))
-                        {
-                            invoiceObj.netTotal = netTotalTemp;
-                        }
-                        decimal amountPaidTemp = new decimal();
-                        if (decimal.TryParse(dataReader["amount_paid"].ToString(), out amountPaidTemp))
-                        {
-                            invoiceObj.amountPaid = amountPaidTemp;
-                        }
-                        invoiceObj.status = int.Parse(dataReader["status"].ToString());
-                    }
-                    cm.CloseConnection();
-                }
-                return invoiceObj;
-            }
-            catch (Exception ex)
-            {
-                cm.CloseConnection();
-                string message = ex.Message;
-                return invoiceObj;
             }
         }
 
@@ -621,10 +533,11 @@ namespace MedicalStoreModule.App_Code.DAO
             return listBillingItems;
         }
 
-        /*public bool DeleteInvoiceAndBill(int invoiceId)
+        public bool DeleteInvoice(int invoiceId)
         {
             string qry = @"UPDATE invoice SET delete_status=@delete_status WHERE invoice_id=@invoice_id;
-                           UPDATE billing_items SET delete_status=@delete_status WHERE invoice_id=@invoice_id";
+                           UPDATE billing_items SET delete_status=@delete_status WHERE invoice_id=@invoice_id
+                           Update invoice_tax SET delete_status=@delete_status WHERE invoice_id=@invoice_id";
             MySqlCommand cmd = new MySqlCommand(qry, cm.connection);
             cmd.Parameters.AddWithValue("@delete_status", 1);
             cmd.Parameters.AddWithValue("@invoice_id", invoiceId);
@@ -647,7 +560,7 @@ namespace MedicalStoreModule.App_Code.DAO
                 string msg = ex.Message;
                 return false;
             }
-        }*/
+        }
 
     }
 }

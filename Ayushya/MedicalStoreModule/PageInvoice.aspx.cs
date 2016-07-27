@@ -151,5 +151,12 @@ namespace MedicalStoreModule
             JavaScriptSerializer serializer = new JavaScriptSerializer();
             return serializer.Serialize(accessInvoiceDb.GetInvoiceJson(invoiceId));
         }
+
+        [WebMethod]
+        public static object DeleteInvoice(int invoiceId)
+        {
+            DAOInvoice accessInvoiceDb = new DAOInvoice();
+            return accessInvoiceDb.DeleteInvoice(invoiceId);
+        }
     }
 }

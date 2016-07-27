@@ -32,7 +32,7 @@
             //document.getElementById("last_updated_timestamp").value = arr.lastUpdatedTimestamp;
         },
         error: function (error) {
-            alert("Failed to load data!");
+            Notification('u');
         }
     });
 });
