@@ -10,7 +10,6 @@ namespace MedicalStoreModule.App_Code.DAO
     public class DAOProductModel
     {
         ConnectionManager cm = new ConnectionManager();
-
         public bool InsertProductModel(ProductModel productModel)
         {
             try
@@ -288,5 +287,6 @@ namespace MedicalStoreModule.App_Code.DAO
                 return productModel;
             }
         }
+
     }
 }

@@ -1,4 +1,5 @@
 ﻿using MedicalStoreModule.App_Code.Model;
+using MedicalStoreModule.App_Code.Utility;
 using MySql.Data.MySqlClient;
 using System;
 using System.Collections.Generic;
@@ -383,86 +384,115 @@ namespace MedicalStoreModule.App_Code.DAO
             return invoiceList;
         }
 
-        public Invoice GetInvoice(int invoiceId)
+        public InvoiceJson GetInvoiceJson(int invoiceId)
         {
-            Invoice invoiceObj = new Invoice();
+            InvoiceJson invoiceJson = new InvoiceJson();
             try
             {
                 if (cm.OpenConnection() == true)
                 {
                     MySqlCommand cmd = new MySqlCommand();
                     cmd.CommandText = @"SELECT 
-                                                invoice_id,
                                                 invoice_number,
-                                                invoice.store_id,
-                                                invoice.customer_id,
-                                                invoice.invoice_date,
                                                 invoice_type,
-                                                payment_terms,
-                                                payment_mode,
-                                                total_amount,
-                                                tax_amount,
+                                                invoice.invoice_date as invoice_date,
+                                                customer.customer_name as invoice_customer,
+                                                customer.address as invoice_address,
+                                                customer.district as invoice_district,
+                                                customer.state as invoice_state,
+                                                customer.country as invoice_country,
+                                                customer.pincode as invoice_pincode,
+                                                customer.email as invoice_email,
+                                                customer.mobile as invoice_mobile,
+                                                store.store_name as invoice_store_name,
+                                                store.address as invoice_store_address,
+                                                store.district as invoice_store_district,
+                                                store.state as invoice_store_state,
+                                                store.country as invoice_store_country,
+                                                store.pincode as invoice_store_pincode,
+                                                store.email as invoice_store_email,
+                                                store.mobile as invoice_store_mobile,
+                                                total_amount as invoice_total_value,
+                                                discount_amount as invoice_discount_amount,
+                                                net_total as invoice_payable_amount,
+                                                tax_amount as invoice_vat_value,
                                                 discount_type,
-                                                discount_amount,
                                                 coupon_code,
-                                                net_total,
                                                 amount_paid,
-                                                invoice.status,
-                                                invoice.delete_status
-                                        FROM invoice
-                                        WHERE invoice_id=@invoice_id AND delete_status=@delete_status";
+                                                payment_terms as invoice_payment_terms,
+                                                payment_mode as invoice_payment_mode
+                                        FROM invoice 
+                                             LEFT JOIN customer on invoice.customer_id = customer.customer_id 
+                                             LEFT JOIN store on store.store_id = invoice.store_id
+                                        WHERE invoice_id=@invoice_id AND invoice.delete_status=@delete_status";
                     cmd.Parameters.AddWithValue("@invoice_id", invoiceId);
                     cmd.Parameters.AddWithValue("@delete_status", 0);
                     cmd.Connection = cm.connection;
                     MySqlDataReader dataReader = cmd.ExecuteReader();
                     while (dataReader.Read())
                     {
-                        invoiceObj.invoiceId = int.Parse(dataReader["invoice_id"].ToString());
-                        invoiceObj.invoiceNumber = int.Parse(dataReader["invoice_number"].ToString());
-                        invoiceObj.customerId = int.Parse(dataReader["customer_id"].ToString());
-                        invoiceObj.storeId = int.Parse(dataReader["store_id"].ToString());
-                        invoiceObj.invoiceDate = DateTime.Parse(dataReader["invoice_date"].ToString());
-                        invoiceObj.invoiceType = dataReader["invoice_type"].ToString();
-                        invoiceObj.paymentTerms = dataReader["payment_terms"].ToString();
-                        invoiceObj.paymentMode = dataReader["payment_mode"].ToString();
-                        decimal totalAmountTemp = new decimal();
-                        if (decimal.TryParse(dataReader["total_amount"].ToString(), out totalAmountTemp))
+                        invoiceJson.invoice_id = invoiceId;
+                        invoiceJson.invoice_number = int.Parse(dataReader["invoice_number"].ToString());
+                        invoiceJson.invoice_type = dataReader["invoice_type"].ToString();
+                        invoiceJson.invoice_date = DateTime.Parse(dataReader["invoice_date"].ToString());
+                        invoiceJson.invoice_customer = dataReader["invoice_customer"].ToString();
+                        invoiceJson.invoice_address = dataReader["invoice_address"].ToString();
+                        invoiceJson.invoice_district = dataReader["invoice_district"].ToString();
+                        invoiceJson.invoice_state = dataReader["invoice_state"].ToString();
+                        invoiceJson.invoice_country = dataReader["invoice_country"].ToString();
+                        invoiceJson.invoice_pincode = dataReader["invoice_pincode"].ToString();
+                        invoiceJson.invoice_email = dataReader["invoice_email"].ToString();
+                        invoiceJson.invoice_mobile = dataReader["invoice_mobile"].ToString();
+                        invoiceJson.invoice_store_name = dataReader["invoice_store_name"].ToString();
+                        invoiceJson.invoice_store_address = dataReader["invoice_store_address"].ToString();
+                        invoiceJson.invoice_store_district = dataReader["invoice_store_district"].ToString();
+                        invoiceJson.invoice_store_state = dataReader["invoice_store_state"].ToString();
+                        invoiceJson.invoice_store_country = dataReader["invoice_store_country"].ToString();
+                        invoiceJson.invoice_store_pincode = dataReader["invoice_store_pincode"].ToString();
+                        invoiceJson.invoice_store_email = dataReader["invoice_store_email"].ToString();
+                        invoiceJson.invoice_store_mobile = dataReader["invoice_store_mobile"].ToString();
+                        invoiceJson.invoice_payment_mode = dataReader["invoice_payment_mode"].ToString();
+                        invoiceJson.invoice_payment_terms = dataReader["invoice_payment_terms"].ToString();
+                        decimal totalValueTemp = new decimal();
+                        if (decimal.TryParse(dataReader["invoice_total_value"].ToString(), out totalValueTemp))
                         {
-                            invoiceObj.totalAmount = totalAmountTemp;
+                            invoiceJson.invoice_total_value = totalValueTemp;
                         }
-                        decimal taxAmountTemp = new decimal();
-                        if (decimal.TryParse(dataReader["tax_amount"].ToString(), out taxAmountTemp))
+
+                        decimal vatValueTemp = new decimal();
+                        if (decimal.TryParse(dataReader["invoice_vat_value"].ToString(), out vatValueTemp))
                         {
-                            invoiceObj.taxAmount = taxAmountTemp;
+                            invoiceJson.invoice_vat_value = vatValueTemp;
                         }
-                        invoiceObj.discountType = dataReader["discount_type"].ToString();
                         decimal discountAmountTemp = new decimal();
-                        if (decimal.TryParse(dataReader["discount_amount"].ToString(), out discountAmountTemp))
+                        if (decimal.TryParse(dataReader["invoice_discount_amount"].ToString(), out discountAmountTemp))
                         {
-                            invoiceObj.discountAmount = discountAmountTemp;
+                            invoiceJson.invoice_discount_amount = discountAmountTemp;
                         }
-                        invoiceObj.couponCode = dataReader["coupon_code"].ToString();
-                        decimal netTotalTemp = new decimal();
-                        if (decimal.TryParse(dataReader["net_total"].ToString(), out netTotalTemp))
+                        decimal netAmountTemp = new decimal();
+                        if (decimal.TryParse(dataReader["invoice_payable_amount"].ToString(), out netAmountTemp))
                         {
-                            invoiceObj.netTotal = netTotalTemp;
+                            invoiceJson.invoice_payable_amount = netAmountTemp;
                         }
-                        decimal amountPaidTemp = new decimal();
-                        if (decimal.TryParse(dataReader["amount_paid"].ToString(), out amountPaidTemp))
-                        {
-                            invoiceObj.amountPaid = amountPaidTemp;
-                        }
-                        invoiceObj.status = int.Parse(dataReader["status"].ToString());
                     }
                     cm.CloseConnection();
+                    List<BillingItems> billingItems = GetBillingItems(invoiceId);
+                    Invoice_Medicines[] invoiceMedicine = new Invoice_Medicines[billingItems.Count];
+                    int i = 0;
+                    foreach (BillingItems item in billingItems)
+                    {
+                        Invoice_Medicines med = new Invoice_Medicines(item);
+                        invoiceMedicine[i++] = med;
+                    }
+                    invoiceJson.invoice_medicines = invoiceMedicine;
                 }
-                return invoiceObj;
+                return invoiceJson;
             }
             catch (Exception ex)
             {
                 cm.CloseConnection();
                 string message = ex.Message;
-                return invoiceObj;
+                return invoiceJson;
             }
         }
 
@@ -503,10 +533,11 @@ namespace MedicalStoreModule.App_Code.DAO
             return listBillingItems;
         }
 
-        /*public bool DeleteInvoiceAndBill(int invoiceId)
+        public bool DeleteInvoice(int invoiceId)
         {
             string qry = @"UPDATE invoice SET delete_status=@delete_status WHERE invoice_id=@invoice_id;
-                           UPDATE billing_items SET delete_status=@delete_status WHERE invoice_id=@invoice_id";
+                           UPDATE billing_items SET delete_status=@delete_status WHERE invoice_id=@invoice_id
+                           Update invoice_tax SET delete_status=@delete_status WHERE invoice_id=@invoice_id";
             MySqlCommand cmd = new MySqlCommand(qry, cm.connection);
             cmd.Parameters.AddWithValue("@delete_status", 1);
             cmd.Parameters.AddWithValue("@invoice_id", invoiceId);
@@ -529,7 +560,7 @@ namespace MedicalStoreModule.App_Code.DAO
                 string msg = ex.Message;
                 return false;
             }
-        }*/
+        }
 
     }
 }

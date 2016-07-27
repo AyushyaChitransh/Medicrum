@@ -151,3 +151,21 @@ function response() {
         }
     });
 }
+
+//Delete invoice
+function DeleteInvoice(invoiceId)
+{
+    $.ajax({
+        type: 'POST',
+        url: 'PageInvoice.aspx/DeleteInvoice',
+        contentType: 'application/json; charset=utf-8',
+        data: "{ 'invoiceId': " + invoiceId + " }",
+        dataType: "json",
+        success: function (response) {
+            window.location = "PageInvoice.aspx";
+        },
+        error: function (error) {
+            alert(JSON.stringify(error));
+        }
+    });
+}
