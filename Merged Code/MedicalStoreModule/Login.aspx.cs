@@ -46,8 +46,7 @@ namespace MedicalStoreModule
         [WebMethod]
         public static void Logout()
         {
-            HttpContext.Current.Session["storeId"] = null;
-            HttpContext.Current.Session["userName"] = null;
+            HttpContext.Current.Session.Abandon();
         }
 
         [WebMethod]
