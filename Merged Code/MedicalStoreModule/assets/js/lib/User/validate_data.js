@@ -22,7 +22,7 @@
                 result = response.d;
             },
             error: function (error) {
-                alert("Failed!");
+                Notification('u');
             }
         });
         return result;
@@ -50,7 +50,7 @@ function CheckUserName(input) {
                 result = response.d;
             },
             error: function (error) {
-                alert("Failed!");
+                Notification('u');
             }
         });
         return result;

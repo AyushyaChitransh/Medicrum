@@ -1,13 +1,13 @@
 ﻿function ViewDetailedSupplier(supplierId) {
     $.ajax({
         type: 'POST',
-        url: 'ViewSupplier.aspx/SetSupplierSession',
+        url: 'SupplierList.aspx/SetSupplierSession',
         contentType: 'application/json; charset=utf-8',
         data: "{ 'supplierId': " + supplierId + " }",
         success: function () {
         },
         error: function (error) {
-            alert("Failed!");
+            Notification('u');
         }
     });
     setTimeout(function () {

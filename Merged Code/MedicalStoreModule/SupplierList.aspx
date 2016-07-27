@@ -1,4 +1,4 @@
-﻿<%@ Page Language="C#" AutoEventWireup="true" CodeBehind="ViewCustomer.aspx.cs" Inherits="MedicalStoreModule.ViewCustomer" %>
+﻿<%@ Page Language="C#" AutoEventWireup="true" CodeBehind="SupplierList.aspx.cs" Inherits="MedicalStoreModule.SupplierList" %>
 
 <!DOCTYPE html>
 
@@ -11,7 +11,7 @@
     <meta name="msapplication-tap-highlight" content="no" />
     <link rel="icon" type="image/png" href="assets/img/favicon-16x16.png" sizes="16x16" />
     <link rel="icon" type="image/png" href="assets/img/favicon-32x32.png" sizes="32x32" />
-    <title>View Customer</title>
+    <title>View Supplier</title>
 
     <!-- uikit -->
     <link rel="stylesheet" href="bower_components/uikit/css/uikit.almost-flat.min.css" media="all" />
@@ -30,12 +30,12 @@
                 <div class="md-card-content">
                     <div class="uk-grid" data-uk-grid-margin="">
                         <div class="uk-width-medium-4-6">
-                            <h3 class="heading_b uk-margin-bottom">Customer List</h3>
+                            <h3 class="heading_b uk-margin-bottom">Supplier List</h3>
                         </div>
                         <br />
                         <div class="uk-width-medium-2-6">
-                            <label for="search_customer">Search Customer</label>
-                            <input type="text" class="md-input" id="search_customer" name="search_customer" onkeyup="response()" />
+                            <label for="search_supplier">Search Supplier</label>
+                            <input type="text" class="md-input" id="search_supplier" name="search_supplier" onkeyup="response()" />
                         </div>
                         <br />
                     </div>
@@ -44,7 +44,7 @@
             <br />
             <div class="md-card">
                 <div class="md-card-content">
-                    <div id="customer_list"></div>
+                    <div id="supplier_list"></div>
                 </div>
             </div>
 
@@ -52,7 +52,7 @@
     </div>
 
     <div class="md-fab-wrapper">
-        <a class="md-fab md-fab-accent" href="AddCustomer.aspx">
+        <a class="md-fab md-fab-accent" href="AddSupplier.aspx">
             <i class="material-icons">&#xE145;</i>
         </a>
     </div>
@@ -84,6 +84,7 @@
     <script src="assets/js/uikit_custom.min.js"></script>
     <!-- altair common functions/helpers -->
     <script src="assets/js/altair_admin_common.min.js"></script>
+
     <uc1:StyleSwitcher runat="server" ID="StyleSwitcher" />
 
     <!-- page specific plugins -->
@@ -100,8 +101,8 @@
     <script src="bower_components/jtable/lib/extensions/jquery.jtable.aspnetpagemethods.js"></script>
     
     <!-- Page function scripts -->
-    <script src="assets/js/lib/customer/view_customer.js"></script>
-    <script src="assets/js/lib/customer/customer_table.js"></script>
+    <script src="assets/js/lib/supplier/view_supplier.js"></script>
+    <script src="assets/js/lib/supplier/supplier_table.js"></script>
 
     <script>
         $(function () {

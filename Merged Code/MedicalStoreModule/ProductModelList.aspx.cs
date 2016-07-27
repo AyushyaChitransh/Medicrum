@@ -10,7 +10,7 @@ using System.Web.UI.WebControls;
 
 namespace MedicalStoreModule
 {
-    public partial class ViewProductModel : System.Web.UI.Page
+    public partial class ProductModelList : System.Web.UI.Page
     {
         private static int storeId;
         private static string userName;
@@ -31,7 +31,7 @@ namespace MedicalStoreModule
         }
 
         [WebMethod]
-        public static object ProductModelList(string productName, int jtStartIndex, int jtPageSize, string jtSorting)
+        public static object ProductModelLists(string productName, int jtStartIndex, int jtPageSize, string jtSorting)
         {
             DAOProductModel accessProductModeldb = new DAOProductModel();
             return accessProductModeldb.ProductModelList(productName, storeId, jtStartIndex, jtPageSize, jtSorting);

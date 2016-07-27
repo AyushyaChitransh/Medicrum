@@ -1,5 +1,5 @@
-﻿using MedicalStoreModule.App_Code.Model;
-using MedicalStoreModule.App_Code.DAO;
+﻿using MedicalStoreModule.App_Code.DAO;
+using MedicalStoreModule.App_Code.Model;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -10,7 +10,7 @@ using System.Web.UI.WebControls;
 
 namespace MedicalStoreModule
 {
-    public partial class ViewCustomer : System.Web.UI.Page
+    public partial class SupplierList : System.Web.UI.Page
     {
         private static int storeId;
         private static string userName;
@@ -31,32 +31,32 @@ namespace MedicalStoreModule
         }
 
         [WebMethod]
-        public static object CustomerList(string customerName, int jtStartIndex, int jtPageSize, string jtSorting)
+        public static object SupplierLists(string supplierStoreName, int jtStartIndex, int jtPageSize, string jtSorting)
         {
-            DAOCustomer accessCustomerDb = new DAOCustomer();
-            return accessCustomerDb.CustomerList(customerName, storeId, jtStartIndex, jtPageSize, jtSorting);
+            DAOSupplier accessSupplierdb = new DAOSupplier();
+            return accessSupplierdb.SupplierList(supplierStoreName, storeId, jtStartIndex, jtPageSize, jtSorting);
         }
 
         [WebMethod]
-        public static object UpdateCustomer(Customer record)
+        public static object UpdateSupplier(Supplier record)
         {
-            DAOCustomer accessCustomerDb = new DAOCustomer();
             record.lastUpdatedBy = userName;
             record.lastUpdatedTimestamp = DateTime.Now;
-            return accessCustomerDb.UpdateCustomer(record);
+            DAOSupplier accessSupplierdb = new DAOSupplier();
+            return accessSupplierdb.UpdateSupplier(record);
         }
 
         [WebMethod]
-        public static object DeleteCustomer(int customerId)
+        public static object DeleteSupplier(int supplierId)
         {
-            DAOCustomer accessCustomerDb = new DAOCustomer();
-            return accessCustomerDb.DeleteCustomer(customerId);
+            DAOSupplier accessSupplierdb = new DAOSupplier();
+            return accessSupplierdb.DeleteSupplier(supplierId);
         }
 
         [WebMethod]
-        public static void SetCustomerSession(int customerId)
+        public static void SetSupplierSession(int supplierId)
         {
-            HttpContext.Current.Session["customerId"] = customerId;
+            HttpContext.Current.Session["supplierId"] = supplierId;
         }
     }
 }

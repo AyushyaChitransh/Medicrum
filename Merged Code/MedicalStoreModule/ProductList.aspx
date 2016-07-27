@@ -1,4 +1,4 @@
-﻿<%@ Page Language="C#" AutoEventWireup="true" CodeBehind="ViewProductModel.aspx.cs" Inherits="MedicalStoreModule.ViewProductModel" %>
+﻿<%@ Page Language="C#" AutoEventWireup="true" CodeBehind="ProductList.aspx.cs" Inherits="MedicalStoreModule.ProductList" %>
 
 <!DOCTYPE html>
 
@@ -11,7 +11,7 @@
     <meta name="msapplication-tap-highlight" content="no" />
     <link rel="icon" type="image/png" href="assets/img/favicon-16x16.png" sizes="16x16" />
     <link rel="icon" type="image/png" href="assets/img/favicon-32x32.png" sizes="32x32" />
-    <title>View Product Model</title>
+    <title>View Product</title>
 
     <!-- uikit -->
     <link rel="stylesheet" href="bower_components/uikit/css/uikit.almost-flat.min.css" media="all" />
@@ -36,7 +36,7 @@
                         <br />
                         <div class="uk-width-medium-2-6">
                             <label for="search_product">Search Product</label>
-                            <input type="text" class="md-input" id="search_product_model" name="search_product" onkeyup="response()" />
+                            <input type="text" class="md-input" id="search_product" name="search_product" onkeyup="response()" />
                         </div>
                         <br />
                     </div>
@@ -45,7 +45,7 @@
             <br />
             <div class="md-card">
                 <div class="md-card-content">
-                    <div id="product_model_list"></div>
+                    <div id="product_list"></div>
                 </div>
             </div>
 
@@ -53,7 +53,7 @@
     </div>
 
     <div class="md-fab-wrapper">
-        <a class="md-fab md-fab-accent" href="AddProductModel.aspx">
+        <a class="md-fab md-fab-accent" href="AddProduct.aspx">
             <i class="material-icons">&#xE145;</i>
         </a>
     </div>
@@ -102,8 +102,8 @@
     <script src="bower_components/jtable/lib/extensions/jquery.jtable.aspnetpagemethods.js"></script>
 
     <!-- Page function scripts -->
-    <script src="assets/js/lib/product_model/view_product_model.js"></script>
-    <script src="assets/js/lib/product_model/product_model_table.js"></script>
+    <script src="assets/js/lib/stock_product/view_product.js"></script>
+    <script src="assets/js/lib/stock_product/product_table.js"></script>
 
     <script>
         $(function () {

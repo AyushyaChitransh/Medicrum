@@ -10,7 +10,7 @@ using System.Web.UI.WebControls;
 
 namespace MedicalStoreModule
 {
-    public partial class ViewSupplier : System.Web.UI.Page
+    public partial class CustomerList : System.Web.UI.Page
     {
         private static int storeId;
         private static string userName;
@@ -31,32 +31,32 @@ namespace MedicalStoreModule
         }
 
         [WebMethod]
-        public static object SupplierList(string supplierStoreName, int jtStartIndex, int jtPageSize, string jtSorting)
+        public static object CustomerLists(string customerName, int jtStartIndex, int jtPageSize, string jtSorting)
         {
-            DAOSupplier accessSupplierdb = new DAOSupplier();
-            return accessSupplierdb.SupplierList(supplierStoreName, storeId, jtStartIndex, jtPageSize, jtSorting);
+            DAOCustomer accessCustomerDb = new DAOCustomer();
+            return accessCustomerDb.CustomerList(customerName, storeId, jtStartIndex, jtPageSize, jtSorting);
         }
 
         [WebMethod]
-        public static object UpdateSupplier(Supplier record)
+        public static object UpdateCustomer(Customer record)
         {
+            DAOCustomer accessCustomerDb = new DAOCustomer();
             record.lastUpdatedBy = userName;
             record.lastUpdatedTimestamp = DateTime.Now;
-            DAOSupplier accessSupplierdb = new DAOSupplier();
-            return accessSupplierdb.UpdateSupplier(record);
+            return accessCustomerDb.UpdateCustomer(record);
         }
 
         [WebMethod]
-        public static object DeleteSupplier(int supplierId)
+        public static object DeleteCustomer(int customerId)
         {
-            DAOSupplier accessSupplierdb = new DAOSupplier();
-            return accessSupplierdb.DeleteSupplier(supplierId);
+            DAOCustomer accessCustomerDb = new DAOCustomer();
+            return accessCustomerDb.DeleteCustomer(customerId);
         }
 
         [WebMethod]
-        public static void SetSupplierSession(int supplierId)
+        public static void SetCustomerSession(int customerId)
         {
-            HttpContext.Current.Session["supplierId"] = supplierId;
+            HttpContext.Current.Session["customerId"] = customerId;
         }
     }
 }

@@ -1,13 +1,13 @@
 ﻿function ViewDetailedCustomer(customerId) {
     $.ajax({
         type: 'POST',
-        url: 'ViewCustomer.aspx/SetCustomerSession',
+        url: 'CustomerList.aspx/SetCustomerSession',
         contentType: 'application/json; charset=utf-8',
         data: "{ 'customerId': " + customerId + " }",
         success: function () {
         },
         error: function (error) {
-            alert("Failed!");
+            Notification('u');
         }
     });
     setTimeout(function () {

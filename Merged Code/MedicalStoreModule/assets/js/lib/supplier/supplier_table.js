@@ -89,9 +89,9 @@ altair_crud_table = {
                 altair_md.inputs();
             },
             actions: {
-                listAction: '/ViewSupplier.aspx/SupplierList',
-                updateAction: '/ViewSupplier.aspx/UpdateSupplier',
-                deleteAction: '/ViewSupplier.aspx/DeleteSupplier'
+                listAction: '/SupplierList.aspx/SupplierLists',
+                updateAction: '/SupplierList.aspx/UpdateSupplier',
+                deleteAction: '/SupplierList.aspx/DeleteSupplier'
             },
             fields: {
                 contactPersonName: {

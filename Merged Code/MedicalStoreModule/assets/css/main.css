@@ -9775,16 +9775,13 @@ div.ganttview .ui-resizable-w {
   transition: transform 280ms;
 }
 #sidebar_main .sidebar_main_header {
-  height: 89px;
   border-bottom: 1px solid rgba(0, 0, 0, 0.12);
   margin-bottom: 20px;
-  background-image: url("../img/sidebar_head_bg.png");
   background-repeat: no-repeat;
   background-position: -20px -124px;
 }
 @media only screen and (-webkit-min-device-pixel-ratio: 2), only screen and (min--moz-device-pixel-ratio: 2), only screen and (min-device-pixel-ratio: 2), only screen and (-webkit-min-device-pixel-ratio: 192), only screen and (min-resolution: 192dppx), only screen and (min-resolution: 2dppx) {
   #sidebar_main .sidebar_main_header {
-    background-image: url("../img/sidebar_head_bg@2x.png");
     background-size: 310px 310px;
   }
 }

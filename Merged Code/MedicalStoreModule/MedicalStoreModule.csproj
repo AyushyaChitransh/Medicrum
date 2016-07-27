@@ -71,9 +71,13 @@
     <Content Include="assets\js\lib\invoice\page_invoices.js" />
     <Content Include="assets\js\lib\login\login.js" />
     <Content Include="assets\js\lib\login\ResetPassword.js" />
+    <Content Include="assets\js\lib\product_model\combo_box.js" />
     <Content Include="assets\js\lib\User\user_profile.js" />
+    <Content Include="CustomerList.aspx" />
     <Content Include="Login.aspx" />
     <Content Include="PageInvoice.aspx" />
+    <Content Include="ProductList.aspx" />
+    <Content Include="ProductModelList.aspx" />
     <Content Include="Register.aspx" />
     <Content Include="AddSupplier.aspx" />
     <Content Include="AddUser.aspx" />
@@ -5295,17 +5299,14 @@
     <Content Include="EmptyStocks.aspx" />
     <Content Include="Error.aspx" />
     <Content Include="ResetPassword.aspx" />
+    <Content Include="SupplierList.aspx" />
+    <Content Include="UserList.aspx" />
     <Content Include="UserProfile.aspx" />
-    <Content Include="ViewCustomer.aspx" />
     <Content Include="ViewDetailedCustomer.aspx" />
     <Content Include="ViewDetailedProduct.aspx" />
     <Content Include="ViewDetailedProductModel.aspx" />
     <Content Include="ViewDetailedSupplier.aspx" />
     <Content Include="ViewDetailedUser.aspx" />
-    <Content Include="ViewProduct.aspx" />
-    <Content Include="ViewProductModel.aspx" />
-    <Content Include="ViewSupplier.aspx" />
-    <Content Include="ViewUser.aspx" />
     <Content Include="Web.config" />
   </ItemGroup>
   <ItemGroup>
@@ -5335,6 +5336,13 @@
     <Compile Include="App_Code\Model\Invoice.cs" />
     <Compile Include="App_Code\Model\InvoiceTax.cs" />
     <Compile Include="App_Code\Utility\InvoiceJson.cs" />
+    <Compile Include="CustomerList.aspx.cs">
+      <DependentUpon>CustomerList.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="CustomerList.aspx.designer.cs">
+      <DependentUpon>CustomerList.aspx</DependentUpon>
+    </Compile>
     <Compile Include="Login.aspx.cs">
       <DependentUpon>Login.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
@@ -5348,6 +5356,20 @@
     </Compile>
     <Compile Include="PageInvoice.aspx.designer.cs">
       <DependentUpon>PageInvoice.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="ProductList.aspx.cs">
+      <DependentUpon>ProductList.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="ProductList.aspx.designer.cs">
+      <DependentUpon>ProductList.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="ProductModelList.aspx.cs">
+      <DependentUpon>ProductModelList.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="ProductModelList.aspx.designer.cs">
+      <DependentUpon>ProductModelList.aspx</DependentUpon>
     </Compile>
     <Compile Include="Register.aspx.cs">
       <DependentUpon>Register.aspx</DependentUpon>
@@ -5436,19 +5458,26 @@
     <Compile Include="ResetPassword.aspx.designer.cs">
       <DependentUpon>ResetPassword.aspx</DependentUpon>
     </Compile>
+    <Compile Include="SupplierList.aspx.cs">
+      <DependentUpon>SupplierList.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="SupplierList.aspx.designer.cs">
+      <DependentUpon>SupplierList.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="UserList.aspx.cs">
+      <DependentUpon>UserList.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="UserList.aspx.designer.cs">
+      <DependentUpon>UserList.aspx</DependentUpon>
+    </Compile>
     <Compile Include="UserProfile.aspx.cs">
       <DependentUpon>UserProfile.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
     </Compile>
     <Compile Include="UserProfile.aspx.designer.cs">
       <DependentUpon>UserProfile.aspx</DependentUpon>
-    </Compile>
-    <Compile Include="ViewCustomer.aspx.cs">
-      <DependentUpon>ViewCustomer.aspx</DependentUpon>
-      <SubType>ASPXCodeBehind</SubType>
-    </Compile>
-    <Compile Include="ViewCustomer.aspx.designer.cs">
-      <DependentUpon>ViewCustomer.aspx</DependentUpon>
     </Compile>
     <Compile Include="ViewDetailedCustomer.aspx.cs">
       <DependentUpon>ViewDetailedCustomer.aspx</DependentUpon>
@@ -5484,34 +5513,6 @@
     </Compile>
     <Compile Include="ViewDetailedUser.aspx.designer.cs">
       <DependentUpon>ViewDetailedUser.aspx</DependentUpon>
-    </Compile>
-    <Compile Include="ViewProduct.aspx.cs">
-      <DependentUpon>ViewProduct.aspx</DependentUpon>
-      <SubType>ASPXCodeBehind</SubType>
-    </Compile>
-    <Compile Include="ViewProduct.aspx.designer.cs">
-      <DependentUpon>ViewProduct.aspx</DependentUpon>
-    </Compile>
-    <Compile Include="ViewProductModel.aspx.cs">
-      <DependentUpon>ViewProductModel.aspx</DependentUpon>
-      <SubType>ASPXCodeBehind</SubType>
-    </Compile>
-    <Compile Include="ViewProductModel.aspx.designer.cs">
-      <DependentUpon>ViewProductModel.aspx</DependentUpon>
-    </Compile>
-    <Compile Include="ViewSupplier.aspx.cs">
-      <DependentUpon>ViewSupplier.aspx</DependentUpon>
-      <SubType>ASPXCodeBehind</SubType>
-    </Compile>
-    <Compile Include="ViewSupplier.aspx.designer.cs">
-      <DependentUpon>ViewSupplier.aspx</DependentUpon>
-    </Compile>
-    <Compile Include="ViewUser.aspx.cs">
-      <DependentUpon>ViewUser.aspx</DependentUpon>
-      <SubType>ASPXCodeBehind</SubType>
-    </Compile>
-    <Compile Include="ViewUser.aspx.designer.cs">
-      <DependentUpon>ViewUser.aspx</DependentUpon>
     </Compile>
   </ItemGroup>
   <ItemGroup>

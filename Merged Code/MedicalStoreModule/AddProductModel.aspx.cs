@@ -43,5 +43,12 @@ namespace MedicalStoreModule
             DAOProductModel accessProductModeldb = new DAOProductModel();
             return accessProductModeldb.InsertProductModel(data);
         }
+
+        [WebMethod]
+        public static object GetCompanyName()
+        {
+            DAOProductModel accessProductModeldb = new DAOProductModel();
+            return accessProductModeldb.GetCompanyName(storeId);
+        }
     }
 }

@@ -1,4 +1,4 @@
-﻿<%@ Page Language="C#" AutoEventWireup="true" CodeBehind="ViewUser.aspx.cs" Inherits="MedicalStoreModule.ViewUser" %>
+﻿<%@ Page Language="C#" AutoEventWireup="true" CodeBehind="CustomerList.aspx.cs" Inherits="MedicalStoreModule.CustomerList" %>
 
 <!DOCTYPE html>
 
@@ -11,7 +11,7 @@
     <meta name="msapplication-tap-highlight" content="no" />
     <link rel="icon" type="image/png" href="assets/img/favicon-16x16.png" sizes="16x16" />
     <link rel="icon" type="image/png" href="assets/img/favicon-32x32.png" sizes="32x32" />
-    <title>View User</title>
+    <title>View Customer</title>
 
     <!-- uikit -->
     <link rel="stylesheet" href="bower_components/uikit/css/uikit.almost-flat.min.css" media="all" />
@@ -22,7 +22,6 @@
 
 </head>
 <body class=" sidebar_main_open sidebar_main_swipe">
-    
     <uc1:HeaderAndSideBar runat="server" ID="HeaderAndSideBar" />
 
     <div id="page_content">
@@ -31,12 +30,12 @@
                 <div class="md-card-content">
                     <div class="uk-grid" data-uk-grid-margin="">
                         <div class="uk-width-medium-4-6">
-                            <h3 class="heading_b uk-margin-bottom">User List</h3>
+                            <h3 class="heading_b uk-margin-bottom">Customer List</h3>
                         </div>
                         <br />
                         <div class="uk-width-medium-2-6">
-                            <label for="search_user">Search User</label>
-                            <input type="text" class="md-input" id="search_user" name="search_user" onkeyup="response()" />
+                            <label for="search_customer">Search Customer</label>
+                            <input type="text" class="md-input" id="search_customer" name="search_customer" onkeyup="response()" />
                         </div>
                         <br />
                     </div>
@@ -45,7 +44,7 @@
             <br />
             <div class="md-card">
                 <div class="md-card-content">
-                    <div id="user_list"></div>
+                    <div id="customer_list"></div>
                 </div>
             </div>
 
@@ -53,7 +52,7 @@
     </div>
 
     <div class="md-fab-wrapper">
-        <a class="md-fab md-fab-accent" href="AddUser.aspx">
+        <a class="md-fab md-fab-accent" href="AddCustomer.aspx">
             <i class="material-icons">&#xE145;</i>
         </a>
     </div>
@@ -85,25 +84,24 @@
     <script src="assets/js/uikit_custom.min.js"></script>
     <!-- altair common functions/helpers -->
     <script src="assets/js/altair_admin_common.min.js"></script>
-
     <uc1:StyleSwitcher runat="server" ID="StyleSwitcher" />
 
     <!-- page specific plugins -->
     <!-- JQuery-UI -->
-    <link rel="stylesheet" href="assets/skins/jquery-ui/material/jquery-ui.min.css" />
+    <link rel="stylesheet" href="assets/skins/jquery-ui/material/jquery-ui.min.css"/>
     <script src="bower_components/jquery-ui/jquery-ui.min.js"></script>
 
     <!-- jTable -->
     <!-- jTable style file -->
-    <link rel="stylesheet" href="assets/skins/jtable/jtable.min.css" />
+    <link rel="stylesheet" href="assets/skins/jtable/jtable.min.css"/>
     <!-- Core jTable script file -->
     <script src="bower_components/jtable/lib/jquery.jtable.js"></script>
     <!-- ASP.NET Web Forms extension for jTable -->
     <script src="bower_components/jtable/lib/extensions/jquery.jtable.aspnetpagemethods.js"></script>
-
+    
     <!-- Page function scripts -->
-    <script src="assets/js/lib/User/view_user.js"></script>
-    <script src="assets/js/lib/user/user_table.js"></script>
+    <script src="assets/js/lib/customer/view_customer.js"></script>
+    <script src="assets/js/lib/customer/customer_table.js"></script>
 
     <script>
         $(function () {

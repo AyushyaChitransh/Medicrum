@@ -288,5 +288,34 @@ namespace MedicalStoreModule.App_Code.DAO
             }
         }
 
+        public string[] GetCompanyName(int storeId)
+        {
+            List<string> companyName = new List<string>();
+            try
+            {
+                if (cm.OpenConnection() == true)
+                {
+                    MySqlCommand cmd = new MySqlCommand();
+                    cmd.CommandText = @"SELECT DISTINCT company FROM product_model
+                                        WHERE store_id=@store_id AND delete_status=@delete_status";
+                    cmd.Parameters.AddWithValue("@store_id", storeId);
+                    cmd.Parameters.AddWithValue("@delete_status", 0);
+                    cmd.Connection = cm.connection;
+                    MySqlDataReader dataReader = cmd.ExecuteReader();
+                    while (dataReader.Read())
+                    {
+                        companyName.Add(dataReader["company"].ToString());
+                    }
+                    cm.CloseConnection();
+                }
+                return companyName.ToArray();
+            }
+            catch (Exception ex)
+            {
+                cm.CloseConnection();
+                string message = ex.Message;
+                return companyName.ToArray();
+            }            
+        }
     }
 }

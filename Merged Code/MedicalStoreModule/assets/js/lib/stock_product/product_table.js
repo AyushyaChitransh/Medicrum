@@ -89,9 +89,9 @@ altair_crud_table = {
                 altair_md.inputs();
             },
             actions: {
-                listAction: '/ViewProduct.aspx/ProductList',
-                updateAction: '/ViewProduct.aspx/UpdateProduct',
-                deleteAction: '/ViewProduct.aspx/DeleteProduct'
+                listAction: '/ProductList.aspx/ProductLists',
+                updateAction: '/ProductList.aspx/UpdateProduct',
+                deleteAction: '/ProductList.aspx/DeleteProduct'
             },
             fields: {
                 productId: {
@@ -103,13 +103,13 @@ altair_crud_table = {
                 productModelId: {
                     title: 'Product Name',
                     width: '20%',
-                    options: '/ViewProduct.aspx/GetProductModelOptions'
+                    options: '/ProductList.aspx/GetProductModelOptions'
                 },
                 supplierId: {
                     title: 'Supplier Name',
                     width: '20%',
                     sorting: false,
-                    options: '/ViewProduct.aspx/GetSupplierOptions'
+                    options: '/ProductList.aspx/GetSupplierOptions'
                 },
                 barcode: {
                     title: 'Barcode',

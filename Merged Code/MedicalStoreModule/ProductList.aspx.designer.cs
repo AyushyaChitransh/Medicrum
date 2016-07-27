@@ -10,7 +10,7 @@
 namespace MedicalStoreModule {
     
     
-    public partial class ViewProduct {
+    public partial class ProductList {
         
         /// <summary>
         /// HeaderAndSideBar control.

@@ -209,7 +209,7 @@ namespace MedicalStoreModule.App_Code.DAO
         public object UpdateSupplier(Supplier supplier)
         {
             string qry = @"UPDATE supplier SET 
-                                           contact_person_name=@contact_person_name
+                                           contact_person_name=@contact_person_name,
                                            address=@address, 
                                            country=@country, 
                                            district=@district, 

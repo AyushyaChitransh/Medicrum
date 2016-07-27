@@ -89,9 +89,9 @@ altair_crud_table = {
                 altair_md.inputs();
             },
             actions: {
-                listAction: '/ViewProductModel.aspx/ProductModelList',
-                updateAction: '/ViewProductModel.aspx/UpdateProductModel',
-                deleteAction: '/ViewProductModel.aspx/DeleteProductModel'
+                listAction: '/ProductModelList.aspx/ProductModelLists',
+                updateAction: '/ProductModelList.aspx/UpdateProductModel',
+                deleteAction: '/ProductModelList.aspx/DeleteProductModel'
             },
             fields: {
                 productModelId: {

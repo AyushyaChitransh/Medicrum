@@ -10,7 +10,7 @@ using System.Web.UI.WebControls;
 
 namespace MedicalStoreModule
 {
-    public partial class ViewUser : System.Web.UI.Page
+    public partial class UserList : System.Web.UI.Page
     {
         private static int storeId;
         private static string userName;
@@ -31,7 +31,7 @@ namespace MedicalStoreModule
         }
 
         [WebMethod]
-        public static object UserList(string userName, int jtStartIndex, int jtPageSize, string jtSorting)
+        public static object UserLists(string userName, int jtStartIndex, int jtPageSize, string jtSorting)
         {
             DAOUser accessUserDb = new DAOUser();
             return accessUserDb.UserList(userName, storeId, jtStartIndex, jtPageSize, jtSorting);

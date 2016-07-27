@@ -30,11 +30,11 @@ function addDetails() {
                 if (response.d == true) {
                     Notification('s');
                     setTimeout(function () {
-                        window.location = "AddProduct.aspx";
+                        window.location = "ProductList.aspx";
                     }, 1000);
                 }
                 else
-                    Notification('u');
+                    Notification('e');
             },
             error: function (error) {
                 Notification('u');
