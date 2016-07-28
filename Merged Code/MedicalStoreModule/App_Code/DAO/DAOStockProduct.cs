@@ -35,7 +35,7 @@ namespace MedicalStoreModule.App_Code.DAO
                         int t = productId;
                     }
                     dataReader.Close();
-                    if(productId == 0)
+                    if (productId == 0)
                     {
                         MySqlCommand cmd2 = new MySqlCommand();
                         string parameters = "product_model_id, store_id, supplier_id, batch_number, manufacture_date, expiry_date, package_quantity, price, quantity, in_stock, delete_status";
@@ -46,6 +46,7 @@ namespace MedicalStoreModule.App_Code.DAO
                         cm.AddIfNotNull(stockProduct.volume.ToString(), "volume", ref parameters, ref values);
                         cm.AddIfNotNull(stockProduct.tax.ToString(), "tax", ref parameters, ref values);
                         cm.AddIfNotNull(stockProduct.status.ToString(), "status", ref parameters, ref values);
+                        cm.AddIfNotNull(stockProduct.shelf, "shelf", ref parameters, ref values);
                         cmd2.CommandText = "INSERT INTO stock_product (" + parameters + ") VALUES (" + values + ")";
                         cmd2.Parameters.AddWithValue("@product_model_id", stockProduct.productModelId);
                         cmd2.Parameters.AddWithValue("@store_id", stockProduct.storeId);
@@ -81,6 +82,10 @@ namespace MedicalStoreModule.App_Code.DAO
                         if (stockProduct.status != null)
                         {
                             cmd2.Parameters.AddWithValue("@status", stockProduct.status);
+                        }
+                        if (stockProduct.shelf != null)
+                        {
+                            cmd2.Parameters.AddWithValue("@shelf", stockProduct.shelf);
                         }
                         cmd2.Connection = cm.connection;
                         cmd2.ExecuteNonQuery();
@@ -118,15 +123,30 @@ namespace MedicalStoreModule.App_Code.DAO
                 int productCount = 0;
                 List<StockProduct> listProduct = new List<StockProduct>();
                 string[] sortOrder = jtSorting.Split(' ');
+                if (sortOrder[0].Equals("productModelId"))
+                    sortOrder[0] = "p.product_name";
+                else if (sortOrder[0].Equals("supplierId"))
+                    sortOrder[0] = "su.supplier_store_name";
                 if (cm.OpenConnection() == true)
                 {
                     MySqlCommand cmd = new MySqlCommand();
-                    cmd.CommandText = @"SELECT * FROM stock_product s 
+                    cmd.CommandText = @"UPDATE stock_product SET in_stock=@emergency_in_stock
+                                        WHERE delete_status=@delete_status AND store_id=@store_id AND quantity<=@uQuantity AND quantity>@lQuantity;
+                                        UPDATE stock_product SET in_stock=@empty_in_stock
+                                        WHERE delete_status=@delete_status AND store_id=@store_id AND quantity<=@quantity;
+                                        SELECT * FROM stock_product s 
                                         LEFT JOIN product_model p ON s.product_model_id = p.product_model_id
-                                        WHERE s.delete_status=@delete_status AND s.store_id=@store_id AND p.product_name LIKE @searchText 
-                                        ORDER BY p.product_name " + sortOrder[1] + " LIMIT @jtStartIndex,@jtPageSize";
+                                        LEFT JOIN supplier su ON s.supplier_id = su.supplier_id
+                                        WHERE s.delete_status=@delete_status AND s.store_id=@store_id 
+                                              AND ( p.product_name LIKE @searchText OR p.company LIKE @searchText OR s.shelf LIKE @searchText OR s.batch_number LIKE @searchText )
+                                        ORDER BY " + sortOrder[0] + " " + sortOrder[1] + " LIMIT @jtStartIndex,@jtPageSize";
                     cmd.Parameters.AddWithValue("@searchText", productModelId + '%');
                     cmd.Parameters.AddWithValue("@store_id", storeId);
+                    cmd.Parameters.AddWithValue("@uQuantity", 50);
+                    cmd.Parameters.AddWithValue("@lQuantity", 0);
+                    cmd.Parameters.AddWithValue("@emergency_in_stock", 2);
+                    cmd.Parameters.AddWithValue("@quantity", 0);
+                    cmd.Parameters.AddWithValue("@empty_in_stock", 0);
                     cmd.Parameters.AddWithValue("@delete_status", 0);
                     cmd.Parameters.AddWithValue("@jtStartIndex", jtStartIndex);
                     cmd.Parameters.AddWithValue("@jtPageSize", jtPageSize);
@@ -185,6 +205,7 @@ namespace MedicalStoreModule.App_Code.DAO
                         {
                             product.tax = tax;
                         }
+                        product.shelf = dataReader["shelf"].ToString();
                         int status = new int();
                         if (int.TryParse(dataReader["status"].ToString(), out status))
                         {
@@ -231,7 +252,7 @@ namespace MedicalStoreModule.App_Code.DAO
                     cmd.CommandText = @"UPDATE stock_product SET product_model_id=@product_model_id, supplier_id=@supplier_id, barcode=@barcode, 
                                         batch_number=@batch_number, manufacture_date=@manufacture_date, expiry_date=@expiry_date, 
                                         package_quantity=@package_quantity, price=@price, manufacture_licence_number=@manufacture_licence_number, 
-                                        weight=@weight, volume=@volume, quantity=@quantity, tax=@tax
+                                        weight=@weight, volume=@volume, quantity=@quantity, tax=@tax, shelf=@shelf
                                         WHERE product_id=@product_id";
                     cmd.Parameters.AddWithValue("@product_id", stockProduct.productId);
                     cmd.Parameters.AddWithValue("@product_model_id", stockProduct.productModelId);
@@ -247,6 +268,7 @@ namespace MedicalStoreModule.App_Code.DAO
                     cmd.Parameters.AddWithValue("@volume", stockProduct.volume);
                     cmd.Parameters.AddWithValue("@quantity", stockProduct.quantity);
                     cmd.Parameters.AddWithValue("@tax", stockProduct.tax);
+                    cmd.Parameters.AddWithValue("@shelf", stockProduct.shelf);
                     cmd.Connection = cm.connection;
                     cmd.CommandTimeout = 0;
                     cmd.ExecuteNonQuery();
@@ -333,7 +355,7 @@ namespace MedicalStoreModule.App_Code.DAO
                         int inStockVar = new int();
                         int.TryParse(dataReader["in_stock"].ToString(), out inStockVar);
 
-                        product = new { productName = dataReader["product_name"].ToString(), supplierStoreName = dataReader["supplier_store_name"].ToString(), batchNumber = dataReader["batch_number"].ToString(), barcode = barcodeVar, manufactureDate = manufactureDateVar, expiryDate = expiryDateVar, packageQuantity = packageQuantityVar, price = priceVar, manufactureLicenceNumber = dataReader["manufacture_licence_number"].ToString(), weight = weightVar, volume = volumeVar, quantity = quantityVar, tax = taxVar, inStock = inStockVar };
+                        product = new { productName = dataReader["product_name"].ToString(), supplierStoreName = dataReader["supplier_store_name"].ToString(), batchNumber = dataReader["batch_number"].ToString(), barcode = barcodeVar, manufactureDate = manufactureDateVar, expiryDate = expiryDateVar, packageQuantity = packageQuantityVar, price = priceVar, manufactureLicenceNumber = dataReader["manufacture_licence_number"].ToString(), weight = weightVar, volume = volumeVar, quantity = quantityVar, tax = taxVar, inStock = inStockVar, shelf = dataReader["shelf"].ToString() };
                     }
                     cm.CloseConnection();
                 }
@@ -405,6 +427,35 @@ namespace MedicalStoreModule.App_Code.DAO
             }
         }
 
+        public object GetSupplierComboOptions(int storeId)
+        {
+            List<object> supplierOptions = new List<object>();
+            try
+            {
+                if (cm.OpenConnection() == true)
+                {
+                    MySqlCommand cmd = new MySqlCommand();
+                    cmd.CommandText = @"SELECT * FROM supplier 
+                                        WHERE delete_status=@delete_status AND store_id=@store_id";
+                    cmd.Parameters.AddWithValue("@store_id", storeId);
+                    cmd.Parameters.AddWithValue("@delete_status", 0);
+                    cmd.Connection = cm.connection;
+                    MySqlDataReader dataReader = cmd.ExecuteReader();
+                    while (dataReader.Read())
+                    {
+                        supplierOptions.Add(new { DisplayText = dataReader["supplier_store_name"].ToString() + " | " + dataReader["contact_person_name"].ToString(), Value = int.Parse(dataReader["supplier_id"].ToString()) });
+                    }
+                    cm.CloseConnection();
+                }
+                return new { Result = "OK", Options = supplierOptions };
+            }
+            catch (Exception ex)
+            {
+                cm.CloseConnection();
+                return new { Result = "ERROR", Message = ex.Message };
+            }
+        }
+
         public object ProductEmergencyList(string productModelId, int storeId, int jtStartIndex, int jtPageSize, string jtSorting)
         {
             try
@@ -415,13 +466,18 @@ namespace MedicalStoreModule.App_Code.DAO
                 if (cm.OpenConnection() == true)
                 {
                     MySqlCommand cmd = new MySqlCommand();
-                    cmd.CommandText = @"SELECT * FROM stock_product s 
+                    cmd.CommandText = @"UPDATE stock_product SET in_stock=@in_stock
+                                        WHERE delete_status=@delete_status AND store_id=@store_id AND quantity<=@uQuantity AND quantity>@lQuantity;
+                                        SELECT * FROM stock_product s 
                                         LEFT JOIN product_model p ON s.product_model_id = p.product_model_id
-                                        WHERE s.delete_status=@delete_status AND s.store_id=@store_id AND s.quantity<@quantity AND p.product_name LIKE @searchText 
+                                        WHERE s.delete_status=@delete_status AND s.store_id=@store_id AND s.quantity<=@uQuantity AND s.quantity>@lQuantity 
+                                              AND ( p.product_name LIKE @searchText OR p.company LIKE @searchText OR s.shelf LIKE @searchText OR s.batch_number LIKE @searchText ) 
                                         ORDER BY p.product_name " + sortOrder[1] + " LIMIT @jtStartIndex,@jtPageSize";
                     cmd.Parameters.AddWithValue("@searchText", productModelId + '%');
                     cmd.Parameters.AddWithValue("@store_id", storeId);
-                    cmd.Parameters.AddWithValue("@quantity", 50);
+                    cmd.Parameters.AddWithValue("@uQuantity", 50);
+                    cmd.Parameters.AddWithValue("@lQuantity", 0);
+                    cmd.Parameters.AddWithValue("@in_stock", 2);
                     cmd.Parameters.AddWithValue("@delete_status", 0);
                     cmd.Parameters.AddWithValue("@jtStartIndex", jtStartIndex);
                     cmd.Parameters.AddWithValue("@jtPageSize", jtPageSize);
@@ -531,7 +587,8 @@ namespace MedicalStoreModule.App_Code.DAO
                                         WHERE delete_status=@delete_status AND store_id=@store_id AND quantity<=@quantity;
                                         SELECT * FROM stock_product s 
                                         LEFT JOIN product_model p ON s.product_model_id = p.product_model_id
-                                        WHERE s.delete_status=@delete_status AND s.store_id=@store_id AND s.quantity<=@quantity AND p.product_name LIKE @searchText 
+                                        WHERE s.delete_status=@delete_status AND s.store_id=@store_id AND s.quantity<=@quantity 
+                                              AND ( p.product_name LIKE @searchText OR p.company LIKE @searchText OR s.shelf LIKE @searchText OR s.batch_number LIKE @searchText ) 
                                         ORDER BY p.product_name " + sortOrder[1] + " LIMIT @jtStartIndex,@jtPageSize;";
                     cmd.Parameters.AddWithValue("@searchText", productModelId + '%');
                     cmd.Parameters.AddWithValue("@store_id", storeId);

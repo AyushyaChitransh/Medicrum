@@ -11,7 +11,7 @@
     <meta name="msapplication-tap-highlight" content="no" />
     <link rel="icon" type="image/png" href="assets/img/favicon-16x16.png" sizes="16x16" />
     <link rel="icon" type="image/png" href="assets/img/favicon-32x32.png" sizes="32x32" />
-    <title>My Profile</title>
+    <title>My Account</title>
 
     <!-- uikit -->
     <link rel="stylesheet" href="bower_components/uikit/css/uikit.almost-flat.min.css" media="all" />

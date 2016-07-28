@@ -42,7 +42,7 @@
                                         <i class="material-icons md-36">people</i>
                                         <span class="uk-text-muted uk-display-block">Add Supplier</span>
                                     </a>  
-                                    <a href="ViewProduct.aspx">
+                                    <a href="ProductList.aspx">
                                         <i class="material-icons md-36">&#xE8CB;</i>
                                         <span class="uk-text-muted uk-display-block">View Inventory</span>
                                     </a>                                  
@@ -123,7 +123,7 @@
                 </a>
                 <ul>
                     <li id="Add Product Model"><a href="AddProductModel.aspx">Add Product Model</a></li>
-                    <li id="View Product Model"><a href="ViewProductModel.aspx">View Product Model</a></li>
+                    <li id="View Product Model"><a href="ProductModelList.aspx">View Product Model</a></li>
                 </ul>
             </li>
             <li title="Inventory" id="Inventory">
@@ -133,7 +133,7 @@
                 </a>
                 <ul>
                     <li id="Add Product"><a href="AddProduct.aspx">Add Product</a></li>
-                    <li id="View Product"><a href="ViewProduct.aspx">View Product</a></li>
+                    <li id="View Product"><a href="ProductList.aspx">View Product</a></li>
                     <li id="Emergency Stocks"><a href="EmergencyStocks.aspx">Emergency Stocks</a></li>
                     <li id="Empty Stocks"><a href="EmptyStocks.aspx">Empty Stocks</a></li>
                 </ul>
@@ -151,7 +151,7 @@
                 </a>
                 <ul>
                     <li id="Add Customer"><a href="AddCustomer.aspx">Add Customer</a></li>
-                    <li id="View Customer"><a href="ViewCustomer.aspx">View Customer</a></li>
+                    <li id="View Customer"><a href="CustomerList.aspx">View Customer</a></li>
                 </ul>
             </li>
             <li title="Supplier" id="Supplier">
@@ -161,7 +161,7 @@
                 </a>
                 <ul>
                     <li id="Add Supplier"><a href="AddSupplier.aspx">Add Supplier</a></li>
-                    <li id="View Supplier"><a href="ViewSupplier.aspx">View Supplier</a></li>
+                    <li id="View Supplier"><a href="SupplierList.aspx">View Supplier</a></li>
                 </ul>
             </li>
             <li title="User" id="User">
@@ -170,9 +170,9 @@
                     <span class="menu_title">User</span>
                 </a>
                 <ul>
-                    <li id="My Profile"><a href="UserProfile.aspx">My Profile</a></li>
+                    <li id="My Account"><a href="UserProfile.aspx">My Account</a></li>
                     <li id="Add User"><a href="AddUser.aspx">Add User</a></li>
-                    <li id="View User"><a href="ViewUser.aspx">View User</a></li>
+                    <li id="View User"><a href="UserList.aspx">View User</a></li>
                 </ul>
             </li>
         </ul>

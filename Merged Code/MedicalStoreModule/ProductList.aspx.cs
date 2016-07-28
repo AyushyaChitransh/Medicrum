@@ -150,6 +150,10 @@ namespace MedicalStoreModule
                     product.tax = decimalTemp;
                 }
             }
+            if (values.TryGetValue("shelf", out output))
+            {
+                product.shelf = output.ToString();
+            }
             DAOStockProduct accessProductdb = new DAOStockProduct();
             return accessProductdb.UpdateProduct(product);
         }

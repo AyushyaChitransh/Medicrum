@@ -115,7 +115,8 @@ namespace MedicalStoreModule.App_Code.DAO
                 {
                     MySqlCommand cmd = new MySqlCommand();
                     cmd.CommandText = @"SELECT * FROM product_model 
-                                        WHERE delete_status=@delete_status AND store_id=@store_id AND product_name LIKE @searchText 
+                                        WHERE delete_status=@delete_status AND store_id=@store_id 
+                                              AND ( product_name LIKE @searchText OR company LIKE @searchText ) 
                                         ORDER BY product_name " + sortOrder[1] + " LIMIT @jtStartIndex,@jtPageSize";
                     cmd.Parameters.AddWithValue("@searchText", productName + '%');
                     cmd.Parameters.AddWithValue("@store_id", storeId);

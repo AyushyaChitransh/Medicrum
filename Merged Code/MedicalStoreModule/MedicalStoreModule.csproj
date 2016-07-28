@@ -72,6 +72,7 @@
     <Content Include="assets\js\lib\login\login.js" />
     <Content Include="assets\js\lib\login\ResetPassword.js" />
     <Content Include="assets\js\lib\product_model\combo_box.js" />
+    <Content Include="assets\js\lib\stock_product\combo_box.js" />
     <Content Include="assets\js\lib\User\user_profile.js" />
     <Content Include="CustomerList.aspx" />
     <Content Include="Login.aspx" />

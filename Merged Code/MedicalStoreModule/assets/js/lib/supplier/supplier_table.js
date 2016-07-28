@@ -94,11 +94,7 @@ altair_crud_table = {
                 deleteAction: '/SupplierList.aspx/DeleteSupplier'
             },
             fields: {
-                contactPersonName: {
-                    title: 'Supplier Name',
-                    edit: true,
-                    list: false
-                },
+                
                 supplierId: {
                     key: true,
                     edit: false,
@@ -106,15 +102,20 @@ altair_crud_table = {
                 },
                 storeId: {
                     title: 'Store Id',
-                    width: '25%',
                     edit: false,
                     list: false
                 },
                 supplierStoreName: {
                     title: 'Supplier Store Name',
-                    width: '25%',
+                    width: '15%',
                     edit: true,
                     list: true
+                },
+                contactPersonName: {
+                    title: 'Supplier Name',
+                    edit: true,
+                    sorting: false,
+                    width: '15%'
                 },
                 address: {
                     title:'Address',
@@ -122,9 +123,10 @@ altair_crud_table = {
                     list: false
                 },
                 district: {
-                    title:'District',
+                    title:'City',
                     edit: true,
-                    list: false
+                    sorting: false,
+                    width: '15%'
                 },
                 state: {
                     title:'State',
@@ -151,7 +153,8 @@ altair_crud_table = {
                     title: 'Email',
                     type: 'email',
                     edit: true,
-                    list: false
+                    sorting: false,
+                    width: '15%'
                 },
                 phoneNumber: {
                     title: 'Phone Number',
@@ -160,10 +163,11 @@ altair_crud_table = {
                     list: false
                 },
                 mobile: {
-                    title: 'Mobile',
+                    title: 'Mobile Number',
                     type:'phone',
                     edit: true,
-                    list: false
+                    sorting: false,
+                    width: '15%'
                 },
                 website: {
                     title: 'Website',
