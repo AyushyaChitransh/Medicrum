@@ -102,13 +102,12 @@ altair_crud_table = {
                 },
                 productModelId: {
                     title: 'Product Name',
-                    width: '20%',
+                    width: '15%',
                     options: '/ProductList.aspx/GetProductModelOptions'
                 },
                 supplierId: {
                     title: 'Supplier Name',
-                    width: '20%',
-                    sorting: false,
+                    width: '15%',
                     options: '/ProductList.aspx/GetSupplierOptions'
                 },
                 barcode: {
@@ -130,7 +129,7 @@ altair_crud_table = {
                     sorting: false,
                     type: 'date',
                     displayFormat: 'dd-mm-yy',
-                    width: '20%'
+                    width: '15%',
                 },
                 packageQuantity: {
                     title: 'Package Quantity',
@@ -154,11 +153,17 @@ altair_crud_table = {
                 },
                 quantity: {
                     title: 'Quantity',
-                    list: false
+                    sorting: false,
+                    width: '15%',
                 },
                 tax: {
                     title: 'Tax',
                     list: false
+                },
+                shelf: {
+                    title: 'Shelf',
+                    sorting: false,
+                    width: '15%',
                 },
                 status: {
                     title: 'Status',
@@ -170,7 +175,7 @@ altair_crud_table = {
                     width: '1%',
                     sorting: false,
                     edit: false,
-                    options: { '1': '<span class="uk-badge uk-badge-success">&nbsp&nbsp&nbsp&nbspIn stock&nbsp&nbsp&nbsp&nbsp</span>', '0': '<span class="uk-badge uk-badge-danger">Out of stock</span>' }
+                    options: { '2': '<span class="uk-badge uk-badge-warning">Emergency Stock</span>', '1': '<span class="uk-badge uk-badge-success">&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbspIn Stock&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp</span>', '0': '<span class="uk-badge uk-badge-danger">&nbsp&nbsp&nbsp&nbspOut of Stock&nbsp&nbsp&nbsp&nbsp&nbsp</span>' }
                 },
                 viewButton: {
                     width: '1%',

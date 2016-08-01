@@ -103,7 +103,7 @@ altair_crud_table = {
                 userName: {
                     key: true,
                     title: 'User Name',
-                    width: '20%',
+                    width: '15%',
                     edit: false,
                     sorting: false,
                     list: true
@@ -127,13 +127,15 @@ altair_crud_table = {
                     title: 'Email',
                     type: 'email',
                     edit: true,
-                    list: false
+                    sorting: false,
+                    width: '15%'
                 },
                 phoneNumber: {
                     title: 'Phone Number',
                     type: 'phone',
                     edit: true,
-                    list: false
+                    sorting: false,
+                    width: '15%'
                 },
                 address: {
                     title: 'Address',

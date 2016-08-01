@@ -51,7 +51,7 @@ namespace MedicalStoreModule
         public static object GetSupplierOptions()
         {
             DAOStockProduct accessStockProductdb = new DAOStockProduct();
-            return accessStockProductdb.GetSupplierOptions(storeId);
+            return accessStockProductdb.GetSupplierComboOptions(storeId);
         }
     }
 }

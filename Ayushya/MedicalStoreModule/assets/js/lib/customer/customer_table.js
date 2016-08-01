@@ -106,7 +106,7 @@ altair_crud_table = {
                 },
                 customerName: {
                     title: 'Customer Name',
-                    width: '25%',
+                    width: '15%',
                     edit: true,
                     list: true
                 },
@@ -121,9 +121,10 @@ altair_crud_table = {
                     list: false
                 },
                 district: {
-                    title: 'District',
+                    title: 'Cty',
                     edit: true,
-                    list: false
+                    sorting: false,
+                    width: '15%'
                 },
                 state: {
                     title: 'State',
@@ -145,19 +146,22 @@ altair_crud_table = {
                     title: 'Phone Number',
                     type: 'phone',
                     edit: true,
-                    list: false
+                    sorting: false,
+                    width: '15%'
                 },
                 mobile: {
-                    title: 'Mobile',
+                    title: 'Mobile Number',
                     type: 'phone',
                     edit: true,
-                    list: false
+                    sorting: false,
+                    width: '15%'
                 },
                 email: {
                     title: 'Email',
                     type: 'email',
                     edit: true,
-                    list: false
+                    sorting: false,
+                    width: '15%'
                 },
                 dateOfBirth: {
                     title: 'Birth Date',

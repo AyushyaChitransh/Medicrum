@@ -102,7 +102,7 @@ altair_crud_table = {
                 },
                 productName: {
                     title: 'Product Name',
-                    width: '50%'
+                    width: '20%'
                 },
                 tradeName: {
                     title: 'Trade Name',
@@ -110,11 +110,13 @@ altair_crud_table = {
                 },
                 company: {
                     title: 'Company',
-                    list: false
+                    sorting: false,
+                    width: '20%'
                 },
                 category: {
                     title: 'Category',
-                    list: false
+                    sorting: false,
+                    width: '20%'
                 },
                 subCategory: {
                     title: 'Sub Category',
@@ -122,7 +124,8 @@ altair_crud_table = {
                 },
                 type: {
                     title: 'Type',
-                    list: false
+                    sorting: false,
+                    width: '20%'
                 },
                 schedule: {
                     title: 'Schedule',

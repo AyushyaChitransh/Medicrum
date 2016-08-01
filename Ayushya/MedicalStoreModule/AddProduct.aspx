@@ -19,6 +19,10 @@
     <link rel="stylesheet" href="assets/icons/flags/flags.min.css" media="all" />
     <!-- altair admin -->
     <link rel="stylesheet" href="assets/css/main.min.css" media="all" />
+    <!-- additional styles for plugins -->
+    <!-- kendo UI -->
+    <link rel="stylesheet" href="bower_components/kendo-ui/styles/kendo.common-material.min.css"/>
+    <link rel="stylesheet" href="bower_components/kendo-ui/styles/kendo.material.min.css"/>
 </head>
 <body class=" sidebar_main_open sidebar_main_swipe">
 
@@ -39,63 +43,65 @@
                                 <div class="uk-grid" data-uk-grid-margin="data-uk-grid-margin">
                                     <div class="uk-width-medium-1-2 parsley-row">
                                         <label for="wizard_product_model_id">Product Model<span class="req">*</span></label>
-                                        <select id="wizard_product_model_id" name="productModelId" class="md-input label-fixed" required="required">
-                                        </select>
+                                        <input type="text" id="wizard_product_model_id" name="productModelId" style="width:100%" required="required" data-uk-tooltip="{cls:'long-text',pos:'bottom'}" title="Name of product" />
                                     </div>
                                     <div class="uk-width-medium-1-2 parsley-row">
                                         <label for="wizard_supplier_id">Supplier<span class="req">*</span></label>
-                                        <select id="wizard_supplier_id" name="supplierId" class="md-input label-fixed" required="required">
-                                        </select>
+                                        <input type="text" id="wizard_supplier_id" name="supplierId" style="width:100%" required="required" data-uk-tooltip="{cls:'long-text',pos:'bottom'}" title="Supplier store name | Contact person name" />
                                     </div>
                                 </div>
                                 <div class="uk-grid" data-uk-grid-margin="data-uk-grid-margin">
                                     <div class="uk-width-medium-1-5 parsley-row">
                                         <label for="wizard_barcode">Barcode</label>
-                                        <input type="number" name="barcode" id="wizard_barcode" class="md-input" />
+                                        <input type="number" name="barcode" id="wizard_barcode" class="md-input" data-uk-tooltip="{cls:'long-text',pos:'bottom'}" title="Barcode of product" />
                                     </div>
                                     <div class="uk-width-medium-1-5 parsley-row">
                                         <label for="wizard_batch_number">Batch Number<span class="req">*</span></label>
-                                        <input type="text" name="batchNumber" id="wizard_batch_number" required="required" class="md-input" />
+                                        <input type="text" name="batchNumber" id="wizard_batch_number" required="required" class="md-input" data-uk-tooltip="{cls:'long-text',pos:'bottom'}" title="Batch number of product" />
                                     </div>
                                     <div class="uk-width-medium-1-5 parsley-row">
                                         <label for="wizard_package_quantity">Package Quantity<span class="req">*</span></label>
-                                        <input type="number" name="packageQuantity" id="wizard_package_quantity" required="required" class="md-input" />
+                                        <input type="number" name="packageQuantity" id="wizard_package_quantity" required="required" class="md-input" data-uk-tooltip="{cls:'long-text',pos:'bottom'}" title="Package quantity of product" />
                                     </div>
                                     <div class="uk-width-medium-1-5 parsley-row">
                                         <label for="wizard_quantity">Quantity<span class="req">*</span></label>
-                                        <input type="number" name="quantity" id="wizard_quantity" required="required" class="md-input" />
+                                        <input type="number" name="quantity" id="wizard_quantity" required="required" class="md-input" data-uk-tooltip="{cls:'long-text',pos:'bottom'}" title="Quantity of product" />
                                     </div>
                                     <div class="uk-width-medium-1-5 parsley-row">
                                         <label for="wizard_price">Price<span class="req">*</span></label>
-                                        <input type="number" step="any" name="price" id="wizard_price" required="required" class="md-input" />
+                                        <input type="number" step="any" name="price" id="wizard_price" required="required" class="md-input" data-uk-tooltip="{cls:'long-text',pos:'bottom'}" title="Price of product" />
                                     </div>
                                 </div>
                                 <div class="uk-grid" data-uk-grid-margin="data-uk-grid-margin">
                                     <div class="uk-width-medium-1-2 parsley-row">
                                         <label for="wizard_manufacture_date">Manufacture Date<span class="req">*</span></label>
-                                        <input type="text" name="manufactureDate" id="wizard_manufacture_date" required="required" class="md-input" data-parsley-date="data-parsley-date" data-parsley-date-message="This value should be a valid date" data-uk-datepicker="{format:'MM.DD.YYYY'}" />
+                                        <input type="text" name="manufactureDate" id="wizard_manufacture_date" required="required" class="md-input" data-parsley-date="data-parsley-date" data-parsley-date-message="This value should be a valid date" data-uk-datepicker="{format:'MM.DD.YYYY'}" readonly="readonly" data-uk-tooltip="{cls:'long-text',pos:'bottom'}" title="Manufacturing date of product" />
                                     </div>
                                     <div class="uk-width-medium-1-2 parsley-row">
                                         <label for="wizard_expiry_date">Expiry Date<span class="req">*</span></label>
-                                        <input type="text" name="expiryDate" id="wizard_expiry_date" required="required" class="md-input" data-parsley-date="data-parsley-date" data-parsley-date-message="This value should be a valid date" data-uk-datepicker="{format:'MM.DD.YYYY'}" />
+                                        <input type="text" name="expiryDate" id="wizard_expiry_date" required="required" class="md-input" data-parsley-date="data-parsley-date" data-parsley-date-message="This value should be a valid date" data-uk-datepicker="{format:'MM.DD.YYYY'}" readonly="readonly" data-uk-tooltip="{cls:'long-text',pos:'bottom'}" title="Expiry date of product" />
                                     </div>
                                 </div>
                                 <div class="uk-grid" data-uk-grid-margin="data-uk-grid-margin">
-                                    <div class="uk-width-medium-1-4 parsley-row">
-                                        <label for="wizard_manufacture_licence_number">Manufacture Licence Number</label>
-                                        <input type="text" name="manufactureLicenceNumber" id="wizard_manufacture_licence_number" class="md-input" />
+                                    <div class="uk-width-medium-1-5 parsley-row">
+                                        <label for="wizard_manufacture_licence_number">Manufacture Licence</label>
+                                        <input type="text" name="manufactureLicenceNumber" id="wizard_manufacture_licence_number" class="md-input" data-uk-tooltip="{cls:'long-text',pos:'bottom'}" title="Manufacturing licence number of product" />
                                     </div>
-                                    <div class="uk-width-medium-1-4 parsley-row">
+                                    <div class="uk-width-medium-1-5 parsley-row">
                                         <label for="wizard_weight">Weight</label>
-                                        <input type="number" step="any" name="weight" id="wizard_weight" class="md-input" />
+                                        <input type="number" step="any" name="weight" id="wizard_weight" class="md-input" data-uk-tooltip="{cls:'long-text',pos:'bottom'}" title="Weight of product" />
                                     </div>
-                                    <div class="uk-width-medium-1-4 parsley-row">
+                                    <div class="uk-width-medium-1-5 parsley-row">
                                         <label for="wizard_volume">Volume</label>
-                                        <input type="number" step="any" name="volume" id="wizard_volume" class="md-input" />
+                                        <input type="number" step="any" name="volume" id="wizard_volume" class="md-input" data-uk-tooltip="{cls:'long-text',pos:'bottom'}" title="Volume of product" />
                                     </div>
-                                    <div class="uk-width-medium-1-4 parsley-row">
+                                    <div class="uk-width-medium-1-5 parsley-row">
                                         <label for="wizard_tax">Tax</label>
-                                        <input type="number" step="any" name="tax" id="wizard_tax" class="md-input" />
+                                        <input type="number" step="any" name="tax" id="wizard_tax" class="md-input" data-uk-tooltip="{cls:'long-text',pos:'bottom'}" title="Tax if any" />
+                                    </div>
+                                    <div class="uk-width-medium-1-5 parsley-row">
+                                        <label for="wizard_shelf">Shelf</label>
+                                        <input type="text" name="shelf" id="wizard_shelf" class="md-input" data-uk-tooltip="{cls:'long-text',pos:'bottom'}" title="Shelf where product will be placed" />
                                     </div>
                                 </div>
                                 <br />
@@ -144,6 +150,8 @@
     <uc1:StyleSwitcher runat="server" ID="StyleSwitcher1" />
 
     <!-- page specific plugins -->
+    <!-- kendo UI -->
+    <script src="assets/js/kendoui_custom.min.js"></script>
     <!-- parsley (validation) -->
     <script>
         // load parsley config (altair_admin_common.js)
@@ -156,7 +164,7 @@
     <script src="assets/js/custom/wizard_steps.min.js"></script>
 
     <!-- Page function scripts -->
-    <script src="assets/js/lib/stock_product/load_add_product_data.js"></script>
+    <script src="assets/js/lib/stock_product/combo_box.js"></script>
     <script src="assets/js/lib/notification.js"></script>
     <script src="assets/js/lib/stock_product/add_product.js"></script>
 
