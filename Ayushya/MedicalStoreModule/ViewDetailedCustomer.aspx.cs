@@ -18,7 +18,7 @@ namespace MedicalStoreModule
         {
             if (Session["customerId"] == null || !int.TryParse(Session["customerId"].ToString(), out customerId))
             {
-                Response.Redirect("Error.aspx");
+                Response.Redirect("CustomerList.aspx");
             }
             Session["customerId"] = "";
         }

@@ -19,6 +19,7 @@
     <IISExpressAnonymousAuthentication />
     <IISExpressWindowsAuthentication />
     <IISExpressUseClassicPipelineMode />
+    <UseGlobalApplicationHostFile />
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
     <DebugSymbols>true</DebugSymbols>
@@ -5337,6 +5338,7 @@
     <Compile Include="App_Code\Model\Invoice.cs" />
     <Compile Include="App_Code\Model\InvoiceTax.cs" />
     <Compile Include="App_Code\Utility\InvoiceJson.cs" />
+    <Compile Include="App_Code\Utility\StringCipher.cs" />
     <Compile Include="CustomerList.aspx.cs">
       <DependentUpon>CustomerList.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>

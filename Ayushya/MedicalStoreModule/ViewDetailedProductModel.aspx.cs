@@ -17,7 +17,7 @@ namespace MedicalStoreModule
         {
             if (Session["productModelId"] == null || !int.TryParse(Session["productModelId"].ToString(), out productModelId))
             {
-                Response.Redirect("Error.aspx");
+                Response.Redirect("ProductModelList.aspx");
             }
             Session["productModelId"] = "";
         }

@@ -17,7 +17,7 @@ namespace MedicalStoreModule
         {
             if (Session["userId"] == null)
             {
-                Response.Redirect("Error.aspx");
+                Response.Redirect("UserList.aspx");
             }
             else
             {
