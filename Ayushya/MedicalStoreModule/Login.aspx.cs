@@ -1,5 +1,6 @@
 ﻿using MedicalStoreModule.App_Code.DAO;
 using MedicalStoreModule.App_Code.Model;
+using MedicalStoreModule.App_Code.Utility;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -16,21 +17,33 @@ namespace MedicalStoreModule
     {
         protected void Page_Load(object sender, EventArgs e)
         {
-            if (!IsPostBack)
+            if (Request.Cookies["LoginData"] != null)
             {
-                Session["storeId"] = 1;
-                Session["userName"] = "ravi.jain";
+                string encryptedLoginData = Request.Cookies["LoginData"].Value;
+                try
+                {
+                    string[] decryptedLoginData = StringCipher.Decrypt(encryptedLoginData).Split(',');
+                    Session["storeId"] = decryptedLoginData[0];
+                    Session["userName"] = decryptedLoginData[1];
+                    Response.Redirect("~/Dashboard");
+                }
+                catch (Exception)
+                {
+                    Response.Cookies["LoginData"].Expires = DateTime.Now.AddDays(-1);
+                    Response.Redirect("~/Login.aspx");
+                }
+            }
+            else
+            {
                 if (Session["storeId"] != null && Session["userName"] != null)
                 {
-                    //Response.Write(@"<script>if(window.confirm('Use existing login?!')){window.location.href='Dashboard.aspx';}</script>");
                     Response.Write(@"<script>window.location.href='Dashboard.aspx';</script>");
                 }
             }
         }
 
-
         [WebMethod]
-        public static bool VerifyCredentials(string email, string password)
+        public static bool LoginButtonClicked(string email, string password, bool rememberMe)
         {
             DAOLogin accessLogindb = new DAOLogin();
             User user = accessLogindb.VerifyUser(email, password);
@@ -38,6 +51,13 @@ namespace MedicalStoreModule
             {
                 HttpContext.Current.Session["storeId"] = user.storeId;
                 HttpContext.Current.Session["userName"] = user.userName;
+                if (rememberMe)
+                {
+                    HttpCookie cookie = new HttpCookie("LoginData");
+                    cookie.Value = StringCipher.Encrypt(user.storeId + "," + user.userName);
+                    cookie.Expires = DateTime.Now.AddDays(30);
+                    HttpContext.Current.Response.Cookies.Add(cookie);
+                }
                 return true;
             }
             else
@@ -50,6 +70,7 @@ namespace MedicalStoreModule
         public static void Logout()
         {
             HttpContext.Current.Session.Abandon();
+            HttpContext.Current.Response.Cookies["LoginData"].Expires = DateTime.Now.AddDays(-1);
         }
 
         [WebMethod]
