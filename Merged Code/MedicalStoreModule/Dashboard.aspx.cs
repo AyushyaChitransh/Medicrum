@@ -1,4 +1,6 @@
-﻿using System;
+﻿using MedicalStoreModule.App_Code.DAO;
+using MedicalStoreModule.App_Code.Model;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Web;
@@ -23,6 +25,11 @@ namespace MedicalStoreModule
                 else
                 {
                     Response.Redirect("Login.aspx");
+                }
+                DAOUserPrivileges accessUserPrivilegesDB = new DAOUserPrivileges();
+                if (!accessUserPrivilegesDB.CheckForAdminRole(userName))
+                {
+                    Response.Write("<script>alert('you are not admin');</script>");
                 }
             }
         }

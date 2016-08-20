@@ -19,7 +19,8 @@ namespace MedicalStoreModule
             if (!IsPostBack)
             {
                 Session["storeId"] = 1;
-                Session["userName"] = "ravi.jain";
+                Session["userName"] = "rohit";
+                //Session["userName"] = "rohit2";
                 if (Session["storeId"] != null && Session["userName"] != null)
                 {
                     //Response.Write(@"<script>if(window.confirm('Use existing login?!')){window.location.href='Dashboard.aspx';}</script>");

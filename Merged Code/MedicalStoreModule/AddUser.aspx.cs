@@ -13,6 +13,7 @@ namespace MedicalStoreModule
     public partial class AddUser : System.Web.UI.Page
     {
         private static int storeId;
+        private static string userName;
         protected void Page_Load(object sender, EventArgs e)
         {
             if (!IsPostBack)
@@ -20,23 +21,29 @@ namespace MedicalStoreModule
                 if (Session["storeId"] != null && Session["userName"] != null)
                 {
                     storeId = int.Parse(Session["storeId"].ToString());
+                    userName = Session["userName"].ToString();
                 }
                 else
                 {
                     Response.Redirect("Login.aspx");
                 }
+                DAOUserPrivileges accessUserPrivilegesDB = new DAOUserPrivileges();
+                if (!accessUserPrivilegesDB.CheckForAdminRole(userName))
+                {
+                    Response.Write("<script>alert('Only Store admin can access this page! You will be redirected to Dashboard'); window.location='Dashboard.aspx'</script>");
+                }
             }
         }
 
         [WebMethod]
-        public static bool InsertUser(User data)
+        public static bool InsertUser(User data, UserPrivileges userPrivileges)
         {
             data.storeId = storeId;
             data.storeStatus = 1;
             data.status = 1;
             data.deleteStatus = 0;
             DAOUser accessUserdb = new DAOUser();
-            return accessUserdb.InsertUser(data);
+            return accessUserdb.InsertUser(data,userPrivileges);
         }
 
         [WebMethod]

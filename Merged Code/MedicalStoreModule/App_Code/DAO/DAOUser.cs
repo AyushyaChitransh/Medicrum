@@ -95,7 +95,29 @@ namespace MedicalStoreModule.App_Code.DAO
                                           @address,
                                           @store_status,
                                           @status,
-                                          @delete_status)";
+                                          @delete_status);
+                        INSERT INTO user_privileges
+                                        (user_name,
+                                        add_product_model,
+                                        view_product_model,
+                                        add_product,
+                                        view_product,
+                                        add_supplier,
+                                        view_supplier,
+                                        invoice,
+                                        add_customer,
+                                        view_customer)
+                                VALUES
+                                        (@user_name,
+                                        @add_product_model,
+                                        @view_product_model,
+                                        @add_product,
+                                        @view_product,
+                                        @add_supplier,
+                                        @view_supplier,
+                                        @invoice,
+                                        @add_customer,
+                                        @view_customer)";
             MySqlCommand cmd = new MySqlCommand(qry, cm.connection);
             cmd.Parameters.AddWithValue("@user_name", record.userName);
             cmd.Parameters.AddWithValue("@name", record.name);
@@ -108,6 +130,105 @@ namespace MedicalStoreModule.App_Code.DAO
             cmd.Parameters.AddWithValue("@store_status", record.storeStatus);
             cmd.Parameters.AddWithValue("@status", record.status);
             cmd.Parameters.AddWithValue("@delete_status", record.deleteStatus);
+            cmd.Parameters.AddWithValue("@add_product_model", 1);
+            cmd.Parameters.AddWithValue("@view_product_model", 1);
+            cmd.Parameters.AddWithValue("@add_product", 1);
+            cmd.Parameters.AddWithValue("@view_product", 1);
+            cmd.Parameters.AddWithValue("@add_supplier", 1);
+            cmd.Parameters.AddWithValue("@view_supplier", 1);
+            cmd.Parameters.AddWithValue("@invoice", 1);
+            cmd.Parameters.AddWithValue("@add_customer", 1);
+            cmd.Parameters.AddWithValue("@view_customer", 1);
+            try
+            {
+                if (cm.OpenConnection())
+                {
+                    cmd.ExecuteNonQuery();
+                    cm.CloseConnection();
+                    return true;
+                }
+                else
+                {
+                    return false;
+                }
+            }
+            catch (Exception ex)
+            {
+                cm.CloseConnection();
+                string message = ex.Message;
+                return false;
+            }
+        }
+
+        public bool InsertUser(User record, UserPrivileges privileges)
+        {
+            string qry = @"INSERT INTO user
+                                          (user_name,
+                                          name,
+                                          role,
+                                          store_id,
+                                          password,
+                                          email,
+                                          phone_number,
+                                          address,
+                                          store_status,
+                                          status,
+                                          delete_status)
+                                  VALUES
+                                          (@user_name,
+                                          @name,
+                                          @role,
+                                          @store_id,
+                                          @password,
+                                          @email,
+                                          @phone_number,
+                                          @address,
+                                          @store_status,
+                                          @status,
+                                          @delete_status);
+                        INSERT INTO user_privileges
+                                        (user_name,
+                                        add_product_model,
+                                        view_product_model,
+                                        add_product,
+                                        view_product,
+                                        add_supplier,
+                                        view_supplier,
+                                        invoice,
+                                        add_customer,
+                                        view_customer)
+                                VALUES
+                                        (@user_name,
+                                        @add_product_model,
+                                        @view_product_model,
+                                        @add_product,
+                                        @view_product,
+                                        @add_supplier,
+                                        @view_supplier,
+                                        @invoice,
+                                        @add_customer,
+                                        @view_customer)";
+            MySqlCommand cmd = new MySqlCommand(qry, cm.connection);
+            cmd.Parameters.AddWithValue("@user_name", record.userName);
+            cmd.Parameters.AddWithValue("@name", record.name);
+            cmd.Parameters.AddWithValue("@role", record.role);
+            cmd.Parameters.AddWithValue("@store_id", record.storeId);
+            cmd.Parameters.AddWithValue("@password", record.password);
+            cmd.Parameters.AddWithValue("@email", record.email);
+            cmd.Parameters.AddWithValue("@phone_number", record.phoneNumber);
+            cmd.Parameters.AddWithValue("@address", record.address);
+            cmd.Parameters.AddWithValue("@store_status", record.storeStatus);
+            cmd.Parameters.AddWithValue("@status", record.status);
+            cmd.Parameters.AddWithValue("@delete_status", record.deleteStatus);
+            cmd.Parameters.AddWithValue("@add_product_model", privileges.addProductModel);
+            cmd.Parameters.AddWithValue("@view_product_model", privileges.viewProductModel);
+            cmd.Parameters.AddWithValue("@add_product", privileges.addProduct);
+            cmd.Parameters.AddWithValue("@view_product", privileges.viewProduct);
+            cmd.Parameters.AddWithValue("@add_supplier", privileges.addSupplier);
+            cmd.Parameters.AddWithValue("@view_supplier", privileges.viewSupplier);
+            cmd.Parameters.AddWithValue("@invoice", privileges.invoice);
+            cmd.Parameters.AddWithValue("@add_customer", privileges.addCustomer);
+            cmd.Parameters.AddWithValue("@view_customer", privileges.viewCustomer);
             try
             {
                 if (cm.OpenConnection())

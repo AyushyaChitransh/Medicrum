@@ -16,8 +16,9 @@ namespace MedicalStoreModule.App_Code.DAO
         #region DAO
         public ConnectionManager()
         {
-            string MyConn = ConfigurationManager.ConnectionStrings["ConnectionString"].ConnectionString;
+            //string MyConn = ConfigurationManager.ConnectionStrings["ConnectionString"].ConnectionString;
             //string MyConn = "Database=hungasty_medicrum_dev;Data Source=localhost;User Id=root;Password=root";
+            string MyConn = "Database=hungasty_medicrum_dev;Data Source=localhost;User Id=root;Password=abcd1234#";
             connection = new MySqlConnection(MyConn);
         }
 

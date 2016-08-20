@@ -5334,8 +5334,10 @@
     </Compile>
     <Compile Include="App_Code\DAO\DAOInvoice.cs" />
     <Compile Include="App_Code\DAO\DAOLogin.cs" />
+    <Compile Include="App_Code\DAO\DAOUserPrivileges.cs" />
     <Compile Include="App_Code\Model\Invoice.cs" />
     <Compile Include="App_Code\Model\InvoiceTax.cs" />
+    <Compile Include="App_Code\Model\UserPrivileges.cs" />
     <Compile Include="App_Code\Utility\InvoiceJson.cs" />
     <Compile Include="CustomerList.aspx.cs">
       <DependentUpon>CustomerList.aspx</DependentUpon>

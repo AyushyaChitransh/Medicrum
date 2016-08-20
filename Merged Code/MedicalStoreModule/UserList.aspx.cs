@@ -27,6 +27,11 @@ namespace MedicalStoreModule
                 {
                     Response.Redirect("Login.aspx");
                 }
+                DAOUserPrivileges accessUserPrivilegesDB = new DAOUserPrivileges();
+                if (!accessUserPrivilegesDB.CheckForAdminRole(userName))
+                {
+                    Response.Write("<script>alert('Only Store admin can access this page! You will be redirected to Dashboard'); window.location='Dashboard.aspx'</script>");
+                }
             }
         }
 
