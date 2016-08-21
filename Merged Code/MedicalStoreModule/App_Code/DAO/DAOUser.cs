@@ -428,6 +428,36 @@ namespace MedicalStoreModule.App_Code.DAO
             }
         }
 
+        public bool EditUserDetails(string userName, string name, string address, string number)
+        {
+            try
+            {
+                if (cm.OpenConnection() == true)
+                {
+                    string qry = @"UPDATE user SET
+                                          name=@name,
+                                          phone_number=@phone_number,
+                                          address=@address
+                                        WHERE 
+                                          user_name=@user_name";
+                    MySqlCommand cmd = new MySqlCommand(qry, cm.connection);
+                    cmd.Parameters.AddWithValue("@user_name", userName);
+                    cmd.Parameters.AddWithValue("@name", name);
+                    cmd.Parameters.AddWithValue("@phone_number", number);
+                    cmd.Parameters.AddWithValue("@address", address);
+                    cmd.ExecuteNonQuery();
+                    cm.CloseConnection();
+                }
+                return true;
+            }
+            catch (Exception ex)
+            {
+                cm.CloseConnection();
+                string msg = ex.Message;
+                return false;
+            }
+        }
+
         #region Password Reset
         public bool AddResetCode(string email, string resetPasswordCode)
         {

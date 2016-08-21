@@ -19,6 +19,10 @@
     <link rel="stylesheet" href="assets/icons/flags/flags.min.css" media="all" />
     <!-- altair admin -->
     <link rel="stylesheet" href="assets/css/main.min.css" media="all" />
+    <!-- additional styles for plugins -->
+    <!-- kendo UI -->
+    <link rel="stylesheet" href="bower_components/kendo-ui/styles/kendo.common-material.min.css"/>
+    <link rel="stylesheet" href="bower_components/kendo-ui/styles/kendo.material.min.css"/>
 </head>
 <body class=" sidebar_main_open sidebar_main_swipe header_double_height">
 
@@ -200,7 +204,7 @@
         <form action="" class="uk-form-stacked" id="form_invoice">
             <div class="md-card-toolbar">
                 <div class="md-card-toolbar-actions">
-                    <i class="md-icon material-icons" id="invoice_submit" onclick="AddInvoice()" data-uk-tooltip="{cls:'long-text',pos:'bottom'}" title="View Invoice">save</i>
+                    <i class="md-icon material-icons" id="invoice_submit" onclick="AddInvoice()" data-uk-tooltip="{cls:'long-text',pos:'bottom'}" title="Add Invoice">save</i>
                 </div>
                 <label class="md-card-toolbar-input">Invoice </label>
                 <input name="invoiceNumber" id="invoice_number" class="md-card-toolbar-input" type="text" placeholder="Invoice number" readonly="readonly" />
@@ -209,8 +213,8 @@
                 <div class="uk-grid" data-uk-grid-margin="data-uk-grid-margin">
                     <div class="uk-width-9-10">
                         <label for="form_customer">Customer<span class="req">*</span></label>
-                        <select class="md-input label-fixed" id="invoice_form_customer" name="customerId" data-uk-tooltip="{cls:'long-text',pos:'top'}" title="Name | Contact">
-                        </select>
+                        <select id="invoice_form_customer" name="customerId" style="width:100%" data-uk-tooltip="{cls:'long-text',pos:'top'}" title="Name | Contact">
+                        </select>                                
                     </div>
                     <div class="uk-width-1-10">
                         <i class="md-icon material-icons" id="invoice_add_customer" onclick="AddCustomer()" data-uk-tooltip="{cls:'long-text',pos:'bottom'}" title="Add Customer">add</i>
@@ -299,7 +303,7 @@
                 <div class="uk-grid uk-grid-small" data-uk-grid-margin="data-uk-grid-margin">
                     <div class="uk-width-medium-4-10">
                         <label for="inv_medicine_{{invoice_medicine_id}}">Product Name<span class="req">*</span></label>
-                        <select class="md-input label-fixed" id="inv_medicine_{{invoice_medicine_id}}" name="billingItems[{{invoice_medicine_id}}][productId]" required="required" data-uk-tooltip="{cls:'long-text',pos:'bottom'}" title="Name | Batch" onchange="GetUnitPrice({{invoice_medicine_id}})">
+                        <select id="inv_medicine_{{invoice_medicine_id}}" name="billingItems[{{invoice_medicine_id}}][productId]" style="width:100%" required="required" data-uk-tooltip="{cls:'long-text',pos:'bottom'}" title="Name | Batch" onchange="GetUnitPrice({{invoice_medicine_id}})">
                         </select>
                     </div>
                     <div class="uk-width-medium-2-10">
@@ -350,6 +354,8 @@
     <uc1:StyleSwitcher runat="server" ID="StyleSwitcher" />
 
     <!-- page specific plugins -->
+    <!-- kendo UI -->
+    <script src="assets/js/kendoui_custom.min.js"></script>
     <!-- handlebars.js -->
     <script src="bower_components/handlebars/handlebars.min.js"></script>
     <script src="assets/js/custom/handlebars_helpers.min.js"></script>

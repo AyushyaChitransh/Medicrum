@@ -30,7 +30,7 @@
 
     <div id="page_content">
         <div id="page_content_inner">
-            <h2 class="heading_b uk-margin-bottom">Add Product</h2>
+            <h2 class="heading_b uk-margin-bottom">Add Product Model</h2>
             <div class="md-card uk-margin-large-bottom">
                 <div class="md-card-content">
                     <form class="uk-form-stacked" id="wizard_advanced_form">
