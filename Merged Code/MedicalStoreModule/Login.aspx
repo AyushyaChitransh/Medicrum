@@ -29,7 +29,7 @@
         <div class="md-card" id="login_card">
             <div class="md-card-content large-padding" id="login_form">
                 <div class="login_heading">
-                    <div class="user_avatar"></div>
+                    <div class="uk-align-center"><img src="assets/img/MedicrumLogo2-1.png"></div>
                 </div>
                 <form>
                     <div class="uk-form-row">
@@ -40,8 +40,15 @@
                         <label for="login_password">Password</label>
                         <input class="md-input" type="password" id="login_password" name="login_password" required="required" value="abcd" />
                     </div>
-                    <div class="uk-margin-medium-top" id="submit_login_details" onclick="VerifyCredentials()">
+                    <div class="uk-margin-medium-top" id="submit_login_details" onclick="LoginButtonClicked()">
                         <a class="md-btn md-btn-primary md-btn-block md-btn-large">Sign In</a>
+                    </div>
+                    <div class="uk-margin-top">
+                        <a href="#" id="login_help_show" class="uk-float-right">Need help?</a>
+                        <span class="icheck-inline">
+                            <input type="checkbox" name="login_remember_me" id="login_remember_me" data-md-icheck />
+                            <label for="login_remember_me" class="inline-label">Remember Me</label>
+                        </span>
                     </div>
                     <div class="uk-margin-top">
                         <a href="#" id="password_reset_show" class="uk-float-right">Forgot Password</a>

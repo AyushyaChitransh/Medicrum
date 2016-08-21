@@ -29,7 +29,7 @@
         <div class="md-card" id="login_card">
             <div class="md-card-content large-padding" id="login_form">
                 <div class="login_heading">
-                    <div class="user_avatar"></div>
+                    <div class="uk-align-center"><img src="assets/img/MedicrumLogo2-1.png"></div>
                 </div>
                 <form>
                     <div class="uk-form-row">

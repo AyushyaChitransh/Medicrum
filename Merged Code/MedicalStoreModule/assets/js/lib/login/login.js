@@ -42,14 +42,15 @@ altair_login_page = {
     }
 };
 
-function VerifyCredentials() {
+function LoginButtonClicked() {
     var email = document.getElementById('login_username').value;
     var password = document.getElementById('login_password').value;
+    var rememberMe = document.getElementById("login_remember_me").checked;
     $.ajax({
         type: 'POST',
-        url: 'Login.aspx/VerifyCredentials',
+        url: 'Login.aspx/LoginButtonClicked',
         contentType: 'application/json; charset=utf-8',
-        data: "{ 'email': '" + email + "','password': '" + password + "' }",
+        data: "{ 'email': '" + email + "','password': '" + password + "','rememberMe':'" + rememberMe + "' }",
         success: function (response) {
             if (response.d == true) {
                 window.location = "Dashboard.aspx";

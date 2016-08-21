@@ -19,6 +19,7 @@
     <IISExpressAnonymousAuthentication />
     <IISExpressWindowsAuthentication />
     <IISExpressUseClassicPipelineMode />
+    <UseGlobalApplicationHostFile />
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
     <DebugSymbols>true</DebugSymbols>
@@ -5311,7 +5312,9 @@
     <Content Include="ViewDetailedProductModel.aspx" />
     <Content Include="ViewDetailedSupplier.aspx" />
     <Content Include="ViewDetailedUser.aspx" />
-    <Content Include="Web.config" />
+    <Content Include="Web.config">
+      <SubType>Designer</SubType>
+    </Content>
   </ItemGroup>
   <ItemGroup>
     <Compile Include="AddCustomer.aspx.cs">
@@ -5343,6 +5346,7 @@
     <Compile Include="App_Code\Model\InvoiceTax.cs" />
     <Compile Include="App_Code\Model\UserPrivileges.cs" />
     <Compile Include="App_Code\Utility\InvoiceJson.cs" />
+    <Compile Include="App_Code\Utility\StringCipher.cs" />
     <Compile Include="CustomerList.aspx.cs">
       <DependentUpon>CustomerList.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
@@ -5990,7 +5994,7 @@
     <VisualStudio>
       <FlavorProperties GUID="{349c5851-65df-11da-9384-00065b846f21}">
         <WebProjectProperties>
-          <UseIIS>True</UseIIS>
+          <UseIIS>False</UseIIS>
           <AutoAssignPort>True</AutoAssignPort>
           <DevelopmentServerPort>13804</DevelopmentServerPort>
           <DevelopmentServerVPath>/</DevelopmentServerVPath>
