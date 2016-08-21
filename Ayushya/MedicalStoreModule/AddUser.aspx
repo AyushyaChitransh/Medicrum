@@ -46,7 +46,7 @@
                                     <div class="uk-width-medium-1-2 parsley-row">
                                         <label for="wizard_user_name">User Name<span class="req">*</span></label>
                                         <input type="text" name="userName" id="wizard_user_name" data-parsley-trigger="change" required="required" class="md-input" onkeyup="CheckUserName(true)" />
-                                        <span class="md-color-red-600" id="userNameCheck" style="display:none;">User Name already taken.</span>
+                                        <span class="md-color-red-600" id="userNameCheck" style="display: none;">User Name already taken.</span>
                                     </div>
                                     <div class="uk-width-medium-1-2 parsley-row">
                                         <label for="wizard_password">Password<span class="req">*</span></label>
@@ -56,15 +56,56 @@
                                 <div class="uk-grid">
                                     <div class="uk-width-medium-1-2 parsley-row">
                                         <label for="wizard_email">Email</label>
-                                        <input type="email" name="email" id="wizard_email" data-parsley-trigger="change" class="md-input" onkeyup="CheckEmail(true)"/>
-                                        <span class="md-color-red-600" id="emailCheck" style="display:none;">Email ID already registered.</span>
+                                        <input type="email" name="email" id="wizard_email" data-parsley-trigger="change" class="md-input" onkeyup="CheckEmail(true)" />
+                                        <span class="md-color-red-600" id="emailCheck" style="display: none;">Email ID already registered.</span>
                                     </div>
                                     <div class="uk-width-medium-1-2 parsley-row">
                                         <label for="wizard_role">Role<span class="req">*</span></label>
-                                        <select id="wizard_role" name="role" required="required" class="md-input label-fixed">
+                                        <select id="wizard_role" name="role" required="required" class="md-input label-fixed" onchange="call()">
                                             <option value="">Select Role</option>
                                             <option value="1">Admin</option>
+                                            <option value="2">User</option>
                                         </select>
+                                    </div>
+                                    <br />
+                                    <br />
+                                    <div class="uk-width-medium-1-1 parseley-row" id="wizard_privilege" style="display: none;">
+                                        <span class="icheck-inline">
+                                            <input name="addProductModel" type="checkbox" value="1" id="wizard_add_product_model" data-md-icheck="" />
+                                            <label for="wizard_add_product_model" class="inline-label">Add Product Model</label>
+                                        </span>
+                                        <span class="icheck-inline">
+                                            <input name="viewProductModel" type="checkbox" value="1" id="wizard_view_product_model" data-md-icheck="" />
+                                            <label for="wizard_view_product_model" class="inline-label">View Product Model</label>
+                                        </span>
+                                        <span class="icheck-inline">
+                                            <input name="addProduct" type="checkbox" value="1" id="wizard_add_product" data-md-icheck="" />
+                                            <label for="wizard_add_product" class="inline-label">Add Product</label>
+                                        </span>
+                                        <span class="icheck-inline">
+                                            <input name="viewProduct" type="checkbox" value="1" id="wizard_view_product" data-md-icheck="checked" />
+                                            <label for="wizard_view_product" class="inline-label">View Product</label>
+                                        </span>
+                                        <span class="icheck-inline">
+                                            <input name="addSupplier" type="checkbox" value="1" id="wizard_add_supplier" data-md-icheck="checked" />
+                                            <label for="wizard_add_supplier" class="inline-label">Add Supplier</label>
+                                        </span>
+                                        <span class="icheck-inline">
+                                            <input name="viewSupplier" type="checkbox" value="1" id="wizard_view_supplier" data-md-icheck="checked" />
+                                            <label for="wizard_view_supplier" class="inline-label">View Supplier</label>
+                                        </span>
+                                        <span class="icheck-inline">
+                                            <input name="invoice" type="checkbox" value="1" id="wizard_invoice" data-md-icheck="checked" />
+                                            <label for="wizard_invoice" class="inline-label">Invoice</label>
+                                        </span>
+                                        <span class="icheck-inline">
+                                            <input name="addCustomer" type="checkbox" value="1" id="wizard_add_customer" data-md-icheck="checked" />
+                                            <label for="wizard_add_customer" class="inline-label">Add Customer</label>
+                                        </span>
+                                        <span class="icheck-inline">
+                                            <input name="viewCustomer" type="checkbox" value="1" id="wizard_view_customer" data-md-icheck="checked" />
+                                            <label for="wizard_view_customer" class="inline-label">View Customer</label>
+                                        </span>
                                     </div>
                                 </div>
                                 <div class="uk-grid">

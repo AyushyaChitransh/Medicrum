@@ -15,6 +15,7 @@ namespace MedicalStoreModule
     public partial class PageInvoice : System.Web.UI.Page
     {
         private static int storeId;
+        private static string userName;
         protected void Page_Load(object sender, EventArgs e)
         {
             if (!IsPostBack)
@@ -22,10 +23,18 @@ namespace MedicalStoreModule
                 if (Session["storeId"] != null && Session["userName"] != null)
                 {
                     storeId = int.Parse(Session["storeId"].ToString());
+                    userName = Session["userName"].ToString();
                 }
                 else
                 {
                     Response.Redirect("Login.aspx");
+                }
+                DAOUserPrivileges accessUserPrivilegesDB = new DAOUserPrivileges();
+                UserPrivileges privileges = new UserPrivileges();
+                privileges = accessUserPrivilegesDB.GetUserPrivileges(userName);
+                if (privileges.invoice != 1)
+                {
+                    Response.Write("<script>alert('You are not allowed to access this particular page! Contact your store admin for access. You will be redirected to Dashboard'); window.location='Dashboard.aspx';</script>");
                 }
             }
         }
