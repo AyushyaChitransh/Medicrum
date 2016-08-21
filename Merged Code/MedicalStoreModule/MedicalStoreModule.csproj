@@ -65,6 +65,7 @@
     <Content Include="AddProduct.aspx" />
     <Content Include="AddProductModel.aspx" />
     <Content Include="assets\img\MedicrumLogo2-1.png" />
+    <Content Include="assets\js\lib\dashboard\sales_view.js" />
     <Content Include="assets\js\lib\invoice\invoice_functions.js" />
     <Content Include="assets\js\lib\invoice\jquery.serialize-object.min.js" />
     <Content Include="assets\js\lib\invoice\json data.txt" />
@@ -5332,6 +5333,7 @@
     <Compile Include="AddProductModel.aspx.designer.cs">
       <DependentUpon>AddProductModel.aspx</DependentUpon>
     </Compile>
+    <Compile Include="App_Code\DAO\DAODashboard.cs" />
     <Compile Include="App_Code\DAO\DAOInvoice.cs" />
     <Compile Include="App_Code\DAO\DAOLogin.cs" />
     <Compile Include="App_Code\DAO\DAOUserPrivileges.cs" />

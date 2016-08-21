@@ -31,7 +31,7 @@
                 <div class="md-card-content">
                     <div class="uk-grid" data-uk-grid-margin="">
                         <div class="uk-width-medium-4-6">
-                            <h3 class="heading_b uk-margin-bottom">Product List</h3>
+                            <h3 class="heading_b uk-margin-bottom">Product Model List</h3>
                         </div>
                         <br />
                         <div class="uk-width-medium-2-6">

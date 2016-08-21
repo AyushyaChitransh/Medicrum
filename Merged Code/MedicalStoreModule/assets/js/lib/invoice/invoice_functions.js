@@ -56,11 +56,18 @@ function GetCustomerOptions() {
         contentType: "application/json; charset=utf-8",
         dataType: "json",
         success: function (msg) {
-            var product = $("[id*=invoice_form_customer]");
-            product.empty().append('<option selected="selected" value="">Select Customer</option>');
-            $.each(msg.d, function (index, item) {
-                var displayText = item.DisplayText + " | " + item.AdditionalText;
-                $("#invoice_form_customer").get(0).options[index + 1] = new Option(displayText, item.Value);
+            //var product = $("[id*=invoice_form_customer]");
+            //product.empty().append('<option selected="selected" value="">Select Customer</option>');
+            //$.each(msg.d, function (index, item) {
+            //    var displayText = item.DisplayText + " | " + item.AdditionalText;
+            //    $("#invoice_form_customer").get(0).options[index + 1] = new Option(displayText, item.Value);
+            //});
+            $('#invoice_form_customer').kendoComboBox({
+                dataTextField: "DisplayText",
+                dataValueField: "Value",
+                dataSource: msg.d,
+                placeholder: "Select Customer",
+                filter: "contains"
             });
         },
         error: function () {
@@ -77,11 +84,18 @@ function GetProductOptions(id) {
         contentType: "application/json; charset=utf-8",
         dataType: "json",
         success: function (msg) {
-            var product = $("[id*=inv_medicine_" + id + "]");
-            product.empty().append('<option selected="selected" value="">Select Product</option>');
-            $.each(msg.d, function (index, item) {
-                var displayText = item.DisplayText + " | " + item.AdditionalText;
-                $("#inv_medicine_" + id).get(0).options[index + 1] = new Option(displayText, item.Value);
+            //var product = $("[id*=inv_medicine_" + id + "]");
+            //product.empty().append('<option selected="selected" value="">Select Product</option>');
+            //$.each(msg.d, function (index, item) {
+            //    var displayText = item.DisplayText + " | " + item.AdditionalText;
+            //    $("#inv_medicine_" + id).get(0).options[index + 1] = new Option(displayText, item.Value);
+            //});
+            $('#inv_medicine_' + id).kendoComboBox({
+                dataTextField: "DisplayText",
+                dataValueField: "Value",
+                dataSource: msg.d,
+                placeholder: "Select Product",
+                filter: "contains"
             });
         },
         error: function () {
