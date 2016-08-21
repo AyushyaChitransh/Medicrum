@@ -204,7 +204,7 @@
         <form action="" class="uk-form-stacked" id="form_invoice">
             <div class="md-card-toolbar">
                 <div class="md-card-toolbar-actions">
-                    <i class="md-icon material-icons" id="invoice_submit" onclick="AddInvoice()" data-uk-tooltip="{cls:'long-text',pos:'bottom'}" title="View Invoice">save</i>
+                    <i class="md-icon material-icons" id="invoice_submit" onclick="AddInvoice()" data-uk-tooltip="{cls:'long-text',pos:'bottom'}" title="Add Invoice">save</i>
                 </div>
                 <label class="md-card-toolbar-input">Invoice </label>
                 <input name="invoiceNumber" id="invoice_number" class="md-card-toolbar-input" type="text" placeholder="Invoice number" readonly="readonly" />

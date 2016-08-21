@@ -84,5 +84,12 @@ namespace MedicalStoreModule
             }
             return list;
         }
+
+        [WebMethod]
+        public static object GetUserPrivileges()
+        {
+            DAOUserPrivileges accessUserPrivilegesDB = new DAOUserPrivileges();
+            return accessUserPrivilegesDB.GetUserPrivileges(userName);
+        }
     }
 }

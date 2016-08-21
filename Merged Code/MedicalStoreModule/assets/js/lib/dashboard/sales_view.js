@@ -6,8 +6,6 @@
         success: function (response) {
             var arr = response.d;
             if (arr !== false) {
-                alert(arr);
-                console.log(arr);
                 var template = $('#admin_sales_template').html(),
                     template_compiled = Handlebars.compile(template),
                     context = arr,
