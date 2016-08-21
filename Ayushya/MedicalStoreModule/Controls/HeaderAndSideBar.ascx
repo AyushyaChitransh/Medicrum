@@ -41,11 +41,11 @@
                                     <a href="AddSupplier.aspx">
                                         <i class="material-icons md-36">people</i>
                                         <span class="uk-text-muted uk-display-block">Add Supplier</span>
-                                    </a>  
+                                    </a>
                                     <a href="ProductList.aspx">
                                         <i class="material-icons md-36">&#xE8CB;</i>
                                         <span class="uk-text-muted uk-display-block">View Inventory</span>
-                                    </a>                                  
+                                    </a>
                                 </div>
                             </div>
                         </div>
@@ -62,7 +62,6 @@
                         <div class="uk-dropdown uk-dropdown-small">
                             <ul class="uk-nav js-uk-prevent">
                                 <li><a href="UserProfile.aspx">My Account</a></li>
-                                <li><a href="StoreProfile.aspx">Store</a></li>
                                 <li><a href="#" onclick="logout()">Logout</a></li>
                             </ul>
                         </div>

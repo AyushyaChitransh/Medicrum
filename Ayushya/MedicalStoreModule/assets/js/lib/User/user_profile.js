@@ -13,7 +13,10 @@
             var arr = JSON.parse(response.d);
             document.getElementById("user_name").value = arr.userName;
             document.getElementById("name").innerHTML = arr.name;
-            document.getElementById("role").value = arr.role;
+            if(arr.role === 1)
+                document.getElementById("role").value = "Admin";
+            else
+                document.getElementById("role").value = "User";
             document.getElementById("email").value = arr.email;
             document.getElementById("address").value = arr.address;
             document.getElementById("phone_number").value = arr.phoneNumber;

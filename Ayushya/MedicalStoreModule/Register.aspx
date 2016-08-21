@@ -150,7 +150,7 @@
                                         <label for="wizard_country">Country<span class="req">*</span></label>
                                         <select id="wizard_country" name="country" required="required">
                                             <option value="">Select Country</option>
-                                            <option value="Afghanistan">Afghanistan</option>
+                                            <%--<option value="Afghanistan">Afghanistan</option>
                                             <option value="Albania">Albania</option>
                                             <option value="Algeria">Algeria</option>
                                             <option value="American Samoa">American Samoa</option>
@@ -249,9 +249,9 @@
                                             <option value="Honduras">Honduras</option>
                                             <option value="Hong Kong">Hong Kong</option>
                                             <option value="Hungary">Hungary</option>
-                                            <option value="Iceland">Iceland</option>
+                                            <option value="Iceland">Iceland</option>--%>
                                             <option value="India">India</option>
-                                            <option value="Indonesia">Indonesia</option>
+                                            <%--<option value="Indonesia">Indonesia</option>
                                             <option value="Iran">Iran (Islamic Republic of)</option>
                                             <option value="Iraq">Iraq</option>
                                             <option value="Ireland">Ireland</option>
@@ -388,15 +388,15 @@
                                             <option value="Yemen">Yemen</option>
                                             <option value="Yugoslavia">Yugoslavia</option>
                                             <option value="Zambia">Zambia</option>
-                                            <option value="Zimbabwe">Zimbabwe</option>
+                                            <option value="Zimbabwe">Zimbabwe</option>--%>
                                         </select>
                                     </div>
                                     <div class="uk-width-medium-1-3 parsley-row">
                                         <label for="wizard_currency">Currency<span class="req">*</span></label>
                                         <select id="wizard_currency" name="currency" required="required">
                                             <option value="">Select Currency</option>
-                                            <option value="INR">Indian rupee</option>
-                                            <option value="USD">United States dollar</option>
+                                            <option value="INR">Indian Rupee</option>
+                                            <%--<option value="USD">United States dollar</option>
                                             <option value="CAD">Canadian dollar</option>
                                             <option value="GBP">Pound sterling</option>
                                             <option value="AUD">Australian dollar</option>
@@ -404,7 +404,7 @@
                                             <option value="AED">UAE dirham</option>
                                             <option value="HKD">Hong Kong dollar</option>
                                             <option value="CHF">Swiss franc</option>
-                                            <option value="SEK">Swedish krona</option>
+                                            <option value="SEK">Swedish krona</option>--%>
                                         </select>
                                     </div>
                                     <div class="uk-width-medium-1-3 parsley-row">

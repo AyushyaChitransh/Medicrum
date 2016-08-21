@@ -66,6 +66,7 @@
     <Content Include="AddProduct.aspx" />
     <Content Include="AddProductModel.aspx" />
     <Content Include="assets\img\MedicrumLogo2-1.png" />
+    <Content Include="assets\js\lib\dashboard\sales_view.js" />
     <Content Include="assets\js\lib\invoice\invoice_functions.js" />
     <Content Include="assets\js\lib\invoice\jquery.serialize-object.min.js" />
     <Content Include="assets\js\lib\invoice\json data.txt" />
@@ -74,6 +75,7 @@
     <Content Include="assets\js\lib\login\ResetPassword.js" />
     <Content Include="assets\js\lib\product_model\combo_box.js" />
     <Content Include="assets\js\lib\stock_product\combo_box.js" />
+    <Content Include="assets\js\lib\User\user_edit_profile.js" />
     <Content Include="assets\js\lib\User\user_profile.js" />
     <Content Include="CustomerList.aspx" />
     <Content Include="Login.aspx" />
@@ -5304,12 +5306,15 @@
     <Content Include="SupplierList.aspx" />
     <Content Include="UserList.aspx" />
     <Content Include="UserProfile.aspx" />
+    <Content Include="UserProfileEdit.aspx" />
     <Content Include="ViewDetailedCustomer.aspx" />
     <Content Include="ViewDetailedProduct.aspx" />
     <Content Include="ViewDetailedProductModel.aspx" />
     <Content Include="ViewDetailedSupplier.aspx" />
     <Content Include="ViewDetailedUser.aspx" />
-    <Content Include="Web.config" />
+    <Content Include="Web.config">
+      <SubType>Designer</SubType>
+    </Content>
   </ItemGroup>
   <ItemGroup>
     <Compile Include="AddCustomer.aspx.cs">
@@ -5333,6 +5338,7 @@
     <Compile Include="AddProductModel.aspx.designer.cs">
       <DependentUpon>AddProductModel.aspx</DependentUpon>
     </Compile>
+    <Compile Include="App_Code\DAO\DAODashboard.cs" />
     <Compile Include="App_Code\DAO\DAOInvoice.cs" />
     <Compile Include="App_Code\DAO\DAOLogin.cs" />
     <Compile Include="App_Code\DAO\DAOUserPrivileges.cs" />
@@ -5483,6 +5489,13 @@
     </Compile>
     <Compile Include="UserProfile.aspx.designer.cs">
       <DependentUpon>UserProfile.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="UserProfileEdit.aspx.cs">
+      <DependentUpon>UserProfileEdit.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="UserProfileEdit.aspx.designer.cs">
+      <DependentUpon>UserProfileEdit.aspx</DependentUpon>
     </Compile>
     <Compile Include="ViewDetailedCustomer.aspx.cs">
       <DependentUpon>ViewDetailedCustomer.aspx</DependentUpon>
@@ -5981,7 +5994,7 @@
     <VisualStudio>
       <FlavorProperties GUID="{349c5851-65df-11da-9384-00065b846f21}">
         <WebProjectProperties>
-          <UseIIS>True</UseIIS>
+          <UseIIS>False</UseIIS>
           <AutoAssignPort>True</AutoAssignPort>
           <DevelopmentServerPort>13804</DevelopmentServerPort>
           <DevelopmentServerVPath>/</DevelopmentServerVPath>

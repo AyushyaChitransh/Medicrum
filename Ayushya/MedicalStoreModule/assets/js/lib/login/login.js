@@ -65,28 +65,6 @@ function LoginButtonClicked() {
     });
 }
 
-function VerifyCredentials() {
-    var email = document.getElementById('login_username').value;
-    var password = document.getElementById('login_password').value;
-    $.ajax({
-        type: 'POST',
-        url: 'Login.aspx/VerifyCredentials',
-        contentType: 'application/json; charset=utf-8',
-        data: "{ 'email': '" + email + "','password': '" + password + "' }",
-        success: function (response) {
-            if (response.d == true) {
-                window.location = "Dashboard.aspx";
-            }
-            else {
-                Notification('i');
-            }
-        },
-        error: function (error) {
-            Notification('u');
-        }
-    });
-}
-
 function ResetPassword() {
     var email = document.getElementById('login_reset_email').value;
     $.ajax({

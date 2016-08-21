@@ -68,9 +68,10 @@
                                         <input type="text" name="state" id="wizard_state" class="md-input" />
                                     </div>
                                     <div class="uk-width-medium-1-4 parsley-row">
-                                        <select id="wizard_country" name="country" class="md-input">
+                                        <label for="wizard_country">Country</label>
+                                        <select id="wizard_country" name="country" class="md-input label-fixed">
                                             <option value="">Select Country</option>
-                                            <option value="Afghanistan">Afghanistan</option>
+                                            <%--<option value="Afghanistan">Afghanistan</option>
                                             <option value="Albania">Albania</option>
                                             <option value="Algeria">Algeria</option>
                                             <option value="American Samoa">American Samoa</option>
@@ -169,9 +170,9 @@
                                             <option value="Honduras">Honduras</option>
                                             <option value="Hong Kong">Hong Kong</option>
                                             <option value="Hungary">Hungary</option>
-                                            <option value="Iceland">Iceland</option>
+                                            <option value="Iceland">Iceland</option>--%>
                                             <option value="India">India</option>
-                                            <option value="Indonesia">Indonesia</option>
+                                            <%--<option value="Indonesia">Indonesia</option>
                                             <option value="Iran">Iran (Islamic Republic of)</option>
                                             <option value="Iraq">Iraq</option>
                                             <option value="Ireland">Ireland</option>
@@ -308,7 +309,7 @@
                                             <option value="Yemen">Yemen</option>
                                             <option value="Yugoslavia">Yugoslavia</option>
                                             <option value="Zambia">Zambia</option>
-                                            <option value="Zimbabwe">Zimbabwe</option>
+                                            <option value="Zimbabwe">Zimbabwe</option>--%>
                                         </select>
                                     </div>
                                     <div class="uk-width-medium-1-4 parsley-row">

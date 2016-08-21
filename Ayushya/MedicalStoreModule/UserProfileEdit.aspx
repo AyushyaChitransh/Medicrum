@@ -1,4 +1,4 @@
-﻿<%@ Page Language="C#" AutoEventWireup="true" CodeBehind="UserProfile.aspx.cs" Inherits="MedicalStoreModule.UserProfile" %>
+﻿<%@ Page Language="C#" AutoEventWireup="true" CodeBehind="UserProfileEdit.aspx.cs" Inherits="MedicalStoreModule.UserProfileEdit" %>
 
 <!DOCTYPE html>
 
@@ -31,37 +31,29 @@
                     <div class="md-card">
                         <div class="user_heading">
                             <div class="user_heading_content">
-                                <h2 class="heading_b uk-margin-bottom"><span id="name" class="uk-text-truncate uk-text-upper"></span></h2>
+                                <h2 class="heading_b uk-margin-bottom"><span class="uk-text-truncate">Edit Profile</span></h2>
                             </div>
-                            <a class="md-fab md-fab-small md-fab-accent" href="UserProfileEdit.aspx">
-                                <i class="material-icons" data-uk-tooltip="{cls:'long-text',pos:'bottom'}" title="Edit User">&#xE150;</i>
+                            <a class="md-fab md-fab-small md-fab-accent" href="#">
+                                <i class="material-icons" onclick="EditUser()" data-uk-tooltip="{cls:'long-text',pos:'bottom'}" title="Save Changes">save</i>
                             </a>
                         </div>
                         <div class="user_content uk-margin">
                             <div class="uk-grid">
-                                <div class="uk-width-medium-1-2 parsley-row">
-                                    <span>User Name</span>
-                                    <input type="text" name="userName" id="user_name" class="md-input" disabled="disabled" />
+                                <div class="uk-width-medium-1-1 parsley-row">
+                                    <span>Name</span>
+                                    <input type="text" id="name" class="md-input" />
                                 </div>
-                                <div class="uk-width-medium-1-2 parsley-row">
-                                    <span>Email</span>
-                                    <input type="text" id="email" class="md-input" disabled="disabled" />
+                            </div>
+                            <div class="uk-grid">
+                                <div class="uk-width-medium-1-1 parsley-row">
+                                    <span>Phone</span>
+                                    <input type="text" id="phone_number" class="md-input" />
                                 </div>
                             </div>
                             <div class="uk-grid">
                                 <div class="uk-width-medium-1-1 parsley-row">
                                     <span>Address</span>
-                                    <input type="text" id="address" class="md-input" disabled="disabled" />
-                                </div>
-                            </div>
-                            <div class="uk-grid">
-                                <div class="uk-width-medium-1-2 parsley-row">
-                                    <span>Role</span>
-                                    <input type="text" id="role" class="md-input" disabled="disabled" />
-                                </div>
-                                <div class="uk-width-medium-1-2 parsley-row">
-                                    <span>Phone</span>
-                                    <input type="text" id="phone_number" class="md-input" disabled="disabled" />
+                                    <input type="text" id="address" class="md-input" />
                                 </div>
                             </div>
                         </div>
@@ -103,7 +95,8 @@
     <uc1:StyleSwitcher runat="server" ID="StyleSwitcher" />
 
     <!-- Page function scripts -->
-    <script src="assets/js/lib/User/user_profile.js"></script>
+    <script src="assets/js/lib/notification.js"></script>
+    <script src="assets/js/lib/User/user_edit_profile.js"></script>
 
     <script>
         $(function () {

@@ -219,7 +219,7 @@ namespace MedicalStoreModule.App_Code.DAO
                     MySqlDataReader dataReader = cmd.ExecuteReader();
                     while (dataReader.Read())
                     {
-                        productOptions.Add(new { DisplayText = dataReader["product_name"].ToString(), Value = int.Parse(dataReader["product_id"].ToString()), AdditionalText = dataReader["batch_number"].ToString() });
+                        productOptions.Add(new { DisplayText = dataReader["product_name"].ToString() + " | " + dataReader["batch_number"].ToString(), Value = int.Parse(dataReader["product_id"].ToString()) });
                     }
                     cm.CloseConnection();
                 }
@@ -249,7 +249,7 @@ namespace MedicalStoreModule.App_Code.DAO
                     MySqlDataReader dataReader = cmd.ExecuteReader();
                     while (dataReader.Read())
                     {
-                        customerOptions.Add(new { DisplayText = dataReader["customer_name"].ToString(), Value = int.Parse(dataReader["customer_id"].ToString()), AdditionalText = dataReader["phone_number"].ToString() });
+                        customerOptions.Add(new { DisplayText = dataReader["customer_name"].ToString() + " | " + dataReader["phone_number"].ToString(), Value = int.Parse(dataReader["customer_id"].ToString()) });
                     }
                     cm.CloseConnection();
                 }
